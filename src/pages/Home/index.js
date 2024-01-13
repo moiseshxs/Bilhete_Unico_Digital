@@ -1,4 +1,4 @@
-
+import { Ionicons } from '@expo/vector-icons';
 import { Text, View, FlatList, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import styles from './styles';
 
@@ -50,14 +50,28 @@ const Item = ({passagem,linha,data}) => (
 
 export default function Home() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
       <StatusBar barStyle="light-content"/>
-        <View style={styles.cima}>
 
+        <View style={[styles.cima, styles.shadow]}>
+          <View style={styles.nav}>
+            <View style={styles.perfil}>
+              <Text style={styles.nomePerfil}>Bom dia, Cassio Ramos</Text>
+            </View>
+            <View style={styles.config}>
+              <Ionicons name="settings-outline" size={30} color="white" />
+            </View>
+          </View>
+
+          <View style={styles.passagens}>
+            <Text style={styles.tituPassag}>Passagens disponiveis</Text>
+            <Text style={styles.qtdPassag}>42</Text>
+          </View>
         </View>
       
 
-        <View style={[styles.integracao, styles.shadow]}>
+        <View style={styles.integracao}>
           <View style={styles.boxInte}>
             <Text style={styles.tituInte}>Integração ativa:</Text>
             <Text style={styles.tempo}>02h 07m 29s</Text>
@@ -74,7 +88,7 @@ export default function Home() {
           />
         </View>
 
-      
+      </View>
     </SafeAreaView>
   );
 }

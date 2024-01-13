@@ -1,25 +1,60 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    safeContainer: {
+        flex:1,
+        backgroundColor: 'red',
+
+      },
     container: {
         flex: 1,
-        backgroundColor: 'red',
+        backgroundColor: '#fff',
         justifyContent: 'center',
         flexDirection: 'column',
       },
+      //PARTE VERMELHA
       cima: {
-        flex: 2,
+        flex: 3,
+        backgroundColor: 'red',
 
+        paddingHorizontal: 20,
+        marginBottom: 10,
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 40,
+      },
+
+      nav: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      },
+      nomePerfil: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
+      },
+
+      passagens: {
+        flex: 2,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+      },
+      tituPassag: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
+      },
+      qtdPassag: {
+        color: 'white',
+        fontSize: 60,
+        fontWeight: 'bold',
       },
     
       integracao: {
-        backgroundColor: '#fff',
         flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
-    
-        borderTopLeftRadius: 40,
-        borderTopRightRadius: 40,
 
         paddingHorizontal: 20,
       },
@@ -57,7 +92,6 @@ export default StyleSheet.create({
       },
     
       atividades: {
-        backgroundColor: '#fff',
         flex: 3,
         paddingHorizontal: 20, 
       },
