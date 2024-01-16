@@ -5,6 +5,19 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         flexDirection: 'column',
-        backgroundColor: '#fff',
+        backgroundColor: 'red',
+    
+    },
+
+    botao: {
+        borderWidth: 2,
+        borderColor: 'white',
+        padding: 15,
+        paddingHorizontal: 25,
+        borderRadius: 25,
+        marginBottom: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        
     },
 });
