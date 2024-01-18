@@ -128,10 +128,14 @@ export default function Login({navigation}) {
                 <View style={styles.buttonGroup}>
                     <TouchableOpacity
                     onPress={() => navigation.navigate('Home')}>
-                        <Text style={styles.button}>Entrar</Text>
+                        <View style={styles.button}>
+                        <Text style={styles.textButton}>Entrar</Text>
+                        </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Text style={styles.buttonCad}>Cadastrar</Text>
+                        <View style={styles.buttonCad}>
+                        <Text style={styles.textCad}>Cadastrar</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>

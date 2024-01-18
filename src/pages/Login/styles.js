@@ -78,24 +78,34 @@ export default StyleSheet.create({
     button:{
         width: Dimensions.get('screen').width/1.6,
         textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 45,
-        lineHeight: 42,
-        borderRadius: 100,
+        borderRadius: 50,
         backgroundColor: '#F00E0E',
         color: '#fff',
-        fontSize: 20,
     },
     buttonCad:{
         width: Dimensions.get('screen').width/1.6,
         textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 45,
-        lineHeight: 42,
-        borderRadius: 100,
+        borderRadius: 50,
         backgroundColor: '#fff',
         color: '#F00E0E',
-        fontSize: 20,
         borderWidth: 2,
         borderColor: '#F00E0E'
+    },
+    textButton:{
+        color: 'white',
+        fontSize: 20,
+        fontWeight: '500'
+    },
+    textCad:{
+        color: '#f00e0e',
+        fontSize: 20,
+        fontWeight: '500'
     }
     
    
