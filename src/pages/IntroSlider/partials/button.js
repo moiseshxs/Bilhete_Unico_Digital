@@ -1,5 +1,5 @@
-import { View, Text } from "react-native-web"
-import { StyleSheet } from "react-native-web"
+import { View, Text } from "react-native"
+import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     center:{

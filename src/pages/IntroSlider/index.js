@@ -42,7 +42,7 @@ const slides = [
 ]
    
 
-export default function IntroSlider({navigation, props}){
+export default function IntroSlider({navigation}){
     
 
     return(
@@ -54,14 +54,14 @@ export default function IntroSlider({navigation, props}){
                 height: 15,
                 width: 15,
                 backgroundColor: '#f00',
-                borderRadius: '100%'
+                borderRadius: 100
             
             }}
             dotStyle={{
                 height: 15,
                 width: 15,
                 backgroundColor: 'gray',
-                borderRadius: '100%'
+                borderRadius: 100
             }}
             showSkipButton={true}
             renderSkipButton={skipButton}

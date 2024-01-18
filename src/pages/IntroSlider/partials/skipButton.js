@@ -1,13 +1,12 @@
 import { Dimensions } from "react-native"
-import { View, Text } from "react-native-web"
-import { StyleSheet } from "react-native-web"
+import { View, Text } from "react-native"
+import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     center:{
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'end',
         position: 'absolute',
         bottom: Dimensions.get('screen').height/1.085
         
@@ -16,7 +15,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#f00',
         textAlign: 'center',
-        fontWeight: '500'
+        fontWeight: '500',
+        position: 'absolute',
+        left: '87%'
     }
 })
 
