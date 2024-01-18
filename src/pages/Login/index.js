@@ -15,7 +15,7 @@ export default function Login({navigation}) {
     const [borderColor3, setBorderColor3] = useState('#7b7b7b')
     
     
-    const [modal, setModal] = useState(true)
+    const [modal, setModal] = useState(false)
 
     function changeColor(input){
         if(input == 'cpf'){
@@ -218,7 +218,7 @@ export default function Login({navigation}) {
                                         isFocused
                                         />
                             <TouchableOpacity
-                                onPress={() => navigation.navigate('Home')}>
+                                onPress={() => navigation.navigate('RecuperarSenha')}>
                                 <View style={styles.buttonRecuperar}>
                                     <Text style={styles.textButton}>Recuperar Senha</Text>
                                 </View>

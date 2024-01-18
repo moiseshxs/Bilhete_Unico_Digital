@@ -5,12 +5,13 @@ import Tabs from './tabs';
 import Login from '../pages/Login';
 import Config from '../pages/Config';
 import IntroSlider from '../pages/IntroSlider';
+import RecuperarSenha from '../pages/Login/subPages/Recuperar/recuperarSenha'
 
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='RecuperarSenha' screenOptions={{headerShown: true}}>
       <Stack.Screen 
         name='Login'
         component={Login}
@@ -54,6 +55,17 @@ export default function StackRoutes() {
           headerShown: false,
         }}
       />  
+
+      <Stack.Screen
+        name='RecuperarSenha'
+        component={RecuperarSenha}
+        options={{
+          title: 'IntroSlider',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
 
       
 
