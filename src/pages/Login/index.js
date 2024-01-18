@@ -218,7 +218,7 @@ export default function Login({navigation}) {
                                         isFocused
                                         />
                             <TouchableOpacity
-                                onPress={() => navigation.navigate('RecuperarSenha')}>
+                                onPress={() => navigation.navigate('FormaRecuperarSenha')}>
                                 <View style={styles.buttonRecuperar}>
                                     <Text style={styles.textButton}>Recuperar Senha</Text>
                                 </View>
