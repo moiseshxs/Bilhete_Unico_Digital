@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Dimensions} from 'react-native';
 import { useState } from 'react';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
-import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Logo from '../../../assets/img/logo/logovermelha.png'
 
