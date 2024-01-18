@@ -16,7 +16,7 @@ export default function StackRoutes() {
         component={Login}
         options={{
           title: 'Login',
-          headerStyle: { backgroundColor: 'purple' },
+          headerStyle: { backgroundColor: 'white' },
           headerTintColor: 'white',
           headerShown: false,
         }}
@@ -54,6 +54,8 @@ export default function StackRoutes() {
           headerShown: false,
         }}
       />  
+
+      
 
       
     </Stack.Navigator>
