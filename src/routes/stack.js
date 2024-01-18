@@ -7,6 +7,7 @@ import Config from '../pages/Config';
 import IntroSlider from '../pages/IntroSlider';
 import RecuperarSenha from '../pages/Login/subPages/Recuperar/index'
 import FormaRecuperarSenha from '../pages/Login/subPages/FormaRecuperarSenha/index'
+import NovaSenha from '../pages/Login/subPages/NovaSenha/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -79,7 +80,16 @@ export default function StackRoutes() {
         }}
       /> 
 
-      
+      <Stack.Screen
+        name='NovaSenha' 
+        component={NovaSenha}
+        options={{
+          title: 'NovaSenha',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
 
       
     </Stack.Navigator>

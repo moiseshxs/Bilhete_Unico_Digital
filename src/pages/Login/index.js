@@ -34,6 +34,11 @@ export default function Login({navigation}) {
         }
     }
 
+    const recuperarSenha =() =>{
+        setModal(false)
+        navigation.navigate('FormaRecuperarSenha')
+    }
+
     const [cpf, setCpf] = useState('')
     const [senha, setSenha] = useState('')
     const [recuperaCpf, setRecuperaCpf] = useState('')
@@ -218,7 +223,7 @@ export default function Login({navigation}) {
                                         isFocused
                                         />
                             <TouchableOpacity
-                                onPress={() => navigation.navigate('FormaRecuperarSenha')}>
+                                onPress={() => recuperarSenha()}>
                                 <View style={styles.buttonRecuperar}>
                                     <Text style={styles.textButton}>Recuperar Senha</Text>
                                 </View>

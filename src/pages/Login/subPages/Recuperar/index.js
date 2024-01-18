@@ -12,7 +12,7 @@ export default function RecuperarSenha({navigation, route}){
     setValue,
     })
     if(value.length == 4){
-      navigation.navigate('Login')
+      navigation.navigate('NovaSenha')
       setValue('')
     }
 
