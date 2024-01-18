@@ -9,22 +9,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         
     },
-    text: {
+    button: {
         backgroundColor: '#f00',
-        color: '#fff',
-        fontSize: 20,
-        lineHeight: 35,
         height: 40,
         width: 250,
-        textAlign: 'center',
-        borderRadius: 25
+        borderRadius: 50,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    text:{
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: '500',
     }
 })
 
 export default function button(){
     return(
         <View style={styles.center}>
+            <View style={styles.button}>
             <Text style={styles.text}>Próximo</Text>
+            </View>
         </View>
     )
 }
