@@ -1,11 +1,11 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Tabs from './tabs';
 //import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Config from '../pages/Config';
-
-import Tabs from './tabs';
 import IntroSlider from '../pages/IntroSlider';
+
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {

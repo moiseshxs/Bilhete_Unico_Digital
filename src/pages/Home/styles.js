@@ -29,6 +29,18 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
       },
+      perfil: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 10,
+      },
+      fotoPerfil: {
+        width: 40,
+        height: 40,
+        borderRadius: 50,
+        borderWidth: 2,
+        borderColor: 'white',
+      },
       nomePerfil: {
         color: 'white',
         fontSize: 20,
@@ -108,38 +120,46 @@ export default StyleSheet.create({
         borderColor: "thistle",
         paddingVertical: 20,
 
-        justifyContent: 'flex-start',
-        
-        
+        justifyContent: 'space-between',
       },
 
       esquerda: {
         rowGap: 5,
+        columnGap: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+      },
+      meio:{
+        //flexDirection: 'column', já é por padrao
 
       },
-      foto: {
-        alignSelf: 'center',
+      pagamen: {
         width: 40,
         height: 40,
         borderRadius: 50,
         borderWidth: 3,
+        justifyContent: 'center',
+      },
+      foto: {
+        alignSelf: 'center',
+        width: 28,
+        height: 28,
       },
       passagem: {
         fontSize: 20,
         fontWeight: 'bold',
       },
       linha: {
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: 'bold',
         color: 'grey',
       },
 
       direita:{
-        alignContent: 'flex-end',
-        justifyContent: 'flex-start'
+        
       },
       data: {
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: 'bold',
         color: 'grey',
         

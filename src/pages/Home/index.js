@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Text, View, FlatList, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
 const DATA = [
@@ -18,28 +19,27 @@ const DATA = [
   {
     id: '3',
     passagem: 'Passagem em QrCode',
-    linha: '312N-10 TERM. CID. TIRADENTES',
-    data: '7 NOV',
+    linha: '312N-10 SÃO MIGUEL',
+    data: '4 NOV',
   },
   {
     id: '4',
     passagem: 'Passagem em QrCode',
     linha: '312N-10 TERM. CID. TIRADENTES',
-    data: '7 NOV',
+    data: '4 NOV',
   },
 ];
 
 const Item = ({passagem,linha,data}) => (
   <View style={styles.item}>
-    
-    <View style={styles.foto}>
-      
-    </View>
-
     <View style={styles.esquerda}>
-      
-      <Text style={styles.passagem}>{passagem}</Text>
-      <Text style={styles.linha}>{linha}</Text>
+      <View style={styles.pagamen}>
+        <Image source={require('../../../assets/img/home/qrcode.png')} style={styles.foto}/>
+      </View>
+      <View style={styles.meio}>
+        <Text style={styles.passagem}>{passagem}</Text>
+        <Text style={styles.linha}>{linha}</Text>
+      </View>
     </View>
 
     <View style={styles.direita}>
@@ -49,6 +49,8 @@ const Item = ({passagem,linha,data}) => (
 );
 
 export default function Home() {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
@@ -57,10 +59,16 @@ export default function Home() {
         <View style={[styles.cima, styles.shadow]}>
           <View style={styles.nav}>
             <View style={styles.perfil}>
+            <Image
+              source={require('../../../assets/img/home/perfil.png')}
+              style={styles.fotoPerfil}
+            />
               <Text style={styles.nomePerfil}>Bom dia, Cassio Ramos</Text>
             </View>
             <View style={styles.config}>
-              <Ionicons name="settings-outline" size={30} color="white" />
+              <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+                <Ionicons name="settings-outline" size={30} color="white" />
+              </TouchableOpacity>
             </View>
           </View>
 
