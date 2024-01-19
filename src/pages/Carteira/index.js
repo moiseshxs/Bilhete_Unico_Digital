@@ -30,26 +30,30 @@ const DATA = [
   },
 ];
 
-const Item = ({tipoRecarga,qtd,data}) => (
-  <View style={styles.item}>
-    <View style={styles.esquerda}>
-      <View style={styles.pagamen}>
-        <Image source={require('../../../assets/img/carteira/pix.png')} style={styles.foto}/>
-      </View>
-      <View style={styles.meio}>
-        <Text style={styles.tipoRecarga}>Compra no {tipoRecarga}</Text>
-        <Text style={styles.qtd}>{qtd} PASSAGENS</Text>
-      </View>
-    </View>
 
-    <View style={styles.direita}>
-      <Text style={styles.data}>{data}</Text>
-    </View>
-  </View>
-);
 
 export default function Carteira() {
   const navigation = useNavigation();
+
+  const Item = ({tipoRecarga,qtd,data}) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Comprovante')}>               
+    <View style={styles.item}>
+      <View style={styles.esquerda}>
+        <View style={styles.pagamen}>
+          <Image source={require('../../../assets/img/carteira/pix.png')} style={styles.foto}/>
+        </View>
+        <View style={styles.meio}>
+          <Text style={styles.tipoRecarga}>Compra no {tipoRecarga}</Text>
+          <Text style={styles.qtd}>{qtd} PASSAGENS</Text>
+        </View>
+      </View>
+  
+      <View style={styles.direita}>
+        <Text style={styles.data}>{data}</Text>
+      </View>
+    </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.safeContainer}>
