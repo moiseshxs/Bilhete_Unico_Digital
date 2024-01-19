@@ -6,39 +6,39 @@ import styles from './styles';
 const DATA = [
   {
     id: '1',
-    passagem: 'Compra no PIX',
-    linha: '2 PASSAGENS',
+    tipoRecarga: 'PIX',
+    qtd: '2',
     data: '18 OUT ',
   },
   {
     id: '2',
-    passagem: 'Compra no PIX',
-    linha: '20 PASSAGENS',
+    tipoRecarga: 'PIX',
+    qtd: '20',
     data: '10 OUT',
   },
   {
     id: '3',
-    passagem: 'Compra no PIX',
-    linha: '15 PASSAGENS',
+    tipoRecarga: 'PIX',
+    qtd: '15',
     data: '24 SET',
   },
   {
     id: '4',
-    passagem: 'Compra no PIX',
-    linha: '10 PASSAGENS',
+    tipoRecarga: 'PIX',
+    qtd: '10',
     data: '4 SET',
   },
 ];
 
-const Item = ({passagem,linha,data}) => (
+const Item = ({tipoRecarga,qtd,data}) => (
   <View style={styles.item}>
     <View style={styles.esquerda}>
       <View style={styles.pagamen}>
         <Image source={require('../../../assets/img/carteira/pix.png')} style={styles.foto}/>
       </View>
       <View style={styles.meio}>
-        <Text style={styles.passagem}>{passagem}</Text>
-        <Text style={styles.linha}>{linha}</Text>
+        <Text style={styles.tipoRecarga}>Compra no {tipoRecarga}</Text>
+        <Text style={styles.qtd}>{qtd} PASSAGENS</Text>
       </View>
     </View>
 
@@ -48,7 +48,7 @@ const Item = ({passagem,linha,data}) => (
   </View>
 );
 
-export default function Home() {
+export default function Carteira() {
   const navigation = useNavigation();
 
   return (
@@ -72,7 +72,7 @@ export default function Home() {
             <Text style={styles.titulo}>Recarga</Text>
             <View style={styles.fundometodos}>
                 <View style={styles.circleMetodo}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens')}>
                         <Image
                             source={require('../../../assets/img/carteira/pix.png')}
                             style={styles.metodo}
@@ -80,7 +80,7 @@ export default function Home() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.circleMetodo}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens')}>
                         <Image
                             source={require('../../../assets/img/carteira/pix.png')}
                             style={styles.metodo}
@@ -88,7 +88,7 @@ export default function Home() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.circleMetodo}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens')}>
                         <Image
                             source={require('../../../assets/img/carteira/pix.png')}
                             style={styles.metodo}
@@ -103,8 +103,9 @@ export default function Home() {
           <Text style={styles.titulo}>Historico</Text>
           <FlatList
             data={DATA}
-            renderItem={({item}) => <Item passagem={item.passagem} linha={item.linha} data={item.data}/>}
+            renderItem={({item}) => <Item tipoRecarga={item.tipoRecarga} qtd={item.qtd} data={item.data}/>}
             keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
           />
         </View>
 

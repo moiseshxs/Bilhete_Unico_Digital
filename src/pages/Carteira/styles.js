@@ -139,11 +139,11 @@ export default StyleSheet.create({
         width: 28,
         height: 28,
       },
-      passagem: {
+      tipoRecarga: {
         fontSize: 20,
         fontWeight: 'bold',
       },
-      linha: {
+      qtd: {
         fontSize: 13,
         fontWeight: 'bold',
         color: 'grey',
