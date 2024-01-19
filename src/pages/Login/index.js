@@ -151,7 +151,8 @@ export default function Login({navigation}) {
                         <Text style={styles.textButton}>Entrar</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                    onPress={() => navigation.navigate('Cadastro')}>
                         <View style={styles.buttonCad}>
                         <Text style={styles.textCad}>Cadastrar</Text>
                         </View>

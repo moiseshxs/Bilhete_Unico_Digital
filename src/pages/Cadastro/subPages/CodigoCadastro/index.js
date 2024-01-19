@@ -13,10 +13,10 @@ export default function RecuperarSenha({navigation, route}){
     })
     if(value.length == 4){
       setTimeout(function(){
-        navigation.navigate('NovaSenha')
+        navigation.navigate('DefinirSenha')
         setValue('')
-
-      }, 200)
+      }, 100)
+      
     }
 
     return(
@@ -26,12 +26,12 @@ export default function RecuperarSenha({navigation, route}){
                 name='arrow-back'
                 size={30}
                 style={{marginStart: 27}}
-                onPress={() => navigation.navigate('Login') }/>
+                onPress={() => navigation.navigate('ConfirmarCadastro') }/>
           </View>
           <View style={styles.texts}>
 
               <Text style={{fontSize:36, fontWeight: '600', width: '100%'}}>Informe o código de 4 digitos</Text>
-              <Text style={{fontSize:20, color:'#7b7b7b', fontWeight: '500'}}>O código de recuperação foi enviado ao seu {route.params.forma}. Informe abaixo:</Text>
+              <Text style={{fontSize:20, color:'#7b7b7b', fontWeight: '500'}}>O código de confirmação foi enviado ao seu {route.params.forma}. Informe abaixo:</Text>
           </View>
           <CodeField
             value={value}

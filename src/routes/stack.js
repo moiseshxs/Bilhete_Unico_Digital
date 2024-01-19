@@ -8,6 +8,11 @@ import IntroSlider from '../pages/IntroSlider';
 import RecuperarSenha from '../pages/Login/subPages/Recuperar/index'
 import FormaRecuperarSenha from '../pages/Login/subPages/FormaRecuperarSenha/index'
 import NovaSenha from '../pages/Login/subPages/NovaSenha/index';
+import Cadastro from '../pages/Cadastro/index';
+import ConfirmarCadastro from '../pages/Cadastro/subPages/ConfirmarCadastro/index';
+import CodigoCadastro from '../pages/Cadastro/subPages/CodigoCadastro/index'
+import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +95,49 @@ export default function StackRoutes() {
           headerShown: false,
         }}
       /> 
+
+      <Stack.Screen
+        name='Cadastro' 
+        component={Cadastro}
+        options={{
+          title: 'Cadastro',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
+
+      <Stack.Screen
+        name='ConfirmarCadastro' 
+        component={ConfirmarCadastro}
+        options={{
+          title: 'ConfirmarCadastro',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
+
+        <Stack.Screen
+        name='CodigoCadastro' 
+        component={CodigoCadastro}
+        options={{
+          title: 'ConfirmarCadastro',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name='DefinirSenha' 
+        component={DefinirSenha}
+        options={{
+          title: 'ConfirmarCadastro',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      />
 
       
     </Stack.Navigator>
