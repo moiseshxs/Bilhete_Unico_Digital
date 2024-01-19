@@ -30,8 +30,9 @@ export default StyleSheet.create({
         marginTop: 20,
     },
     passagens: {
-        paddingVertical: 10,
+        paddingVertical: 15,
         borderBottomWidth: 1,
+        borderColor: "thistle",
         alignContent: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',

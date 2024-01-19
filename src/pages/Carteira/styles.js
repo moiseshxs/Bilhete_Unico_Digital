@@ -58,8 +58,8 @@ export default StyleSheet.create({
       },
 
       fundometodos: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        gap: 5,
+        alignItems: 'center',
       },
       circleMetodo: {
         width: 70,
@@ -68,11 +68,11 @@ export default StyleSheet.create({
         borderWidth: 2,
         justifyContent: 'center',
         alignItems: 'center',
+        marginHorizontal: 20,
       },
       metodo: {
         width: 50,
         height: 50,
-        borderRadius: 50,
       },
 
       shadow: {
