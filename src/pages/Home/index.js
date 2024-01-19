@@ -93,6 +93,7 @@ export default function Home() {
             data={DATA}
             renderItem={({item}) => <Item passagem={item.passagem} linha={item.linha} data={item.data}/>}
             keyExtractor={item => item.id}
+            showsVerticalScrollIndicator={false}
           />
         </View>
 

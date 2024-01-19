@@ -12,7 +12,9 @@ import Cadastro from '../pages/Cadastro/index';
 import ConfirmarCadastro from '../pages/Cadastro/subPages/ConfirmarCadastro/index';
 import CodigoCadastro from '../pages/Cadastro/subPages/CodigoCadastro/index'
 import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
-
+import QtdPassagens from '../pages/Carteira/subPages/qtdPassagens';
+import ConfirmarPagamento from '../pages/Carteira/subPages/confirmarPagamento';
+import Comprovante from '../pages/Carteira/subPages/comprovante';
 
 const Stack = createNativeStackNavigator();
 
@@ -136,6 +138,37 @@ export default function StackRoutes() {
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name='QtdPassagens' 
+        component={QtdPassagens}
+        options={{
+          title: 'Recarga',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name='ConfirmarPagamento' 
+        component={ConfirmarPagamento}
+        options={{
+          title: '',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name='Comprovante' 
+        component={Comprovante}
+        options={{
+          title: 'Comprovante',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
         }}
       />
 
