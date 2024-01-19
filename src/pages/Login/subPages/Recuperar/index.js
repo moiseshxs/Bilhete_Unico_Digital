@@ -24,7 +24,7 @@ export default function RecuperarSenha({navigation, route}){
           <View style={styles.returnArea}>  
             <Ionicons
                 name='arrow-back'
-                size={30}
+                size={30} 
                 style={{marginStart: 27}}
                 onPress={() => navigation.navigate('Login') }/>
           </View>
@@ -33,7 +33,7 @@ export default function RecuperarSenha({navigation, route}){
               <Text style={{fontSize:36, fontWeight: '600', width: '100%'}}>Informe o código de 4 digitos</Text>
               <Text style={{fontSize:20, color:'#7b7b7b', fontWeight: '500'}}>O código de recuperação foi enviado ao seu {route.params.forma}. Informe abaixo:</Text>
           </View>
-          <CodeField
+          <CodeField 
             value={value}
             onChangeText={setValue}
             cellCount={CELL_COUNT}

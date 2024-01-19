@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         position: 'absolute',
-        bottom: Dimensions.get('screen').height/1.085
+        bottom: Dimensions.get('screen').height/1.15
         
     },
     text:{

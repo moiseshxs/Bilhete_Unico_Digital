@@ -2,12 +2,12 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container:{
-        display:'flex',
+        flex:1,
         alignItems:'center',
         justifyContent:'flex-start',
         flexDirection:'column',
         width: '100%',
-        height: Dimensions.get('screen').height,
+        
         backgroundColor:'#fff'
     },
     returnArea:{

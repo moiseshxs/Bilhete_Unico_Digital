@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     container: {
-        display: 'flex',
+        flex:1,
         justifyContent: 'end',
         alignItems: 'center',
         flexDirection: 'column',
@@ -34,7 +34,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        gap: 80
+        gap: 80,
+        flex:2,
+     
     },
     inputGroup:{
         width: '95%',
@@ -49,7 +51,7 @@ export default StyleSheet.create({
     },
     forgetArea:{
         width: '100%',
-        height: '5%',
+        
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -61,7 +63,7 @@ export default StyleSheet.create({
     },
     buttonArea:{
         width: '100%',
-        height: '35%',
+        flex:1,
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',

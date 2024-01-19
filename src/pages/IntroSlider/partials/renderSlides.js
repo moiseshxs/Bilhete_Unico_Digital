@@ -13,7 +13,7 @@ export default function renderSlides({ item }){
         <View style={styles.skipArea}></View>
         <Image
             source={logo}
-            style={styles.logo}
+            style={styles.logo} 
         />
         <Text style={styles.title}>{ item.title }</Text>
         <Text style={styles.desc}>{ item.text }</Text>
@@ -21,6 +21,7 @@ export default function renderSlides({ item }){
             source={item.image}
             style={styles.image}
         />
+        <View style={styles.espaco}></View>
     </View>
     )
 }

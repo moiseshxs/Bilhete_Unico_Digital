@@ -8,7 +8,7 @@ export default function RecuperarSenha({navigation}){
 
     return(
         <SafeAreaView style={styles.container}>
-          <View style={styles.returnArea}>  
+          <View style={styles.returnArea}>    
             <Ionicons
                 name='arrow-back'
                 size={30}

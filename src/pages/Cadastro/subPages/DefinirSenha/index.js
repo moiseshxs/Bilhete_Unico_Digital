@@ -26,7 +26,7 @@ export default function NovaSenha({navigation}){
                 <Text style={styles.title}>Defina uma senha:</Text>
                 <Text style={styles.desc}>Esta senha será utilizada para entrar no aplicativo, não se preocupe seus dados da sptrans não serão modificados!</Text>
             </View>
-            <View style={styles.inputGroup}>
+            <View style={styles.inputGroup}> 
             <FloatingLabelInput
                     label='Senha'
                     staticLabel

@@ -78,7 +78,7 @@ export default function Cadastro({navigation}){
             <View style={styles.descArea}> 
                 <Text style={styles.desc}>Nosso aplicativo funciona em conjunto a SPtrans, seus dados serão resgatados dos registros e serão utilizados no aplicativo. Ainda não possui um cadastro na Sptrans?<Text style={styles.link} onPress={() => Linking.openURL('https://scapub.sbe.sptrans.com.br/sa/acessoPublico/novoUsuario.action')}>Clique aqui</Text></Text>
             </View>
-            <View style={styles.buttonArea}>
+            <View style={styles.buttonArea}> 
                 <TouchableHighlight
                 onPress={() => navigation.navigate('ConfirmarCadastro')}>
                 <View style={styles.button}>

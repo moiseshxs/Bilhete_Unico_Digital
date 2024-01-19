@@ -2,34 +2,34 @@ import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 const styles = StyleSheet.create({
     container: {
-       
+        
         justifyContent: 'center',
+        display:'flex',
         alignItems: 'center',
         width: '100%',
+        height: Dimensions.get('screen').height,
+        
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 24
+        fontSize: 24,
+        
+        
     },
+    
     logo:{
-        width: 120,
-        height: 120
+        width: 150,
+        height:150,
     },
     image:{
-        height: Dimensions.get('screen').height/2.2,
+        height: '40%',
         width: '80%'
     },
     desc:{
         fontSize: 18,
-        marginTop: 8
+        
     },
-    skipArea:{
-        width: '100%',
-        height: '10%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'end',
-    },
+    
     
 })
 

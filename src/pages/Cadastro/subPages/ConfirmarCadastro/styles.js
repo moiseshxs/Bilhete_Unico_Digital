@@ -7,7 +7,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         width: '100%',
-        height: Dimensions.get('screen').height,
+        flex:1,
         backgroundColor: 'white',
     
     },
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     
     
     returnArea: {
-        height: '10%',
+        flex:1,
         alignItems: 'flex-start',
         width: '100%',
         marginTop: '10%'
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     },
     optionsArea:{
         width: '100%',
-        height: '50%',
+        flex:7,
         display: 'flex',
         justifyContent: 'space-around',
         alignItems:'center',

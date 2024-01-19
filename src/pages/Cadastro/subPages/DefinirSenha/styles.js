@@ -2,10 +2,9 @@ import { Dimensions, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container:{
-        display: 'flex',
+        flex:1,
         justifyContent:'center',
         alignItems:'center',
-        height: Dimensions.get('screen').height,
         width:'100%',
         backgroundColor: '#fff',
         gap: 20,

@@ -134,8 +134,6 @@ export default function Login({navigation}) {
                     isFocused
                     />
                     
-                </View>
-            </View>
             <TouchableOpacity
             style={styles.forgetArea}
             onPress={() => setModal(true)}>
@@ -143,13 +141,15 @@ export default function Login({navigation}) {
             <Text style={styles.forgetText}>Esqueceu sua senha?</Text>
 
             </TouchableOpacity>
+                </View>
+            </View>
             <View style={styles.buttonArea}>
                 <View style={styles.buttonGroup}>
                     <TouchableOpacity
                     onPress={() => navigation.navigate('Home')}>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Entrar</Text>
-                        </View>
+                        </View> 
                     </TouchableOpacity>
                     <TouchableOpacity
                     onPress={() => navigation.navigate('Cadastro')}>

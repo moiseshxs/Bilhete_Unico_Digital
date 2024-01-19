@@ -7,7 +7,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'column',
         width: '100%',
-        height: Dimensions.get('screen').height,
+        flex:1,
         backgroundColor: 'white',
     
     },
@@ -21,8 +21,9 @@ export default StyleSheet.create({
         fontSize: 30
     },
     codeFieldRoot: {
-        width: '80%',
-        marginTop: 20
+        height:'20%',
+        width:'85%',
+        
     },
     celula: {
       width: 70,
@@ -42,13 +43,14 @@ export default StyleSheet.create({
       borderColor: '#000',
     },
     returnArea: {
-        height: '10%',
+        height: '5%',
         alignItems: 'flex-start',
         width: '100%',
         marginTop: '10%'
     },
     texts:{
-        height: '30%',
+        height: '40%',
+        justifyContent:'center',
         width: '80%',
         gap: 35
     },
