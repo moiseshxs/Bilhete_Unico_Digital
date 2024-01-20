@@ -35,7 +35,9 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     esquerda:{
-
+        flexDirection: 'row',
+        alignItems: 'center',
+        columnGap: 10,
     },
     titulo: {
         fontWeight: 'bold',

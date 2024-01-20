@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, SafeAreaView, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -20,11 +21,12 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Perfil')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
+                        <FontAwesome name="user" size={25} color="black" />
                         <Text style={styles.titulo}>Perfil</Text>
                     </View>
 
                     <View style={styles.direita}>  
-                            <AntDesign name="right" size={25} color="black" />
+                            <AntDesign name="right" size={20} color="black" />
                     </View>
                 </View>
                 </TouchableOpacity>
@@ -32,11 +34,12 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Bilhete')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
+                        <FontAwesome name="vcard" size={25} color="black" />  
                         <Text style={styles.titulo}>Bilhete</Text>
                     </View>
 
                     <View style={styles.direita}>  
-                            <AntDesign name="right" size={25} color="black" />
+                            <AntDesign name="right" size={20} color="black" />
                     </View>
                 </View>
                 </TouchableOpacity>
@@ -44,11 +47,12 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Cartao')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
+                        <FontAwesome name="credit-card-alt" size={25} color="black" />
                         <Text style={styles.titulo}>Cartão</Text>
                     </View>
 
                     <View style={styles.direita}>  
-                            <AntDesign name="right" size={25} color="black" />
+                            <AntDesign name="right" size={20} color="black" />
                     </View>
                 </View>
                 </TouchableOpacity>
