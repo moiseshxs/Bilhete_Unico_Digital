@@ -49,7 +49,9 @@ export default StyleSheet.create({
         fontSize: 60,
         fontWeight: 'bold',
       },
-
+      recargatext:{
+        fontWeight: 'bold',
+      },
       
     
       recarga: {

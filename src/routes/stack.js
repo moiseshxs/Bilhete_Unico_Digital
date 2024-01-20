@@ -15,12 +15,15 @@ import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
 import QtdPassagens from '../pages/Carteira/subPages/qtdPassagens';
 import ConfirmarPagamento from '../pages/Carteira/subPages/confirmarPagamento';
 import Comprovante from '../pages/Carteira/subPages/comprovante';
+import Perfil from '../pages/Config/subPages/perfil';
+import Bilhete from '../pages/Config/subPages/bilhete';
+import Cartao from '../pages/Config/subPages/cartao';
 
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: true}}>
       <Stack.Screen 
         name='Login'
         component={Login}
@@ -166,6 +169,36 @@ export default function StackRoutes() {
         component={Comprovante}
         options={{
           title: 'Comprovante',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name='Perfil' 
+        component={Perfil}
+        options={{
+          title: 'Perfil',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name='Bilhete' 
+        component={Bilhete}
+        options={{
+          title: 'Bilhete',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name='Cartao' 
+        component={Cartao}
+        options={{
+          title: 'Cartao',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: true,

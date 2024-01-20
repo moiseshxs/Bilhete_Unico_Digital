@@ -70,7 +70,7 @@ export default function Carteira() {
           />
         </TouchableOpacity>
       </View>
-      <Text>{tipoRecarga}</Text>
+      <Text style={styles.recargatext}>{tipoRecarga}</Text>
     </View>
   );
 
