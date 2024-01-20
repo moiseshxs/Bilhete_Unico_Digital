@@ -10,17 +10,13 @@ export default StyleSheet.create({
 
     areaCartoes: {
         flex: 3,
-        padding: 20,
-    },
-    cartao: {
-        borderWidth: 1,
-        borderColor: "thistle",
-        borderRadius: 25,
-        height: 120,
+        paddingHorizontal: 20,
+        backgroundColor: 'purple',
     },
 
     areaBotao: {
         flex: 1,
+        backgroundColor: 'yellow',
         paddingHorizontal: 20,
         justifyContent: 'center',
     },

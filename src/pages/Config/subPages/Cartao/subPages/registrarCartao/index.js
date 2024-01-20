@@ -6,11 +6,7 @@ export default function Cartao() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.areaCartoes}>
-                <TouchableOpacity onPress={() => navigation.navigate('RegistrarCartao')}>
-                    <View style={styles.cartao}>
-                        
-                    </View>
-                </TouchableOpacity>
+
             </View>
 
             <View style={styles.areaBotao}>

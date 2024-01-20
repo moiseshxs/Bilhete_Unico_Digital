@@ -21,7 +21,7 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Perfil')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
-                        <FontAwesome name="user" size={25} color="black" />
+                        <FontAwesome name="user" size={20} color="black" />
                         <Text style={styles.titulo}>Perfil</Text>
                     </View>
 
@@ -34,7 +34,7 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Bilhete')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
-                        <FontAwesome name="vcard" size={25} color="black" />  
+                        <FontAwesome name="vcard" size={20} color="black" />  
                         <Text style={styles.titulo}>Bilhete</Text>
                     </View>
 
@@ -47,7 +47,7 @@ export default function Config() {
                 <TouchableOpacity onPress={() => navigation.navigate('Cartao')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
-                        <FontAwesome name="credit-card-alt" size={25} color="black" />
+                        <FontAwesome name="credit-card-alt" size={20} color="black" />
                         <Text style={styles.titulo}>Cartão</Text>
                     </View>
 
