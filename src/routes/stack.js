@@ -18,6 +18,7 @@ import Comprovante from '../pages/Carteira/subPages/comprovante';
 import Perfil from '../pages/Config/subPages/Perfil/index';
 import Bilhete from '../pages/Config/subPages/Bilhete/index';
 import Cartao from '../pages/Config/subPages/Cartao/index';
+import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
 
 const Stack = createNativeStackNavigator();
 
@@ -188,10 +189,21 @@ export default function StackRoutes() {
         name='Bilhete' 
         component={Bilhete}
         options={{
-          title: 'Bilhete',
+          title: '',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: true,
+        }}
+      />
+
+        <Stack.Screen
+        name='ListaBilhetes' 
+        component={ListaBilhetes}
+        options={{
+          title: '',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
         }}
       />
       <Stack.Screen

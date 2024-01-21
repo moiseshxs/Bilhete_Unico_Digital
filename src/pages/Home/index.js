@@ -96,7 +96,7 @@ export default function Home() {
             showsVerticalScrollIndicator={false}
           />
         </View>
-
+ 
       </View>
 
       
