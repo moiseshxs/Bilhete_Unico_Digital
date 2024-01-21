@@ -22,16 +22,18 @@ export default function Login({navigation}) {
             setBorderColor('#F00E0E')
             setBorderColor2('#7b7b7b')
         }
-        else if('recupera'){
+         if(input =='recupera'){
             setBorderColor('#7b7b7b')
             setBorderColor2('#7b7b7b')
             setBorderColor3('#f00e0e')
             
         }
-        else{
+         if( input =='senha'){
             setBorderColor('#7b7b7b')
             setBorderColor2('#F00E0E')
+            console.log('pinto')
         }
+        console.log(input)
     }
 
     const recuperarSenha =() =>{
@@ -131,7 +133,7 @@ export default function Login({navigation}) {
                     }}
                     onChangeText={value => {setSenha(value)}}
                     onFocus={() => changeColor('senha')}
-                    isFocused
+                    
                     />
                     
             <TouchableOpacity
@@ -221,7 +223,7 @@ export default function Login({navigation}) {
                                         }}
                                         onChangeText={value => {setRecuperaCpf(value)}}
                                         onFocus={() => changeColor('recupera')}
-                                        isFocused
+                                        
                                         />
                             <TouchableOpacity
                                 onPress={() => recuperarSenha()}>
