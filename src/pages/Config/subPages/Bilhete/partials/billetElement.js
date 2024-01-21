@@ -6,7 +6,7 @@ import Ubes from '../../../../../../assets/img/bilhete/UBESlogo.png'
 import Umes from '../../../../../../assets/img/bilhete/UMESlogo.jpg'
 import Cassio from '../../../../../../assets/img/home/perfil.png'
 import Ano from '../../../../../../assets/img/bilhete/anoBilhete.png'
-import { useState } from "react";
+
 
 export default function BilheteElement(props) {
     let lista = props.lista
@@ -19,8 +19,7 @@ export default function BilheteElement(props) {
     if (backgroundColor == undefined) {
         backgroundColor = '#438E28'
     }
-    console.log(backgroundColor)
-    let paddingHorizontal = props.padding
+   
 
     return (
         <TouchableOpacity
