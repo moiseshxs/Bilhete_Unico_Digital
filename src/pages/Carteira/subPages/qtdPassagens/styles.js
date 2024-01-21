@@ -9,7 +9,7 @@ export default StyleSheet.create({
     },
 
     areaTexto: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'center',
         rowGap: 5,
         paddingHorizontal: 20,

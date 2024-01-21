@@ -15,9 +15,9 @@ import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
 import QtdPassagens from '../pages/Carteira/subPages/qtdPassagens';
 import ConfirmarPagamento from '../pages/Carteira/subPages/confirmarPagamento';
 import Comprovante from '../pages/Carteira/subPages/comprovante';
-import Perfil from '../pages/Config/subPages/perfil';
-import Bilhete from '../pages/Config/subPages/bilhete';
-import Cartao from '../pages/Config/subPages/cartao';
+import Perfil from '../pages/Config/subPages/Perfil/index';
+import Bilhete from '../pages/Config/subPages/Bilhete/index';
+import Cartao from '../pages/Config/subPages/Cartao/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -174,7 +174,7 @@ export default function StackRoutes() {
           headerShown: true,
         }}
       />
-      <Stack.Screen
+       <Stack.Screen
         name='Perfil' 
         component={Perfil}
         options={{
@@ -184,7 +184,7 @@ export default function StackRoutes() {
           headerShown: true,
         }}
       />
-      <Stack.Screen
+       <Stack.Screen
         name='Bilhete' 
         component={Bilhete}
         options={{
@@ -203,7 +203,7 @@ export default function StackRoutes() {
           headerTintColor:'black',
           headerShown: true,
         }}
-      />
+      />  
 
       
     </Stack.Navigator>
