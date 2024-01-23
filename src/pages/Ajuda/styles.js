@@ -10,9 +10,49 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
 
     },
+    boxTitulo:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: Height/6,
+    },
+    titulo:{
+       fontSize: Width/10,
+       fontWeight: 'bold'
+    },
+    boxSubTitulo: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: Height/9,
+    },
+    subTitulo: {
+        fontSize: Width/15,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        width: Width/2
+    },
+    boxDuvida:{
+        
+        gap: 20
+    },
+    BoxsubTituloDuvida:{
+        height: Height/8,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    subTituloDuvida: {
+        fontSize: Width/15,
+        textAlign: 'center',
+        fontWeight: '500',
+    },
+    sectionPesquisa:{
+        
+        gap: Height/22
+    },
+
     boxInput:{
         flex:0,
-        height: Height/9,
+        
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
@@ -21,18 +61,18 @@ export default StyleSheet.create({
     input: { 
         borderWidth: 1,
         borderRadius: 20,
+        borderColor: '#9B9B9B',
         marginHorizontal: 10,
         backgroundColor: 'white',
-        height: Height/20,
+        height: Height/16,
         width: Width/1.4,
-        paddingLeft: 3
+        padding: 10
     
       },
     linha:{
-        borderBottomWidth: 1,
+        borderBottomWidth: 5,
         borderColor: '#d3d3d3', 
-        display: 'flex',
-        justifyContent: 'space-between' 
+         
     },
     circuloBorda:{
         width: 90,
@@ -44,6 +84,27 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-  
-      
+
+    centralizar:{
+        padding: Width/40,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+  boxResposta:{
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    padding: Width/38,
+    borderBottomWidth: 1,
+    borderColor: '#d3d3d3', 
+    
+  },
+
+  tituloArtigo:{
+    color: '#9b9b9b'
+  },
+    respostaDuvida:{
+        width: Width/4,
+        justifyContent: 'flex-end',
+        alignItems:'flex-end',
+    }
 });

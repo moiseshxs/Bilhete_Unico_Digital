@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TouchableHighlight } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -14,9 +14,9 @@ export default function ArtigosBilhete() {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <View>
-                    <TouchableHighlight style={styles.buttonAjuda} onPress={() => navigation.navigate('Ajuda')}>
-                        <AntDesign name="left" size={20} color="black" />
-                    </TouchableHighlight>
+                    <TouchableOpacity onPress={() => navigation.navigate('Ajuda')}>
+                        <AntDesign name="left" size={30} color="black" />
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -40,24 +40,24 @@ export default function ArtigosBilhete() {
                 <Text style={styles.artigoUtil}>Esse artigo foi útil?</Text>
                 <View style={styles.linha} />
                 <View style={styles.center}>
-                    <TouchableHighlight style={styles.buttonAjuda}
+                    <TouchableOpacity style={styles.buttonAjuda}
                     //onPress={}
                     >
                         <Text>
                             Sim
                         </Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.buttonAjuda}
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonAjuda}
                     //onPress={}
                     >
                         <Text>
                             Não
                         </Text>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                 </View>
             </View>
 
 
         </SafeAreaView>
-    );
+    );
 }

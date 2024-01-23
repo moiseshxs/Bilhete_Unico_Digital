@@ -21,12 +21,14 @@ import Cartao from '../pages/Config/subPages/Cartao/index';
 import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
 import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
 import Ajuda from '../pages/Ajuda';
+import Chat from '../pages/Ajuda/subPages/Chat';
 
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
     <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
+      
       <Stack.Screen 
         name='Login'
         component={Login}
@@ -240,7 +242,18 @@ export default function StackRoutes() {
           headerShown: false,
         }}
       /> 
-      
+
+      <Stack.Screen
+        name='Chat'
+        component={Chat}
+        options={{
+          title: 'Chat',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
+
     </Stack.Navigator>
   );
 }
