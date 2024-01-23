@@ -106,5 +106,5 @@ export default StyleSheet.create({
         width: Width/4,
         justifyContent: 'flex-end',
         alignItems:'flex-end',
-    },
+    }
 });

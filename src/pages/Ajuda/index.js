@@ -85,7 +85,9 @@ export default function Ajuda() {
                         <View style={styles.centralizar}>
 
                             <View style={styles.circuloBorda}>
-                                <Ionicons name="chatbubble-ellipses-outline" size={60} color={'black'}></Ionicons>
+                            <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Chat')}>
+                                <Ionicons style={styles.centralizar} name="chatbubble-ellipses-outline"  size={60} color={'black'}></Ionicons>
+                            </TouchableOpacity>
                             </View>
                         </View>
                         </View>
