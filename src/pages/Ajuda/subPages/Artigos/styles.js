@@ -21,10 +21,11 @@ export default StyleSheet.create({
 
     },
     header: {
-        flex: 0.3,
+        flex: 0.075,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: Height/40
     },
     boxTitulo:{
 
@@ -34,7 +35,7 @@ export default StyleSheet.create({
 
         fontWeight: 'bold',
         fontSize: 28,
-        width: Width/1.4,
+        width: Width/1.35,
         gap: Height/2
 
     },
@@ -66,6 +67,6 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#000', 
         display: 'flex',
-        justifyContent: 'space-between' 
+        justifyContent: 'space-between'
     }
 });
