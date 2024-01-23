@@ -19,6 +19,8 @@ import Perfil from '../pages/Config/subPages/Perfil/index';
 import Bilhete from '../pages/Config/subPages/Bilhete/index';
 import Cartao from '../pages/Config/subPages/Cartao/index';
 import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
+import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
+import Ajuda from '../pages/Ajuda';
 
 const Stack = createNativeStackNavigator();
 
@@ -217,6 +219,27 @@ export default function StackRoutes() {
         }}
       />  
 
+      <Stack.Screen
+        name='ArtigosBilhete'
+        component={ArtigosBilhete}
+        options={{
+          title: 'ArtigosBilhete',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      />  
+
+      <Stack.Screen
+        name='Ajuda'
+        component={Ajuda}
+        options={{
+          title: 'Ajuda',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
       
     </Stack.Navigator>
   );
