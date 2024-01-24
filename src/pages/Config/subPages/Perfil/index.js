@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, Image, TouchableOpacity} from 'react-native';
+import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import styles from './styles';
 import Cassio from '../../../../../assets/img/home/perfil.png'
 import { Ionicons } from '@expo/vector-icons';
 import { launchImageLibrary } from "react-native-image-picker";
-export default function Perfil() {
+export default function Perfil({navigation}) {
     
     
     const [file, setFile] = useState();
+    const [modal, setModal] =useState(false);
+
+    const trocarSenha = () =>{
+        setModal(false)
+        navigation.navigate('TrocarSenha')
+    }
 
     const handleChoosePhoto = () => {
         const options = {
@@ -60,7 +66,8 @@ export default function Perfil() {
                     <View>
                     <Text style={{fontSize:20}}>Dados Pessoais</Text>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                    onPress={() => setModal(true)}>
                     <Ionicons
                     name='create'
                     size={30}/>
@@ -99,6 +106,45 @@ export default function Perfil() {
                 </View>
 
             </View>
+
+
+            <Modal
+            visible={modal}
+            transparent={true}
+            style={styles.modal}
+            animationType='slide'>
+            <TouchableOpacity
+            style={{flex: 1}}
+            onPress={() => setModal(false)}>
+                <SafeAreaView style={styles.containerModal}>
+                    <View style={styles.areaModal}>
+                        <View style={styles.closeArea}>
+                            <Ionicons
+                            name='close' size={30} color={'black'} style={styles.icon}
+                            onPress={() => setModal(false)}/>
+                        </View>
+                        <View style={styles.contArea}>
+                            <View style={styles.textModal}>
+                            <Text style={styles.informe}>Alterar dados</Text>
+                            </View>
+                            <View style={{height:'10%'}}></View>
+                            <View style={styles.descModalArea}>
+                                <Text style={{fontSize:16}}>
+                                    O Bilhete Único Digital não pode alterar os dados fornecidos pela SPtrans, para atualizar suas informações, acesse o site <Text style={styles.link} onPress={() => Linking.openURL('https://scapub.sbe.sptrans.com.br/sa/acessoPublico/novoUsuario.action')}>SPtrans</Text>.
+                                </Text>
+                            </View>
+                            <TouchableOpacity
+                               style={styles.buttonArea}
+                               onPress={() => trocarSenha()} >
+                                <View style={styles.buttonAlterar}>
+                                    <Text style={styles.textButton}>Alterar Senha</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </SafeAreaView>
+            </TouchableOpacity>
+            </Modal>
 
         </SafeAreaView>
     );

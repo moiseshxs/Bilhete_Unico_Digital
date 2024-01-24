@@ -22,6 +22,7 @@ import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
 import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
 import Ajuda from '../pages/Ajuda';
 import Chat from '../pages/Ajuda/subPages/Chat';
+import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
 
 const Stack = createNativeStackNavigator();
 
@@ -189,6 +190,17 @@ export default function StackRoutes() {
           headerShown: true,
         }}
       />
+
+        <Stack.Screen
+        name='TrocarSenha' 
+        component={TrocarSenha}
+        options={{
+          title: 'TrocarSenha',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
        <Stack.Screen
         name='Bilhete' 
         component={Bilhete}

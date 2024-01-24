@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Bilete",
-    "slug": "Bilete",
+    "name": "Bilhete Único Digital",
+    "slug": "Bilhete Único Digital",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

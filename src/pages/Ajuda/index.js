@@ -11,7 +11,7 @@ export default function Ajuda() {
 
     const navigation = useNavigation();
 
-    return (
+    return ( 
         <SafeAreaView style={styles.container}>
             <ScrollView>
 
