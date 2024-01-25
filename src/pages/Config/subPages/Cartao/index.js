@@ -17,7 +17,7 @@ const DATA = [
     },
   ];
 
-export default function Cartao() {
+export default function Cartao({navigation}) {
 
     const Item = ({numero,bandeira}) => (
         <View>
