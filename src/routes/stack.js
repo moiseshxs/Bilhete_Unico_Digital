@@ -15,14 +15,14 @@ import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
 import QtdPassagens from '../pages/Carteira/subPages/qtdPassagens';
 import ConfirmarPagamento from '../pages/Carteira/subPages/confirmarPagamento';
 import Comprovante from '../pages/Carteira/subPages/comprovante';
-import Perfil from '../pages/Config/subPages/Perfil/index';
-import Bilhete from '../pages/Config/subPages/Bilhete/index';
-import Cartao from '../pages/Config/subPages/Cartao/index';
-import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
+import Perfil from '../pages/Config/subPages/perfil/index';
+import Bilhete from '../pages/Config/subPages/bilhete/index';
+import Cartao from '../pages/Config/subPages/cartao/index';
+import ListaBilhetes from '../pages/Config/subPages/bilhete/listaBilhetes';
 import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
 import Ajuda from '../pages/Ajuda';
 import Chat from '../pages/Ajuda/subPages/Chat';
-import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
+import TrocarSenha from '../pages/Config/subPages/perfil/subPages/trocarSenha';
 
 const Stack = createNativeStackNavigator();
 

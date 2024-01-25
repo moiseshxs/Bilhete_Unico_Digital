@@ -15,8 +15,21 @@ export default StyleSheet.create({
     cartao: {
         borderWidth: 1,
         borderColor: "thistle",
-        borderRadius: 25,
+        borderRadius: 20,
         height: 120,
+        padding: 15,
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+    },
+    textCartao: {
+        fontSize: 20,
+    },
+    bandeira: {
+        height: 25,
+        width: 45,
+        objectFit: 'contain',
     },
 
     areaBotao: {
