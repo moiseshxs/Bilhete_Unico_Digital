@@ -33,12 +33,16 @@ export default function FaleComFuncionario() {
                     </View>
 
                     <View style={styles.section}>
-                        <TextInput style={styles.assunto}/>
+                        <TextInput style={styles.assunto} placeholder='Assunto'/>
                         <TextInput
                             multiline={true}
                             numberOfLines={30}
                             style={styles.inputArea}
                          />
+
+                         <View style={styles.button}>
+                            
+                         </View>
                     </View>
                 </View>
             </ScrollView>

@@ -39,23 +39,23 @@ export default StyleSheet.create({
     },
     section:{
         height: Height/2,
-        justifyContent: 'flex-end',
         flexDirection: 'column',
-        gap: Height/30,
-        
-        
+        gap: Height/10,
     },
     assunto:{
-        borderTopWidth: 1,
         borderBottomWidth: 1,
         padding: Width/40,
+        fontWeight:'bold',
+        fontSize: Width/24
         
     },
     inputArea:{
         borderWidth: 1,
         borderColor: '#f00',
+        
         height: Height/2.8,
         padding: Width/40,
+        borderRadius: 40
 
     },
     
