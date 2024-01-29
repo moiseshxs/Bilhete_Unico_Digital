@@ -58,7 +58,23 @@ export default StyleSheet.create({
         borderRadius: 40
 
     },
-    
+    buttonArea:{
+        justifyContent:'flex-end',
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 10,
+    },
+    buttonAjuda:{
+        backgroundColor:'#f00',
+        borderWidth: 1,
+        borderColor: '#000',
+        padding: Width/36,
+        borderRadius:10,     
+    },
+    buttonText:{
+        color: '#fff',
+        fontWeight:'bold'
+    },    
     
     
    

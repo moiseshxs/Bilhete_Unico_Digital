@@ -18,7 +18,7 @@ export default function FaleComFuncionario() {
                 <View style={styles.container}>
                     <View style={styles.row}>
                         <View>
-                            <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Ajuda')}>
+                            <TouchableOpacity style={styles.buttonBack} onPress={() => navigation.navigate('Ajuda')}>
                                 <AntDesign name="left" size={30} color="black" />
                             </TouchableOpacity>
                         </View>
@@ -40,10 +40,15 @@ export default function FaleComFuncionario() {
                             style={styles.inputArea}
                          />
 
-                         <View style={styles.button}>
-                            
-                         </View>
-                    </View>
+                         <View style={styles.buttonArea}>
+                                <TouchableOpacity style={styles.buttonAjuda}>
+                                    <Text style={styles.buttonText}>Enviar</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonAjuda}>
+                                    <Text style={styles.buttonText}>Cancelar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
