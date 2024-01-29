@@ -9,15 +9,10 @@ export default StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#fff',
     },
-    linha:{
-        borderBottomWidth: 1,
-        borderColor: '#000', 
-        display: 'flex',
-        justifyContent: 'space-between' 
-    },
     circuloBorda:{
-        width:  30,
-        height: 30,
+        width:  40,
+        height: 40,
+        
         borderRadius: 50,
         borderWidth: 1,
         borderColor: 'black',
@@ -25,10 +20,26 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems: 'center'
     },
+    circuloBordaChat:{
+        width:  40,
+        height: 40,
+        backgroundColor:'red',
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: 'white',
+        display: 'flex',
+        justifyContent:'center',
+        alignItems: 'center'
+    },
     row:{
+        flex: 0.11,
         display: 'flex',
         flexDirection:'row',
-        gap:10
+        alignItems: 'center',
+        gap:10,
+        borderBottomWidth: 1,
+        borderColor: '#000', 
+        
     },
     center:{
         display: 'flex',
@@ -37,10 +48,11 @@ export default StyleSheet.create({
     },
     titulo:{
         fontWeight:'bold',
+        fontSize: Width/18
     },
     boxInput:{
         flex:0,
-        height: Height/9,
+        height: Height/12,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
@@ -51,9 +63,9 @@ export default StyleSheet.create({
         borderRadius: 20,
         marginHorizontal: 10,
         backgroundColor: 'white',
-        height: Height/20,
-        width: Width/1.4,
-        paddingLeft: 3
+        height: Height/14,
+        width: Width/1.2,
+        paddingLeft: 10
         
     },
     viewCompleta:{

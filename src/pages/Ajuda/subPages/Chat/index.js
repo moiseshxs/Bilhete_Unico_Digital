@@ -22,7 +22,7 @@ export default function Chat() {
                             </TouchableOpacity>
                         </View>
                             <View style={styles.circuloBorda}>
-                                <Ionicons style={styles.center} name="headset" size={20}/>
+                                <Ionicons style={styles.center} name="headset" size={30}/>
                             </View>
                         <View style={styles.center}>
                             <Text style={styles.titulo}>
@@ -30,8 +30,8 @@ export default function Chat() {
                             </Text>
                         </View>
                     </View>
-
-                    <View style={styles.linha} />
+                    
+                    
                     <View>
                         
                     </View>
@@ -42,11 +42,14 @@ export default function Chat() {
                                 //onChangeText={() => 
                                 style={styles.input}>
                             </TextInput>
+                            <View style={styles.circuloBordaChat}>
+
                         <TouchableOpacity>
                             <View>    
-                                <Ionicons name="paper-plane"  size={30}/>
+                                <Ionicons name="paper-plane"  size={25} color={'white'}/>
                             </View>    
                         </TouchableOpacity>
+                            </View>
                         </View> 
                     </View>
 

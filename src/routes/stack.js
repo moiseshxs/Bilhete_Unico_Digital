@@ -22,13 +22,14 @@ import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
 import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
 import Ajuda from '../pages/Ajuda';
 import Chat from '../pages/Ajuda/subPages/Chat';
+import FaleComFuncionario from '../pages/Ajuda/subPages/FaleComFuncionario';
 import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
 
 const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='FaleComFuncionario' screenOptions={{headerShown: true}}>
       
       <Stack.Screen 
         name='Login'
@@ -260,6 +261,16 @@ export default function StackRoutes() {
         component={Chat}
         options={{
           title: 'Chat',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: false,
+        }}
+      /> 
+      <Stack.Screen
+        name='FaleComFuncionario'
+        component={FaleComFuncionario}
+        options={{
+          title: 'FaleComFuncionario',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: false,
