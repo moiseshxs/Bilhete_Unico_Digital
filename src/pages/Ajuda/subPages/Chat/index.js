@@ -17,7 +17,7 @@ export default function Chat() {
            
                     <View style={styles.row}>
                         <View>
-                            <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Ajuda')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Ajuda')}>
                                 <AntDesign name="left" size={30} color="black" />
                             </TouchableOpacity>
                         </View>
@@ -30,12 +30,19 @@ export default function Chat() {
                             </Text>
                         </View>
                     </View>
-                    
-                    
-                    <View>
-                        
-                    </View>
+
                     <View style={styles.viewCompleta}>
+                    <View style={styles.boxChat}>
+                            <Text>Conseguiu resolver seu problema?</Text>
+                        <View style={styles.buttonArea}>
+                            <TouchableOpacity style={styles.buttonAjuda}  onPress={() => navigation.navigate('Ajuda')}>
+                                <Text>Sim</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.buttonAjuda}  onPress={() => navigation.navigate('FaleComFuncionario')}>
+                                <Text>Não</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                         <View style={styles.boxInput}>
                             <TextInput placeholder='Digite sua dúvida...'
                                 //value={}

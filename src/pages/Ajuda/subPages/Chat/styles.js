@@ -69,10 +69,33 @@ export default StyleSheet.create({
         
     },
     viewCompleta:{
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    }
-    
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    boxChat:{
+        
+        justifyContent: 'center',
+        alignItems:'center',
+    },  
+    buttonAjuda:{
+        
+        height: Height/40,
+        width: Width/5.3,
+        borderRadius: 50,
+        borderWidth: 1.5,
+        borderColor: '#000',
+        backgroundColor: '#fff',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    buttonArea:{
+        justifyContent:'flex-end',
+        flexDirection: 'row',
+        alignItems:'center',
+        gap: 10,
+    },    
     
 });
