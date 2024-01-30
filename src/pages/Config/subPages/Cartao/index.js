@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, SafeAreaView, Image, FlatList, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import visa from '../../../../../assets/img/cartao/visa.png';
 import mastercard from '../../../../../assets/img/cartao/mastercard.png';
 import styles from './styles';
@@ -17,7 +18,8 @@ const DATA = [
     },
   ];
 
-export default function Cartao({navigation}) {
+export default function Cartao() {
+    const navigation = useNavigation();
 
     const Item = ({numero,bandeira}) => (
         <View>

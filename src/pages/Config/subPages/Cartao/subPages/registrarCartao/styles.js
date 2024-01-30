@@ -8,15 +8,28 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
     },
 
-    areaCartoes: {
-        flex: 3,
+    areaTexto: {
+        flex: 1,
+        justifyContent: 'center',
+        rowGap: 5,
         paddingHorizontal: 20,
-        backgroundColor: 'purple',
+    },
+    text: {
+        fontWeight: 'bold',
+        fontSize: 30,
+    },
+
+    areaInput:{
+        flex: 4,
+        paddingHorizontal: 20,
+    },
+    
+    inputGroup:{
+        gap: 20,
     },
 
     areaBotao: {
-        flex: 1,
-        backgroundColor: 'yellow',
+        flex: 2,
         paddingHorizontal: 20,
         justifyContent: 'center',
     },

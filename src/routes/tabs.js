@@ -18,9 +18,10 @@ export default function TabRoutes() {
       screenOptions={{
       headerShown: false, 
       tabBarActiveTintColor: 'red', 
-      tabBarStyle: {backgroundColor: '#fff',
+      tabBarStyle: {
+      backgroundColor: '#fff',
       tabBarLabelPosition: 'below-icon',
-      
+      paddingBottom: 3,
       }}}>
       <Tab.Screen 
         name='Home'

@@ -18,6 +18,7 @@ import Comprovante from '../pages/Carteira/subPages/comprovante';
 import Perfil from '../pages/Config/subPages/Perfil/index';
 import Bilhete from '../pages/Config/subPages/Bilhete/index';
 import Cartao from '../pages/Config/subPages/Cartao/index';
+import RegistrarCartao from '../pages/Config/subPages/Cartao/subPages/registrarCartao';
 import ListaBilhetes from '../pages/Config/subPages/Bilhete/listaBilhetes';
 import ArtigosBilhete from '../pages/Ajuda/subPages/Artigos';
 import Ajuda from '../pages/Ajuda';
@@ -29,7 +30,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='FaleComFuncionario' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: true}}>
       
       <Stack.Screen 
         name='Login'
@@ -227,7 +228,18 @@ export default function StackRoutes() {
         name='Cartao' 
         component={Cartao}
         options={{
-          title: 'Cartao',
+          title: 'Cartão',
+          headerStyle: { backgroundColor: 'white' },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      /> 
+
+      <Stack.Screen
+        name='RegistrarCartao' 
+        component={RegistrarCartao}
+        options={{
+          title: 'Registrar Cartao',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: true,
@@ -260,20 +272,20 @@ export default function StackRoutes() {
         name='Chat'
         component={Chat}
         options={{
-          title: 'Chat',
+          title: 'Suporte',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
-          headerShown: false,
+          headerShown: true,
         }}
       /> 
       <Stack.Screen
         name='FaleComFuncionario'
         component={FaleComFuncionario}
         options={{
-          title: 'FaleComFuncionario',
+          title: 'Fale Conosco',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
-          headerShown: false,
+          headerShown: true,
         }}
       /> 
 
