@@ -74,14 +74,23 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     boxChat:{
-        
+        height: Height/1.55, 
+        justifyContent: 'flex-end',
+        alignItems:'center',
+    },
+    questionario:{
         justifyContent: 'center',
         alignItems:'center',
+        gap: 10
     },  
+    titleQuest:{
+        fontWeight: 'bold',
+        fontSize: 14,
+    },
     buttonAjuda:{
         
-        height: Height/40,
-        width: Width/5.3,
+        height: Height/20,
+        width: Width/4,
         borderRadius: 50,
         borderWidth: 1.5,
         borderColor: '#000',

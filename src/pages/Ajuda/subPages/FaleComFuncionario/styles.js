@@ -5,7 +5,6 @@ const Height = Dimensions.get('screen').height;
 export default StyleSheet.create({
     container: {
         flex: 1,
-        height: Height,
         padding: Width/40,
         flexDirection: 'column',
         backgroundColor: '#fff',
@@ -38,38 +37,40 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     section:{
-        height: Height/2,
+        height: Height,
         flexDirection: 'column',
         gap: Height/10,
     },
     assunto:{
         borderBottomWidth: 1,
-        padding: Width/40,
+        paddingVertical: Width/50,
         fontWeight:'bold',
         fontSize: Width/24
         
     },
     inputArea:{
-        borderWidth: 1,
-        borderColor: '#f00',
         
+        borderColor: '#9B9B9B',
         height: Height/2.8,
         padding: Width/40,
-        borderRadius: 40
+       
 
     },
     buttonArea:{
-        justifyContent:'flex-end',
+        height: Height/10,
+        paddingHorizontal: Height/40,
+        justifyContent: 'space-between',
+        borderColor:'#9B9B9B',
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderWidth: 1,
         flexDirection: 'row',
         alignItems:'center',
         gap: 10,
     },
-    buttonAjuda:{
-        backgroundColor:'#f00',
-        borderWidth: 1,
-        borderColor: '#000',
-        padding: Width/36,
-        borderRadius:10,     
+    arquivo:{
+        flexDirection: 'row',
+        gap: 10
     },
     buttonText:{
         color: '#fff',
