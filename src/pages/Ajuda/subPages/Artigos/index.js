@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import { AntDesign } from '@expo/vector-icons';
+
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,13 +12,7 @@ export default function ArtigosBilhete() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.header}>
-                <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('Ajuda')}>
-                        <AntDesign name="left" size={30} color="black" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+            
 
             <View style={styles.boxTitulo}>
                 <Text style={styles.subTitulo}>

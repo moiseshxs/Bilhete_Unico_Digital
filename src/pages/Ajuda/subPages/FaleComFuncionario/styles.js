@@ -11,20 +11,6 @@ export default StyleSheet.create({
     },
     
     
-    row:{
-        height: Height/9,
-        display: 'flex',
-        flexDirection:'row',
-        alignItems: 'center',
-        gap:10,
-        borderBottomWidth: 1,
-        borderColor: '#000', 
-        
-    },
-    titulo:{
-        fontWeight:'bold',
-        fontSize: Width/18
-    },
 
     circuloBorda:{
         width:  40,
@@ -37,36 +23,58 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     section:{
-        height: Height,
         flexDirection: 'column',
         gap: Height/10,
     },
+    boxAssunto:{
+        justifyContent: 'space-between',
+         flexDirection: 'column',
+         gap: 20
+    },
     assunto:{
-        borderBottomWidth: 1,
         paddingVertical: Width/50,
         fontWeight:'bold',
-        fontSize: Width/24
+        fontSize: Width/16
         
     },
+
+    textAssunto:{
+        width: Width/1.2,
+        paddingHorizontal: Width/40,
+        color: '#9B9B9B',
+        fontWeight: '500',
+        fontSize: Width/23,
+        textAlign: 'justify'
+    },
     inputArea:{
-        
-        borderColor: '#9B9B9B',
+        borderWidth: 1,
+        borderRadius: 40,
+        borderColor: '#f00',
         height: Height/2.8,
         padding: Width/40,
        
 
     },
+    boxButton:{
+        flex: 1,
+        justifyContent:'flex-end'
+    },
     buttonArea:{
-        height: Height/10,
-        paddingHorizontal: Height/40,
-        justifyContent: 'space-between',
-        borderColor:'#9B9B9B',
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderWidth: 1,
+        height: Height/12,
+        justifyContent: "space-evenly",
+        padding: Width/40,
         flexDirection: 'row',
         alignItems:'center',
         gap: 10,
+    },
+    buttonAjuda: {
+        height: Height/12,
+        width: Height/12,
+        alignItems:'center',
+        justifyContent: 'center',
+        borderWidth: 2,
+        borderColor: '#9B9B9B',
+        borderRadius: 10
     },
     arquivo:{
         flexDirection: 'row',

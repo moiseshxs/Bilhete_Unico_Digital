@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity, TextInput} from 'react-native';
 import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+
 import { useNavigation } from '@react-navigation/native';
 
 

@@ -55,7 +55,8 @@ export default StyleSheet.create({
         height: Height/12,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        margin: Width/30
         
     },
     input: { 
@@ -63,7 +64,7 @@ export default StyleSheet.create({
         borderRadius: 20,
         marginHorizontal: 10,
         backgroundColor: 'white',
-        height: Height/14,
+        height: Height/16,
         width: Width/1.2,
         paddingLeft: 10
         
@@ -72,6 +73,7 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        padding: Height/40
     },
     boxChat:{
         height: Height/1.55, 

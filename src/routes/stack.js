@@ -30,7 +30,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
       
       <Stack.Screen 
         name='Login'
@@ -250,10 +250,10 @@ export default function StackRoutes() {
         name='ArtigosBilhete'
         component={ArtigosBilhete}
         options={{
-          title: 'ArtigosBilhete',
+          title: 'Ajuda',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
-          headerShown: false,
+          headerShown: true,
         }}
       />  
 
@@ -264,7 +264,7 @@ export default function StackRoutes() {
           title: 'Ajuda',
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
-          headerShown: false,
+          headerShown: true,
         }}
       /> 
 
