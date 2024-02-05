@@ -59,8 +59,7 @@ export default function FaleComFuncionario() {
                             }}
 
                             onChangeText={value => {setAssunto(value)}}
-                    onFocus={() => changeColor('assunto')}
-                    isFocused
+                   
                         />
                         <View style={styles.boxButton}>
 

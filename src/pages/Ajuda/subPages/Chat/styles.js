@@ -53,11 +53,8 @@ export default StyleSheet.create({
     boxInput:{
         flex:0,
         height: Height/12,
-        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        margin: Width/30
-        
     },
     input: { 
         borderWidth: 1,
@@ -66,8 +63,6 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         height: Height/16,
         width: Width/1.2,
-        paddingLeft: 10
-        
     },
     viewCompleta:{
         flex: 1,
