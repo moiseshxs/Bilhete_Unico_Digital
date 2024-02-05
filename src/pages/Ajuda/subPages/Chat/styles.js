@@ -5,9 +5,18 @@ const Height = Dimensions.get('screen').height;
 export default StyleSheet.create({
     container: {
         flex: 1,
-        padding: Width/40,
-        flexDirection: 'column',
+        justifyContent: 'flex-end',
         backgroundColor: '#fff',
+        alignItems: 'center',
+        padding: 20,
+        gap : Height/20,
+        
+    },
+    containerR: {  
+        alignItems: 'center',
+        padding: 20,
+        flexDirection: 'row',
+        
     },
     circuloBorda:{
         width:  40,
@@ -63,6 +72,8 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         height: Height/16,
         width: Width/1.2,
+        padding: Width/40,
+        
     },
     viewCompleta:{
         flex: 1,
@@ -103,5 +114,6 @@ export default StyleSheet.create({
         alignItems:'center',
         gap: 10,
     },    
+    
     
 });

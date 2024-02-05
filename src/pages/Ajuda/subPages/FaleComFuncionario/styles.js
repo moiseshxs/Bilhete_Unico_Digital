@@ -5,13 +5,11 @@ const Height = Dimensions.get('screen').height;
 export default StyleSheet.create({
     container: {
         flex: 1,
+        height: Height,
         padding: Width/40,
         flexDirection: 'column',
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
-    
-    
-
     circuloBorda:{
         width:  40,
         height: 40,
