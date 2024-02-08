@@ -14,7 +14,7 @@ export default StyleSheet.create({
       },
       //PARTE VERMELHA
       cima: {
-        flex: 3,
+        flex: 2,
         backgroundColor: 'red',
 
         paddingHorizontal: 20,

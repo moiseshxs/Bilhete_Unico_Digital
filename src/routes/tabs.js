@@ -18,10 +18,23 @@ export default function TabRoutes() {
       screenOptions={{
       headerShown: false, 
       tabBarActiveTintColor: 'red', 
+
       tabBarStyle: {
+      position: 'absolute',
       backgroundColor: '#fff',
       tabBarLabelPosition: 'below-icon',
       paddingBottom: 3,
+      bottom: 20,
+      marginHorizontal: 50,
+      borderWidth: 0,
+      borderRadius: 50,
+
+      shadowColor: '#000',
+      shadowOpacity: 0.10,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      }
       }}}>
       <Tab.Screen 
         name='Home'
@@ -29,15 +42,6 @@ export default function TabRoutes() {
         options={{
           tabBarIcon: ({color, size}) => <Feather name='home' color={color} size={size} />,
           tabBarLabel: 'Home',
-        }}
-      />
-
-      <Tab.Screen 
-        name='Carteira'
-        component={Carteira}
-        options={{
-          tabBarIcon: ({color, size}) => <AntDesign name='wallet' color={color} size={size} />,
-          tabBarLabel: 'Carteira'
         }}
       />
 

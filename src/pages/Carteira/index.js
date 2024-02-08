@@ -100,9 +100,7 @@ export default function Carteira() {
       <StatusBar barStyle="light-content"/>
 
         <View style={[styles.cima, styles.shadow]}>
-          <View style={styles.nav}>
-              <Text style={styles.nomeCarteira}>CARTEIRA</Text>
-          </View>
+ 
 
           <View style={styles.passagens}>
             <Text style={styles.tituPassag}>Passagens disponiveis</Text>

@@ -15,6 +15,7 @@ import DefinirSenha from '../pages/Cadastro/subPages/DefinirSenha/index'
 import QtdPassagens from '../pages/Carteira/subPages/qtdPassagens';
 import ConfirmarPagamento from '../pages/Carteira/subPages/confirmarPagamento';
 import Comprovante from '../pages/Carteira/subPages/comprovante';
+import Carteira from '../pages/Carteira';
 import Perfil from '../pages/Config/subPages/Perfil/index';
 import Bilhete from '../pages/Config/subPages/Bilhete/index';
 import Cartao from '../pages/Config/subPages/Cartao/index';
@@ -51,6 +52,17 @@ export default function StackRoutes() {
           headerStyle: { backgroundColor: 'white' },
           headerTintColor: 'black',
           headerShown: false,
+        }}
+      />
+
+      <Stack.Screen 
+        name='Carteira'
+        component={Carteira}
+        options={{
+          title: 'Carteira',
+          headerStyle: { backgroundColor: 'red' },
+          headerTintColor: 'white',
+          headerShown: true,
         }}
       />
 

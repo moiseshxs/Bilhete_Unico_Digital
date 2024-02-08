@@ -31,13 +31,12 @@ export default StyleSheet.create({
         flex: 4,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'100%'
     },
     qrcode: {
         height: '100%',
         width: '100%',
         resizeMode:'center',
-        flex: 1
+        objectFit: 'contain',
     },
 
     areaOffline: {
@@ -51,4 +50,8 @@ export default StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     },
+
+    alal:{
+        flex:1
+    }
 });

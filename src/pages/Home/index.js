@@ -73,8 +73,10 @@ export default function Home() {
           </View>
 
           <View style={styles.passagens}>
-            <Text style={styles.tituPassag}>Passagens disponiveis</Text>
-            <Text style={styles.qtdPassag}>42</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Carteira')}>
+                <Text style={styles.tituPassag}>Passagens disponiveis</Text>
+                <Text style={styles.qtdPassag}>42</Text>
+              </TouchableOpacity>
           </View>
         </View>
       

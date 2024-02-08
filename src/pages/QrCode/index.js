@@ -25,6 +25,10 @@ export default function QrCode() {
             <View style={styles.areaOffline}>
                 <Text style={styles.subText}>Para usar offline é só tirar print da tela e utilizar como de costume</Text>
             </View>
+
+            <View style={styles.alal}>
+                
+            </View>
         </SafeAreaView>
     );
 }
