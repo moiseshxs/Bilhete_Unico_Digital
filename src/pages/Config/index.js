@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { Text, View, Image, SafeAreaView, TouchableOpacity} from 'react-native';
+import { Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 
@@ -15,9 +15,25 @@ export default function Config() {
                     source={require('../../../assets/img/home/perfil.png')} 
                     style={styles.imagem}
                 />
+                <Text style={styles.nomeUsuario}>Cassio Ramos</Text>
+
+                
             </View>
+            <View style={styles.areaPassagens}>
+                <View style={styles.areaEsq}>
+                    <Text style={styles.textPassagens}>CONSUMO</Text>
+                    <Text style={styles.numPassagens}>19</Text>
+                </View>
+                <View style={styles.areaDir}>
+                    <Text style={styles.textPassagens}>RECARGA</Text>
+                    <Text style={styles.numPassagens}>7</Text>
+                </View>
+                
+            </View>
+            
 
             <View style={styles.areaOpcoes}>
+            <ScrollView>
                 <TouchableOpacity onPress={() => navigation.navigate('Perfil')}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
@@ -56,16 +72,14 @@ export default function Config() {
                     </View>
                 </View>
                 </TouchableOpacity>
-                
+
+                <View style={styles.areaUltima}>
+                    
+                </View>
+            </ScrollView>
             </View>
 
-            <View style={styles.areaSair}>
-            <View style={styles.botao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.textBotao}>Sair da conta</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            
         </SafeAreaView>
     );
 }

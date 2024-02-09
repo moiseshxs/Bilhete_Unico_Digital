@@ -9,24 +9,60 @@ export default StyleSheet.create({
     },
 
     areaImagem:{
-        flex: 2,
+        flex: 3,
+        paddingTop: 10,
         paddingHorizontal: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        rowGap: 15,
     },
     imagem:{
-        height: 150,
-        width: 150,
+        height: 125,
+        width: 125,
         objectFit: 'contain',
 
         borderRadius: 100,
     },
+    nomeUsuario:{
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    areaPassagens:{
+        flex: 1,
+        flexDirection: 'row',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: 'thistle',
+
+    },
+    areaEsq:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRightWidth: 1,
+        borderColor: 'thistle',
+    },
+    areaDir:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textPassagens:{
+        fontSize: 15,
+    },
+    numPassagens:{
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+
 
     areaOpcoes:{
-        flex: 3,
+       
+        flex: 5,
         paddingHorizontal: 20,
     },
     areaBotao: {
+        backgroundColor: '',
         paddingVertical: 20,
         borderBottomWidth: 1,
         borderColor: "thistle",
@@ -49,6 +85,10 @@ export default StyleSheet.create({
     },
     textEditar: {
         color:'red',
+    },
+
+    areaUltima: {
+        marginBottom: 90,
     },
 
     areaSair:{

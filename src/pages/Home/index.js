@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -66,8 +66,8 @@ export default function Home() {
               <Text style={styles.nomePerfil}>Bom dia, Cassio Ramos</Text>
             </View>
             <View style={styles.config}>
-              <TouchableOpacity onPress={() => navigation.navigate('Config')}>
-                <Ionicons name="settings-outline" size={30} color="white" />
+              <TouchableOpacity onPress={() => navigation.navigate('Ajuda')}>
+              <Feather name='help-circle' size={30} color="white" />
               </TouchableOpacity>
             </View>
           </View>
