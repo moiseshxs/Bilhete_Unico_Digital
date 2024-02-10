@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../pages/Home';
 import Carteira from '../pages/Carteira';
 import QrCode from '../pages/QrCode';
-import Config from '../pages/Config';
+import Ajuda from '../pages/Ajuda';
 
 const Tab = createBottomTabNavigator();
 
@@ -56,12 +56,11 @@ export default function TabRoutes() {
       />
 
       <Tab.Screen 
-        name='Configurações'
-        component={Config}
+        name='Ajuda'
+        component={Ajuda}
         options={{
-          tabBarIcon: ({color, size}) => <Ionicons name="settings-outline" color={color} size={size} />,
-          tabBarLabel: 'Config',
-          headerShown: true, 
+          tabBarIcon: ({color, size}) => <Feather name='help-circle' color={color} size={size} />,
+          tabBarLabel: 'Ajuda',
         }}
       />
     </Tab.Navigator>

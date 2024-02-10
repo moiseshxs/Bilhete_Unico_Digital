@@ -49,8 +49,9 @@ export default StyleSheet.create({
 
       passagens: {
         flex: 2,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
       },
       tituPassag: {
         color: 'white',
@@ -112,8 +113,7 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
       },
-    
-    
+      
       item: {
         flexDirection: 'row',
         borderBottomWidth: 1,

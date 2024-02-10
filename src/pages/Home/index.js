@@ -1,4 +1,5 @@
-import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -54,7 +55,7 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-      <StatusBar barStyle="light-content"/>
+      <StatusBar barStyle="dark-content"/>
 
         <View style={[styles.cima, styles.shadow]}>
           <View style={styles.nav}>
@@ -66,17 +67,24 @@ export default function Home() {
               <Text style={styles.nomePerfil}>Bom dia, Cassio Ramos</Text>
             </View>
             <View style={styles.config}>
-              <TouchableOpacity onPress={() => navigation.navigate('Ajuda')}>
-              <Feather name='help-circle' size={30} color="white" />
+              <TouchableOpacity onPress={() => navigation.navigate('Config')}>
+              <Ionicons name="settings-outline" size={30} color="white" />
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.passagens}>
             <TouchableOpacity onPress={() => navigation.navigate('Carteira')}>
+              <View style={styles.areaPassagens}>
                 <Text style={styles.tituPassag}>Passagens disponiveis</Text>
                 <Text style={styles.qtdPassag}>42</Text>
-              </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Carteira')}>
+              <View style={styles.botaoPassagens}>
+                <AntDesign name="right" size={20} color="white" />
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       

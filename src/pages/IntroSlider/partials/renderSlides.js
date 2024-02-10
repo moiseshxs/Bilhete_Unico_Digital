@@ -1,4 +1,4 @@
-import { View,  Image, Text } from "react-native"
+import { View,  Image, Text, StatusBar } from "react-native"
 import styles from "../styles"
 import logo from "../../../../assets/img/logo/logovermelha.png"
 
@@ -7,7 +7,7 @@ import logo from "../../../../assets/img/logo/logovermelha.png"
 
 
 export default function renderSlides({ item }){
-    
+    <StatusBar barStyle="light-content"/>
     return(
     <View style={styles.container}>
         <View style={styles.skipArea}></View>
