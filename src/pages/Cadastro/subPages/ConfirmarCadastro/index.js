@@ -1,11 +1,40 @@
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView, View, Text, Pressable } from "react-native";
 import styles from './styles'
+import { useEffect, useState } from 'react';
+import Api from '../../../../Services/api/Api';
+import api from '../../../../Services/api/teste';
 
-export default function ConfirmarCadastro({navigation}){
+export default function ConfirmarCadastro({navigation, route}){
     
     
+    const[email, setEmail] = useState('');
+    const[numTel, setNumTel] = useState('');
+    const[dados, setDados] = useState('')
 
+    if(route.params !== undefined){
+        let emailPassageiro = route.params.dados.emailPassageiro
+        let numTelPassageiro = route.params.dados.numTelPassageiro
+        useEffect(() => {
+        setEmail(emailPassageiro)
+        setNumTel(numTelPassageiro)
+        setDados(route.params.dados)
+
+    })
+
+}
+        let api = new Api()
+        const requireCod = async(forma, dado) =>{
+            const response = await api.requireCod(forma, dado)
+            if(response){
+                navigation.navigate('CodigoCadastro', {
+                    id: dados.id,
+                    forma: forma
+                })
+            }
+
+        }
+    
     return(
         <SafeAreaView style={styles.container}>
           <View style={styles.returnArea}>  
@@ -30,21 +59,21 @@ export default function ConfirmarCadastro({navigation}){
                         </View>
                         <View style={styles.desc}>
                             <Text style={{fontSize:20, fontWeight:'500', color:'#7b7b7b'}}>Via SMS:</Text>
-                            <Text style={{fontSize:16, fontWeight:'500', color:'#000'}}>** ****-**10</Text>
+                            <Text style={{fontSize:16, fontWeight:'500', color:'#000'}}>{numTel}</Text>
                         </View>
                     </View>
 
                 </Pressable>
                 <Pressable
                 style={styles.pressable}
-                onPress={() => navigation.navigate('CodigoCadastro', {forma: "Email"})}>
+                onPress={() => requireCod("email", email)}>
                      <View style={styles.controller}>
                         <View style={styles.icon}>
                             <Ionicons name='mail' size={80}/>
                         </View>
                         <View style={styles.desc}>
                             <Text style={{fontSize:20, fontWeight:'500', color:'#7b7b7b'}}>Via Email:</Text>
-                            <Text style={{fontSize:16, fontWeight:'500', color:'#000'}}>******ro12@gmail.com</Text>
+                            <Text style={{fontSize:16, fontWeight:'500', color:'#000'}}>{email}</Text>
                         </View>
                     </View>
 

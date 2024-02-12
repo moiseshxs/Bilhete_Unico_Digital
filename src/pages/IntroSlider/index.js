@@ -8,6 +8,7 @@ import button from "./partials/button";
 import doneButton from './partials/doneButton'
 import renderSlides from "./partials/renderSlides";
 import skipButton from './partials/skipButton'
+import Api from "../../Services/api/Api";
 
 
 

@@ -3,8 +3,9 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import styles from "./styles"
 import { useState } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
+import Api from "../../../../Services/api/Api"
 
-export default function NovaSenha({navigation}){
+export default function NovaSenha({navigation, route}){
 
     function changeColor(input){
         if(input == 'senha'){
@@ -13,6 +14,17 @@ export default function NovaSenha({navigation}){
         }else{
             setBorderColor('#7b7b7b')
             setBorderColor2('#f00')
+        }
+    }
+    let api = new Api()
+    const register = async(senha, confirmaSenha) => {
+        if(senha != confirmaSenha){
+            return false;
+        }
+        if(await api.register(route.params.id, senha)){
+            navigation.navigate('Login')
+        }else{
+            return false
         }
     }
 
@@ -117,7 +129,7 @@ export default function NovaSenha({navigation}){
             </View>
             <View style={styles.buttonArea}>
             <TouchableOpacity
-                    onPress={() => navigation.navigate('Login')}>
+                    onPress={() => register(senha, confirmSenha)}>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Cadastrar</Text>
                         </View>

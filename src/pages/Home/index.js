@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import { Text, View, Image, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useContext, useState } from 'react';
 import styles from './styles';
 import MyContext from '../../Context/context';
+import Api from '../../Services/api/Api';
 
 
 
@@ -43,8 +44,8 @@ const DATA = [
   },
 ];
 
+
 const Item = ({passagem,linha,data}) => (
-  
   
   
   <View style={styles.item}>
@@ -71,7 +72,8 @@ export default function Home()  {
   
 
   const {setNome,nome, token} = useContext(MyContext)
-  
+  let api = new Api()
+  api.perfil(token)
   const navigation = useNavigation();
 
   

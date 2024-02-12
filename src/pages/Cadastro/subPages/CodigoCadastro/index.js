@@ -1,8 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView, View, Text } from "react-native";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CodeField, Cursor,  useClearByFocusCell } from 'react-native-confirmation-code-field';
 import styles from './styles'
+import Api from '../../../../Services/api/Api';
 
 export default function RecuperarSenha({navigation, route}){
     const CELL_COUNT = 4
@@ -11,13 +12,23 @@ export default function RecuperarSenha({navigation, route}){
     value,
     setValue,
     })
+    let api = new Api()
+    const verCod = async(codigo) =>
+    {
+      const response = await api.verCod(route.params.id,codigo)
+      console.log(response)
+      if(response){
+        navigation.navigate('DefinirSenha', {
+          id: route.params.id
+        })
+      }
+    }
     if(value.length == 4){
-      setTimeout(function(){
-        navigation.navigate('DefinirSenha')
-        setValue('')
-      }, 100)
+      verCod(value)
+      
       
     }
+    console.log(route.params.id)
 
     return(
         <SafeAreaView style={styles.container}>

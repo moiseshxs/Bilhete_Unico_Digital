@@ -10,7 +10,7 @@ export default class Api{
     {
         this.api = axios.create({
             baseURL: this.baseUrl,
-            headers: {'Authorization': `Bearer ${this.token}`}
+            
         });
     }
     setToken(token:string)
@@ -20,20 +20,61 @@ export default class Api{
     async getPassageiro(id:number){
         try{
             const response = await this.api.get(`/passageiros/${id}`)
-            console.log(response)
+            
             return response.data
             
           }catch(err){
             return "Email ou senha incorretos!"
           }
         }
+      async perfil(token)
+      {
+        const response = await this.api.get('/auth/perfil', { headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+      }
       async login(cpf:string, password:string)
       {
         let form = new FormData();
         form.append("cpfPassageiro", cpf);
         form.append("password", password);
         const response = await this.api.post('/auth/login', form);
+        console.log(response.data)
         this.setToken(response.data.token_de_acesso)
         return response.data
+      }
+      async getByCpf(cpf:string){
+        let form = new FormData();
+        form.append("cpfPassageiro",cpf);
+        const response = await this.api.post('/auth/cadastro', form);
+        return response.data;
+      }
+      async requireCod(forma:string, dado:string){
+        if(forma == "email"){
+          let form = new FormData();
+          form.append("emailPassageiro", dado);
+          const response = await this.api.post('/auth/requireCod', form);
+
+          return response.data.message == 'sucesso ao enviar email'
+            
+          
+        }
+      }
+      async verCod(id:number, codigo:string)
+      {
+        let form = new FormData();
+        form.append("codigo", codigo);
+        const response = await this.api.post(`/auth/verCod/${id}`, form);
+        console.log(response.data)
+        return response.data.message == 'autorizado';
+      }
+      async register(id:number, password:string)
+      {
+        let form = new FormData();
+        
+        form.append("password", password);
+        const response = await this.api.post(`/auth/register/${id}`, form);
+       
+        return response.data.message == "Sucesso ao cadastrar!";
+
       }
     }

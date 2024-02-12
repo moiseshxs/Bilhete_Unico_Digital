@@ -3,10 +3,12 @@ import styles from "./styles"
 import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { useState } from "react";
+import Api from "../../Services/api/Api";
 
 
 
 export default function Cadastro({navigation}){
+
     const [cpf, setCpf] = useState()
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const changeColor =(area) =>{
@@ -15,6 +17,14 @@ export default function Cadastro({navigation}){
         }else{
             setBorderColor('#7b7b7b')
         }
+    }
+    let api = new Api()
+    const consultar = async(cpf) =>{
+        let response = await api.getByCpf(cpf)
+        console.log(response)
+        navigation.navigate('ConfirmarCadastro', {
+            dados: response.usuario
+        })
     }
     return(
         <SafeAreaView style={styles.container}
@@ -80,7 +90,7 @@ export default function Cadastro({navigation}){
             </View>
             <View style={styles.buttonArea}> 
                 <TouchableHighlight
-                onPress={() => navigation.navigate('ConfirmarCadastro')}>
+                onPress={() => consultar(cpf)}>
                 <View style={styles.button}>
                         <Text style={styles.textButton}>Consultar</Text>
                         </View>
