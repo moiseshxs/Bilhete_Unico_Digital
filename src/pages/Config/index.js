@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import MyContext from '../../Context/context';
 
 export default function Config() {
     const navigation = useNavigation();
-
+    const{nome} = useContext(MyContext);
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.areaImagem}>
@@ -15,7 +16,7 @@ export default function Config() {
                     source={require('../../../assets/img/home/perfil.png')} 
                     style={styles.imagem}
                 />
-                <Text style={styles.nomeUsuario}>Cassio Ramos</Text>
+                <Text style={styles.nomeUsuario}>{nome}</Text>
 
                 
             </View>

@@ -1,15 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Modal, Dimensions} from 'react-native';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
 import Logo from '../../../assets/img/logo/logovermelha.png'
+import Api from '../../Services/api/Api';
+import MyContext from '../../Context/context';
 
 
 
 export default function Login({navigation}) {
     
+    const api = new Api()
+    const{nome, setNome, email, setEmail, dataNasc, setDataNasc, cpf, setCpf,numTel, setNumTel, foto, setFoto, token, setToken} = useContext(MyContext)
+    const[error, setError] = useState('')
+    
+
+    const login = async(cpf, password) =>{
+        const response = await api.login(cpf, password)
+            
+            if( response.usuario !== undefined){
+            
+            let nomes = response.usuario.nomePassageiro
+            nomes = (nomes).split(' ')
+            nomes = nomes[0] + " " + nomes[1]
+            console.log(nomes)
+            setNome(response.usuario.nomePassageiro)
+
+            setEmail(response.usuario.emailPassageiro)
+            setDataNasc(response.usuario.dataNascPassageiro)
+            setCpf(response.usuario.cpfPassageiro)
+            setNumTel(response.usuario.numTelPassageiro)
+            setFoto(response.usuario.fotoPassageiro)
+            setToken(response.token_de_acesso)
+            navigation.navigate('Home')
+        }else if(typeof response.message !== undefined){
+            setError(response.message)
+        }
+            
+           
+            
+        }
+    
+       
+    
+
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
     const [borderColor3, setBorderColor3] = useState('#7b7b7b')
@@ -41,7 +77,7 @@ export default function Login({navigation}) {
         navigation.navigate('FormaRecuperarSenha')
     }
 
-    const [cpf, setCpf] = useState('')
+    const [cpfForm, setCpfForm] = useState('')
     const [senha, setSenha] = useState('')
     const [recuperaCpf, setRecuperaCpf] = useState('')
     return (
@@ -57,7 +93,7 @@ export default function Login({navigation}) {
                     hintTextColor='#aaa'
                     mask='000.000.000-00'
                     hint='123.456.789-10'
-                    value={cpf}
+                    value={cpfForm}
                     containerStyles={{
                         borderWidth: 2,
                         width: Dimensions.get('screen').width/1.15,
@@ -87,7 +123,7 @@ export default function Login({navigation}) {
                         fontSize: 16
                         
                     }}
-                    onChangeText={value => {setCpf(value)}}
+                    onChangeText={value => {setCpfForm(value)}}
                     onFocus={() => changeColor('cpf')}
                     isFocused
                     />
@@ -141,14 +177,15 @@ export default function Login({navigation}) {
             onPress={() => setModal(true)}>
             
             <Text style={styles.forgetText}>Esqueceu sua senha?</Text>
-
+            <Text style={styles.forgetText}>{error}</Text>
+            
             </TouchableOpacity>
                 </View>
             </View>
             <View style={styles.buttonArea}>
                 <View style={styles.buttonGroup}>
                     <TouchableOpacity
-                    onPress={() => navigation.navigate('Home')}>
+                    onPress={() => login(cpfForm, senha)}>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Entrar</Text>
                         </View> 

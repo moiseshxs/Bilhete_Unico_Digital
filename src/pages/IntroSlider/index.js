@@ -44,7 +44,7 @@ const slides = [
 
 export default function IntroSlider({navigation}){
     
-
+    
     return(
         
             <AppIntroSlider

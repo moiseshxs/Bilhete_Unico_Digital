@@ -1,8 +1,20 @@
+import { Feather } from '@expo/vector-icons';
+import { Text, View, Image, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+
+import { useContext, useState } from 'react';
 import styles from './styles';
+import MyContext from '../../Context/context';
+
+
+
+
+
+
 
 const DATA = [
   {
@@ -32,6 +44,9 @@ const DATA = [
 ];
 
 const Item = ({passagem,linha,data}) => (
+  
+  
+  
   <View style={styles.item}>
     <View style={styles.esquerda}>
       <View style={styles.pagamen}>
@@ -49,8 +64,17 @@ const Item = ({passagem,linha,data}) => (
   </View>
 );
 
-export default function Home() {
+export default function Home()  {
+
+
+
+  
+
+  const {setNome,nome, token} = useContext(MyContext)
+  
   const navigation = useNavigation();
+
+  
 
   return (
     <SafeAreaView style={styles.safeContainer}>
@@ -64,7 +88,7 @@ export default function Home() {
               source={require('../../../assets/img/home/perfil.png')}
               style={styles.fotoPerfil}
             />
-              <Text style={styles.nomePerfil}>Bom dia, Cassio Ramos</Text>
+              <Text style={styles.nomePerfil}>Bom dia, {nome}</Text>
             </View>
             <View style={styles.config}>
               <TouchableOpacity onPress={() => navigation.navigate('Config')}>

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import styles from './styles';
 import Cassio from '../../../../../assets/img/home/perfil.png'
 import { Ionicons } from '@expo/vector-icons';
 import { launchImageLibrary } from "react-native-image-picker";
+import MyContext from '../../../../Context/context';
 export default function Perfil({navigation}) {
     
     
     const [file, setFile] = useState();
     const [modal, setModal] =useState(false);
-
+    const{nome, setNome, email, setEmail, dataNasc, setDataNasc, cpf, setCpf,numTel, setNumTel, foto, setFoto, token, setToken} = useContext(MyContext)
     const trocarSenha = () =>{
         setModal(false)
         navigation.navigate('TrocarSenha')
@@ -77,19 +78,19 @@ export default function Perfil({navigation}) {
                     
                     <View style={styles.infoController}>
                         <Text style={styles.title}>Nome completo</Text>
-                        <Text style={styles.desc}>Cassio Adalberto Ramos</Text>
+                        <Text style={styles.desc}>{nome}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>E-mail</Text>
-                        <Text style={styles.desc}>gigantecassio@gmail.com</Text>
+                        <Text style={styles.desc}>{email}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>Celular</Text>
-                        <Text style={styles.desc}>(11) 9 0000-0000</Text>
+                        <Text style={styles.desc}>{numTel}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>CPF</Text>
-                        <Text style={styles.desc}>777.***.***-*7</Text>
+                        <Text style={styles.desc}>{cpf}</Text>
                     </View>
                 </View>
             </View>
