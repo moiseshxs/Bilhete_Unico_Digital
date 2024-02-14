@@ -44,6 +44,9 @@ export default StyleSheet.create({
       nomePerfil: {
         color: 'white',
         fontSize: 20,
+        width: '20ch',
+        
+        overflow:'hidden',
         fontWeight: 'bold',
       },
 

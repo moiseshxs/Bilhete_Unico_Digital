@@ -2,50 +2,51 @@ import { Feather } from '@expo/vector-icons';
 
 import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
-import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './styles';
 import MyContext from '../../Context/context';
-import Api from '../../Services/api/Api';
+
+import Passageiro from '../../Services/api/Passageiro';
 
 
 
 
+  let p = new Passageiro()
 
 
+// const DATA = [
+//   {
+//     id: '1',
+//     passagem: 'Passagem em QrCode',
+//     linha: '312N-10 SÃO MIGUEL',
+//     data: '7 NOV',
+//   },
+//   {
+//     id: '2',
+//     passagem: 'Passagem em QrCode',
+//     linha: '312N-10 TERM. CID. TIRADENTES',
+//     data: '7 NOV',
+//   },
+//   {
+//     id: '3',
+//     passagem: 'Passagem em QrCode',
+//     linha: '312N-10 SÃO MIGUEL',
+//     data: '4 NOV',
+//   },
+//   {
+//     id: '4',
+//     passagem: 'Passagem em QrCode',
+//     linha: '312N-10 TERM. CID. TIRADENTES',
+//     data: '4 NOV',
+//   },
+// ];
 
-const DATA = [
-  {
-    id: '1',
-    passagem: 'Passagem em QrCode',
-    linha: '312N-10 SÃO MIGUEL',
-    data: '7 NOV',
-  },
-  {
-    id: '2',
-    passagem: 'Passagem em QrCode',
-    linha: '312N-10 TERM. CID. TIRADENTES',
-    data: '7 NOV',
-  },
-  {
-    id: '3',
-    passagem: 'Passagem em QrCode',
-    linha: '312N-10 SÃO MIGUEL',
-    data: '4 NOV',
-  },
-  {
-    id: '4',
-    passagem: 'Passagem em QrCode',
-    linha: '312N-10 TERM. CID. TIRADENTES',
-    data: '4 NOV',
-  },
-];
 
-
-const Item = ({passagem,linha,data}) => (
+const Item = ({numero,linha,data}) => (
   
   
   <View style={styles.item}>
@@ -54,7 +55,7 @@ const Item = ({passagem,linha,data}) => (
         <Image source={require('../../../assets/img/home/qrcode.png')} style={styles.foto}/>
       </View>
       <View style={styles.meio}>
-        <Text style={styles.passagem}>{passagem}</Text>
+        <Text style={styles.passagem}>Passagem em qrCode</Text>
         <Text style={styles.linha}>{linha}</Text>
       </View>
     </View>
@@ -70,16 +71,52 @@ export default function Home()  {
 
 
   
+  const[DATA, setDATA] = useState('')
+  const[infos, setInfos] = useState(false)
+  const[refreshing, setRefreshing] = useState(false)
+  const {passageiro, bilhete, passagens, setPassagens, setCompras} = useContext(MyContext)
 
-  const {setNome,nome, token} = useContext(MyContext)
-  let api = new Api()
-  api.perfil(token)
+  const getPassagens = async() =>{
+    let response =  await p.getPassagens(bilhete.id, passageiro.token)
+      setPassagens(response)
+      setDATA(response.consumos)
+      console.log(response.consumos)
+      setInfos(true) 
+      let response2 = await p.getComprasByBilhete(passageiro.id, bilhete.id, passageiro.token)
+      setCompras(response2)
+  }
+  const onRefresh = async() =>{
+    let response =  await p.getPassagens(bilhete.id, passageiro.token)
+    if(response != passagens){
+      setPassagens(response)
+      setDATA(response.consumos)
+    }
+  }
+
+  useEffect(() => {
+    if(DATA == ''){
+      setInfos(false)
+      if(passagens == ''){
+        getPassagens()   
+      }else{
+        setDATA(passagens.consumos)
+        setInfos(true)
+      }
+    }
+  })
+  const  navCarteira  = async() => {
+      const response = await p.getComprasByBilhete(passageiro.id, bilhete.id, passageiro.token)
+      setCompras(response)
+      navigation.navigate('Carteira')
+  }
+  
   const navigation = useNavigation();
 
   
 
   return (
-    <SafeAreaView style={styles.safeContainer}>
+    
+    <SafeAreaView  style={styles.safeContainer}>
       <View style={styles.container}>
       <StatusBar barStyle="dark-content"/>
 
@@ -90,7 +127,7 @@ export default function Home()  {
               source={require('../../../assets/img/home/perfil.png')}
               style={styles.fotoPerfil}
             />
-              <Text style={styles.nomePerfil}>Bom dia, {nome}</Text>
+              <Text numberOfLines={1} style={styles.nomePerfil}>Bom dia, {passageiro.nomePassageiro}</Text>
             </View>
             <View style={styles.config}>
               <TouchableOpacity onPress={() => navigation.navigate('Config')}>
@@ -100,13 +137,13 @@ export default function Home()  {
           </View>
 
           <View style={styles.passagens}>
-            <TouchableOpacity onPress={() => navigation.navigate('Carteira')}>
+            <TouchableOpacity onPress={() => navCarteira()}>
               <View style={styles.areaPassagens}>
                 <Text style={styles.tituPassag}>Passagens disponiveis</Text>
-                <Text style={styles.qtdPassag}>42</Text>
+                <Text style={styles.qtdPassag}>{passagens.qtdPassagens}</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Carteira')}>
+            <TouchableOpacity onPress={() => navCarteira()}>
               <View style={styles.botaoPassagens}>
                 <AntDesign name="right" size={20} color="white" />
               </View>
@@ -125,12 +162,17 @@ export default function Home()  {
 
         <View style={styles.atividades}>
           <Text style={styles.titulo}>Atividades</Text>
+          { infos &&
           <FlatList
             data={DATA}
-            renderItem={({item}) => <Item passagem={item.passagem} linha={item.linha} data={item.data}/>}
+            renderItem={({item}) => <Item numero={item.numero} linha={item.linha} data={item.data}/>}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
+            refreshControl={<RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}/>}
           />
+        }
         </View>
  
       </View>
@@ -138,5 +180,6 @@ export default function Home()  {
       
 
     </SafeAreaView>
+    
   );
 }

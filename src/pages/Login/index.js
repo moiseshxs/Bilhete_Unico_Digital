@@ -13,7 +13,7 @@ import MyContext from '../../Context/context';
 export default function Login({navigation}) {
     
     const api = new Api()
-    const{nome, setNome, email, setEmail, dataNasc, setDataNasc, cpf, setCpf,numTel, setNumTel, foto, setFoto, token, setToken} = useContext(MyContext)
+    const{setPassageiro} = useContext(MyContext)
     const[error, setError] = useState('')
     
 
@@ -23,18 +23,9 @@ export default function Login({navigation}) {
             if( response.usuario !== undefined){
             
             let nomes = response.usuario.nomePassageiro
-            nomes = (nomes).split(' ')
-            nomes = nomes[0] + " " + nomes[1]
-            console.log(nomes)
-            setNome(response.usuario.nomePassageiro)
-
-            setEmail(response.usuario.emailPassageiro)
-            setDataNasc(response.usuario.dataNascPassageiro)
-            setCpf(response.usuario.cpfPassageiro)
-            setNumTel(response.usuario.numTelPassageiro)
-            setFoto(response.usuario.fotoPassageiro)
-            setToken(response.token_de_acesso)
-            navigation.navigate('Home')
+            setPassageiro(response.usuario)
+            
+            navigation.navigate('ListaBilhetes')
         }else if(typeof response.message !== undefined){
             setError(response.message)
         }

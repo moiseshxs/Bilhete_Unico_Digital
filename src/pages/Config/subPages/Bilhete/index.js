@@ -1,61 +1,63 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import BilletElement from './partials/billetElement';
+import MyContext from '../../../../Context/context';
 
 export default function Bilhete({navigation, route}) {
-    let tipo = null;
-    let gratuidade = null;
-    let meia = null;
-    let num = null;
-    let status = null;
-    let backgroundColor = undefined;
-    if(route.params == undefined){
-         tipo = 'Estudante';
-         gratuidade = 'Sim';
-         meia = 'Sim';
-         num = '123 456 789';
-         status = 'Ativo';
-    }else{
-         tipo = route.params.tipo;
-         gratuidade = route.params.gratuidade;
-         meia = route.params.meia;
-         num = route.params.num;
-         status = route.params.status;
-         backgroundColor = route.params.backgroundColor
-    }
+    // let tipo = null;
+    // let gratuidade = null;
+    // let meia = null;
+    // let num = null;
+    // let status = null;
+    // let backgroundColor = undefined;
+    // if(route.params == undefined){
+    //      tipo = 'Estudante';
+    //      gratuidade = 'Sim';
+    //      meia = 'Sim';
+    //      num = '123 456 789';
+    //      status = 'Ativo';
+    // }else{
+    //      tipo = route.params.tipo;
+    //      gratuidade = route.params.gratuidade;
+    //      meia = route.params.meia;
+    //      num = route.params.num;
+    //      status = route.params.status;
+    //      backgroundColor = route.params.backgroundColor
+    // }
+    const{passageiro, bilhete} = useContext(MyContext)
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.bilheteArea}>
                 <BilletElement lista={false} 
-                tipoBilhete={tipo}
-                 gratuidadeBilhete={gratuidade}
-                 meiaPassagemBilhete={meia} 
-                 statusBilhete={status}
-                 numBilhete={num}
-                 backgroundColor={backgroundColor}/>
+                tipoBilhete={bilhete.tipoBilhete}
+                 gratuidadeBilhete={bilhete.gratuidadeBilhete? 'Sim' : 'Não'}
+                 meiaPassagemBilhete={bilhete.meiaPassagensBilhete? 'Sim' : 'Não'} 
+                 statusBilhete={bilhete.statusBilhete}
+                 numBilhete={bilhete.numBilhete}
+                 backgroundColor={bilhete.backgroundColor}/>
             </View>
             <View style={styles.infosArea}>
                 <View style={styles.infos1}>
                     <View style={styles.nomePassageiro}>
                         <Text style={styles.miniTitle}>Nome</Text>
-                        <Text style={styles.desc}>CASSIO ADALBERTO RAMOS</Text>
+                        <Text style={styles.desc}>{passageiro.nomePassageiro}</Text>
                     </View>
                     <View style={styles.numBilhete}>
                         <Text style={styles.miniTitle}>Código de uso/N° do Bilhete Único</Text>
-                        <Text style={styles.desc}>123 456 789</Text>
+                        <Text style={styles.desc}>{bilhete.numBilhete}</Text>
                     </View>
                 </View>
                 <View style={styles.infos2}>
                     <View style={styles.tipoBilhete}>
                         <Text style={styles.miniTitle2}>Bilhete</Text>
-                        <Text style={styles.desc2}>Estudante</Text>
+                        <Text style={styles.desc2}>{bilhete.tipoBilhete}</Text>
                     </View>
                     <View style={styles.statusBilhete}>
                         <Text style={styles.miniTitle2}>Status</Text>
-                        <Text style={styles.desc2}>Ativo</Text>
+                        <Text style={styles.desc2}>{bilhete.statusBilhete}</Text>
                     </View>
                 </View>
                 

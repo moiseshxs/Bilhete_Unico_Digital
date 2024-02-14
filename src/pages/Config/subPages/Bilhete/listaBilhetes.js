@@ -1,70 +1,96 @@
-import { SafeAreaView, View, Text, StyleSheet, FlatList, ScrollView } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, FlatList, ScrollView, RefreshControl, TouchableHighlight } from "react-native"
 import BilletElement from './partials/billetElement'
+import { useContext, useEffect, useState } from "react"
+import Passageiro from "../../../../Services/api/Passageiro"
+import MyContext from "../../../../Context/context"
 
 
 export default function ListaBilhetes({navigation}){
     
-   
-        
+    const{id, token, passageiro, setBilhete} = useContext(MyContext)
+    const[infos, setInfos] = useState(true)
+    const[refreshing, setRefreshing] = useState(false)
+
+    let p = new Passageiro()
+    const[DATA, setDATA] = useState('')
     
-
-    const DATA = [
-        {
-            id: '1',
-            tipoBilhete: 'Estudante',
-            gratuidadeBilhete: 'Sim',
-            meiaPassagemBilhete: 'Sim',
-            statusBilhete: 'Ativo',
-            numBilhete: '123 456 789',
-            backgroundColor: '#438E28'
-        },
-        {
-            id: '2',
-            tipoBilhete: 'Comum',
-            gratuidadeBilhete: 'Não',
-            meiaPassagemBilhete: 'Não',
-            statusBilhete: 'Ativo',
-            numBilhete: '543 326 123',
-            backgroundColor: 'gray'
-        },
-        {
-            id: '3',
-            tipoBilhete: 'PCD',
-            gratuidadeBilhete: 'Sim',
-            meiaPassagemBilhete: 'Sim',
-            statusBilhete: 'Ativo',
-            numBilhete: '544 222 749',
-            backgroundColor:'#728'
+    // let DATA = [ 
+    //     // {
+    //     //     id: '1',
+    //     //     tipoBilhete: 'Estudante',
+    //     //     gratuidadeBilhete: 'Sim',
+    //     //     meiaPassagemBilhete: 'Sim',
+    //     //     statusBilhete: 'Ativo',
+    //     //     numBilhete: '123 456 789',
+    //     //     backgroundColor: '#438E28'
+    //     // },
+    //     // {
+    //     //     id: '2',
+    //     //     tipoBilhete: 'Comum',
+    //     //     gratuidadeBilhete: 'Não',
+    //     //     meiaPassagemBilhete: 'Não',
+    //     //     statusBilhete: 'Ativo',
+    //     //     numBilhete: '543 326 123',
+    //     //     backgroundColor: 'gray'
+    //     // },
+    //     // {
+    //     //     id: '3',
+    //     //     tipoBilhete: 'PCD',
+    //     //     gratuidadeBilhete: 'Sim',
+    //     //     meiaPassagemBilhete: 'Sim',
+    //     //     statusBilhete: 'Ativo',
+    //     //     numBilhete: '544 222 749',
+    //     //     backgroundColor:'#728'
+    //     // }
+    // ]
+    
+    
+    const choseBilhete = (item) => {
+        setBilhete(item)
+        navigation.navigate('Bilhete')
+    }
+    const getBilhetes = async() => {
+        const response = await p.getBilhetes(passageiro.id, passageiro.token)
+        setDATA(response)
+    
+    }
+    useEffect(() => {
+        if(DATA == ''){
+        getBilhetes()
         }
-    ]
-
+    })
+    const onRefresh = () => {
+        setRefreshing(true)
+        getBilhetes()
+        console.log('vai')
+    }
+    
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
             <Text style={styles.title}>Seus Bilhetes</Text>
             </View>
             <View style={styles.lista}>
+                { infos &&
             <FlatList
             data={DATA}
+            refreshControl={<RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}/>}
             renderItem={({item}) => <BilletElement lista={true}
                 tipoBilhete={item.tipoBilhete}
                 statusBilhete={item.statusBilhete}
-                gratuidadeBilhete={item.gratuidadeBilhete}
-                meiaPassagemBilhete={item.meiaPassagemBilhete}
+                gratuidadeBilhete={item.gratuidadeBilhete?'Sim' : 'Não'}
+                meiaPassagemBilhete={item.meiaPassagensBilhete? 'Sim' : 'Não'}
                 numBilhete={item.numBilhete} 
                 backgroundColor={item.backgroundColor}
-                press={() => navigation.navigate('Bilhete', {
-                    tipo: item.tipoBilhete,
-                     gratuidade: item.gratuidadeBilhete,
-                      meia: item.meiaPassagemBilhete,
-                       num: item.numBilhete, 
-                       status: item.statusBilhete,
-                        backgroundColor: item.backgroundColor
-                })}   />}
+                press={() => choseBilhete(item)}   />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             
           />
+            }
+            
           </View>
         </SafeAreaView>
     )

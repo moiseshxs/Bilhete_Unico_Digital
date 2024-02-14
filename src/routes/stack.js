@@ -31,7 +31,7 @@ const Stack = createNativeStackNavigator();
 
 export default function StackRoutes() {
   return (
-    <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: true}}>
       
       <Stack.Screen 
         name='Login'

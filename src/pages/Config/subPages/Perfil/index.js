@@ -10,7 +10,7 @@ export default function Perfil({navigation}) {
     
     const [file, setFile] = useState();
     const [modal, setModal] =useState(false);
-    const{nome, setNome, email, setEmail, dataNasc, setDataNasc, cpf, setCpf,numTel, setNumTel, foto, setFoto, token, setToken} = useContext(MyContext)
+    const{passageiro, compras, passagens} = useContext(MyContext)
     const trocarSenha = () =>{
         setModal(false)
         navigation.navigate('TrocarSenha')
@@ -78,19 +78,19 @@ export default function Perfil({navigation}) {
                     
                     <View style={styles.infoController}>
                         <Text style={styles.title}>Nome completo</Text>
-                        <Text style={styles.desc}>{nome}</Text>
+                        <Text style={styles.desc}>{passageiro.nomePassageiro}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>E-mail</Text>
-                        <Text style={styles.desc}>{email}</Text>
+                        <Text style={styles.desc}>{passageiro.emailPassageiro}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>Celular</Text>
-                        <Text style={styles.desc}>{numTel}</Text>
+                        <Text style={styles.desc}>{passageiro.numTelPassageiro}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>CPF</Text>
-                        <Text style={styles.desc}>{cpf}</Text>
+                        <Text style={styles.desc}>{passageiro.cpfPassageiro}</Text>
                     </View>
                 </View>
             </View>
@@ -98,11 +98,11 @@ export default function Perfil({navigation}) {
                 <View style={styles.dashController}>              
                     <View style={styles.quadrado}>
                         <Text style={styles.acao}>Consumos</Text>
-                        <Text style={styles.numero}>19</Text>
+                        <Text style={styles.numero}>{passagens.qtdConsumos}</Text>
                     </View>
                     <View style={styles.quadrado}>
                         <Text style={styles.acao}>Compras</Text>
-                        <Text style={styles.numero}>7</Text>
+                        <Text style={styles.numero}>{compras.qtdCompras}</Text>
                     </View>
                 </View>
 

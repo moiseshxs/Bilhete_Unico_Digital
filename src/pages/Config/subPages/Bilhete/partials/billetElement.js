@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     bilhete: {
         width: '95%',
         
-
+        
         borderRadius: 25,
 
         backgroundColor: '#438E28',
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     bilheteUnique: {
-        height: '85%'
+        height: '95%'
     },
     bilheteLista: {
         height: 250,

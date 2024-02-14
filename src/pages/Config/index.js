@@ -8,7 +8,7 @@ import MyContext from '../../Context/context';
 
 export default function Config() {
     const navigation = useNavigation();
-    const{nome} = useContext(MyContext);
+    const{passageiro, compras, passagens} = useContext(MyContext);
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.areaImagem}>
@@ -16,18 +16,18 @@ export default function Config() {
                     source={require('../../../assets/img/home/perfil.png')} 
                     style={styles.imagem}
                 />
-                <Text style={styles.nomeUsuario}>{nome}</Text>
+                <Text style={styles.nomeUsuario}>{passageiro.nomePassageiro}</Text>
 
                 
             </View>
             <View style={styles.areaPassagens}>
                 <View style={styles.areaEsq}>
                     <Text style={styles.textPassagens}>CONSUMO</Text>
-                    <Text style={styles.numPassagens}>19</Text>
+                    <Text style={styles.numPassagens}>{passagens.qtdConsumos}</Text>
                 </View>
                 <View style={styles.areaDir}>
                     <Text style={styles.textPassagens}>RECARGA</Text>
-                    <Text style={styles.numPassagens}>7</Text>
+                    <Text style={styles.numPassagens}>{compras.qtdCompras}</Text>
                 </View>
                 
             </View>

@@ -5,6 +5,8 @@ import cartao from '../../../assets/img/carteira/cartao.png';
 import pix from '../../../assets/img/carteira/pix.png';
 import boleto from '../../../assets/img/carteira/boleto.png';
 import styles from './styles';
+import { useContext, useEffect, useState } from 'react';
+import MyContext from '../../Context/context';
 
 const metodos = [
   {
@@ -24,41 +26,66 @@ const metodos = [
   },
 ];
 
-const historico = [
-  {
-    id: '1',
-    tipoRecarga: 'crédito',
-    qtd: '6',
-    data: '12 DEZ ',
-    image: cartao,
-  },
-  {
-    id: '2',
-    tipoRecarga: 'PIX',
-    qtd: '20',
-    data: '10 OUT',
-    image: pix,
-  },
-  {
-    id: '3',
-    tipoRecarga: 'boleto',
-    qtd: '15',
-    data: '24 SET',
-    image: boleto,
-  },
-  {
-    id: '4',
-    tipoRecarga: 'boleto',
-    qtd: '10',
-    data: '4 SET',
-    image: boleto,
-  },
-];
+// const historico = [
+//   {
+//     id: '1',
+//     tipoRecarga: 'crédito',
+//     qtd: '6',
+//     data: '12 DEZ ',
+//     image: cartao,
+//   },
+//   {
+//     id: '2',
+//     tipoRecarga: 'PIX',
+//     qtd: '20',
+//     data: '10 OUT',
+//     image: pix,
+//   },
+//   {
+//     id: '3',
+//     tipoRecarga: 'boleto',
+//     qtd: '15',
+//     data: '24 SET',
+//     image: boleto,
+//   },
+//   {
+//     id: '4',
+//     tipoRecarga: 'boleto',
+//     qtd: '10',
+//     data: '4 SET',
+//     image: boleto,
+//   },
+// ];
 
 
 
 export default function Carteira() {
   const navigation = useNavigation();
+
+  const{compras, passagens} = useContext(MyContext)
+  const[historico, setHistorico] = useState('')
+  const[infos, setInfos] = useState(false)
+
+  useEffect(() => {
+    if(historico == ''){
+    let comprasAll = compras.compras
+    for(var i=0;i<comprasAll.length;i++){
+      
+      if(comprasAll[i].descFormaPagamento == 'credito' || comprasAll[i].descFormaPagamento == 'debito' ){
+        comprasAll[i].image = cartao
+        
+      }
+      else if(comprasAll[i].descFormaPagamento == 'pix'){
+        comprasAll[i].image = pix
+      }else{
+        comprasAll[i].image = boleto
+      }
+    }
+    
+    setHistorico(comprasAll)
+    setInfos(true)
+    }
+  })
 
   const Metodos = ({tipoRecarga,image}) => ( 
     <View style={styles.fundometodos}>            
@@ -74,21 +101,23 @@ export default function Carteira() {
     </View>
   );
 
-  const Item = ({tipoRecarga,qtd,data,image}) => (
-    <TouchableOpacity onPress={() => navigation.navigate('Comprovante')}>               
+  const Item = ({ dados}) => (
+    <TouchableOpacity onPress={() => navigation.navigate('Comprovante', {
+      dados: dados
+    })}>               
     <View style={styles.item}>
       <View style={styles.esquerda}>
         <View style={styles.pagamen}>
-          <Image source={image} style={styles.foto}/>
+          <Image source={dados.image} style={styles.foto}/>
         </View>
         <View style={styles.meio}>
-          <Text style={styles.tipoRecarga}>Compra no {tipoRecarga}</Text>
-          <Text style={styles.qtd}>{qtd} PASSAGENS</Text>
+          <Text style={styles.tipoRecarga}>Compra no {dados.descFormaPagamento}</Text>
+          <Text style={styles.qtd}>{dados.passagens} PASSAGENS</Text>
         </View>
       </View>
   
       <View style={styles.direita}>
-        <Text style={styles.data}>{data}</Text>
+        <Text style={styles.data}>{dados.dataTratada}</Text>
       </View>
     </View>
     </TouchableOpacity>
@@ -104,7 +133,7 @@ export default function Carteira() {
 
           <View style={styles.passagens}>
             <Text style={styles.tituPassag}>Passagens disponiveis</Text>
-            <Text style={styles.qtdPassag}>42</Text>
+            <Text style={styles.qtdPassag}>{passagens.qtdPassagens}</Text>
           </View>
         </View>
       
@@ -129,12 +158,14 @@ export default function Carteira() {
 
         <View style={styles.historico}>
           <Text style={styles.titulo}>Historico</Text>
+          { infos && 
           <FlatList
             data={historico}
-            renderItem={({item}) => <Item tipoRecarga={item.tipoRecarga} qtd={item.qtd} data={item.data} image={item.image}/>}
+            renderItem={({item}) => <Item dados={item} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
           />
+        }
         </View>
 
       </View>

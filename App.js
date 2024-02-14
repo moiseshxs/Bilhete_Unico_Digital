@@ -2,26 +2,30 @@ import Routes from "./src/routes";
 import MyContext from "./src/Context/context";
 import { useState } from "react";
 import Api from "./src/Services/api/Api";
+import Passageiro from "./src/Services/api/Passageiro";
 
 export default function App(){
 
   
  
-  
-  const[nome, setNome] = useState('')
-  const[email, setEmail] = useState('')
-  const[dataNasc, setDataNasc] = useState('')
-  const[cpf, setCpf] = useState('')
-  const[numTel, setNumTel] = useState('')
-  const[foto, setFoto] = useState('')
-  const[token, setToken] = useState('')
-   const setInfos = () =>{
-    setNome("Cuzinho")
-  }
-  
+  const[bilhete, setBilhete] = useState('')
+  const[passageiro, setPassageiro] = useState('')
+  const[passagens, setPassagens] = useState('')
+  const[compras, setCompras] = useState('') 
   
   return(
-    <MyContext.Provider value={{nome, setNome, email, setEmail, dataNasc, setDataNasc, cpf, setCpf,numTel, setNumTel, foto, setFoto, token, setToken}}>
+    <MyContext.Provider value={
+      { 
+        passageiro,
+        setPassageiro,
+        bilhete,
+        setBilhete,
+        passagens,
+        setPassagens,
+        compras,
+        setCompras
+      }
+      }>
     <Routes />
     </MyContext.Provider>
   );
