@@ -28,7 +28,7 @@ export default function ConfirmarCadastro({navigation, route}){
             const response = await api.requireCod(forma, dado)
             if(response){
                 navigation.navigate('CodigoCadastro', {
-                    id: dados.id,
+                    id: dados.id,   
                     forma: forma
                 })
             }

@@ -13,7 +13,7 @@ import MyContext from '../../Context/context';
 export default function Login({navigation}) {
     
     const api = new Api()
-    const{setPassageiro} = useContext(MyContext)
+    const{setPassageiro} = useContext(MyContext) 
     const[error, setError] = useState('')
     
 
@@ -22,7 +22,7 @@ export default function Login({navigation}) {
             
             if( response.usuario !== undefined){
             
-            let nomes = response.usuario.nomePassageiro
+            
             setPassageiro(response.usuario)
             
             navigation.navigate('ListaBilhetes')
@@ -35,7 +35,15 @@ export default function Login({navigation}) {
         }
     
        
-    
+        let data = new Date()
+        let dataAntiga = new Date("2024-02-14 15:27:40")
+        let diferencaMS = data - dataAntiga
+        let segundos = diferencaMS/1000
+        let minutos = segundos/60
+        segundos = segundos%60
+        let horas = minutos/60
+        minutos = minutos%60
+        console.log(Math.round(horas)+":"+Math.round(minutos)+":"+Math.round(segundos))
 
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')

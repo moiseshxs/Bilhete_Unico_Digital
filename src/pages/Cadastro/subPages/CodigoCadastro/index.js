@@ -19,7 +19,7 @@ export default function RecuperarSenha({navigation, route}){
       console.log(response)
       if(response){
         navigation.navigate('DefinirSenha', {
-          id: route.params.id
+          id: route.params.id 
         })
       }
     }

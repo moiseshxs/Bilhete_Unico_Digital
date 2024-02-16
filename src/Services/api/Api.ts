@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export default class Api{
-    baseUrl: string = 'http://127.0.0.1:9000/api';
+    baseUrl: string = 'http://127.0.0.1:9000/api/';
     api;
     config;
     token;
@@ -10,23 +10,25 @@ export default class Api{
     {
         this.api = axios.create({
             baseURL: this.baseUrl,
-            
+            headers: { Accept:'application/json',
+            'Content-Type': 'multipart/form-data',
+               }
         });
     }
     setToken(token:string)
     {
       this.token = token;
     }
-    async getPassageiro(id:number){
-        try{
-            const response = await this.api.get(`/passageiros/${id}`)
+    // async getPassageiro(id:number){
+    //     try{
+    //         const response = await this.api.get(`/passageiros/${id}`)
             
-            return response.data
+    //         return response.data
             
-          }catch(err){
-            return "Email ou senha incorretos!"
-          }
-        }
+    //       }catch(err){
+    //         return "Email ou senha incorretos!"
+    //       }
+    //     }
       async perfil(token)
       {
         const response = await this.api.get('/auth/perfil', { headers: {'Authorization': `Bearer ${token}`}})
@@ -37,7 +39,14 @@ export default class Api{
         let form = new FormData();
         form.append("cpfPassageiro", cpf);
         form.append("password", password);
-        const response = await this.api.post('/auth/login', form);
+        
+         const response = await this.api.post('/auth/login', form)
+        
+        //  }).catch(error => console.log(error.message))
+        // const response = await this.api.get(`/bilhetes/1` )
+        // console.log(response.data)
+        // return response.data
+
         console.log(response.data)
         this.setToken(response.data.token_de_acesso)
         return response.data
@@ -58,6 +67,7 @@ export default class Api{
             
           
         }
+        
       }
       async verCod(id:number, codigo:string)
       {
@@ -73,7 +83,7 @@ export default class Api{
         
         form.append("password", password);
         const response = await this.api.post(`/auth/register/${id}`, form);
-       
+        
         return response.data.message == "Sucesso ao cadastrar!";
 
       }

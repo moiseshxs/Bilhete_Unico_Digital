@@ -108,8 +108,14 @@ export default StyleSheet.create({
       },
     
       atividades: {
-        flex: 3,
+        
         paddingHorizontal: 20, 
+      },
+      atividadesIntegracao:{
+        flex: 3,
+      },
+      atividadesSemIntegracao:{
+        flex: 5,
       },
       titulo: {
         fontSize: 30,

@@ -72,6 +72,47 @@ export default function Home()  {
 
   
   const[DATA, setDATA] = useState('')
+  const[integracao, setintegracao] = useState(false)
+  const[segundos, setSegundos] = useState(parseInt('00'))
+  const [minutos, setMinutos] = useState(parseInt('00'))
+  const [horas, setHoras] = useState(parseInt('02'))
+
+ 
+    const contador = () => {
+      if(segundos == 0){
+        if(minutos == 0){
+
+          if(horas != 0){
+            setHoras(horas -1)
+            setMinutos(parseInt('59'))
+          }
+          
+        }else{
+
+          setMinutos(minutos - 1)
+        }
+        setSegundos('59')
+      }else{
+      setSegundos(segundos - 1)
+    }
+    }
+
+    setTimeout(() =>{
+      contador()
+      console.log('piunto')
+    }, 1000)
+ 
+   
+  const resolveHoras = (number) =>{
+    if(number == 0){
+      return `${number}0`
+    }
+    if(number.toString().length == 1){
+      return `0${number}`
+    }
+    return number
+  }
+
   const[infos, setInfos] = useState(false)
   const[refreshing, setRefreshing] = useState(false)
   const {passageiro, bilhete, passagens, setPassagens, setCompras} = useContext(MyContext)
@@ -142,7 +183,7 @@ export default function Home()  {
                 <Text style={styles.tituPassag}>Passagens disponiveis</Text>
                 <Text style={styles.qtdPassag}>{passagens.qtdPassagens}</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> 
             <TouchableOpacity onPress={() => navCarteira()}>
               <View style={styles.botaoPassagens}>
                 <AntDesign name="right" size={20} color="white" />
@@ -151,16 +192,17 @@ export default function Home()  {
           </View>
         </View>
       
-
+    { integracao &&
         <View style={styles.integracao}>
           <View style={styles.boxInte}>
             <Text style={styles.tituInte}>Integração ativa:</Text>
-            <Text style={styles.tempo}>02h 07m 29s</Text>
+            <Text style={styles.tempo}>{resolveHoras(horas)}h {resolveHoras(minutos)}m {resolveHoras(segundos)}s</Text>
           </View>
         </View>
+        }
 
 
-        <View style={styles.atividades}>
+        <View style={[styles.atividades, integracao? styles.atividadesIntegracao : styles.atividadesSemIntegracao]}>
           <Text style={styles.titulo}>Atividades</Text>
           { infos &&
           <FlatList

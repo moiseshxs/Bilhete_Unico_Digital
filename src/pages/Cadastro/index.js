@@ -20,7 +20,7 @@ export default function Cadastro({navigation}){
     }
     let api = new Api()
     const consultar = async(cpf) =>{
-        let response = await api.getByCpf(cpf)
+        let response = await api.getByCpf(cpf) 
         console.log(response)
         navigation.navigate('ConfirmarCadastro', {
             dados: response.usuario
