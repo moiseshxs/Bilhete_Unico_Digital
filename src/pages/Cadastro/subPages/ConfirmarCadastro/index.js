@@ -1,9 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, Pressable } from "react-native";
+import { SafeAreaView, View, Text, Pressable, Dimensions } from "react-native";
 import styles from './styles'
 import { useEffect, useState } from 'react';
 import Api from '../../../../Services/api/Api';
-import api from '../../../../Services/api/teste';
+import Loading from '../../../Loading';
 
 export default function ConfirmarCadastro({navigation, route}){
     
@@ -11,6 +11,8 @@ export default function ConfirmarCadastro({navigation, route}){
     const[email, setEmail] = useState('');
     const[numTel, setNumTel] = useState('');
     const[dados, setDados] = useState('')
+    const[loading, setLoading] = useState(false)
+    
 
     if(route.params !== undefined){
         let emailPassageiro = route.params.dados.emailPassageiro
@@ -25,8 +27,10 @@ export default function ConfirmarCadastro({navigation, route}){
 }
         let api = new Api()
         const requireCod = async(forma, dado) =>{
+            setLoading(true)
             const response = await api.requireCod(forma, dado)
             if(response){
+                setTimeout(() => setLoading(false), 1000)
                 navigation.navigate('CodigoCadastro', {
                     id: dados.id,   
                     forma: forma
@@ -34,7 +38,7 @@ export default function ConfirmarCadastro({navigation, route}){
             }
 
         }
-    
+    if(!loading){
     return(
         <SafeAreaView style={styles.container}>
           <View style={styles.returnArea}>  
@@ -73,7 +77,7 @@ export default function ConfirmarCadastro({navigation, route}){
                         </View>
                         <View style={styles.desc}>
                             <Text style={{fontSize:20, fontWeight:'500', color:'#7b7b7b'}}>Via Email:</Text>
-                            <Text style={{fontSize:16, fontWeight:'500', color:'#000'}}>{email}</Text>
+                            <Text numberOfLines={1} style={{fontSize:16, fontWeight:'500', color:'#000', width:Dimensions.get('screen').width/2}}>{email}</Text>
                         </View>
                     </View>
 
@@ -84,4 +88,9 @@ export default function ConfirmarCadastro({navigation, route}){
           
         </SafeAreaView>
     )
+}else{
+    return(
+        <Loading obs="Isso pode demorar um pouco.."/>
+    )
+}
 }

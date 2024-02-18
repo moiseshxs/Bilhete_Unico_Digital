@@ -4,8 +4,12 @@ import styles from "./styles"
 import { useState } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
 import Api from "../../../../Services/api/Api"
+import Loading from "../../../Loading"
 
 export default function NovaSenha({navigation, route}){
+
+    const[error, setError] = useState('')
+    const[loading, setLoading] = useState(false)
 
     function changeColor(input){
         if(input == 'senha'){
@@ -18,20 +22,31 @@ export default function NovaSenha({navigation, route}){
     }
     let api = new Api()
     const register = async(senha, confirmaSenha) => {
-        if(senha != confirmaSenha){
-            return false;
+        if(senha == '' || confirmSenha == ''){
+            setError('Campos vazios')
         }
+        else if(senha != confirmaSenha){
+            setError('Senhas diferentes')
+            setLoading(false)
+            return false;
+        }else{
+        setLoading(true)
         if(await api.register(route.params.id, senha)){
+            setTimeout(() => setLoading(false), 1000)
             navigation.navigate('Login')
         }else{
+            setError('Erro ao cadastrar')
+            setLoading(false)
             return false
         }
     }
+    }
 
-    const [senha, setSenha] = useState()
-    const [confirmSenha, setConfirmSenha] = useState()
+    const [senha, setSenha] = useState('')
+    const [confirmSenha, setConfirmSenha] = useState('')
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
+    if(!loading){
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
@@ -126,6 +141,7 @@ export default function NovaSenha({navigation, route}){
                     onFocus={() => changeColor('confirma')}
                     isFocused
                     />
+                    <Text style={styles.error}>{error}</Text>
             </View>
             <View style={styles.buttonArea}>
             <TouchableOpacity
@@ -137,4 +153,9 @@ export default function NovaSenha({navigation, route}){
             </View>
         </SafeAreaView>
     )
+}else{
+    return (
+        <Loading/>
+    )
+}
 }

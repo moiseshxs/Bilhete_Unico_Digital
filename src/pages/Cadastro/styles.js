@@ -22,7 +22,13 @@ const styles = StyleSheet.create({
     descArea:{
         width: '80%',
         height:'20%',
-        justifyContent:'center'
+        justifyContent:'center',
+        
+    },
+    error:{
+        textAlign:'center',
+        fontSize:14,
+        color:'red'
     },
     title:{
         fontSize:30,

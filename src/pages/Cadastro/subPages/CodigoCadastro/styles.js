@@ -54,7 +54,21 @@ export default StyleSheet.create({
         width: '80%',
         gap: 35
     },
-
+    reenviar:{
+        fontStyle:'italic',
+        color:'blue',
+        
+    },
+    messageView:{
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center',
+        gap:20
+    },
+    error:{
+        color:'red',
+        fontSize:14
+    }
     
    
 });

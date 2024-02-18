@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export default class Api{
-    baseUrl: string = 'http://127.0.0.1:9000/api/';
+    baseUrl: string = 'http://0.tcp.sa.ngrok.io:11829/api/';
     api;
     config;
     token;

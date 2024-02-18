@@ -172,6 +172,13 @@ export default StyleSheet.create({
         position: 'relative',
         top: '40%',
         borderWidth:1
+    },
+    feedback:{
+        textAlign:'center',
+        gap:3,
+        width:'100%',
+        justifyContent:'center',
+        alignItems:'center'
     }
     
    

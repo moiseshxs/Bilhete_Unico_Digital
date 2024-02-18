@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     safeContainer: {
@@ -44,7 +44,7 @@ export default StyleSheet.create({
       nomePerfil: {
         color: 'white',
         fontSize: 20,
-        width: '20ch',
+        width: Dimensions.get('screen').width/1.7,
         
         overflow:'hidden',
         fontWeight: 'bold',
@@ -115,7 +115,7 @@ export default StyleSheet.create({
         flex: 3,
       },
       atividadesSemIntegracao:{
-        flex: 5,
+        flex: 6,
       },
       titulo: {
         fontSize: 30,

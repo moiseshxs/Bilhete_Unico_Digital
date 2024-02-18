@@ -7,43 +7,59 @@ import styles from './styles';
 import Logo from '../../../assets/img/logo/logovermelha.png'
 import Api from '../../Services/api/Api';
 import MyContext from '../../Context/context';
-
+import Loading from '../Loading';
 
 
 export default function Login({navigation}) {
     
     const api = new Api()
+    //Uso do context para ter acesso aos estados globais
     const{setPassageiro} = useContext(MyContext) 
+    //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
-    
-
+    //estado de loading
+    const[loading, setLoading] = useState(false)
+    //função para chamar a função de consumo da api para fazer login
     const login = async(cpf, password) =>{
+        
+        if(cpf  == '' || password == ''){
+            
+            setError('Campos vazios')
+        }
+        else if(cpf.length < 14){
+            setError('CPF invalido')
+        }else{
+            setLoading(true)
         const response = await api.login(cpf, password)
             
             if( response.usuario !== undefined){
             
             
             setPassageiro(response.usuario)
-            
+            setTimeout(() => setLoading(false), 1000)
             navigation.navigate('ListaBilhetes')
-        }else if(typeof response.message !== undefined){
+        }else if( response.message !== undefined){
+            setLoading(false)
             setError(response.message)
         }
+
+    }
             
            
             
         }
     
        
-        let data = new Date()
-        let dataAntiga = new Date("2024-02-14 15:27:40")
-        let diferencaMS = data - dataAntiga
-        let segundos = diferencaMS/1000
-        let minutos = segundos/60
-        segundos = segundos%60
-        let horas = minutos/60
-        minutos = minutos%60
-        console.log(Math.round(horas)+":"+Math.round(minutos)+":"+Math.round(segundos))
+        // let data = new Date()
+        // let dataAntiga = new Date("2024-02-14 15:27:40")
+        // let diferencaMS = data - dataAntiga
+        // let segundos = diferencaMS/1000
+        // let minutos = segundos/60
+        // segundos = segundos%60
+        // let horas = minutos/60
+        // minutos = minutos%60
+        // console.log(Math.round(horas)+":"+Math.round(minutos)+":"+Math.round(segundos))
+
 
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
@@ -51,7 +67,7 @@ export default function Login({navigation}) {
     
     
     const [modal, setModal] = useState(false)
-
+    //função para mudar a cor da borda dos inputs ao clicar neles    
     function changeColor(input){
         if(input == 'cpf'){
             setBorderColor('#F00E0E')
@@ -66,11 +82,11 @@ export default function Login({navigation}) {
          if( input =='senha'){
             setBorderColor('#7b7b7b')
             setBorderColor2('#F00E0E')
-            console.log('pinto')
+            
         }
-        console.log(input)
+        
     }
-
+    //função para navegar a pagina de recuperação de senha
     const recuperarSenha =() =>{
         setModal(false)
         navigation.navigate('FormaRecuperarSenha')
@@ -78,9 +94,13 @@ export default function Login({navigation}) {
 
     const [cpfForm, setCpfForm] = useState('')
     const [senha, setSenha] = useState('')
+
     const [recuperaCpf, setRecuperaCpf] = useState('')
+    if(loading == false){
     return (
+        
         <SafeAreaView style={styles.container}>
+            
             <View style={styles.inputArea}>
                 <Image
                 source={Logo}
@@ -92,6 +112,7 @@ export default function Login({navigation}) {
                     hintTextColor='#aaa'
                     mask='000.000.000-00'
                     hint='123.456.789-10'
+                    keyboardType='numeric'
                     value={cpfForm}
                     containerStyles={{
                         borderWidth: 2,
@@ -174,10 +195,11 @@ export default function Login({navigation}) {
             <TouchableOpacity
             style={styles.forgetArea}
             onPress={() => setModal(true)}>
-            
+            <View style={styles.feedback}>
             <Text style={styles.forgetText}>Esqueceu sua senha?</Text>
-            <Text style={styles.forgetText}>{error}</Text>
             
+            <Text style={styles.forgetText}>{error}</Text>
+            </View>
             </TouchableOpacity>
                 </View>
             </View>
@@ -274,6 +296,16 @@ export default function Login({navigation}) {
 
 
             </Modal>
+            
         </SafeAreaView>
+        
     );
+    }else{
+        return(
+            
+                <Loading/>
+            
+        )
+
+    }
 }

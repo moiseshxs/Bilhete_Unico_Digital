@@ -43,7 +43,9 @@ export default function StackRoutes() {
           headerShown: false,
         }}
       />
+
       
+
       <Stack.Screen 
         name='Home'
         component={Tabs}

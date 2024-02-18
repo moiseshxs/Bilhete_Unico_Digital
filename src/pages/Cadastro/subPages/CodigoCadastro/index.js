@@ -1,9 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text } from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from 'react';
 import { CodeField, Cursor,  useClearByFocusCell } from 'react-native-confirmation-code-field';
 import styles from './styles'
 import Api from '../../../../Services/api/Api';
+import Loading from '../../../Loading';
 
 export default function RecuperarSenha({navigation, route}){
     const CELL_COUNT = 4
@@ -12,24 +13,34 @@ export default function RecuperarSenha({navigation, route}){
     value,
     setValue,
     })
+    const[loading, setLoading] = useState(false)
+    const[error, setError] = useState(false)
     let api = new Api()
+
     const verCod = async(codigo) =>
     {
+      setLoading(true)
       const response = await api.verCod(route.params.id,codigo)
-      console.log(response)
+      
       if(response){
+        setTimeout(() => setLoading(false), 1000)
         navigation.navigate('DefinirSenha', {
           id: route.params.id 
         })
       }
+      else{
+        setLoading(false)
+        setError('Código Incorreto')
+      }
     }
     if(value.length == 4){
       verCod(value)
+      setValue('')
       
       
     }
     console.log(route.params.id)
-
+    if(!loading){
     return(
         <SafeAreaView style={styles.container}>
           <View style={styles.returnArea}>  
@@ -60,6 +71,19 @@ export default function RecuperarSenha({navigation, route}){
               </View>
             )}
           />
+          <View style={styles.messageView}>
+              <TouchableOpacity>
+            <Text>Não recebeu o código? 
+              <Text style={styles.reenviar}> Reenviar</Text>
+              </Text>
+              </TouchableOpacity>
+              <Text style={styles.error}>{error}</Text>
+          </View>
         </SafeAreaView>
     )
+  }else{
+    return (
+      <Loading/>
+    )
+  }
 }
