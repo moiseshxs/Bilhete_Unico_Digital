@@ -5,6 +5,7 @@ import { CodeField, Cursor,  useClearByFocusCell } from 'react-native-confirmati
 import styles from './styles'
 import Api from '../../../../Services/api/Api';
 import Loading from '../../../Loading';
+import Animated from 'react-native-reanimated';
 
 export default function RecuperarSenha({navigation, route}){
     const CELL_COUNT = 4
@@ -42,7 +43,8 @@ export default function RecuperarSenha({navigation, route}){
     console.log(route.params.id)
     if(!loading){
     return(
-        <SafeAreaView style={styles.container}>
+        <Animated.View style={styles.container}
+        sharedTransitionTag="tag">
           <View style={styles.returnArea}>  
             <Ionicons
                 name='arrow-back'
@@ -79,7 +81,7 @@ export default function RecuperarSenha({navigation, route}){
               </TouchableOpacity>
               <Text style={styles.error}>{error}</Text>
           </View>
-        </SafeAreaView>
+        </Animated.View>
     )
   }else{
     return (

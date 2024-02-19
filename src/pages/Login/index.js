@@ -14,7 +14,7 @@ export default function Login({navigation}) {
     
     const api = new Api()
     //Uso do context para ter acesso aos estados globais
-    const{setPassageiro} = useContext(MyContext) 
+    const{setPassageiro, setToken} = useContext(MyContext) 
     //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
     //estado de loading
@@ -36,6 +36,8 @@ export default function Login({navigation}) {
             
             
             setPassageiro(response.usuario)
+            setToken(response.token_de_acesso)
+            
             setTimeout(() => setLoading(false), 1000)
             navigation.navigate('ListaBilhetes')
         }else if( response.message !== undefined){

@@ -6,26 +6,7 @@ import BilletElement from './partials/billetElement';
 import MyContext from '../../../../Context/context';
 
 export default function Bilhete({navigation, route}) {
-    // let tipo = null;
-    // let gratuidade = null;
-    // let meia = null;
-    // let num = null;
-    // let status = null;
-    // let backgroundColor = undefined;
-    // if(route.params == undefined){
-    //      tipo = 'Estudante';
-    //      gratuidade = 'Sim';
-    //      meia = 'Sim';
-    //      num = '123 456 789';
-    //      status = 'Ativo';
-    // }else{
-    //      tipo = route.params.tipo;
-    //      gratuidade = route.params.gratuidade;
-    //      meia = route.params.meia;
-    //      num = route.params.num;
-    //      status = route.params.status;
-    //      backgroundColor = route.params.backgroundColor
-    // }
+    
     const{passageiro, bilhete} = useContext(MyContext)
 
     return (

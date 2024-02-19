@@ -41,6 +41,7 @@ export default function StackRoutes() {
           headerStyle: { backgroundColor: 'white' },
           headerTintColor: 'white',
           headerShown: false,
+          
         }}
       />
 
@@ -131,6 +132,7 @@ export default function StackRoutes() {
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: false,
+          
         }}
       /> 
 

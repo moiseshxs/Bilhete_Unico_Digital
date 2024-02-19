@@ -4,13 +4,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
+import {DotIndicator } from 'react-native-indicators'
 
 import { useContext, useEffect, useState } from 'react';
 import styles from './styles';
 import MyContext from '../../Context/context';
 
 import Passageiro from '../../Services/api/Passageiro';
+import Loading from '../Loading';
 
 
 
@@ -18,32 +19,7 @@ import Passageiro from '../../Services/api/Passageiro';
   let p = new Passageiro()
 
 
-// const DATA = [
-//   {
-//     id: '1',
-//     passagem: 'Passagem em QrCode',
-//     linha: '312N-10 SÃO MIGUEL',
-//     data: '7 NOV',
-//   },
-//   {
-//     id: '2',
-//     passagem: 'Passagem em QrCode',
-//     linha: '312N-10 TERM. CID. TIRADENTES',
-//     data: '7 NOV',
-//   },
-//   {
-//     id: '3',
-//     passagem: 'Passagem em QrCode',
-//     linha: '312N-10 SÃO MIGUEL',
-//     data: '4 NOV',
-//   },
-//   {
-//     id: '4',
-//     passagem: 'Passagem em QrCode',
-//     linha: '312N-10 TERM. CID. TIRADENTES',
-//     data: '4 NOV',
-//   },
-// ];
+
 
 
 const Item = ({numero,linha,data}) => (
@@ -56,7 +32,7 @@ const Item = ({numero,linha,data}) => (
       </View>
       <View style={styles.meio}>
         <Text style={styles.passagem}>Passagem em qrCode</Text>
-        <Text style={styles.linha}>{linha}</Text>
+        <Text style={styles.linha}>{linha} {numero}</Text>
       </View>
     </View>
 
@@ -73,6 +49,7 @@ export default function Home()  {
   
   const[DATA, setDATA] = useState('')
   const[integracao, setintegracao] = useState(false)
+  const[loading, setLoading] = useState(false)
   const[segundos, setSegundos] = useState(parseInt('00'))
   const [minutos, setMinutos] = useState(parseInt('00'))
   const [horas, setHoras] = useState(parseInt('02'))
@@ -99,7 +76,7 @@ export default function Home()  {
 
     setTimeout(() =>{
       contador()
-      console.log('piunto')
+      
     }, 1000)
  
    
@@ -118,20 +95,26 @@ export default function Home()  {
   const {passageiro, bilhete, passagens, setPassagens, setCompras} = useContext(MyContext)
 
   const getPassagens = async() =>{
+    setLoading(true)
     let response =  await p.getPassagens(bilhete.id, passageiro.token)
       setPassagens(response)
       setDATA(response.consumos)
-      console.log(response.consumos)
+      
       setInfos(true) 
       let response2 = await p.getComprasByBilhete(passageiro.id, bilhete.id, passageiro.token)
       setCompras(response2)
+      setLoading(false)
   }
   const onRefresh = async() =>{
+    setLoading(true)
+    setInfos(false)
     let response =  await p.getPassagens(bilhete.id, passageiro.token)
     if(response != passagens){
       setPassagens(response)
       setDATA(response.consumos)
     }
+    setLoading(false)
+    setInfos(true)
   }
 
   useEffect(() => {
@@ -181,7 +164,7 @@ export default function Home()  {
             <TouchableOpacity onPress={() => navCarteira()}>
               <View style={styles.areaPassagens}>
                 <Text style={styles.tituPassag}>Passagens disponiveis</Text>
-                <Text style={styles.qtdPassag}>{passagens.qtdPassagens}</Text>
+                <Text style={styles.qtdPassag}>{!loading ?  passagens.qtdPassagens : <DotIndicator color='#fff' count={3} size={16} />}</Text>
               </View>
             </TouchableOpacity> 
             <TouchableOpacity onPress={() => navCarteira()}>
@@ -204,7 +187,7 @@ export default function Home()  {
 
         <View style={[styles.atividades, integracao? styles.atividadesIntegracao : styles.atividadesSemIntegracao]}>
           <Text style={styles.titulo}>Atividades</Text>
-          { infos &&
+          { infos ? 
           <FlatList
             data={DATA}
             renderItem={({item}) => <Item numero={item.numero} linha={item.linha} data={item.data}/>}
@@ -213,7 +196,8 @@ export default function Home()  {
             refreshControl={<RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}/>}
-          />
+          /> :
+          <Loading/>
         }
         </View>
  

@@ -1,16 +1,18 @@
-import { SafeAreaView, View, Text, StyleSheet, FlatList, ScrollView, RefreshControl, TouchableHighlight } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, FlatList,  RefreshControl } from "react-native"
 import BilletElement from './partials/billetElement'
 import { useContext, useEffect, useState } from "react"
 import Passageiro from "../../../../Services/api/Passageiro"
 import MyContext from "../../../../Context/context"
+import Loading from "../../../Loading"
 
 
 export default function ListaBilhetes({navigation}){
     
-    const{id, token, passageiro, setBilhete} = useContext(MyContext)
-    const[infos, setInfos] = useState(true)
+    const{ token, passageiro, setBilhete} = useContext(MyContext)
+    const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
-
+    
+    const[error, setError] = useState(false)
     let p = new Passageiro()
     const[DATA, setDATA] = useState('')
     
@@ -50,8 +52,22 @@ export default function ListaBilhetes({navigation}){
         navigation.navigate('Bilhete')
     }
     const getBilhetes = async() => {
-        const response = await p.getBilhetes(passageiro.id, passageiro.token)
+        setInfos(false)
+        const response = await p.getBilhetes(passageiro.id, token)
+        if(response.message !== undefined){
+            setError(true)
+            setDATA([{
+                id: '1',
+                error: response.message
+            }])
+            setInfos(true)
+            setRefreshing(false)
+        }else{
         setDATA(response)
+        setError(false)
+        setRefreshing(false)
+        setInfos(true)
+    }
     
     }
     useEffect(() => {
@@ -70,28 +86,33 @@ export default function ListaBilhetes({navigation}){
             <View style={styles.titleArea}>
             <Text style={styles.title}>Seus Bilhetes</Text>
             </View>
+            
             <View style={styles.lista}>
-                { infos &&
+                { infos ?
             <FlatList
             data={DATA}
             refreshControl={<RefreshControl
                 refreshing={refreshing}
                 onRefresh={onRefresh}/>}
-            renderItem={({item}) => <BilletElement lista={true}
+            renderItem={({item}) => !error ? <BilletElement lista={true}
                 tipoBilhete={item.tipoBilhete}
                 statusBilhete={item.statusBilhete}
                 gratuidadeBilhete={item.gratuidadeBilhete?'Sim' : 'Não'}
                 meiaPassagemBilhete={item.meiaPassagensBilhete? 'Sim' : 'Não'}
                 numBilhete={item.numBilhete} 
                 backgroundColor={item.backgroundColor}
-                press={() => choseBilhete(item)}   />}
+                press={() => choseBilhete(item)}   /> :
+            <Text>{item.error}</Text>}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             
           />
-            }
+            :
+            <Loading/>}
             
           </View>
+          
+          
         </SafeAreaView>
     )
 }
