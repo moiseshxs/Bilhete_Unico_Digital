@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Passageiro from '../../../../Services/api/Passageiro';

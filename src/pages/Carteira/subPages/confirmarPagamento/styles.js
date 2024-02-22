@@ -25,7 +25,7 @@ export default StyleSheet.create({
     },
 
     infos: {
-        flex: 2,
+        flex: 3,
         paddingHorizontal: 20,
         marginTop: 20,
     },
