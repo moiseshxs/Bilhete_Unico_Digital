@@ -87,4 +87,11 @@ export default class Api{
         return response.data.message == "Sucesso ao cadastrar!";
 
       }
+
+      async getPreco(token:string){
+        const response = await this.api.get('/preco', { headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+
+        
+      }
     }

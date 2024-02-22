@@ -37,15 +37,19 @@ const DATA = [
         id: '8',
         qtd: '20',
     },
+    
 ];
+function qtdPasssagem(){
+    
+}
 
-export default function QtdPassagens() {
+export default function QtdPassagens({route}) {
     const navigation = useNavigation();
 
     const Item = ({ qtd }) => (
         <View style={styles.bolinhas}>
             <View style={styles.numPassagens}>
-                <TouchableOpacity onPress={() => navigation.navigate('ConfirmarPagamento')}>
+                <TouchableOpacity onPress={() => navigation.navigate('ConfirmarPagamento', {quantidade:qtd, formaPagamento: route.params.fpId} )}>
                     <Text style={styles.textPassagens}>{qtd}</Text>
                 </TouchableOpacity>
             </View>

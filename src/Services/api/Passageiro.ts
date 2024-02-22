@@ -21,6 +21,7 @@ class Passageiro extends Api{
         console.log(response.data)
         return response.data
     }
+    
 }
 
 export default Passageiro

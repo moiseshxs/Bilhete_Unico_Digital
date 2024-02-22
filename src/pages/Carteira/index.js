@@ -10,12 +10,12 @@ import MyContext from '../../Context/context';
 
 const metodos = [
   {
-    id: '1',
-    tipoRecarga: 'PIX',
+    id: '2',
+    tipoRecarga: 'Pix',
     image: pix,
   },
   {
-    id: '2',
+    id: '1',
     tipoRecarga: 'Cartão',
     image: cartao,
   },
@@ -87,10 +87,10 @@ export default function Carteira() {
     }
   })
 
-  const Metodos = ({tipoRecarga,image}) => ( 
+  const Metodos = ({tipoRecarga,image, id}) => ( 
     <View style={styles.fundometodos}>            
       <View style={styles.circleMetodo}>
-        <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens')}>
+        <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens', {fpId: id})}>
           <Image
             source={image}
             style={styles.metodo}
@@ -143,7 +143,7 @@ export default function Carteira() {
             <View style={styles.fundometodos}>
             <FlatList
               data={metodos}
-              renderItem={({item}) => <Metodos tipoRecarga={item.tipoRecarga} image={item.image}/>}
+              renderItem={({item}) => <Metodos tipoRecarga={item.tipoRecarga} image={item.image} id={item.id}/>}
               keyExtractor={item => item.id}
               showsVerticalScrollIndicator={false}
               horizontal={true}
