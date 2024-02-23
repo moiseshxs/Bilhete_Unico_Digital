@@ -21,6 +21,16 @@ class Passageiro extends Api{
         console.log(response.data)
         return response.data
     }
+    async storageCompraByBilhete(id:number,token:string, qtdPassagensCompra:number, valorTotalCompra:number, forma_pagamento_id:number, tipoAcao:string, bilhete_id:number ) {
+
+        const response = await this.api.post(`/acao/${id}`,{ headers: {'Authorization': `Bearer ${token}`}})
+        console.log(response.data)
+        return response.data
+    }
+ 
+    
+    
+    
     
 }
 

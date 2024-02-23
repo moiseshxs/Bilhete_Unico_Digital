@@ -10,7 +10,7 @@ import Api from '../../../../Services/api/Api';
 
 export default function ConfirmarPagamento({route}) {
 
-    
+    let passageiro = new Passageiro()
     const formasPagamento = {
         1 : 'Cartão',
         2: 'Pix',
@@ -61,7 +61,7 @@ export default function ConfirmarPagamento({route}) {
         let ano = new Date().getFullYear()
         let mes = new Date().getMonth()
         let dia = new Date().getDate()
-        console.log(dia)
+        console.log(passageiro.storageCompraByBilhete(1,3,7,4,1,'Compra',1))
         return `${resolveDia(dia)}/${resolveMes(mes)}/${ano}`
         
     }
@@ -103,9 +103,10 @@ export default function ConfirmarPagamento({route}) {
         </View>
       );
       
-        if(!loading){
-    return (
-        <SafeAreaView style={styles.container}>
+      if(!loading){
+          
+          return (
+              <SafeAreaView style={styles.container}>
             <View style={styles.recarregando}>
                 <Text style={styles.text}>Você está recarregando</Text>
                 <Text style={styles.valor}>{resolveValor(route.params.quantidade)}</Text>
@@ -118,20 +119,20 @@ export default function ConfirmarPagamento({route}) {
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                     scrollEnabled={false}
-                />
+                    />
             </View>
 
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Comprovante')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Comprovante',{formaPagamento: route.params.formaPagamento, quantidade: route.params.quantidade})}>
                         <Text style={styles.textBotao}>Confirmar pagamento</Text>
                     </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
     );
-        }else{
-            return(
+}else{
+    return(
                 <Loading/>
             )
         }
