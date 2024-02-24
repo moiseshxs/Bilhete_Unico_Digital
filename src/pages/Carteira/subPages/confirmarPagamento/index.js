@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, SafeAreaView, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Passageiro from '../../../../Services/api/Passageiro';
 import Loading from '../../../Loading';
 import Api from '../../../../Services/api/Api';
+import MyContext from '../../../../Context/context';
 
 
 
 export default function ConfirmarPagamento({route}) {
 
-    let passageiro = new Passageiro()
     const formasPagamento = {
         1 : 'Cartão',
         2: 'Pix',
         3:'Boleto'
     }
+
+    const {passageiro, token, bilhete, setPassagens, setCompras} = useContext(MyContext);
     let api = new Api()
     const[loading, setLoading] = useState(false)
 
@@ -23,7 +25,6 @@ export default function ConfirmarPagamento({route}) {
     const[preco, setPreco] = useState(1)
 
     const getPreco = async() =>{
-        setLoading(true)
         let response = await api.getPreco()
         console.log(response)
         setPreco(response)
@@ -31,7 +32,7 @@ export default function ConfirmarPagamento({route}) {
     }
     useFocusEffect(() =>{
     if(preco == 1){
-
+        setLoading(true)
         getPreco()
     }
     })
@@ -61,7 +62,6 @@ export default function ConfirmarPagamento({route}) {
         let ano = new Date().getFullYear()
         let mes = new Date().getMonth()
         let dia = new Date().getDate()
-        console.log(passageiro.storageCompraByBilhete(1,3,7,4,1,'Compra',1))
         return `${resolveDia(dia)}/${resolveMes(mes)}/${ano}`
         
     }
@@ -86,7 +86,24 @@ export default function ConfirmarPagamento({route}) {
             
         },
     ];
+
     const navigation = useNavigation();
+    let p = new Passageiro();
+    const storeCompra = async() => {
+       setLoading(true);
+       const response = await p.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), route.params.formaPagamento, 'Compra', bilhete.id)
+       console.log(response);
+       const compras = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
+       const passagens = await p.getPassagens(bilhete.id, token)
+       setTimeout(()=> {setLoading(false)
+       setPassagens(passagens)
+
+    } ,300)
+
+       setCompras(compras)
+       navigation.navigate('Comprovante', {dados:response.message});
+       console.log(compras.compras);
+    };
     
     const Item = ({ titulo, conteudo, editar }) => (
         <View style={styles.passagens}>
@@ -124,7 +141,7 @@ export default function ConfirmarPagamento({route}) {
 
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Comprovante',{formaPagamento: route.params.formaPagamento, quantidade: route.params.quantidade})}>
+                    <TouchableOpacity onPress={() => storeCompra()}>
                         <Text style={styles.textBotao}>Confirmar pagamento</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { Ionicons } from '@expo/vector-icons'; 
+import { Button, Pressable } from 'react-native';
 import Tabs from './tabs';
 //import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -26,10 +27,11 @@ import Ajuda from '../pages/Ajuda';
 import Chat from '../pages/Ajuda/subPages/Chat';
 import FaleComFuncionario from '../pages/Ajuda/subPages/FaleComFuncionario';
 import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
-
 export default function StackRoutes() {
+const navigation = useNavigation();
   return (
     <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: true}}>
       
@@ -196,6 +198,14 @@ export default function StackRoutes() {
           headerStyle: { backgroundColor: 'white' },
           headerTintColor:'black',
           headerShown: true,
+          headerLeft: () => (<Pressable
+          style = {{marginLeft: 5}}
+          onPress = {() =>navigation.navigate('Carteira')}
+          ><Ionicons
+            name = 'arrow-back-outline'
+            size = {30}
+          
+          /></Pressable>)
         }}
       />
        <Stack.Screen

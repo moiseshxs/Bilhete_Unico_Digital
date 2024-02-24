@@ -33,35 +33,40 @@ import { useFocusEffect } from '@react-navigation/native';
 // ];
 
 export default function Comprovante({route}) {
-    
+    const resolveValor = (qtd) => {
+        let valor = `R$ ${(parseInt(qtd)).toFixed(2)}`
+
+            return valor.replaceAll ('.', ',')
+    }
 
     const formasPagamento = {
         1 : 'Cartão',
         2: 'Pix',
         3:'Boleto'
     }
-    console.log(route.params.quantidade);
+    let dados = route.params.dados;
+    console.log(dados);
     const[DATA, setDATA] = useState([
         
             {
                 id: '1',
                 titulo: 'Valor',
-                conteudo: resolveValor(route.params.quantidade),
+                conteudo: resolveValor(dados.valor),
             },
             {
                 id: '2',
                 titulo: 'Passagens',
-                conteudo: route.params.quantidade,
+                conteudo: dados.passagens,
             },
             {
                 id: '3',
                 titulo: 'Pagamento com',
-                conteudo: formasPagamento[route.params.formaPagamento]
+                conteudo: formasPagamento[dados.forma]
             },
             {
                 id: '4',
                 titulo: 'Data da recarga',
-                conteudo: 'route.params.dados.dataCompra',
+                conteudo: dados.dataCompra,
             },
         
     ])

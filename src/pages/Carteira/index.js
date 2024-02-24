@@ -65,9 +65,9 @@ export default function Carteira() {
   const{compras, passagens} = useContext(MyContext)
   const[historico, setHistorico] = useState('')
   const[infos, setInfos] = useState(false)
-
+  console.log(compras);
   useEffect(() => {
-    if(historico == ''){
+    if(historico == '' || historico != compras.compras){
     let comprasAll = compras.compras
     for(var i=0;i<comprasAll.length;i++){
       
