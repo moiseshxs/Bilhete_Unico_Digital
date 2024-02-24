@@ -135,7 +135,9 @@ const navigation = useNavigation();
           headerTintColor:'black',
           headerShown: false,
           
+          
         }}
+        
       /> 
 
       <Stack.Screen
@@ -206,6 +208,7 @@ const navigation = useNavigation();
             size = {30}
           
           /></Pressable>)
+          
         }}
       />
        <Stack.Screen
