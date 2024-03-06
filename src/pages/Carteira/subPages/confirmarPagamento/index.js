@@ -88,7 +88,9 @@ export default function ConfirmarPagamento({route}) {
     ];
 
     const navigation = useNavigation();
+    
     let p = new Passageiro();
+
     const storeCompra = async() => {
        setLoading(true);
        const response = await p.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), route.params.formaPagamento, 'Compra', bilhete.id)

@@ -50,9 +50,10 @@ export default function Home()  {
   const[DATA, setDATA] = useState('')
   const[integracao, setintegracao] = useState(false)
   const[loading, setLoading] = useState(false)
-  const[segundos, setSegundos] = useState(parseInt('00'))
-  const [minutos, setMinutos] = useState(parseInt('00'))
-  const [horas, setHoras] = useState(parseInt('02'))
+  const[segundos, setSegundos] = useState(0)
+  const [minutos, setMinutos] = useState(0)
+  const [horas, setHoras] = useState()
+  const[checkIntegracao, setCheckIntegracao] = useState('')
 
  
     const contador = () => {
@@ -72,13 +73,20 @@ export default function Home()  {
       }else{
       setSegundos(segundos - 1)
     }
+    if(horas == 0 && minutos ==0 &&segundos <5)
+    {
+      verificaIntegracao()
+      
+    }
     }
 
+
+    if(checkIntegracao == 'ok'){
     setTimeout(() =>{
       contador()
       
     }, 1000)
- 
+  }
    
   const resolveHoras = (number) =>{
     if(number == 0){
@@ -90,31 +98,72 @@ export default function Home()  {
     return number
   }
 
+  
+
+
   const[infos, setInfos] = useState(false)
   const[refreshing, setRefreshing] = useState(false)
-  const {passageiro, bilhete, passagens, setPassagens, setCompras} = useContext(MyContext)
+  const {passageiro, bilhete, passagens, setPassagens, setCompras, token} = useContext(MyContext)
 
   const getPassagens = async() =>{
     setLoading(true)
-    let response =  await p.getPassagens(bilhete.id, passageiro.token)
+    let response =  await p.getPassagens(bilhete.id, token)
       setPassagens(response)
       setDATA(response.consumos)
       
       setInfos(true) 
-      let response2 = await p.getComprasByBilhete(passageiro.id, bilhete.id, passageiro.token)
+      let response2 = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
       setCompras(response2)
       setLoading(false)
+      if(checkIntegracao == ''){
+        verificaIntegracao()
+      }
+      
   }
   const onRefresh = async() =>{
     setLoading(true)
     setInfos(false)
-    let response =  await p.getPassagens(bilhete.id, passageiro.token)
+    let response =  await p.getPassagens(bilhete.id, token)
     if(response != passagens){
       setPassagens(response)
       setDATA(response.consumos)
     }
     setLoading(false)
     setInfos(true)
+  }
+
+  const verificaIntegracao = async() => {
+    const response = await p.getPassagemEmUso(bilhete.id, token)
+    console.log(response)
+    if(response.updated_at !== undefined){
+        let data = new Date()
+        let dataAntiga = new Date(response.updated_at)
+        let diferencaMS = dataAntiga - data
+        
+        
+        let segundosC = (diferencaMS/1000) + 7200
+        let minutosC = segundosC/60
+        segundosC = segundosC%60
+        if(parseInt(segundosC) > 3){
+        let horasC = minutosC/60
+        minutosC = minutosC%60
+        console.log(Math.round(horasC)+":"+Math.round(minutosC)+":"+Math.round(segundosC))
+
+        
+        
+        
+        setHoras(parseInt(horasC))
+        setintegracao(true)
+        setMinutos(parseInt(minutosC))
+        setSegundos(parseInt(segundosC))
+        setCheckIntegracao('ok')
+        }else{
+          setintegracao(false)
+          const response2 = await p.inativarPassagem(response.id, token)
+          console.log(response2)
+          setCheckIntegracao('nook')
+        }
+      }
   }
 
   useEffect(() => {
@@ -126,10 +175,13 @@ export default function Home()  {
         setDATA(passagens.consumos)
         setInfos(true)
       }
+
+    }else{
+      
     }
   })
   const  navCarteira  = async() => {
-      const response = await p.getComprasByBilhete(passageiro.id, bilhete.id, passageiro.token)
+      const response = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
       setCompras(response)
       navigation.navigate('Carteira')
   }
