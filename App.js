@@ -13,6 +13,7 @@ export default function App(){
   const[passagens, setPassagens] = useState('')
   const[compras, setCompras] = useState('') 
   const[token, setToken] = useState('')
+  const[troca, setTroca] = useState(false)
   
   return(
     <MyContext.Provider value={
@@ -26,7 +27,9 @@ export default function App(){
         compras,
         setCompras,
         token,
-        setToken
+        setToken,
+        troca,
+        setTroca
       }
       }>
       <Routes />

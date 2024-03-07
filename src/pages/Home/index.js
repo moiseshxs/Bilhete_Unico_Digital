@@ -46,7 +46,7 @@ export default function Home()  {
 
 
 
-  
+  const {passageiro, bilhete, passagens, setPassagens, setCompras, token, troca, setTroca} = useContext(MyContext)
   const[DATA, setDATA] = useState('')
   const[integracao, setintegracao] = useState(false)
   const[loading, setLoading] = useState(false)
@@ -55,8 +55,9 @@ export default function Home()  {
   const [horas, setHoras] = useState()
   const[checkIntegracao, setCheckIntegracao] = useState('')
 
- 
+
     const contador = () => {
+      console.log(segundos)
       if(segundos == 0){
         if(minutos == 0){
 
@@ -73,7 +74,7 @@ export default function Home()  {
       }else{
       setSegundos(segundos - 1)
     }
-    if(horas == 0 && minutos ==0 &&segundos <5)
+    if(horas <= 0 && minutos <=0 &&segundos <=5)
     {
       verificaIntegracao()
       
@@ -82,9 +83,9 @@ export default function Home()  {
 
 
     if(checkIntegracao == 'ok'){
-    setTimeout(() =>{
-      contador()
-      
+    setTimeout( () =>{
+       contador()
+        console.log("contador")
     }, 1000)
   }
    
@@ -103,9 +104,10 @@ export default function Home()  {
 
   const[infos, setInfos] = useState(false)
   const[refreshing, setRefreshing] = useState(false)
-  const {passageiro, bilhete, passagens, setPassagens, setCompras, token} = useContext(MyContext)
+  
 
   const getPassagens = async() =>{
+     
     setLoading(true)
     let response =  await p.getPassagens(bilhete.id, token)
       setPassagens(response)
@@ -114,13 +116,20 @@ export default function Home()  {
       setInfos(true) 
       let response2 = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
       setCompras(response2)
-      setLoading(false)
+      
+      if(troca){
+        setTroca(false)
+      }
       if(checkIntegracao == ''){
         verificaIntegracao()
       }
+      setLoading(false)
+      
       
   }
   const onRefresh = async() =>{
+    setintegracao(false)
+    setCheckIntegracao('nook') 
     setLoading(true)
     setInfos(false)
     let response =  await p.getPassagens(bilhete.id, token)
@@ -128,13 +137,16 @@ export default function Home()  {
       setPassagens(response)
       setDATA(response.consumos)
     }
+    if(verificaIntegracao != 'ok'){
+    await verificaIntegracao()
+  }
     setLoading(false)
     setInfos(true)
   }
 
   const verificaIntegracao = async() => {
     const response = await p.getPassagemEmUso(bilhete.id, token)
-    console.log(response)
+    console.log(response.id)
     if(response.updated_at !== undefined){
         let data = new Date()
         let dataAntiga = new Date(response.updated_at)
@@ -144,24 +156,27 @@ export default function Home()  {
         let segundosC = (diferencaMS/1000) + 7200
         let minutosC = segundosC/60
         segundosC = segundosC%60
-        if(parseInt(segundosC) > 3){
         let horasC = minutosC/60
         minutosC = minutosC%60
-        console.log(Math.round(horasC)+":"+Math.round(minutosC)+":"+Math.round(segundosC))
+        console.log("m"+minutosC+ " h"+horasC)
+        if(parseInt(segundosC) <= 8 && parseInt(minutosC) <= 0 && parseInt(horasC) <= 0){
+          setintegracao(false)
+          const response2 = await p.inativarPassagem(response.id, token)
+          console.log(response2)
+          setCheckIntegracao('nook')
+        }else{
+          
+
+          console.log(Math.round(horasC)+":"+Math.round(minutosC)+":"+Math.round(segundosC))
 
         
         
         
         setHoras(parseInt(horasC))
-        setintegracao(true)
         setMinutos(parseInt(minutosC))
         setSegundos(parseInt(segundosC))
         setCheckIntegracao('ok')
-        }else{
-          setintegracao(false)
-          const response2 = await p.inativarPassagem(response.id, token)
-          console.log(response2)
-          setCheckIntegracao('nook')
+        setintegracao(true)
         }
       }
   }
@@ -169,13 +184,27 @@ export default function Home()  {
   useEffect(() => {
     if(DATA == ''){
       setInfos(false)
-      if(passagens == ''){
-        getPassagens()   
+      if(passagens == '' ){
+        
+         getPassagens()   
       }else{
         setDATA(passagens.consumos)
         setInfos(true)
       }
+      
+    }else{
+      
+    }
+  })
 
+  useEffect(() => {
+    if(troca == true){
+      setInfos(false)
+      
+        
+        getPassagens()   
+      
+      
     }else{
       
     }
@@ -227,14 +256,14 @@ export default function Home()  {
           </View>
         </View>
       
-    { integracao &&
+    { integracao ?
         <View style={styles.integracao}>
           <View style={styles.boxInte}>
             <Text style={styles.tituInte}>Integração ativa:</Text>
-            <Text style={styles.tempo}>{resolveHoras(horas)}h {resolveHoras(minutos)}m {resolveHoras(segundos)}s</Text>
+             <Text style={styles.tempo}>{resolveHoras(horas)}h {resolveHoras(minutos)}m {resolveHoras(segundos)}s</Text>  
           </View>
         </View>
-        }
+        : loading ? <DotIndicator color='#f00' count={3} size={16} /> :  null}
 
 
         <View style={[styles.atividades, integracao? styles.atividadesIntegracao : styles.atividadesSemIntegracao]}>

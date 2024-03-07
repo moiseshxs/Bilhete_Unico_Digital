@@ -7,7 +7,11 @@ import MyContext from '../../../../Context/context';
 
 export default function Bilhete({navigation, route}) {
     
-    const{passageiro, bilhete} = useContext(MyContext)
+    const{passageiro, bilhete, setTroca} = useContext(MyContext)
+    const navHome = (bilhete) => {
+        setTroca(true)
+        navigation.navigate('Home')
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -57,7 +61,7 @@ export default function Bilhete({navigation, route}) {
                 </View>
                 <View style={styles.button}>
                 <TouchableOpacity
-                onPress={() =>navigation.navigate('Home')}>    
+                onPress={() => navHome(bilhete)}>    
                 <Ionicons
                     size={50}
                     name='checkmark-outline'

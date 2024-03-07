@@ -63,9 +63,10 @@ class Passageiro extends Api{
         const response = await this.api.put(`/passagens/inativar/${idPassagem}`,{ headers: {'Authorization': `Bearer ${token}`}})
         return response.data;
     }
- 
     
     
+    
+
     
     
 }
