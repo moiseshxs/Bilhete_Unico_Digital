@@ -1,17 +1,45 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import styles from './styles';
+import Passagem from '../../../../Controllers/Passagem';
 import { Ionicons } from '@expo/vector-icons';
 import BilletElement from './partials/billetElement';
 import MyContext from '../../../../Context/context';
 
 export default function Bilhete({navigation, route}) {
     
-    const{passageiro, bilhete, setTroca} = useContext(MyContext)
+    const{passageiro, bilhete, setTroca, setPassagens, token} = useContext(MyContext)
+    const[loadPassagens, setLoadPassagens] = useState(false)
+    
     const navHome = (bilhete) => {
         setTroca(true)
         navigation.navigate('Home')
     }
+
+    const getPassagens = async() =>{
+        let passagem = new Passagem()
+        let response = await passagem.getPassagens(bilhete.id, token)
+        if(response.message !== undefined){
+            Alert.alert('Erro', "Erro inesperado ao carregar bilhete", [
+                {
+                  text: 'Cancel',
+                  onPress: () => navigation.navigate("ListaBilhetes"),
+                  style: 'cancel',
+                },
+                {text: 'OK', onPress: () =>  navigation.navigate("ListaBilhetes")},
+              ]);
+        }else{
+            setPassagens(response)
+            console.log(response)
+        }
+        setLoadPassagens(true)
+    }
+    useEffect(() =>{
+        if(!loadPassagens){
+
+            getPassagens()
+        }
+    })
 
     return (
         <SafeAreaView style={styles.container}>

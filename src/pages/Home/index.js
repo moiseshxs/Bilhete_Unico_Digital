@@ -57,7 +57,7 @@ export default function Home()  {
 
 
     const contador = () => {
-      console.log(segundos)
+      
       if(segundos == 0){
         if(minutos == 0){
 
@@ -146,7 +146,7 @@ export default function Home()  {
 
   const verificaIntegracao = async() => {
     const response = await p.getPassagemEmUso(bilhete.id, token)
-    console.log(response.id)
+    
     if(response.updated_at !== undefined){
         let data = new Date()
         let dataAntiga = new Date(response.updated_at)
@@ -178,37 +178,35 @@ export default function Home()  {
         setCheckIntegracao('ok')
         setintegracao(true)
         }
+        setInfos(true)
       }
   }
 
   useEffect(() => {
     if(DATA == ''){
       setInfos(false)
-      if(passagens == '' ){
-        
-         getPassagens()   
-      }else{
-        setDATA(passagens.consumos)
-        setInfos(true)
-      }
-      
-    }else{
-      
+      console.log(passagens)
+      setDATA(passagens.consumos)
+      setInfos(true)
+    }
+
+    if(checkIntegracao == ''){
+      verificaIntegracao()
     }
   })
 
-  useEffect(() => {
-    if(troca == true){
-      setInfos(false)
+  // useEffect(() => {
+  //   if(troca == true){
+  //     setInfos(false)
       
         
-        getPassagens()   
+       
       
       
-    }else{
+  //   }else{
       
-    }
-  })
+  //   }
+  // })
   const  navCarteira  = async() => {
       const response = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
       setCompras(response)

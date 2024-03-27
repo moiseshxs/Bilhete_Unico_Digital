@@ -5,14 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
 import Logo from '../../../assets/img/logo/logovermelha.png'
-import Api from '../../Services/api/Api';
+import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import MyContext from '../../Context/context';
 import Loading from '../Loading';
 
 
 export default function Login({navigation}) {
     
-    const api = new Api()
+    const authP = new AuthPassageiro()
     //Uso do context para ter acesso aos estados globais
     const{setPassageiro, setToken} = useContext(MyContext) 
     //estado sera utilizado para mostrar erros ao usuario
@@ -30,9 +30,9 @@ export default function Login({navigation}) {
             setError('CPF invalido')
         }else{
             setLoading(true)
-        const response = await api.login(cpf, password)
-            
-            if( response.usuario !== undefined){
+        const response = await authP.login(cpf, password)
+            console.log(response)
+            if(response.message === undefined){
             
             
             setPassageiro(response.usuario)
@@ -40,9 +40,9 @@ export default function Login({navigation}) {
             
             setTimeout(() => setLoading(false), 1000)
             navigation.navigate('ListaBilhetes')
-        }else if( response.message !== undefined){
+        }else{
             setLoading(false)
-            setError(response.message)
+            setError("CPF ou senha incorretos!")
         }
 
     }
@@ -52,15 +52,7 @@ export default function Login({navigation}) {
         }
     
        
-        // let data = new Date()
-        // let dataAntiga = new Date("2024-02-14 15:27:40")
-        // let diferencaMS = data - dataAntiga
-        // let segundos = diferencaMS/1000
-        // let minutos = segundos/60
-        // segundos = segundos%60
-        // let horas = minutos/60
-        // minutos = minutos%60
-        // console.log(Math.round(horas)+":"+Math.round(minutos)+":"+Math.round(segundos))
+        
 
 
     const [borderColor, setBorderColor] = useState('#7b7b7b')

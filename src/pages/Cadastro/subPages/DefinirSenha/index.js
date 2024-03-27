@@ -1,9 +1,9 @@
-import { View, Text, Dimensions, TouchableOpacity } from "react-native"
+import { View, Text, Dimensions, TouchableOpacity, Alert } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styles from "./styles"
 import { useState } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
-import Api from "../../../../Services/api/Api"
+import AuthPassageiro from "../../../../Controllers/AuthPassageiro"
 import Loading from "../../../Loading"
 
 export default function NovaSenha({navigation, route}){
@@ -20,7 +20,7 @@ export default function NovaSenha({navigation, route}){
             setBorderColor2('#f00')
         }
     }
-    let api = new Api()
+    let authP = new AuthPassageiro()
     const register = async(senha, confirmaSenha) => {
         if(senha == '' || confirmSenha == ''){
             setError('Campos vazios')
@@ -31,9 +31,21 @@ export default function NovaSenha({navigation, route}){
             return false;
         }else{
         setLoading(true)
-        if(await api.register(route.params.id, senha)){
+
+        if(await authP.register(route.params.id, senha)){
             setTimeout(() => setLoading(false), 1000)
-            navigation.navigate('Login')
+            // Alert.alert('Erro', "Erro inesperado ao verificar código", [
+            //     {
+            //       text: 'Cancel',
+            //       onPress: () => navigation.navigate('Login'),
+            //       style: 'cancel',
+            //     },
+            //     {
+            //       text: 'OK',
+            //       onPress: ()=> navigation.navigate('Login')
+            //     },
+            //   ]);
+            navigation.navigate('Login') //usar apenas no navegador
         }else{
             setError('Erro ao cadastrar')
             setLoading(false)
