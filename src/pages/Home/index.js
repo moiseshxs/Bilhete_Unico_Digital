@@ -227,7 +227,7 @@ export default function Home()  {
           <View style={styles.nav}>
             <View style={styles.perfil}>
             <Image
-              source={require('../../../assets/img/home/perfil.png')}
+              source={require('../../../assets/img/home/homem.jpg')}
               style={styles.fotoPerfil}
             />
               <Text numberOfLines={1} style={styles.nomePerfil}>Bom dia, {passageiro.nomePassageiro}</Text>

@@ -13,7 +13,7 @@ export default function Config() {
         <SafeAreaView style={styles.container}>
             <View style={styles.areaImagem}>
                 <Image 
-                    source={require('../../../assets/img/home/perfil.png')} 
+                    source={require('../../../assets/img/home/homem.jpg')} 
                     style={styles.imagem}
                 />
                 <Text style={styles.nomeUsuario}>{passageiro.nomePassageiro}</Text>

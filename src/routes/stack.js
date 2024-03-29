@@ -33,7 +33,7 @@ const Stack = createNativeStackNavigator();
 export default function StackRoutes() {
 const navigation = useNavigation();
   return (
-    <Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: true}}>
+    <Stack.Navigator initialRouteName='IntroSlider' screenOptions={{headerShown: true}}>
       
       <Stack.Screen 
         name='Login'

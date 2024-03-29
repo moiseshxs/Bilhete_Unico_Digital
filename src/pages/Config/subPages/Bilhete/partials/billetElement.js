@@ -4,7 +4,7 @@ import Uee from '../../../../../../assets/img/bilhete/UEElogo.png'
 import Anpg from '../../../../../../assets/img/bilhete/ANPGlogo.png'
 import Ubes from '../../../../../../assets/img/bilhete/UBESlogo.png'
 import Umes from '../../../../../../assets/img/bilhete/UMESlogo.jpg'
-import Cassio from '../../../../../../assets/img/home/perfil.png'
+import Cassio from '../../../../../../assets/img/home/homem.jpg'
 import Ano from '../../../../../../assets/img/bilhete/anoBilhete.png'
 
 
