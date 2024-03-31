@@ -1,19 +1,19 @@
 import { SafeAreaView, View, Text, StyleSheet, FlatList,  RefreshControl } from "react-native"
 import BilletElement from './partials/billetElement'
 import { useContext, useEffect, useState } from "react"
-import Passageiro from "../../../../Services/api/Passageiro"
+import Bilhete from "../../../../Controllers/Bilhete"
 import MyContext from "../../../../Context/context"
 import Loading from "../../../Loading"
 
 
 export default function ListaBilhetes({navigation}){
     
-    const{ token, passageiro, setBilhete} = useContext(MyContext)
+    const{ token, passageiro, setBilhete, setPassagens, setCompras} = useContext(MyContext)
     const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
     
     const[error, setError] = useState(false)
-    let p = new Passageiro()
+    let b = new Bilhete()
     const[DATA, setDATA] = useState('')
     
     // let DATA = [ 
@@ -53,12 +53,12 @@ export default function ListaBilhetes({navigation}){
     }
     const getBilhetes = async() => {
         setInfos(false)
-        const response = await p.getBilhetes(passageiro.id, token)
+        const response = await b.getBilhetes(passageiro.id, token)
         if(response.message !== undefined){
             setError(true)
             setDATA([{
                 id: '1',
-                error: response.message
+                error: "Você não possui bilhetes"
             }])
             setInfos(true)
             setRefreshing(false)
@@ -73,6 +73,8 @@ export default function ListaBilhetes({navigation}){
     useEffect(() => {
         if(DATA == ''){
         getBilhetes()
+        setPassagens('')
+        setCompras('')
         }
     })
     const onRefresh = () => {

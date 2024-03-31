@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking} from 'react-native';
 import styles from './styles';
-import Cassio from '../../../../../assets/img/home/perfil.png'
+import Cassio from '../../../../../assets/img/home/homem.jpg'
 import { Ionicons } from '@expo/vector-icons';
 import { launchImageLibrary } from "react-native-image-picker";
 import MyContext from '../../../../Context/context';

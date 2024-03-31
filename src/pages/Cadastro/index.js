@@ -3,7 +3,7 @@ import styles from "./styles"
 import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { useState } from "react";
-import Api from "../../Services/api/Api";
+import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import Loading from "../Loading";
 
 
@@ -26,30 +26,39 @@ export default function Cadastro({navigation}){
     }
 
     //instancia api
-    let api = new Api()
+    let authP = new AuthPassageiro()
 
     //função para chamar a api para consular se o cpf existe no banco
     const consultar = async(cpf) =>{
+        //validação
         if(cpf == ''){
             setError('Campo vazio')
         }
         else if(cpf.length < 14){
             setError('CPF invalido')
         }
+
         else{
         setLoading(true)    
+        //requisição
+        let response = await authP.getByCpf(cpf) 
+        //resposta for true    
+        if(response){ 
 
-        let response = await api.getByCpf(cpf) 
-
-        if(response.message !== undefined){
-            setError(response.message)
+            if(response.message !== undefined){
+                setError("CPF não encontrado!")
+                setLoading(false)
+                return false
+            }
+            setTimeout(() => setLoading(false), 1000)
+            navigation.navigate('ConfirmarCadastro', {
+                dados: response.usuario
+            })
+        //resposta false
+        }else{
+            setError("Erro ao carregar informações")
             setLoading(false)
-            return false
         }
-        setTimeout(() => setLoading(false), 1000)
-        navigation.navigate('ConfirmarCadastro', {
-            dados: response.usuario
-        })
     }
     }
     if(!loading){

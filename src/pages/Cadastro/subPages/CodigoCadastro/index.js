@@ -1,11 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
-import { useEffect, useState } from 'react';
+import {  View, Text, TouchableOpacity } from "react-native";
+import {  useState } from 'react';
 import { CodeField, Cursor,  useClearByFocusCell } from 'react-native-confirmation-code-field';
 import styles from './styles'
-import Api from '../../../../Services/api/Api';
+
 import Loading from '../../../Loading';
 import Animated from 'react-native-reanimated';
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 
 export default function RecuperarSenha({navigation, route}){
     const CELL_COUNT = 4
@@ -16,31 +17,45 @@ export default function RecuperarSenha({navigation, route}){
     })
     const[loading, setLoading] = useState(false)
     const[error, setError] = useState(false)
-    let api = new Api()
+    let authP = new AuthPassageiro()
 
     const verCod = async(codigo) =>
     {
       setLoading(true)
-      const response = await api.verCod(route.params.id,codigo)
+      const response = await authP.verCod(route.params.id,codigo)
       
-      if(response){
+      if(response == 'autorizado'){
         setTimeout(() => setLoading(false), 1000)
         navigation.navigate('DefinirSenha', {
           id: route.params.id 
         })
       }
-      else{
+      else if(response == 'incorreto'){
         setLoading(false)
         setError('Código Incorreto')
+      }else{
+        setLoading(false)
+        Alert.alert('Erro', "Erro inesperado ao verificar código", [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK'
+          },
+        ]);
+        
       }
     }
+
+
     if(value.length == 4){
       verCod(value)
       setValue('')
-      
-      
     }
-    console.log(route.params.id)
+
+
+    
     if(!loading){
     return(
         <Animated.View style={styles.container}

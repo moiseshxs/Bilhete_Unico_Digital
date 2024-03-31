@@ -1,19 +1,40 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import MyContext from '../../Context/context';
+import Compra from '../../Controllers/Compra';
 
 export default function Config() {
     const navigation = useNavigation();
-    const{passageiro, compras, passagens} = useContext(MyContext);
+    const{passageiro, compras, passagens, bilhete, token} = useContext(MyContext);
+    const[loading, setLoading] = useState(false)
+    const[countCompra,setCountCompra] = useState('')
+
+    const countCompras = async() =>{
+        let c = new Compra()
+        const response = await c.countCompras(bilhete.id, token)
+        if(!response){
+            return false
+        }
+        setCountCompra(response)
+
+    }
+
+    useEffect(()=>{
+        if(compras == ''){
+            countCompras()
+        }
+    })
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.areaImagem}>
                 <Image 
-                    source={require('../../../assets/img/home/perfil.png')} 
+                    source={require('../../../assets/img/home/homem.jpg')} 
                     style={styles.imagem}
                 />
                 <Text style={styles.nomeUsuario}>{passageiro.nomePassageiro}</Text>
@@ -27,7 +48,11 @@ export default function Config() {
                 </View>
                 <View style={styles.areaDir}>
                     <Text style={styles.textPassagens}>RECARGA</Text>
+                    {compras != '' ?
                     <Text style={styles.numPassagens}>{compras.qtdCompras}</Text>
+                    :
+                    <Text style={styles.numPassagens}>{countCompra}</Text>
+                    }
                 </View>
                 
             </View>

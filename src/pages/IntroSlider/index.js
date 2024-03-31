@@ -22,7 +22,7 @@ const slides = [
     },
     {
         key: '2',
-        title: 'Passagens por QR Code e NFC',
+        title: 'Passagens por QR Code',
         text: 'É só aproximar e passar!',
         image: image2
     },

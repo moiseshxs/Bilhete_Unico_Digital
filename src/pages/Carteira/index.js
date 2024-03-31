@@ -7,6 +7,8 @@ import boleto from '../../../assets/img/carteira/boleto.png';
 import styles from './styles';
 import { useContext, useEffect, useState } from 'react';
 import MyContext from '../../Context/context';
+import Compra from '../../Controllers/Compra';
+import Loading from '../Loading';
 
 const metodos = [
   {
@@ -61,17 +63,41 @@ const metodos = [
 
 export default function Carteira() {
   const navigation = useNavigation();
+  const formasPagamento = {
+    1 : 'Cartão',
+    2: 'Pix',
+    3:'Boleto'
+} 
 
-  const{compras, passagens} = useContext(MyContext)
+  const{compras, setCompras , passagens, passageiro, bilhete, token} = useContext(MyContext)
   const[historico, setHistorico] = useState('')
   const[infos, setInfos] = useState(false)
-  console.log(compras);
+  
+
+
+
+  const getComprasByBilhete = async() =>{
+    
+    let c = new Compra()
+    const response = await c.getComprasByBilhete(passageiro.id, bilhete.id, token)
+    console.log(response)
+    if(!response){
+      return false
+    }
+    
+    setCompras(response)
+    setInfos(true)
+  }
+
+  
   useEffect(() => {
+    
+    if(infos){
     if(historico == '' || historico != compras.compras){
     let comprasAll = compras.compras
     for(var i=0;i<comprasAll.length;i++){
       
-      if(comprasAll[i].descFormaPagamento == 'credito' || comprasAll[i].descFormaPagamento == 'debito' ){
+      if(comprasAll[i].forma == '1'  ){
         comprasAll[i].image = cartao
         
       }
@@ -81,9 +107,15 @@ export default function Carteira() {
         comprasAll[i].image = boleto
       }
     }
-    
     setHistorico(comprasAll)
-    setInfos(true)
+  } 
+    
+    }else{
+      if(compras == ''){
+      getComprasByBilhete()
+      }else{
+        setInfos(true)
+      }
     }
   })
 
@@ -111,7 +143,7 @@ export default function Carteira() {
           <Image source={dados.image} style={styles.foto}/>
         </View>
         <View style={styles.meio}>
-          <Text style={styles.tipoRecarga}>Compra no {dados.descFormaPagamento}</Text>
+          <Text style={styles.tipoRecarga}>Compra no {formasPagamento[dados.forma]}</Text>
           <Text style={styles.qtd}>{dados.passagens} PASSAGENS</Text>
         </View>
       </View>
@@ -122,7 +154,7 @@ export default function Carteira() {
     </View>
     </TouchableOpacity>
   );
-
+    if(infos){
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
@@ -171,4 +203,9 @@ export default function Carteira() {
       </View>
     </SafeAreaView>
   );
+}else{
+  return(
+    <Loading/>
+  )
+}
 }

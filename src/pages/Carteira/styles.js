@@ -57,6 +57,7 @@ export default StyleSheet.create({
       recarga: {
         flex: 2,
         paddingHorizontal: 20,
+        justifyContent:'center',
       },
 
       fundometodos: {

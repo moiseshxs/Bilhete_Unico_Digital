@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, Pressable, Dimensions } from "react-native";
+import { SafeAreaView, View, Text, Pressable, Dimensions, Alert } from "react-native";
 import styles from './styles'
 import { useEffect, useState } from 'react';
-import Api from '../../../../Services/api/Api';
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 import Loading from '../../../Loading';
 
 export default function ConfirmarCadastro({navigation, route}){
@@ -25,18 +25,28 @@ export default function ConfirmarCadastro({navigation, route}){
     })
 
 }
-        let api = new Api()
+        let authP = new AuthPassageiro()
         const requireCod = async(forma, dado) =>{
             setLoading(true)
-            const response = await api.requireCod(forma, dado)
+            const response = await authP.requireCod(forma, dado)
             if(response){
                 setTimeout(() => setLoading(false), 1000)
                 navigation.navigate('CodigoCadastro', {
                     id: dados.id,   
                     forma: forma
                 })
+            }else{
+                setLoading(false)
+                Alert.alert('Erro', "Erro inesperado ao carregar informações", [
+                    {
+                      text: 'Cancel',
+                      onPress: () => navigation.navigate("Login"),
+                      style: 'cancel',
+                    },
+                    {text: 'OK', onPress: () =>  navigation.navigate("Login")},
+                  ]);
+                //navigation.navigate("Login")  
             }
-
         }
     if(!loading){
     return(
