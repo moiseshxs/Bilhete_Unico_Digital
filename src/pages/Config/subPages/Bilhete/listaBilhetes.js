@@ -8,7 +8,7 @@ import Loading from "../../../Loading"
 
 export default function ListaBilhetes({navigation}){
     
-    const{ token, passageiro, setBilhete} = useContext(MyContext)
+    const{ token, passageiro, setBilhete, setPassagens, setCompras} = useContext(MyContext)
     const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
     
@@ -73,6 +73,8 @@ export default function ListaBilhetes({navigation}){
     useEffect(() => {
         if(DATA == ''){
         getBilhetes()
+        setPassagens('')
+        setCompras('')
         }
     })
     const onRefresh = () => {

@@ -5,6 +5,7 @@ import Passagem from '../../../../Controllers/Passagem';
 import { Ionicons } from '@expo/vector-icons';
 import BilletElement from './partials/billetElement';
 import MyContext from '../../../../Context/context';
+import Loading from '../../../Loading';
 
 export default function Bilhete({navigation, route}) {
     
@@ -32,6 +33,7 @@ export default function Bilhete({navigation, route}) {
             setPassagens(response)
             console.log(response)
         }
+        
         setLoadPassagens(true)
     }
     useEffect(() =>{
@@ -40,7 +42,7 @@ export default function Bilhete({navigation, route}) {
             getPassagens()
         }
     })
-
+    if(loadPassagens){
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.bilheteArea}>
@@ -101,4 +103,9 @@ export default function Bilhete({navigation, route}) {
             </View>
         </SafeAreaView>  
     );
+}else{
+    return(
+        <Loading/>
+    )
+}
 }

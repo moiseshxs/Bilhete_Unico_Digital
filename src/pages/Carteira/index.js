@@ -7,6 +7,8 @@ import boleto from '../../../assets/img/carteira/boleto.png';
 import styles from './styles';
 import { useContext, useEffect, useState } from 'react';
 import MyContext from '../../Context/context';
+import Compra from '../../Controllers/Compra';
+import Loading from '../Loading';
 
 const metodos = [
   {
@@ -67,11 +69,30 @@ export default function Carteira() {
     3:'Boleto'
 } 
 
-  const{compras, passagens} = useContext(MyContext)
+  const{compras, setCompras , passagens, passageiro, bilhete, token} = useContext(MyContext)
   const[historico, setHistorico] = useState('')
   const[infos, setInfos] = useState(false)
-  console.log(compras);
+  
+
+
+
+  const getComprasByBilhete = async() =>{
+    
+    let c = new Compra()
+    const response = await c.getComprasByBilhete(passageiro.id, bilhete.id, token)
+    console.log(response)
+    if(!response){
+      return false
+    }
+    
+    setCompras(response)
+    setInfos(true)
+  }
+
+  
   useEffect(() => {
+    
+    if(infos){
     if(historico == '' || historico != compras.compras){
     let comprasAll = compras.compras
     for(var i=0;i<comprasAll.length;i++){
@@ -86,9 +107,15 @@ export default function Carteira() {
         comprasAll[i].image = boleto
       }
     }
-    
     setHistorico(comprasAll)
-    setInfos(true)
+  } 
+    
+    }else{
+      if(compras == ''){
+      getComprasByBilhete()
+      }else{
+        setInfos(true)
+      }
     }
   })
 
@@ -127,7 +154,7 @@ export default function Carteira() {
     </View>
     </TouchableOpacity>
   );
-
+    if(infos){
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
@@ -176,4 +203,9 @@ export default function Carteira() {
       </View>
     </SafeAreaView>
   );
+}else{
+  return(
+    <Loading/>
+  )
+}
 }

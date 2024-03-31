@@ -31,19 +31,22 @@ export default function Login({navigation}) {
         }else{
             setLoading(true)
         const response = await authP.login(cpf, password)
-            console.log(response)
+            
+
+            if(!response){
+                setError("Falha ao carregar informações!")
+                setLoading(false)
+                return false
+            }
             if(response.message === undefined){
-            
-            
-            setPassageiro(response.usuario)
-            setToken(response.token_de_acesso)
-            
-            setTimeout(() => setLoading(false), 1000)
-            navigation.navigate('ListaBilhetes')
-        }else{
-            setLoading(false)
-            setError("CPF ou senha incorretos!")
-        }
+                setPassageiro(response.usuario)
+                setToken(response.token_de_acesso)
+                setTimeout(() => setLoading(false), 1000)
+                navigation.navigate('ListaBilhetes')
+            }else{
+                setLoading(false)
+                setError("CPF ou senha incorretos!")
+            }
 
     }
             
