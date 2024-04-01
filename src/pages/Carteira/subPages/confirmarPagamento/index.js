@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import { Text, View, SafeAreaView, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import Passageiro from '../../../../Services/api/Passageiro';
+import Compra from '../../../../Controllers/Compra';
+import Passagem from '../../../../Controllers/Passagem';
 import Loading from '../../../Loading';
-import Api from '../../../../Services/api/Api';
+import Preco from '../../../../Controllers/Preco';
 import MyContext from '../../../../Context/context';
 
 
@@ -18,14 +19,14 @@ export default function ConfirmarPagamento({route}) {
     }
 
     const {passageiro, token, bilhete, setPassagens, setCompras} = useContext(MyContext);
-    let api = new Api()
+    let pr = new Preco()
     const[loading, setLoading] = useState(false)
 
     console.log(route.params.formaPagamento)
     const[preco, setPreco] = useState(1)
 
     const getPreco = async() =>{
-        let response = await api.getPreco()
+        let response = await pr.getPreco()
         console.log(response)
         setPreco(response)
         setLoading(false)
@@ -89,14 +90,23 @@ export default function ConfirmarPagamento({route}) {
 
     const navigation = useNavigation();
     
-    let p = new Passageiro();
-
+    let compra = new Compra();
+    let passagem = new Passagem();
     const storeCompra = async() => {
        setLoading(true);
-       const response = await p.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), route.params.formaPagamento, 'Compra', bilhete.id)
-       console.log(response);
-       const compras = await p.getComprasByBilhete(passageiro.id, bilhete.id, token)
-       const passagens = await p.getPassagens(bilhete.id, token)
+
+       const response = await compra.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), route.params.formaPagamento, 'Compra', bilhete.id)
+       if(!response){
+            return false
+       }
+       const compras = await compra.getComprasByBilhete(passageiro.id, bilhete.id, token)
+       if(!compras){
+            return false
+       }
+       const passagens = await passagem.getPassagens(bilhete.id, token)
+       if(!passagens){
+            return false
+       }
        setTimeout(()=> {setLoading(false)
        setPassagens(passagens)
 
@@ -104,7 +114,7 @@ export default function ConfirmarPagamento({route}) {
 
        setCompras(compras)
        navigation.navigate('Comprovante', {dados:response.message});
-       console.log(compras.compras);
+       
     };
     
     const Item = ({ titulo, conteudo, editar }) => (
