@@ -1,13 +1,17 @@
 import React from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
-
+import CartaoPassageiro from '../../../../../../Controllers/CartaoPassageiro'
+import MyContext from '../../../../../../Context/context';
 export default function Cartao() {
 
+
+    const {passageiro, token} = useContext(MyContext);
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
+    let cartaoPassageiro = new CartaoPassageiro()
 
     function changeColor(input){
         if(input == 'numCartao'){
@@ -27,6 +31,15 @@ export default function Cartao() {
             setBorderColor2('#F00E0E')
         }
     }
+
+
+
+const storeCartao = async()=>{
+    console.log(passageiro.id);
+    console.log(token);
+   const response = await cartaoPassageiro.storeCartaoPassageiro( passageiro.id, token,numCartao,"visa", "c6 bank", cvv,"088988", "8999", validade,)
+    console.log(response)
+}
 
     const [numCartao, setNumCartao] = useState('')
     const [validade, setValidade] = useState('')
@@ -216,7 +229,7 @@ export default function Cartao() {
 
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
-                    <TouchableOpacity onPress={() => ('')}>
+                    <TouchableOpacity onPress={storeCartao}>
                         <Text style={styles.textBotao}>Adicionar cartão</Text>
                     </TouchableOpacity>
                 </View>
