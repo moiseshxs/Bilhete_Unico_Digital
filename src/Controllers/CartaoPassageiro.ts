@@ -18,12 +18,22 @@ async storeCartaoPassageiro(id:number,token:string, numeroCartao:string, bandeir
 
    
 
-    const response = await this.api.post(`/storeCartao/${id}`,form,{ headers: {'Authorization': `Bearer ${token}`}})
+    const response = await this.api.post(`/getCartao/${id}`,form,{ headers: {'Authorization': `Bearer ${token}`}})
     
     return response.data
     } catch (error) {
         return error;
     }
-}}
+}
 
-export default CartaoPassageiro
+async getCartaoPassageiro(id:number,token:string){
+    try {
+    
+    const response = await this.api.get(`/getCartao/${id}`,{ headers: {'Authorization': `Bearer ${token}`}})
+    return response.data
+    } catch (error) {
+        return error;
+    }
+}
+}
+export default CartaoPassageiro;

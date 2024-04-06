@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {  useState } from 'react';
 import { Text, View, SafeAreaView, Image, FlatList, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import {  useContext } from 'react';
 import visa from '../../../../../assets/img/cartao/visa.png';
 import mastercard from '../../../../../assets/img/cartao/mastercard.png';
 import styles from './styles';
+import CartaoPassageiro from '../../../../Controllers/CartaoPassageiro';
+import MyContext from '../../../../Context/context';
+
 
 const DATA = [
     {
@@ -19,6 +23,21 @@ const DATA = [
   ];
 
 export default function Cartao() {
+
+    const [cartao,setCartao] = useState();
+    const {passageiro, token} = useContext(MyContext);
+    let cP = new CartaoPassageiro();  
+
+  const getCartoesPassageiro = async() => {
+      console.log(passageiro.id);
+      console.log(token);
+      const response = await cP.getCartaoPassageiro(passageiro.id,token)
+      setCartao(response)
+  }
+  useState(()=>{
+    getCartoesPassageiro();
+    console.log(cartao)
+})
     const navigation = useNavigation();
 
     const Item = ({numero,bandeira}) => (
@@ -39,8 +58,8 @@ export default function Cartao() {
         <SafeAreaView style={styles.container}>
             <View style={styles.areaCartoes}>
                 <FlatList
-                    data={DATA}
-                    renderItem={({item}) => <Item numero={item.numero} bandeira={item.bandeira}/>}
+                    data={cartao}
+                    renderItem={({item}) => <Item numero={item.numeroCartao} bandeira={item.bandeira}/>}
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                 />
