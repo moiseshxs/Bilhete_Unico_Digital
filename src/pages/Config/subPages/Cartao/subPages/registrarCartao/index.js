@@ -59,7 +59,7 @@ const storeCartao = async()=>{
                     label='Número do cartão'
                     staticLabel
                     hintTextColor='#aaa'
-                    mask='000 000 000 00'
+                    mask='0000 0000 0000 0000'
                     value={numCartao}
 
                     containerStyles={{
@@ -102,8 +102,8 @@ const storeCartao = async()=>{
                     label='Validade'
                     staticLabel
                     hintTextColor='#aaa'
-                    isPassword
-                    
+                    mask='00/00'
+                    placeholder='mês/ano'
                     value={validade}
                     containerStyles={{
                         borderWidth: 2,
@@ -144,7 +144,7 @@ const storeCartao = async()=>{
                     label='CVV'
                     staticLabel
                     hintTextColor='#aaa'
-                    isPassword
+                    mask='000'
                     
                     value={cvv}
                     containerStyles={{
@@ -186,7 +186,7 @@ const storeCartao = async()=>{
                     label='Nome titular'
                     staticLabel
                     hintTextColor='#aaa'
-                    isPassword
+                    
                     
                     value={nome}
                     containerStyles={{
