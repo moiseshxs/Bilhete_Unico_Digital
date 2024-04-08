@@ -18,7 +18,7 @@ async storeCartaoPassageiro(id:number,token:string, numeroCartao:string, bandeir
 
    
 
-    const response = await this.api.post(`/getCartao/${id}`,form,{ headers: {'Authorization': `Bearer ${token}`}})
+    const response = await this.api.post(`/storeCartao/${id}`,form,{ headers: {'Authorization': `Bearer ${token}`}})
     
     return response.data
     } catch (error) {
@@ -31,6 +31,15 @@ async getCartaoPassageiro(id:number,token:string){
     
     const response = await this.api.get(`/getCartao/${id}`,{ headers: {'Authorization': `Bearer ${token}`}})
     return response.data
+    } catch (error) {
+        return error;
+    }
+}
+
+async destroyCartaoPassageiro(id:number, token:string){
+    try{
+        const response = await this.api.delete(`/destroyCartao/${id}`, {headers: {'Authorization': `Bearer ${token}`}}) 
+        return false
     } catch (error) {
         return error;
     }

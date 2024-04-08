@@ -5,7 +5,7 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
 import CartaoPassageiro from '../../../../../../Controllers/CartaoPassageiro'
 import MyContext from '../../../../../../Context/context';
-export default function Cartao() {
+export default function Cartao({navigation}) {
 
 
     const {passageiro, token} = useContext(MyContext);
@@ -37,8 +37,9 @@ export default function Cartao() {
 const storeCartao = async()=>{
     console.log(passageiro.id);
     console.log(token);
-   const response = await cartaoPassageiro.storeCartaoPassageiro( passageiro.id, token,numCartao,"visa", "c6 bank", cvv,"088988", "8999", validade,)
-    console.log(response)
+    await cartaoPassageiro.storeCartaoPassageiro( passageiro.id, token,numCartao,"visa", "c6 bank", cvv,"088988", "8999", validade,)
+    
+    return navigation.navigate("Cartao", { novoCartaoAdicionado: true })
 }
 
     const [numCartao, setNumCartao] = useState('')
