@@ -27,7 +27,7 @@ const metodos = [
     },
   ];
 
-export default function ConfirmarPagamento({route}) {
+export default function ConfirmarPagamento({navigation, route}) {
     const [modalEdit, setModalEdit] = useState(false)
     const [idEdit, setIdEdit] = useState("")
     
@@ -99,7 +99,7 @@ export default function ConfirmarPagamento({route}) {
             id: '2',
             titulo: 'Forma Pagamento',
             conteudo: idEdit!='' ? formasPagamento[idEdit]:formasPagamento[route.params.formaPagamento],
-            editar: 'QtdPassagens',
+            editar: 'formaPagamento',
         },
         {
             id: '3',
@@ -130,7 +130,7 @@ export default function ConfirmarPagamento({route}) {
       );
     
 
-    const navigation = useNavigation();
+  
     
     let compra = new Compra();
     let passagem = new Passagem();
@@ -159,6 +159,16 @@ export default function ConfirmarPagamento({route}) {
        
     };
     
+    const arrayEdit = (editar) =>{
+      console.log(editar, "EDITAR")
+        if (editar == "formaPagamento"){
+          setModalEdit(true)
+        } else {
+          return navigation.navigate('QtdPassagens')
+        }
+
+    }
+
     const Item = ({ titulo, conteudo, editar }) => (
         <View style={styles.passagens}>
           <View style={styles.esquerda}>
@@ -167,7 +177,7 @@ export default function ConfirmarPagamento({route}) {
           </View>
 
           <View style={styles.direita}>
-            <TouchableOpacity onPress={() => setModalEdit(true)}>
+            <TouchableOpacity onPress={() =>arrayEdit(editar) }>
               <Text style={styles.textEditar}>Editar</Text>
             </TouchableOpacity>
           </View>
@@ -186,7 +196,7 @@ export default function ConfirmarPagamento({route}) {
             <View style={styles.infos}>
                 <FlatList
                     data={DATA}
-                    renderItem={({item}) => <Item titulo={item.titulo} conteudo={item.conteudo}/>}
+                    renderItem={({item}) => <Item titulo={item.titulo} conteudo={item.conteudo} editar={item.editar}/>}
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                     scrollEnabled={false}
