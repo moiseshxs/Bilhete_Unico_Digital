@@ -86,4 +86,49 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 20,
     },
+    modalEdit: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    },
+    containerModalEdit: {
+        flex: 0.3,
+        width: '80%',
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    flatListContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1, // Para ocupar todo o espaço disponível
+    },
+    
+
+    recargatext:{
+        fontWeight: 'bold',
+      },
+
+      metodo: {
+        width: 50,
+        height: 50,
+      },
+
+      fundometodos: {
+        gap: 5,
+        alignItems: 'center',
+      },
+      circleMetodo: {
+        width: 70,
+        height: 70,
+        borderRadius: 50,
+        borderWidth: 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 20,
+      },
 });

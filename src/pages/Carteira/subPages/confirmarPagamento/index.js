@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Modal, Image} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Compra from '../../../../Controllers/Compra';
@@ -9,14 +9,35 @@ import Preco from '../../../../Controllers/Preco';
 import MyContext from '../../../../Context/context';
 
 
+const metodos = [
+    {
+      id: '2',
+      tipoRecarga: 'Pix',
+      image: require('../../../../../assets/img/carteira/pix.png'),
+    },
+    {
+      id: '1',
+      tipoRecarga: 'Cartão',
+      image: require('../../../../../assets/img/carteira/cartao.png'),
+    },
+    {
+      id: '3',
+      tipoRecarga: 'Boleto',
+      image: require('../../../../../assets/img/carteira/boleto.png'),
+    },
+  ];
 
 export default function ConfirmarPagamento({route}) {
-
+    const [modalEdit, setModalEdit] = useState(false)
+    const [idEdit, setIdEdit] = useState("")
+    
     const formasPagamento = {
         1 : 'Cartão',
         2: 'Pix',
         3:'Boleto'
     }
+
+
 
     const {passageiro, token, bilhete, setPassagens, setCompras} = useContext(MyContext);
     let pr = new Preco()
@@ -77,7 +98,7 @@ export default function ConfirmarPagamento({route}) {
         {
             id: '2',
             titulo: 'Forma Pagamento',
-            conteudo: formasPagamento[route.params.formaPagamento],
+            conteudo: idEdit!='' ? formasPagamento[idEdit]:formasPagamento[route.params.formaPagamento],
             editar: 'QtdPassagens',
         },
         {
@@ -88,6 +109,27 @@ export default function ConfirmarPagamento({route}) {
         },
     ];
 
+    const modalEditId = (id) =>{
+        setIdEdit(id)
+        setModalEdit(false)
+    }
+
+    const Metodos = ({tipoRecarga,image, id}) => ( 
+        <View style={styles.fundometodos}>            
+          <View style={styles.circleMetodo}>
+            <TouchableOpacity onPress={()=>modalEditId(id)}>
+              <Image
+                source={image}
+                style={styles.metodo}
+                />
+                </TouchableOpacity>
+           
+          </View>
+          <Text style={styles.recargatext}>{tipoRecarga}</Text>
+        </View>
+      );
+    
+
     const navigation = useNavigation();
     
     let compra = new Compra();
@@ -95,7 +137,7 @@ export default function ConfirmarPagamento({route}) {
     const storeCompra = async() => {
        setLoading(true);
 
-       const response = await compra.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), route.params.formaPagamento, 'Compra', bilhete.id)
+       const response = await compra.storageCompraByBilhete(passageiro.id, token, route.params.quantidade, (route.params.quantidade*preco), idEdit!='' ?idEdit:route.params.formaPagamento, 'Compra', bilhete.id)
        if(!response){
             return false
        }
@@ -125,7 +167,7 @@ export default function ConfirmarPagamento({route}) {
           </View>
 
           <View style={styles.direita}>
-            <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens')}>
+            <TouchableOpacity onPress={() => setModalEdit(true)}>
               <Text style={styles.textEditar}>Editar</Text>
             </TouchableOpacity>
           </View>
@@ -158,6 +200,26 @@ export default function ConfirmarPagamento({route}) {
                     </TouchableOpacity>
                 </View>
             </View>
+
+            <Modal  transparent visible={modalEdit}  >
+
+        <View style={styles.modalEdit}>
+          <View style={styles.containerModalEdit}>
+          <View style={styles.flatListContainer}>
+          <FlatList
+              data={metodos}
+              renderItem={({item}) => <Metodos tipoRecarga={item.tipoRecarga} image={item.image} id={item.id}/>}
+              keyExtractor={item => item.id}
+              showsVerticalScrollIndicator={false}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              scrollEnabled={false}
+            />
+</View>
+          </View>
+
+        </View>
+      </Modal>
         </SafeAreaView>
     );
 }else{
