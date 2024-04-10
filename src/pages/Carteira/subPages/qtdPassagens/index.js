@@ -55,7 +55,7 @@ export default function QtdPassagens({route, navigation}) {
             setBorderColor2('#F00E0E')
         }
     }
-
+console.log(route.params.formaPagamento == undefined?route.params.fpId: route.params.formaPagamento, "id que está voltando")
 const qtdOutroValor = parseInt(outroValor)
     const Item = ({ qtd }) => (
         <View style={styles.bolinhas}>

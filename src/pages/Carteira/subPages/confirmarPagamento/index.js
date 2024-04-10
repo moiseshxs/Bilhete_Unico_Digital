@@ -164,7 +164,7 @@ export default function ConfirmarPagamento({navigation, route}) {
       if (editar == "formaPagamento") {
           setModalEdit(true);
       } else {
-        navigation.navigate('QtdPassagens', {formaPagamento: idEdit}); 
+        navigation.navigate('QtdPassagens', {formaPagamento: idEdit == ''? route.params.formaPagamento: idEdit}); 
     }
   }
     const Item = ({ titulo, conteudo, editar }) => (
