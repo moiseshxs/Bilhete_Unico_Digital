@@ -20,6 +20,7 @@ async getByCpf(cpf:string)
 async requireCodEmail(forma:string, dado:string)
 {
     
+    
       let form = new FormData();
       form.append("emailPassageiro", dado);
       try{
@@ -71,6 +72,18 @@ async login(cpf:string, password:string)
        
 
        
+}
+async updateSenhaPassageiro(id:number,password:string) {
+
+    let formData = new FormData();
+    formData.append("password", password);
+    try {
+    const response = await this.api.post(`/auth/putPassword/${id}`, formData)
+    return response.data
+    } catch (error) {
+        console.log(error, "erro ao atualizar a senha do usuario")
+        return error;
+    }
 }
 
 }

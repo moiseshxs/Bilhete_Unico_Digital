@@ -1,11 +1,13 @@
 import { View, Text, Dimensions, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styles from "./styles"
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
-
+import AuthPassageiro from '../../../../../Controllers/AuthPassageiro'
+import MyContext from "../../../../../Context/context"
 export default function TrocarSenha({navigation}){
-
+const {passageiro} = useContext(MyContext);
+   
     function changeColor(input){
         if(input == 'senhaAtual'){
             setBorderColor('#f00')
@@ -23,11 +25,21 @@ export default function TrocarSenha({navigation}){
         }
     }
     const [senhaAtual, setSenhaAtual] = useState('')
-    const [senha, setSenha] = useState()
-    const [confirmSenha, setConfirmSenha] = useState()
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
     const [borderColor3, setBorderColor3] = useState('#7b7b7b')
+
+    let aP = new AuthPassageiro();
+    const updateSenha = async() =>{
+        if(password === passwordConfirm){
+
+            const response = await aP.updateSenhaPassageiro(passageiro.id,password)
+            console.log(response)
+            navigation.navigate('Home');
+        }
+    }
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
@@ -85,7 +97,7 @@ export default function TrocarSenha({navigation}){
                     isPassword
                     
                     
-                    value={senha}
+                    value={password}
                     containerStyles={{
                         borderWidth: 2,
                         width: Dimensions.get('screen').width/1.15,
@@ -117,7 +129,7 @@ export default function TrocarSenha({navigation}){
                         paddingHorizontal: 10,
                         
                     }}
-                    onChangeText={value => {setSenha(value)}}
+                    onChangeText={value => {setPassword(value)}}
                     onFocus={() => changeColor('senha')}
                     isFocused
                     />
@@ -129,7 +141,7 @@ export default function TrocarSenha({navigation}){
                     isPassword
                     
                     
-                    value={confirmSenha}
+                    value={passwordConfirm}
                     containerStyles={{
                         borderWidth: 2,
                         width: Dimensions.get('screen').width/1.15,
@@ -161,7 +173,7 @@ export default function TrocarSenha({navigation}){
                         paddingHorizontal: 10,
                         
                     }}
-                    onChangeText={value => {setConfirmSenha(value)}}
+                    onChangeText={value => {setPasswordConfirm(value)}}
                     onFocus={() => changeColor('confirma')}
                     isFocused
                     />
@@ -169,7 +181,7 @@ export default function TrocarSenha({navigation}){
                     <Text style={{fontSize:16, color:'#f00'}} onPress={() => navigation.navigate('FormaRecuperarSenha')}>Esqueci a senha</Text>
             <View style={styles.buttonArea}>
             <TouchableOpacity
-                    onPress={() => navigation.navigate('Perfil')}>
+                    onPress={updateSenha}>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Trocar</Text>
                         </View>

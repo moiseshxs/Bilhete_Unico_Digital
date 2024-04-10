@@ -14,6 +14,7 @@ export default class Api{
             baseURL: this.baseUrl,
             headers: { Accept:'application/json',
             'Content-Type': 'multipart/form-data',
+            
                }
         });
     }
