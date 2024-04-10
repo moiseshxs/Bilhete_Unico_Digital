@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Modal, Image} from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -30,7 +30,6 @@ const metodos = [
 export default function ConfirmarPagamento({navigation, route}) {
     const [modalEdit, setModalEdit] = useState(false)
     const [idEdit, setIdEdit] = useState("")
-    
     const formasPagamento = {
         1 : 'Cartão',
         2: 'Pix',
@@ -105,9 +104,11 @@ export default function ConfirmarPagamento({navigation, route}) {
             id: '3',
             titulo: 'Data da recarga',
             conteudo:   dataAtual() ,
-            
+            editar : 'Datarecarga'
         },
+        
     ];
+    
 
     const modalEditId = (id) =>{
         setIdEdit(id)
@@ -158,16 +159,28 @@ export default function ConfirmarPagamento({navigation, route}) {
        navigation.navigate('Comprovante', {dados:response.message});
        
     };
+
     
     const arrayEdit = (editar) => {
       
       if (editar == "formaPagamento") {
-          setModalEdit(true);
+         setModalEdit(true);
       } else {
         navigation.navigate('QtdPassagens', {formaPagamento: idEdit == ''? route.params.formaPagamento: idEdit}); 
     }
   }
-    const Item = ({ titulo, conteudo, editar }) => (
+    const Item = ({ titulo, conteudo, editar }) =>
+    {
+      const [texto,setTexto] = useState("");
+      useEffect(() => {
+        if (editar === "formaPagamento" || editar === "QtdPassagens") {
+          setTexto("Editar");
+        } else {
+          setTexto("");
+        }
+      }, [editar]);
+    return (
+      
         <View style={styles.passagens}>
           <View style={styles.esquerda}>
             <Text style={styles.titulo}>{titulo}</Text>
@@ -176,11 +189,11 @@ export default function ConfirmarPagamento({navigation, route}) {
 
           <View style={styles.direita}>
             <TouchableOpacity onPress={() =>arrayEdit(editar) }>
-              <Text style={styles.textEditar}>Editar</Text>
+              <Text style={styles.textEditar}>{texto}</Text>
             </TouchableOpacity>
           </View>
         </View>
-      );
+      );}
       
       if(!loading){
           
