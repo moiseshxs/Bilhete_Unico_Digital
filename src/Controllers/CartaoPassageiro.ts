@@ -4,10 +4,12 @@ import Api from "../Services/api/Api";
 
 class CartaoPassageiro extends Api{
 
-async storeCartaoPassageiro(id:number,token:string, numeroCartao:string, bandeiraCartao: string,bancoCartao: string, cvcCartao: string, contaCartao: string, agenciaCartao: string, validadeCartao:string) {
+async storeCartaoPassageiro(id:number,token:string,nomeTitularCartao:string,cpfTitularCartao:string, numeroCartao:string, bandeiraCartao: string,bancoCartao: string, cvcCartao: string, contaCartao: string, agenciaCartao: string, validadeCartao:string) {
     try {
         let form = new FormData();
     
+    form.append("nomeTitularCartao", nomeTitularCartao);
+    form.append("cpfTitularCartao", cpfTitularCartao);
     form.append("numeroCartao", numeroCartao);
     form.append("bandeiraCartao", bandeiraCartao);
     form.append("bancoCartao", bancoCartao);
@@ -22,6 +24,7 @@ async storeCartaoPassageiro(id:number,token:string, numeroCartao:string, bandeir
     
     return response.data
     } catch (error) {
+        console.log(error, "ERRO AO INSERIR CARTAO")
         return error;
     }
 }

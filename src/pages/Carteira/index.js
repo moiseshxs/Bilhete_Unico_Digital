@@ -143,6 +143,7 @@ export default function Carteira() {
           <Image source={dados.image} style={styles.foto}/>
         </View>
         <View style={styles.meio}>
+          
           <Text style={styles.tipoRecarga}>Compra no {formasPagamento[dados.forma]}</Text>
           <Text style={styles.qtd}>{dados.passagens} PASSAGENS</Text>
         </View>

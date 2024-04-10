@@ -24,8 +24,9 @@ export default StyleSheet.create({
     },
 
     areaPassagens: {
-        flex: 2,
+        flex: 3,
         paddingHorizontal: 20,
+        
     },
 
     bolinhas: {
@@ -50,10 +51,7 @@ export default StyleSheet.create({
         color: 'grey',
     },  
 
-    areaPerso: {
-        flex: 1,
-        justifyContent: 'flex-start'
-    },
+    
     input: {
         borderWidth: 2,
         borderColor: 'grey',

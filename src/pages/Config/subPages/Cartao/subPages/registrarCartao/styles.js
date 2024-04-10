@@ -45,4 +45,10 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 20,
     },
+
+    inputValidadeCvv:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 10
+    }
 });

@@ -43,7 +43,7 @@ export default function ConfirmarPagamento({navigation, route}) {
     let pr = new Preco()
     const[loading, setLoading] = useState(false)
 
-    console.log(route.params.formaPagamento)
+
     const[preco, setPreco] = useState(1)
 
     const getPreco = async() =>{
@@ -159,16 +159,14 @@ export default function ConfirmarPagamento({navigation, route}) {
        
     };
     
-    const arrayEdit = (editar) =>{
-      console.log(editar, "EDITAR")
-        if (editar == "formaPagamento"){
-          setModalEdit(true)
-        } else {
-          return navigation.navigate('QtdPassagens')
-        }
-
+    const arrayEdit = (editar) => {
+      
+      if (editar == "formaPagamento") {
+          setModalEdit(true);
+      } else {
+        navigation.navigate('QtdPassagens', {formaPagamento: idEdit}); 
     }
-
+  }
     const Item = ({ titulo, conteudo, editar }) => (
         <View style={styles.passagens}>
           <View style={styles.esquerda}>
