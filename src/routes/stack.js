@@ -39,7 +39,7 @@ const navigation = useNavigation();
         component={Login}
         options={{
           title: 'Login',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor: 'white',
           headerShown: false,
           
@@ -53,7 +53,7 @@ const navigation = useNavigation();
         component={Tabs}
         options={{
           title: 'Inicio',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor: 'black',
           headerShown: false,
         }}
@@ -64,7 +64,7 @@ const navigation = useNavigation();
         component={Carteira}
         options={{
           title: 'Carteira',
-          headerStyle: { backgroundColor: 'red' },
+          headerStyle: { backgroundColor: 'red' , borderBottomWidth: 0 },
           headerTintColor: 'white',
           headerShown: true,
         }}
@@ -75,7 +75,7 @@ const navigation = useNavigation();
         component={Config}
         options={{
           title: 'Configurações',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor: 'black',
           headerShown: true,
         }}
@@ -86,7 +86,7 @@ const navigation = useNavigation();
         component={IntroSlider}
         options={{
           title: 'IntroSlider',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -97,7 +97,7 @@ const navigation = useNavigation();
         component={RecuperarSenha}
         options={{
           title: 'RecuperarSenha',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -108,7 +108,7 @@ const navigation = useNavigation();
         component={FormaRecuperarSenha}
         options={{
           title: 'FormaRecuperarSenha',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -119,7 +119,7 @@ const navigation = useNavigation();
         component={NovaSenha}
         options={{
           title: 'NovaSenha',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -130,7 +130,7 @@ const navigation = useNavigation();
         component={Cadastro}
         options={{
           title: 'Cadastro',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
           
@@ -144,7 +144,7 @@ const navigation = useNavigation();
         component={ConfirmarCadastro}
         options={{
           title: 'ConfirmarCadastro',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -155,7 +155,7 @@ const navigation = useNavigation();
         component={CodigoCadastro}
         options={{
           title: 'ConfirmarCadastro',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -165,7 +165,7 @@ const navigation = useNavigation();
         component={DefinirSenha}
         options={{
           title: 'ConfirmarCadastro',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -176,7 +176,7 @@ const navigation = useNavigation();
         component={QtdPassagens}
         options={{
           title: 'Recarga',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -186,7 +186,7 @@ const navigation = useNavigation();
         component={ConfirmarPagamento}
         options={{
           title: '',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -196,7 +196,7 @@ const navigation = useNavigation();
         component={Comprovante}
         options={{
           title: 'Comprovante',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
           headerLeft: () => (<Pressable
@@ -215,7 +215,7 @@ const navigation = useNavigation();
         component={Perfil}
         options={{
           title: 'Perfil',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -226,7 +226,7 @@ const navigation = useNavigation();
         component={TrocarSenha}
         options={{
           title: 'TrocarSenha',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -236,7 +236,7 @@ const navigation = useNavigation();
         component={Bilhete}
         options={{
           title: '',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -247,7 +247,7 @@ const navigation = useNavigation();
         component={ListaBilhetes}
         options={{
           title: '',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
         }}
@@ -257,7 +257,7 @@ const navigation = useNavigation();
         component={Cartao}
         options={{
           title: 'Cartão',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -268,7 +268,7 @@ const navigation = useNavigation();
         component={RegistrarCartao}
         options={{
           title: 'Registrar Cartao',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -279,7 +279,7 @@ const navigation = useNavigation();
         component={ArtigosBilhete}
         options={{
           title: 'Ajuda',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -290,7 +290,7 @@ const navigation = useNavigation();
         component={Ajuda}
         options={{
           title: 'Ajuda',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -301,7 +301,7 @@ const navigation = useNavigation();
         component={Chat}
         options={{
           title: 'Suporte',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
@@ -311,7 +311,7 @@ const navigation = useNavigation();
         component={FaleComFuncionario}
         options={{
           title: 'Fale Conosco',
-          headerStyle: { backgroundColor: 'white' },
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,
         }}
