@@ -1,10 +1,37 @@
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, View, Text, Pressable } from "react-native";
+import { SafeAreaView, View, Text, Pressable,Alert } from "react-native";
 import styles from './styles'
 
-export default function RecuperarSenha({navigation}){
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
+
+export default function RecuperarSenha({navigation,route}){
     
-    
+    let authP = new AuthPassageiro()
+    const email = useState(route.params.dados.emailPassageiro);
+    console.log(email)
+    const requireCodRecuperar = async(forma, dado) =>{
+      
+        const response = await authP.requireCodEmailRecuperar(forma, email)
+        if(response){
+            setTimeout(() =>  1000)
+            navigation.navigate('CodigoCadastro', {
+                id: response.id,   
+                forma: forma
+            })
+        }else{
+            
+            Alert.alert('Erro', "Erro inesperado ao carregar informações", [
+                {
+                  text: 'Cancel',
+                  onPress: () => navigation.navigate("Login"),
+                  style: 'cancel',
+                },
+                {text: 'OK', onPress: () =>  navigation.navigate("Login")},
+              ]);
+            navigation.navigate("RecuperarSenha",{forma : forma})  
+        }
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -37,7 +64,7 @@ export default function RecuperarSenha({navigation}){
                 </Pressable>
                 <Pressable
                 style={styles.pressable}
-                onPress={() => navigation.navigate('RecuperarSenha', {forma: "Email"})}>
+                onPress={() => requireCodRecuperar("email", email)}>
                      <View style={styles.controller}>
                         <View style={styles.icon}>
                             <Ionicons name='mail' size={80}/>

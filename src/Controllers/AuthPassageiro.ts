@@ -85,7 +85,30 @@ async updateSenhaPassageiro(id:number,password:string) {
         return error;
     }
 }
-
+async getByCpfRecuperar(cpf:string)
+{
+    let form = new FormData();
+    form.append("cpfPassageiro",cpf);
+    try{
+        const response = await this.api.post('/auth/recuperar', form);
+        return response.data;
+    }catch(e){
+        return false
+    }
+}
+async requireCodEmailRecuperar(forma:string,dado:string) 
+{
+    
+    
+      let form = new FormData();
+      form.append("emailPassageiro", dado);
+      try{
+        const response = await this.api.post('/auth/requireCodRecuperar', form);
+        return response.data.message == 'sucesso ao enviar email'
+      }catch(e){
+        return false
+      }
+  }
 }
 
 

@@ -56,8 +56,41 @@ export default function Login({navigation}) {
            
             
         }
+        const consultar = async(cpf) =>{
+            //validação
+            if(cpf == ''){
+                setError('Campo vazio')
+            }
+            else if(cpf.length < 14){
+                setError('CPF invalido')
+            }
     
-       
+            else{
+            setLoading(true)    
+            //requisição
+            let response = await authP.getByCpfRecuperar(cpf) 
+            console.log(response)
+            //resposta for true    
+            if(response){ 
+    
+                if(response.message !== undefined){
+                    setError("CPF não encontrado!")
+                    setLoading(false)
+                    return false
+                }
+                setTimeout(() => setLoading(false), 1000)
+                setModal(false)
+      
+                navigation.navigate('FormaRecuperarSenha', {
+                    dados: response.usuario
+                })
+            //resposta false
+            }else{
+                setError("Erro ao carregar informações")
+                setLoading(false)
+            }
+        }
+        }
         
 
 
@@ -85,11 +118,6 @@ export default function Login({navigation}) {
             
         }
         
-    }
-    //função para navegar a pagina de recuperação de senha
-    const recuperarSenha =() =>{
-        setModal(false)
-        navigation.navigate('FormaRecuperarSenha')
     }
 
     const [cpfForm, setCpfForm] = useState('')
@@ -284,7 +312,7 @@ export default function Login({navigation}) {
                                         
                                         />
                             <TouchableOpacity
-                                onPress={() => recuperarSenha()}>
+                                onPress={() => consultar(recuperaCpf)}>
                                 <View style={styles.buttonRecuperar}>
                                     <Text style={styles.textButton}>Recuperar Senha</Text>
                                 </View>

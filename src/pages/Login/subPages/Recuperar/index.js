@@ -3,18 +3,51 @@ import { SafeAreaView, View, Text } from "react-native";
 import { useState } from 'react';
 import { CodeField, Cursor,  useClearByFocusCell } from 'react-native-confirmation-code-field';
 import styles from './styles'
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 
 export default function RecuperarSenha({navigation, route}){
+    let authP = new AuthPassageiro()
     const CELL_COUNT = 4
     const [value, setValue] = useState('');
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
     })
+    const verCod = async(codigo) =>
+    {
+      setLoading(true)
+      const response = await authP.verCodRecuperar(route.params.id,codigo)
+      
+      if(response == 'autorizado'){
+        setTimeout(() => setLoading(false), 1000)
+        navigation.navigate('DefinirSenha', {
+          id: route.params.id 
+        })
+      }
+      else if(response == 'incorreto'){
+        setLoading(false)
+        setError('Código Incorreto')
+      }else{
+        setLoading(false)
+        Alert.alert('Erro', "Erro inesperado ao verificar código", [
+          {
+            text: 'Cancel',
+            style: 'cancel',
+          },
+          {
+            text: 'OK'
+          },
+        ]);
+        
+      }
+    }
+
+
     if(value.length == 4){
       setTimeout(function(){
-        navigation.navigate('NovaSenha')
+        // navigation.navigate('NovaSenha')
         setValue('')
+        verCod(value);
 
       }, 200)
     }
