@@ -1,32 +1,31 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles';
-
 import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function ArtigosBilhete() {
+export default function ArtigosBilhete({navigation,route}) {
 
-    const navigation = useNavigation(); 
-
+    
+    const [titulo] = useState(route.params?.titulo);
+    const [caminho] = useState(route.params?.caminho);
+    const [descricao] = useState(route.params?.desc)
+    console.log(route.paramns, "PORRA")
     return (
         <SafeAreaView style={styles.container}>
             
 
             <View style={styles.boxTitulo}>
                 <Text style={styles.subTitulo}>
-                    Como trocar o bilhete selecionado?
+                   {titulo}
                 </Text>
                 <View style={{ height: 30 }}>
-                    <Text style={styles.caminho}>Inicio -&gt; configurações -&gt; bilhete</Text>
+                    <Text style={styles.caminho}>{caminho}</Text>
                 </View>
                 <View>
                     <Text style={styles.textoAjuda}>
-                        Ao definir um Bilhete como favorito,
-                        sempre ao abrir o aplicativo do Bilhete
-                        Único Digital ele abrirá automaticamente
-                        com o bilhete selecionado.
+                       {descricao}
                     </Text>
                 </View>
             </View>
@@ -53,5 +52,5 @@ export default function ArtigosBilhete() {
 
 
         </SafeAreaView>
-    );
+        );
 }

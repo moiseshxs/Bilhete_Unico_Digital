@@ -6,7 +6,7 @@ import { FloatingLabelInput } from "react-native-floating-label-input"
 import AuthPassageiro from '../../../../../Controllers/AuthPassageiro'
 import MyContext from "../../../../../Context/context"
 export default function TrocarSenha({navigation}){
-const {passageiro} = useContext(MyContext);
+const {passageiro,password} = useContext(MyContext);
    
     function changeColor(input){
         if(input == 'senhaAtual'){
@@ -23,9 +23,12 @@ const {passageiro} = useContext(MyContext);
             setBorderColor2('#7b7b7b')
             setBorderColor3('#f00')
         }
+   
+    
     }
+    const [texto,setTexto] = useState("")
     const [senhaAtual, setSenhaAtual] = useState('')
-    const [password, setPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
@@ -33,11 +36,26 @@ const {passageiro} = useContext(MyContext);
 
     let aP = new AuthPassageiro();
     const updateSenha = async() =>{
-        if(password === passwordConfirm){
-
-            const response = await aP.updateSenhaPassageiro(passageiro.id,password)
-            console.log(response)
-            navigation.navigate('Home');
+        if(password == senhaAtual){
+            if(newPassword=== passwordConfirm){
+               if(password!=newPassword){
+                const response = await aP.updateSenhaPassageiro(passageiro.id,password)
+                console.log(response)
+                navigation.navigate('Home');
+               }
+               if(password==newPassword){
+                setTexto("É sua senha atual")
+                console.log(texto)
+               }
+            }
+            if(password != passwordConfirm){
+            setTexto("Senhas não conferem")
+            console.log(texto)
+            }
+        }
+        if(password != senhaAtual){
+            setTexto("Senha atual não confere")
+            console.log(texto)
         }
     }
     return(
@@ -97,7 +115,7 @@ const {passageiro} = useContext(MyContext);
                     isPassword
                     
                     
-                    value={password}
+                    value={newPassword}
                     containerStyles={{
                         borderWidth: 2,
                         width: Dimensions.get('screen').width/1.15,
@@ -129,7 +147,7 @@ const {passageiro} = useContext(MyContext);
                         paddingHorizontal: 10,
                         
                     }}
-                    onChangeText={value => {setPassword(value)}}
+                    onChangeText={value => {setNewPassword(value)}}
                     onFocus={() => changeColor('senha')}
                     isFocused
                     />
@@ -177,11 +195,14 @@ const {passageiro} = useContext(MyContext);
                     onFocus={() => changeColor('confirma')}
                     isFocused
                     />
+                    
             </View>
                     <Text style={{fontSize:16, color:'#f00'}} onPress={() => navigation.navigate('FormaRecuperarSenha')}>Esqueci a senha</Text>
             <View style={styles.buttonArea}>
+
             <TouchableOpacity
                     onPress={updateSenha}>
+                        <Text style={styles.textAviso}>{texto}</Text>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Trocar</Text>
                         </View>

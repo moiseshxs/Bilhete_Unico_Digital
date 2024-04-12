@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         fontWeight: '500'
+    },textAviso:{
+        color: 'red',
+        fontSize: 20,
+        fontWeight: '500',
+        textAlign:'center'
     },
     titleArea:{
         width: '90%',

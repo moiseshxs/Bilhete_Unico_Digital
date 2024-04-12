@@ -14,7 +14,8 @@ export default function Login({navigation}) {
     
     const authP = new AuthPassageiro()
     //Uso do context para ter acesso aos estados globais
-    const{setPassageiro, setToken} = useContext(MyContext) 
+    const{setPassageiro, setToken,setPassword} = useContext(MyContext) 
+
     //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
     //estado de loading
@@ -41,6 +42,8 @@ export default function Login({navigation}) {
             if(response.message === undefined){
                 setPassageiro(response.usuario)
                 setToken(response.token_de_acesso)
+                setPassword(senha)
+                console.log(senha)
                 setTimeout(() => setLoading(false), 1000)
                 navigation.navigate('ListaBilhetes')
             }else{

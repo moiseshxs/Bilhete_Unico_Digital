@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, FlatList, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, FlatList, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import MyContext from '../../Context/context';
 import search from '../../Controllers/Ajuda';
@@ -22,9 +21,12 @@ export default function Ajuda({navigation}) {
     };
     const resultSearchData = result.map(item => ({
         id: item.id,
-        tituloAjuda: item.tituloAjuda
+        tituloAjuda: item.tituloAjuda,
+        caminhoAjuda: item.caminhoAjuda,
+        descAjuda: item.descAjuda
+        
     }));
-
+    console.log(resultSearchData)
     useEffect(() => {
         searchAjuda();
         if (filtro != '') {
@@ -34,14 +36,17 @@ export default function Ajuda({navigation}) {
         }
     }, [filtro]);
 
-    const ResultSearch = ({ id, tituloAjuda }) => (
+    const ResultSearch = ({ id, tituloAjuda, caminhoAjuda, descAjuda}) => (
+        
+    <TouchableOpacity onPress={()=> navigation.navigate('ArtigosBilhete',{id: id, titulo: tituloAjuda, caminho: caminhoAjuda, desc: descAjuda})}>
         <View style={styles.boxAjuda}>
             <View style={styles.boxTituloAjuda}>
                 <Text style={styles.tituloArtigo}>{tituloAjuda}</Text>
+               
             </View>
         </View>
+    </TouchableOpacity>
     );
-
 
     return (
         <SafeAreaView style={styles.container}>
@@ -69,7 +74,7 @@ export default function Ajuda({navigation}) {
                         </View>
                         <FlatList
                             data={resultSearchData}
-                            renderItem={({ item }) => <ResultSearch id={item.id} tituloAjuda={item.tituloAjuda} />}
+                            renderItem={({ item }) => <ResultSearch id={item.id} tituloAjuda={item.tituloAjuda} caminhoAjuda={item.caminhoAjuda} descAjuda={item.descAjuda} />}
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
                             horizontal={false}

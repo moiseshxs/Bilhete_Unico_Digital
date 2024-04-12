@@ -131,7 +131,7 @@ const qtdOutroValor = parseInt(outroValor)
 
                 <View style={styles.areaBotao}>
                     <View style={styles.botao}>
-                        <TouchableOpacity onPress={() =>qtdOutroValor!=0? navigation.navigate('ConfirmarPagamento', {quantidade: qtdOutroValor, formaPagamento:route.params.formaPagamento == undefined?route.params.fpId: route.params.formaPagamento}):console.log("escolha a quantidade de passagens")}>
+<TouchableOpacity onPress={() =>qtdOutroValor!=0? navigation.navigate('ConfirmarPagamento', {quantidade: qtdOutroValor, formaPagamento:route.params.formaPagamento == undefined?route.params.fpId: route.params.formaPagamento}):console.log("escolha a quantidade de passagens")}>
                             <AntDesign name="right" size={30} color="white" />
                         </TouchableOpacity>
                     </View>
