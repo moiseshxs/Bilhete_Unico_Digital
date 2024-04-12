@@ -102,9 +102,22 @@ export default StyleSheet.create({
   tituloArtigo:{
     color: '#9b9b9b'
   },
+
+  boxTituloAjuda:{
+    justifyContent: 'flex-end',
+    flexDirection: 'column',
+    padding: Width/38,
+    borderBottomWidth: 1,
+    borderColor: '#d3d3d3', 
+  },
     respostaDuvida:{
         width: Width/4,
         justifyContent: 'flex-end',
         alignItems:'flex-end',
-    }
+    },
+
+    boxAjuda:{
+        gap: 20,
+        flexDirection: 'column',
+    },
 });

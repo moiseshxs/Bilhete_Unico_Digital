@@ -1,17 +1,49 @@
-import React from 'react';
-import { Text, View, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Text, View, SafeAreaView, FlatList, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import MyContext from '../../Context/context';
+import search from '../../Controllers/Ajuda';
 
 import styles from './styles';
 
 
-export default function Ajuda() {
+export default function Ajuda({navigation}) {
+    const [filtro, setFiltro] = useState('')
+    const [result, setResult] = useState([])
+    const { token } = useContext(MyContext)
+    const searchAjuda = async () => {
+        let ajuda = new search();
 
-    const navigation = useNavigation();
+        const response = await ajuda.search(token, filtro.trim() || '');
+        setResult(response);
 
-    return ( 
+    };
+    const resultSearchData = result.map(item => ({
+        id: item.id,
+        tituloAjuda: item.tituloAjuda
+    }));
+
+    useEffect(() => {
+        searchAjuda();
+        if (filtro != '') {
+            result.filter((item) => {
+                return item.tituloAjuda ? item.tituloAjuda.toLowerCase().includes(filtro.toLowerCase()) : false;
+            });
+        }
+    }, [filtro]);
+
+    const ResultSearch = ({ id, tituloAjuda }) => (
+        <View style={styles.boxAjuda}>
+            <View style={styles.boxTituloAjuda}>
+                <Text style={styles.tituloArtigo}>{tituloAjuda}</Text>
+            </View>
+        </View>
+    );
+
+
+    return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
 
@@ -26,26 +58,32 @@ export default function Ajuda() {
 
                         <View style={styles.boxInput}>
                             <TextInput placeholder='Buscar'
-                                //value={}
-                                //onChangeText={() => 
+                                value={filtro}
+                                onChangeText={(texto) => setFiltro(texto)}
                                 style={styles.input}>
                             </TextInput>
+
                             <TouchableOpacity>
                                 <Ionicons name='search-outline' size={30} color={'black'} />
                             </TouchableOpacity>
                         </View>
-
+                        <FlatList
+                            data={resultSearchData}
+                            renderItem={({ item }) => <ResultSearch id={item.id} tituloAjuda={item.tituloAjuda} />}
+                            keyExtractor={item => item.id}
+                            showsVerticalScrollIndicator={false}
+                            horizontal={false}
+                            showsHorizontalScrollIndicator={false}
+                            scrollEnabled={false}
+                        />
                     </View>
                     <View style={styles.boxDuvida}>
                         <View style={styles.BoxsubTituloDuvida}>
                             <Text style={styles.subTituloDuvida}>Dúvidas frenquentes</Text>
-
                         </View>
                         <View>
                             <TouchableOpacity style={styles.boxResposta}>
-
                                 <Text style={styles.tituloArtigo}>Como utilizar o QR Code?</Text>
-
                                 <View style={styles.respostaDuvida}>
                                     <AntDesign name="right" size={20} color="#9b9b9b" />
                                 </View>
@@ -54,9 +92,7 @@ export default function Ajuda() {
                         </View>
                         <View>
                             <TouchableOpacity style={styles.boxResposta}>
-
                                 <Text style={styles.tituloArtigo}>Como utilizar sensor NFC?</Text>
-
                                 <View style={styles.respostaDuvida}>
                                     <AntDesign name="right" size={20} color="#9b9b9b" />
                                 </View>
@@ -78,22 +114,22 @@ export default function Ajuda() {
                     </View>
                     <View>
                         <View>
-                        <View style={styles.BoxsubTituloDuvida}>
-                            <Text style={styles.subTituloDuvida}>Ainda precisa de ajuda?</Text>
+                            <View style={styles.BoxsubTituloDuvida}>
+                                <Text style={styles.subTituloDuvida}>Ainda precisa de ajuda?</Text>
 
-                        </View>
-                        <View style={styles.centralizar}>
-
-                            <View style={styles.circuloBorda}>
-                            <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Chat')}>
-                                <Ionicons style={styles.centralizar} name="chatbubble-ellipses-outline"  size={60} color={'black'}></Ionicons>
-                            </TouchableOpacity>
                             </View>
-                        </View>
+                            <View style={styles.centralizar}>
+
+                                <View style={styles.circuloBorda}>
+                                    <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Chat')}>
+                                        <Ionicons style={styles.centralizar} name="chatbubble-ellipses-outline" size={60} color={'black'}></Ionicons>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
                         </View>
                     </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
-    );
+    );
 }

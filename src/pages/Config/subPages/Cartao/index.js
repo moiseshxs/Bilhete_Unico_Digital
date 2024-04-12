@@ -24,20 +24,21 @@ const DATA = [
 ];
 
 export default function Cartao({navigation, route}) {
-
+    
     const [cartao, setCartao] = useState();
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
     let cP = new CartaoPassageiro();
-
+    
+   
     useEffect(() => {
         const getCartoesPassageiro = async () => {
             const response = await cP.getCartaoPassageiro(passageiro.id, token)
-            console.log(token)
             setCartao(response)
         } 
     
         getCartoesPassageiro();
+        navigation.setParams({ novoCartaoAdicionado: false })
     },[route.params?.novoCartaoAdicionado]);
     
 
