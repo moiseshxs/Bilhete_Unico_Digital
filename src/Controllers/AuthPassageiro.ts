@@ -38,6 +38,7 @@ async verCod(id:number, codigo:string)
 
     try{
         const response = await this.api.post(`/auth/verCod/${id}`, form);
+        console.log(response, "da api")
         return response.data.message
     }catch(e){
         return false
@@ -101,7 +102,11 @@ async requireCodEmailRecuperar(forma:string,dado:string)
     
     
       let form = new FormData();
+
+      
+      console.log(dado, "retorno do typescript dado")
       form.append("emailPassageiro", dado);
+      console.log(form, "retorno do typescript form")
       try{
         const response = await this.api.post('/auth/requireCodRecuperar', form);
         return response.data.message == 'sucesso ao enviar email'

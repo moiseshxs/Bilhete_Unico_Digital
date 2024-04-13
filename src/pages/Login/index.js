@@ -68,8 +68,7 @@ export default function Login({navigation}) {
             else{
             setLoading(true)    
             //requisição
-            let response = await authP.getByCpfRecuperar(cpf) 
-            console.log(response)
+            const response = await authP.getByCpfRecuperar(cpf) 
             //resposta for true    
             if(response){ 
     
@@ -80,10 +79,11 @@ export default function Login({navigation}) {
                 }
                 setTimeout(() => setLoading(false), 1000)
                 setModal(false)
-      
+                
                 navigation.navigate('FormaRecuperarSenha', {
                     dados: response.usuario
                 })
+              
             //resposta false
             }else{
                 setError("Erro ao carregar informações")

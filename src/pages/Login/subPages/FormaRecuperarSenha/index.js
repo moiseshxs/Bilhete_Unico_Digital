@@ -5,20 +5,21 @@ import styles from './styles'
 
 import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 
-export default function RecuperarSenha({navigation,route}){
+export default function FormaRecuperarSenha({navigation,route}){
     
     let authP = new AuthPassageiro()
-    const email = useState(route.params.dados.emailPassageiro);
-    console.log(email)
+    
+   
     const requireCodRecuperar = async(forma, dado) =>{
       
-        const response = await authP.requireCodEmailRecuperar(forma, email)
+        const response = await authP.requireCodEmailRecuperar(forma, dado)
         if(response){
             setTimeout(() =>  1000)
-            navigation.navigate('CodigoCadastro', {
-                id: response.id,   
+            navigation.navigate('RecuperarSenha', {
+                id: route.params.dados.id,   
                 forma: forma
             })
+            
         }else{
             
             Alert.alert('Erro', "Erro inesperado ao carregar informações", [
@@ -29,7 +30,7 @@ export default function RecuperarSenha({navigation,route}){
                 },
                 {text: 'OK', onPress: () =>  navigation.navigate("Login")},
               ]);
-            navigation.navigate("RecuperarSenha",{forma : forma})  
+            
         }
     }
 
@@ -64,7 +65,7 @@ export default function RecuperarSenha({navigation,route}){
                 </Pressable>
                 <Pressable
                 style={styles.pressable}
-                onPress={() => requireCodRecuperar("email", email)}>
+                onPress={() => requireCodRecuperar("email", route.params.dados.emailPassageiro)}>
                      <View style={styles.controller}>
                         <View style={styles.icon}>
                             <Ionicons name='mail' size={80}/>
