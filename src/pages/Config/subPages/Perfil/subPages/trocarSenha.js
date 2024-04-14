@@ -36,28 +36,35 @@ const {passageiro,password} = useContext(MyContext);
 
     let aP = new AuthPassageiro();
     const updateSenha = async() =>{
-        if(password == senhaAtual){
-            if(newPassword=== passwordConfirm){
-               if(password!=newPassword){
-                const response = await aP.updateSenhaPassageiro(passageiro.id,password)
-                console.log(response)
-                navigation.navigate('Home');
-               }
-               if(password==newPassword){
-                setTexto("É sua senha atual")
-                console.log(texto)
-               }
-            }
-            if(password != passwordConfirm){
-            setTexto("Senhas não conferem")
+    if(senha == '' || confirmSenha == ''){
+            setTexto('Campos vazios')
+    }
+    if(password == senhaAtual){
+        if(newPassword=== passwordConfirm){
+           if(password!=newPassword){
+            console.log(passageiro.id)
+            const response = await aP.updateSenhaPassageiro(passageiro.id,password)
+            console.log(response)
+            setTexto("É sua senha atual")
+            navigation.navigate('Home');
+           }
+           if(password==newPassword){
+            setTexto("É sua senha atual")
             console.log(texto)
-            }
+           }
         }
-        if(password != senhaAtual){
-            setTexto("Senha atual não confere")
-            console.log(texto)
+        if(password != passwordConfirm){
+        setTexto("Senhas não conferem")
+        console.log(texto)
         }
     }
+    if(password != senhaAtual){
+        setTexto("Senha atual não confere")
+        console.log(texto)
+    }
+   
+}
+
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>

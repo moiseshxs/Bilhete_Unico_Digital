@@ -23,7 +23,7 @@ export default function RecuperarSenha({navigation, route}){
       setLoading(true)
       const response = await authP.verCod(route.params.id,codigo)
       if(response == 'autorizado'){
-        navigation.navigate('DefinirSenha', {
+        navigation.navigate('NovaSenha', {
           id: route.params.id 
         })
       }

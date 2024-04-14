@@ -1,11 +1,41 @@
 import { View, Text, Dimensions, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styles from "./styles"
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro'
+import MyContext from "../../../../Context/context"
 
-export default function NovaSenha({navigation}){
+export default function NovaSenha({navigation,route}){
+const {passageiro,password} = useContext(MyContext);
+    let aP = new AuthPassageiro();
+    const recuperaSenha = async() =>{
+        console.log("chegou aqui")
+        
+        if(senha == '' || confirmSenha == ''){
+            setTexto('Campos vazios')
+        }
+        if(senha == confirmSenha){
+            if(password!=senha){
+                console.log(route.params.id)
+                console.log(passageiro.id)
+             const response = await aP.updateSenhaPassageiro(route.params.id,senha)
+             console.log(response)
+             setTexto("É sua senha atual")
+             navigation.navigate('Login');
+            }
+            if(password==senha){
+             setTexto("É sua senha atual")
+             console.log(texto)
+            }
+         }
+         if(senha != confirmSenha){
+         setTexto("Senhas não conferem")
+         console.log(texto)
+         }
 
+    
+    }
     function changeColor(input){
         if(input == 'senha'){
             setBorderColor('#f00')
@@ -15,7 +45,7 @@ export default function NovaSenha({navigation}){
             setBorderColor2('#f00')
         }
     }
-
+    const [texto,setTexto] = useState("")
     const [senha, setSenha] = useState()
     const [confirmSenha, setConfirmSenha] = useState()
     const [borderColor, setBorderColor] = useState('#7b7b7b')
@@ -114,10 +144,12 @@ export default function NovaSenha({navigation}){
                     onFocus={() => changeColor('confirma')}
                     isFocused
                     />
+                    
+                <Text style={styles.textAviso}>{texto}</Text>
             </View>
             <View style={styles.buttonArea}>
             <TouchableOpacity
-                    onPress={() => navigation.navigate('Login')}>
+                    onPress={recuperaSenha}>
                         <View style={styles.button}>
                         <Text style={styles.textButton}>Entrar</Text>
                         </View>

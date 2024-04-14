@@ -54,7 +54,12 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'#7b7b7b',
         fontWeight:'500'
-    }
+    },textAviso:{
+        color: 'red',
+        fontSize: 20,
+        fontWeight: '500',
+        textAlign:'center'
+    },
 })
 
 export default styles
