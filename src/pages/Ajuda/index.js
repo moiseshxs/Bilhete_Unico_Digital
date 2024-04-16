@@ -72,6 +72,7 @@ export default function Ajuda({ navigation }) {
           <Text style={styles.textSubTitulo}>Como podemos te ajudar?</Text>
         </View>
 
+        <View style={styles.areaPraTudo}>
         <View style={styles.areaInput}>
           <TextInput
             placeholder="Buscar"
@@ -84,6 +85,7 @@ export default function Ajuda({ navigation }) {
             <Ionicons name="search-outline" size={30} color={"black"} />
           </TouchableOpacity>
         </View>
+        
         <FlatList
           data={resultSearchData}
           renderItem={({ item }) => (
@@ -100,6 +102,7 @@ export default function Ajuda({ navigation }) {
           showsHorizontalScrollIndicator={false}
           scrollEnabled={false}
         />
+      </View>
       </View>
 
       <View style={styles.areaDuvidas}>
@@ -143,9 +146,10 @@ export default function Ajuda({ navigation }) {
       </View>
 
       <View style={styles.areaChat}>
-        <View style={styles.BoxsubTituloDuvida}>
+        <View style={styles.areaSubTitulo}>
           <Text style={styles.subTituloDuvida}>Ainda precisa de ajuda?</Text>
         </View>
+        
         <View style={styles.centralizar}>
           <View style={styles.circuloBorda}>
             <TouchableOpacity
