@@ -58,17 +58,7 @@ export default StyleSheet.create({
         flexDirection: 'row'
     
       },
-    input: { 
-        borderWidth: 1,
-        borderRadius: 20,
-        borderColor: '#9B9B9B',
-        marginHorizontal: 10,
-        backgroundColor: 'white',
-        height: Height/16,
-        width: Width/1.4,
-        padding: 10
-    
-      },
+
     linha:{
         borderBottomWidth: 5,
         borderColor: '#d3d3d3', 
@@ -120,4 +110,65 @@ export default StyleSheet.create({
         gap: 20,
         flexDirection: 'column',
     },
+
+
+    areaTitulo: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "red",
+      },
+      textTitulo: {
+        fontSize: 30,
+        fontWeight: "bold",
+      },
+    
+      areaPesquisa: {
+        flex: 2,
+        backgroundColor: "blue",
+      },
+      areaSubTitulo: {
+        flex: 1,
+        paddingHorizontal: 70,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "green",
+      },
+      textSubTitulo: {
+        fontSize: 25,
+        fontWeight: "bold",
+        textAlign: "center",
+      },
+      areaInput: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      input: {
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: "#9B9B9B",
+        marginHorizontal: 10,
+        backgroundColor: "white",
+        height: 40,
+        width: "80%",
+        padding: 10,
+      },
+    
+      areaDuvidas: {
+        flex: 3,
+        backgroundColor: "purple",
+      },
+      areaFrequentes: {
+        flex: 2,
+      },
+    
+      areaChat: {
+        flex: 2,
+        backgroundColor: "pink",
+      },
+      areaNada: {
+        flex: 1,
+      },
 });

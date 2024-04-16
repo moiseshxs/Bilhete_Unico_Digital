@@ -240,7 +240,7 @@ export default function ConfirmarPagamento({ navigation, route }) {
           <View style={styles.modalEdit}>
             <View style={styles.containerModalEdit}>
               <View style={styles.headerModalEdit}>
-                <Text>X</Text>
+                <Text style={styles.textHeaderModal}>Escolha um método de pagamento</Text>
               </View>
               <View style={styles.flexModal}>
                 <View style={styles.flatListContainer}>

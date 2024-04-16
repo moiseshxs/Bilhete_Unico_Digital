@@ -93,8 +93,8 @@ export default StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   containerModalEdit: {
-    flex: 0.3,
-    width: "80%",
+    flex: 0.2,
+    width: "90%",
     backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
@@ -104,12 +104,16 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "red",
+  },
+  textHeaderModal: {
+    color: 'grey',
+    fontSize: 15,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 
   flexModal: {
     flex: 5,
-    backgroundColor: "blue",
     justifyContent: 'center',
     alignItems: 'center',
   },
