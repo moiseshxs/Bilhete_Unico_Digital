@@ -112,7 +112,12 @@ export default function Ajuda({ navigation }) {
 
         <View style={styles.areaFrequentes}>
           <View>
-            <TouchableOpacity style={styles.boxResposta}>
+          <TouchableOpacity style={styles.boxResposta} onPress={() => navigation.navigate("ArtigosBilhete",{
+        id: 3,
+        titulo: 'Como consumir uma passagem?',
+        caminho: 'Início->QrCode',
+        desc: 'Basta acessar a tela de QrCode e aproxima-lo ao leitor de QrCodes de uma catraca',
+        })}>
               <Text style={styles.tituloArtigo}>Como utilizar o QR Code?</Text>
               <View style={styles.respostaDuvida}>
                 <AntDesign name="right" size={20} color="#9b9b9b" />
@@ -121,8 +126,16 @@ export default function Ajuda({ navigation }) {
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style={styles.boxResposta}>
-              <Text style={styles.tituloArtigo}>Como utilizar sensor NFC?</Text>
+             <TouchableOpacity
+              style={styles.boxResposta}
+              onPress={() => navigation.navigate("ArtigosBilhete",{
+                id: 5,
+                titulo: 'Como fazer uma compra com o cartão de crédito?',
+                caminho: 'Início->Carteira',
+                desc: 'Acessando a carteira, basta selecionar o método de pagamento, selecionar a quantidade de passagens para comprar, depois é so verificar as informações e efetuar a compra',
+              })}
+            >
+              <Text style={styles.tituloArtigo}>Como comprar com o cartão de crédito?</Text>
               <View style={styles.respostaDuvida}>
                 <AntDesign name="right" size={20} color="#9b9b9b" />
               </View>
@@ -132,7 +145,12 @@ export default function Ajuda({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.boxResposta}
-              onPress={() => navigation.navigate("ArtigosBilhete")}
+              onPress={() => navigation.navigate("ArtigosBilhete",{
+                id: 1,
+                titulo: 'Como trocar o bilhete selecionado?',
+                caminho: 'Início->Config->Bilhetes->Trocar',
+                desc: 'Na tela de bilhetes, aperte o botão trocar, assim será listado todos seus bilhetes ativos, basta selecionar o de sua preferência',
+              })}
             >
               <Text style={styles.tituloArtigo}>Como trocar de bilhete?</Text>
 
