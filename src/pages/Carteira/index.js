@@ -101,7 +101,7 @@ export default function Carteira() {
         comprasAll[i].image = cartao
         
       }
-      else if(comprasAll[i].descFormaPagamento == 'pix'){
+      else if(comprasAll[i].forma == '2'){
         comprasAll[i].image = pix
       }else{
         comprasAll[i].image = boleto

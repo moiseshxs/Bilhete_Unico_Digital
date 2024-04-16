@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, Image, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, Image, FlatList, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import visa from '../../../../../assets/img/cartao/visa.png';
@@ -28,6 +28,7 @@ export default function Cartao({navigation, route}) {
     const [cartao, setCartao] = useState();
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
+    const [modalEdit, setModalEdit] = useState(false);
     let cP = new CartaoPassageiro();
     
    
@@ -51,7 +52,14 @@ export default function Cartao({navigation, route}) {
             console.error('Erro ao excluir o cartão:', error);
         }
     };
-    
+    const modalId = (id)=>{
+        setIdCartao(id);
+        setModalEdit(true)
+    }
+    const modalDestroy = ()=>{
+        destroyCartao(idCartao)
+        setModalEdit(false)
+    }
 
     const Item = ({ id, numero, bandeira }) => (
         <View>
@@ -61,7 +69,7 @@ export default function Cartao({navigation, route}) {
                     source={bandeira}
                     style={styles.bandeira}
                 />
-                <TouchableOpacity onPress={() => destroyCartao(id)}>
+                <TouchableOpacity onPress={() => modalId(id)}>
                     <Ionicons name="trash-outline" size={30} />
                 </TouchableOpacity>
             </View>
@@ -89,7 +97,23 @@ export default function Cartao({navigation, route}) {
 />
 
             </View>
-
+         <Modal transparent visible={modalEdit}>
+          <View style={styles.modalEdit}>
+            <View style={styles.containerModalEdit}>
+              <View style={styles.headerModalEdit}>
+                <Text style={styles.textHeaderModal}>Deseja apagar este cartão</Text>
+              </View>
+              <View style={styles.boxBotaoModal}>
+                <Pressable  style={styles.botaoModal} onPress={modalDestroy}>
+                    <Text style={styles.textModal}>Sim</Text>
+                </Pressable>
+                <Pressable style={styles.botaoModal} onPress={() => setModalEdit(false)}>
+                    <Text style={styles.textModal}>Não</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
                     <TouchableOpacity onPress={() => navigation.navigate('RegistrarCartao')}>
