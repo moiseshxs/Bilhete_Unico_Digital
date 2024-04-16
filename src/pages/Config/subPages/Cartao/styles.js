@@ -49,4 +49,52 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 20,
     },
+    modalEdit: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      },
+      containerModalEdit: {
+        flex: 0.2,
+        width: "90%",
+        backgroundColor: "#fff",
+        padding: 10,
+        borderRadius: 10,
+      },
+      headerModalEdit: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      textHeaderModal: {
+        color: 'grey',
+        fontSize: 15,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+    
+      flexModal: {
+        flex: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      textModal:{
+        color: 'black',
+        fontSize: 10,
+        fontWeight: 'bold',
+      },
+      botaoModal:{
+        flex: 0.2,
+        borderWidth: 2,
+        borderColor: 'black',
+      },
+      boxBotaoModal:{
+        flex: 2,
+        borderWidth: 2,
+        flexDirection:'row',
+        borderColor: 'black',
+        justifyContent: 'space-evenly',
+        alignItems:'center'
+      }
 });
