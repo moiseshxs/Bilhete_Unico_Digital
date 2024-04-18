@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import {
   Text,
   View,
   SafeAreaView,
   FlatList,
+  Modal,
   TextInput,
   TouchableOpacity,
 } from "react-native";
@@ -15,6 +16,15 @@ import search from "../../Controllers/Ajuda";
 import styles from "./styles";
 
 export default function Ajuda({ navigation }) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isModalVisible) {
+      inputRef.current.focus();
+    }
+  }, [isModalVisible]);
+
   const [filtro, setFiltro] = useState("");
   const [result, setResult] = useState([]);
   const { token } = useContext(MyContext);
@@ -73,36 +83,63 @@ export default function Ajuda({ navigation }) {
         </View>
 
         <View style={styles.areaPraTudo}>
-        <View style={styles.areaInput}>
-          <TextInput
+          <View style={styles.areaInput}>
+            <TouchableOpacity style={styles.fakeInput} onPress={() => setIsModalVisible(true)}>
+              <Ionicons name="search-outline" size={20} color={"grey"} />
+              <Text style={styles.fakeInputText}>Buscar duvida</Text>
+            </TouchableOpacity>
+
+
+
+            <Modal
+              visible={isModalVisible}
+              animationType='slide'
+              presentationStyle='overFullScreen'
+              onShow={() => {
+                inputRef.current.focus();
+              }}
+            >
+              <View style={styles.areaModal}>
+                <View style={styles.areaModalHeader}>
+                  <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                    <Ionicons name='chevron-back-outline' size={28} color='black' />
+                  </TouchableOpacity>
+                  <TextInput
+                    style={styles.input}
+                    ref={inputRef}
+                    placeholder='Qual sua dúvida?'
+                    value={filtro}
+                    onChangeText={(texto) => setFiltro(texto)}
+                  />
+                </View>
+                {/* {<TextInput
             placeholder="Buscar"
             value={filtro}
             onChangeText={(texto) => setFiltro(texto)}
             style={styles.input}
-          ></TextInput>
-
-          <TouchableOpacity>
-            <Ionicons name="search-outline" size={30} color={"black"} />
-          </TouchableOpacity>
+          ></TextInput>} */}
+                <View style={styles.areaModalCorpo}>
+                  <FlatList
+                    data={resultSearchData}
+                    renderItem={({ item }) => (
+                      <ResultSearch
+                        id={item.id}
+                        tituloAjuda={item.tituloAjuda}
+                        caminhoAjuda={item.caminhoAjuda}
+                        descAjuda={item.descAjuda}
+                      />
+                    )}
+                    keyExtractor={(item) => item.id}
+                    showsVerticalScrollIndicator={false}
+                    horizontal={false}
+                    showsHorizontalScrollIndicator={false}
+                    scrollEnabled={false}
+                  />
+                </View>
+              </View>
+            </Modal>
+          </View>
         </View>
-        
-        <FlatList
-          data={resultSearchData}
-          renderItem={({ item }) => (
-            <ResultSearch
-              id={item.id}
-              tituloAjuda={item.tituloAjuda}
-              caminhoAjuda={item.caminhoAjuda}
-              descAjuda={item.descAjuda}
-            />
-          )}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          horizontal={false}
-          showsHorizontalScrollIndicator={false}
-          scrollEnabled={false}
-        />
-      </View>
       </View>
 
       <View style={styles.areaDuvidas}>
@@ -112,12 +149,12 @@ export default function Ajuda({ navigation }) {
 
         <View style={styles.areaFrequentes}>
           <View>
-          <TouchableOpacity style={styles.boxResposta} onPress={() => navigation.navigate("ArtigosBilhete",{
-        id: 3,
-        titulo: 'Como consumir uma passagem?',
-        caminho: 'Início->QrCode',
-        desc: 'Basta acessar a tela de QrCode e aproxima-lo ao leitor de QrCodes de uma catraca',
-        })}>
+            <TouchableOpacity style={styles.boxResposta} onPress={() => navigation.navigate("ArtigosBilhete", {
+              id: 3,
+              titulo: 'Como consumir uma passagem?',
+              caminho: 'Início->QrCode',
+              desc: 'Basta acessar a tela de QrCode e aproxima-lo ao leitor de QrCodes de uma catraca',
+            })}>
               <Text style={styles.tituloArtigo}>Como utilizar o QR Code?</Text>
               <View style={styles.respostaDuvida}>
                 <AntDesign name="right" size={20} color="#9b9b9b" />
@@ -126,9 +163,9 @@ export default function Ajuda({ navigation }) {
             </TouchableOpacity>
           </View>
           <View>
-             <TouchableOpacity
+            <TouchableOpacity
               style={styles.boxResposta}
-              onPress={() => navigation.navigate("ArtigosBilhete",{
+              onPress={() => navigation.navigate("ArtigosBilhete", {
                 id: 5,
                 titulo: 'Como fazer uma compra com o cartão de crédito?',
                 caminho: 'Início->Carteira',
@@ -145,7 +182,7 @@ export default function Ajuda({ navigation }) {
           <View>
             <TouchableOpacity
               style={styles.boxResposta}
-              onPress={() => navigation.navigate("ArtigosBilhete",{
+              onPress={() => navigation.navigate("ArtigosBilhete", {
                 id: 1,
                 titulo: 'Como trocar o bilhete selecionado?',
                 caminho: 'Início->Config->Bilhetes->Trocar',
@@ -167,7 +204,7 @@ export default function Ajuda({ navigation }) {
         <View style={styles.areaSubTitulo}>
           <Text style={styles.subTituloDuvida}>Ainda precisa de ajuda?</Text>
         </View>
-        
+
         <View style={styles.centralizar}>
           <View style={styles.circuloBorda}>
             <TouchableOpacity
