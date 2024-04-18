@@ -60,7 +60,7 @@ export default function Ajuda({ navigation }) {
           titulo: tituloAjuda,
           caminho: caminhoAjuda,
           desc: descAjuda,
-        })
+        }, setIsModalVisible(false))
       }
     >
       <View style={styles.boxAjuda}>

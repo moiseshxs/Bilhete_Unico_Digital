@@ -23,25 +23,24 @@ const DATA = [
     },
 ];
 
-export default function Cartao({navigation, route}) {
-    
+export default function Cartao({ navigation, route }) {
+
     const [cartao, setCartao] = useState();
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
     const [modalEdit, setModalEdit] = useState(false);
     let cP = new CartaoPassageiro();
-    
-   
+
     useEffect(() => {
         const getCartoesPassageiro = async () => {
             const response = await cP.getCartaoPassageiro(passageiro.id, token)
             setCartao(response)
-        } 
-    
+        }
+
         getCartoesPassageiro();
         navigation.setParams({ novoCartaoAdicionado: false })
-    },[route.params?.novoCartaoAdicionado]);
-    
+    }, [route.params?.novoCartaoAdicionado]);
+
 
     const destroyCartao = async (id) => {
         try {
@@ -52,11 +51,11 @@ export default function Cartao({navigation, route}) {
             console.error('Erro ao excluir o cartão:', error);
         }
     };
-    const modalId = (id)=>{
+    const modalId = (id) => {
         setIdCartao(id);
         setModalEdit(true)
     }
-    const modalDestroy = ()=>{
+    const modalDestroy = () => {
         destroyCartao(idCartao)
         setModalEdit(false)
     }
@@ -75,45 +74,45 @@ export default function Cartao({navigation, route}) {
             </View>
         </View>
     );
-    
-    
-    
+
+
+
 
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.areaCartoes}>
-            <FlatList
-    data={cartao}
-    renderItem={({ item }) => (
-        <Item 
-            id={item.id}
-            numero={item.numeroCartao} 
-            bandeira={item.bandeira} 
-        />
-    )}
-    keyExtractor={item => item.id.toString()}
-    showsVerticalScrollIndicator={false}
-/>
+                <FlatList
+                    data={cartao}
+                    renderItem={({ item }) => (
+                        <Item
+                            id={item.id}
+                            numero={item.numeroCartao}
+                            bandeira={item.bandeira}
+                        />
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                    showsVerticalScrollIndicator={false}
+                />
 
             </View>
-         <Modal transparent visible={modalEdit}>
-          <View style={styles.modalEdit}>
-            <View style={styles.containerModalEdit}>
-              <View style={styles.headerModalEdit}>
-                <Text style={styles.textHeaderModal}>Deseja apagar este cartão</Text>
-              </View>
-              <View style={styles.boxBotaoModal}>
-                <Pressable  style={styles.botaoModal} onPress={modalDestroy}>
-                    <Text style={styles.textModal}>Sim</Text>
-                </Pressable>
-                <Pressable style={styles.botaoModal} onPress={() => setModalEdit(false)}>
-                    <Text style={styles.textModal}>Não</Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
-        </Modal>
+            <Modal transparent visible={modalEdit}>
+                <View style={styles.modalEdit}>
+                    <View style={styles.containerModalEdit}>
+                        <View style={styles.headerModalEdit}>
+                            <Text style={styles.textHeaderModal}>Deseja excluir este cartão?</Text>
+                        </View>
+                        <View style={styles.boxBotaoModal}>
+                            <Pressable style={styles.botaoModal} onPress={() => setModalEdit(false)}>
+                                <Text style={styles.textModal}>Não</Text>
+                            </Pressable>
+                            <Pressable style={[styles.botaoModal, styles.botaoModalSim]} onPress={modalDestroy}>
+                                <Text style={[styles.textModal, styles.textModalSim]}>Excluir</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
                     <TouchableOpacity onPress={() => navigation.navigate('RegistrarCartao')}>

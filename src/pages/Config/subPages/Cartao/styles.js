@@ -49,52 +49,65 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 20,
     },
+
+    //MODAL STYLE
     modalEdit: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-      },
-      containerModalEdit: {
-        flex: 0.2,
-        width: "90%",
-        backgroundColor: "#fff",
-        padding: 10,
-        borderRadius: 10,
-      },
-      headerModalEdit: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      },
-      textHeaderModal: {
-        color: 'grey',
-        fontSize: 15,
-        fontWeight: 'bold',
-        textAlign: 'center',
-      },
-    
-      flexModal: {
-        flex: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      textModal:{
-        color: 'black',
-        fontSize: 10,
-        fontWeight: 'bold',
-      },
-      botaoModal:{
-        flex: 0.2,
-        borderWidth: 2,
-        borderColor: 'black',
-      },
-      boxBotaoModal:{
-        flex: 2,
-        borderWidth: 2,
-        flexDirection:'row',
-        borderColor: 'black',
-        justifyContent: 'space-evenly',
-        alignItems:'center'
-      }
+      flex: 1,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    containerModalEdit: {
+      flex: 0.3,
+      width: "100%",
+      backgroundColor: "#fff",
+      padding: 10,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+    },
+    headerModalEdit: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    textHeaderModal: {
+      color: 'grey',
+      fontSize: 15,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+  
+    flexModal: {
+      flex: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    textModal:{
+      color: 'red',
+      fontSize: 15,
+      fontWeight: 'bold',
+    },
+    botaoModal:{
+      height: 40,
+      width: 110,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 20,
+      borderWidth: 2,
+      borderColor: 'red',
+    },
+    botaoModalSim: {
+      backgroundColor: 'red',
+      borderWidth: 0,
+    },
+    textModalSim:{
+      color:'white',
+    },
+    boxBotaoModal:{
+      flex: 3,
+      flexDirection:'row',
+      borderColor: 'black',
+      justifyContent: 'space-evenly',
+      alignItems:'center'
+    }
 });
