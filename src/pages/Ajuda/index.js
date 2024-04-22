@@ -65,7 +65,7 @@ export default function Ajuda({ navigation }) {
     >
       <View style={styles.boxAjuda}>
         <View style={styles.boxTituloAjuda}>
-          <Text style={styles.tituloArtigo}>{tituloAjuda}</Text>
+          <Text style={styles.tituloArtigoP}>{tituloAjuda}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -202,7 +202,7 @@ export default function Ajuda({ navigation }) {
 
       <View style={styles.areaChat}>
         <View style={styles.areaSubTitulo}>
-          <Text style={styles.subTituloDuvida}>Ainda precisa de ajuda?</Text>
+          <Text style={styles.textSubTitulo}>Ainda precisa de ajuda?</Text>
         </View>
 
         <View style={styles.centralizar}>

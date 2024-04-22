@@ -48,11 +48,18 @@ export default StyleSheet.create({
     padding: Width / 38,
     borderBottomWidth: 1,
     borderColor: '#d3d3d3',
+    paddingVertical: 10,
+  },
 
+  tituloArtigoP: {
+    color: '#000',
+    fontWeight: 'bold',
+    fontSize: 15,
   },
 
   tituloArtigo: {
-    color: '#9b9b9b'
+    color: '#9b9b9b',
+    textAlign: 'center',
   },
 
   boxTituloAjuda: {
@@ -172,17 +179,19 @@ export default StyleSheet.create({
   },
   text: {
     color: 'black',
+    fontSize: 10,
   },
   input: {
     borderWidth: 1,
     backgroundColor: '#fbfbfb',
     borderColor: 'black',
     width: '90%',
-    height: 40,
+    height: 35,
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 5,
-    fontSize: 18,
+    fontSize: 15,
+    fontWeight: '600',
   },
 
   areaModalCorpo: {

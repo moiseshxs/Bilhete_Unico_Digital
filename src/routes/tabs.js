@@ -22,20 +22,13 @@ export default function TabRoutes() {
 
       tabBarStyle: {
       position: 'absolute',
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(255,255,255, 0.9)',
       tabBarLabelPosition: 'below-icon',
       paddingBottom: 3,
       bottom: 20,
       marginHorizontal: 70,
       borderWidth: 0,
       borderRadius: 50,
-
-      shadowColor: '#000',
-      shadowOpacity: 0.10,
-      shadowOffset: {
-        width: 0,
-        height: 0,
-      }
       }}}>
       <Tab.Screen 
         name='Home'

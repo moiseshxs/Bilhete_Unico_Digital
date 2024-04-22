@@ -2,7 +2,10 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import Passagem from '../../../../Controllers/Passagem';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import BilletElement from './partials/billetElement';
 import MyContext from '../../../../Context/context';
 import Loading from '../../../Loading';
@@ -82,20 +85,21 @@ export default function Bilhete({navigation, route}) {
                 <View style={styles.button}>
                     <TouchableOpacity
                     onPress={() => navigation.navigate('ListaBilhetes')}>
-                    <Ionicons
-                    size={50}
-                    name='arrow-undo-outline'
-                    style={{padding:10, backgroundColor:'#d3d3d3',textAlign:'center', width:75,height:75,  borderRadius: 100}}/>
+                    
+                    <FontAwesome
+                    size={35}
+                    name="undo"
+                    style={{padding:10, backgroundColor:'#d3d3d3', textAlign: 'center', alignContent: 'center', width:75,height:75,  borderRadius: 100}}/>
                     </TouchableOpacity>
                     <Text style={styles.legend}>Trocar</Text>
                 </View>
                 <View style={styles.button}>
                 <TouchableOpacity
                 onPress={() => navHome(bilhete)}>    
-                <Ionicons
-                    size={50}
-                    name='checkmark-outline'
-                    style={{padding:10, backgroundColor:'#d3d3d3', width:75,textAlign:'center',height:75,  borderRadius: 100}}/>
+                <Feather
+                    size={35}
+                    name='check'
+                    style={{padding:10, backgroundColor:'#d3d3d3', width:75,textAlign:'center', alignContent: 'center', height:75,  borderRadius: 100}}/>
                 </TouchableOpacity>
                     <Text style={styles.legend}>Usar</Text>
                 </View>
