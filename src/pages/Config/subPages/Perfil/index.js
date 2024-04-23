@@ -5,6 +5,7 @@ import Cassio from '../../../../../assets/img/home/homem.jpg'
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import MyContext from '../../../../Context/context';
+import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 export default function Perfil({navigation}) {
     
     
@@ -50,6 +51,9 @@ export default function Perfil({navigation}) {
         })
         if(!response.canceled) {
             setFile(response.assets[0].uri);
+            console.log(file)
+            let p = new AuthPassageiro()
+            await p.colocaImagem(file);
         }
     }
 

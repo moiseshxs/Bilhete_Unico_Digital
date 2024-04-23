@@ -114,6 +114,28 @@ async requireCodEmailRecuperar(forma:string,dado:string)
         return false
       }
   }
+
+  async colocaImagem(arquivo:string)
+  {
+    console.log(arquivo);
+      const filename = arquivo.substring(arquivo.lastIndexOf('/') + 1, arquivo.length);
+      
+      const tipoArquivo = filename.split('.')[1];
+      let form = new FormData();
+      form.append('file', JSON.parse(JSON.stringify({
+          name: filename,
+          uri: arquivo,
+          type: 'image/' +tipoArquivo
+      })));
+
+      try {
+        const reponse = await this.api.post(`/insertFoto/${1}`, form);
+        console.log(reponse.data);
+      } catch(e) {
+        console.error("Erro ao enviar imagem parceiro")
+      }
+      
+  }
 }
 
 
