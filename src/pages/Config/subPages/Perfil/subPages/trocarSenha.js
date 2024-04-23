@@ -36,14 +36,14 @@ const {passageiro,password} = useContext(MyContext);
 
     let aP = new AuthPassageiro();
     const updateSenha = async() =>{
-    if(senha == '' || confirmSenha == ''){
+    if(newPassword == '' || passwordConfirm == ''){
             setTexto('Campos vazios')
     }
     if(password == senhaAtual){
         if(newPassword=== passwordConfirm){
            if(password!=newPassword){
             console.log(passageiro.id)
-            const response = await aP.updateSenhaPassageiro(passageiro.id,password)
+            const response = await aP.updateSenhaPassageiro(passageiro.id,newPassword)
             console.log(response)
             setTexto("É sua senha atual")
             navigation.navigate('Home');

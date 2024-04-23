@@ -3,7 +3,7 @@ import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking} from
 import styles from './styles';
 import Cassio from '../../../../../assets/img/home/homem.jpg'
 import { Ionicons } from '@expo/vector-icons';
-import { launchImageLibrary } from "react-native-image-picker";
+import * as ImagePicker from 'expo-image-picker';
 import MyContext from '../../../../Context/context';
 export default function Perfil({navigation}) {
     
@@ -16,31 +16,42 @@ export default function Perfil({navigation}) {
         navigation.navigate('TrocarSenha')
     }
 
-    const handleChoosePhoto = () => {
-        const options = {
-          noData: true,
-          title: "Foto de avaliação",
-          takePhotoButtonTitle: "Escolha uma foto",
-          chooseFromLibraryButtonTitle: "Selecione da galeria uma foto",
-          selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
-        };
+    // const handleChoosePhoto = () => {
+    //     const options = {
+    //       noData: true,
+    //       title: "Foto de avaliação",
+    //       takePhotoButtonTitle: "Escolha uma foto",
+    //       chooseFromLibraryButtonTitle: "Selecione da galeria uma foto",
+    //       selectionLimit: 1, // Se deixar 1, será permitido apenas uma foto e 0 várias
+    //     };
     
-        launchImageLibrary(options, async (response) => {
-          if (response.didCancel) {
-            console.log("Usuário cancelou a seleção");
-          } else if (response.error) {
-            console.log("Ocorreu um erro.");
-          } else {
-            const photoFile = {
-              uri: asset.uri,
-              name: asset.fileName,
-              type: "image/jpeg",
-            };
+    //     launchImageLibrary(options, async (response) => {
+    //       if (response.didCancel) {
+    //         console.log("Usuário cancelou a seleção");
+    //       } else if (response.error) {
+    //         console.log("Ocorreu um erro.");
+    //       } else {
+    //         const photoFile = {
+    //           uri: asset.uri,
+    //           name: asset.fileName,
+    //           type: "image/jpeg",
+    //         };
     
-            setFile(photoFile);
-          }
-        });
-      };
+    //         setFile(photoFile);
+    //       }
+    //     });
+    //   };
+    const pickImage = async() => {
+        let response = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4,4],
+            quality: 1
+        })
+        if(!response.canceled) {
+            setFile(response.assets[0].uri);
+        }
+    }
 
 
 
@@ -50,10 +61,10 @@ export default function Perfil({navigation}) {
             <View style={styles.fotoArea}>
                 <View style={styles.fotoPlace}>
                     <Image
-                    source={Cassio}
+                    source={file}
                     style={styles.foto}/>
                     <TouchableOpacity style={styles.icon}
-                    onPress={() => handleChoosePhoto}>
+                    onPress={() => pickImage()}>
                     <Ionicons
                     name='camera'
                     size={30}
