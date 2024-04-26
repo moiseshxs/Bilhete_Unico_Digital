@@ -80,19 +80,19 @@ export default function Perfil({navigation}) {
             <View style={styles.infosArea}>
                 <View style={styles.alterarArea}>
                     <View>
-                    <Text style={{fontSize:20}}>Dados Pessoais</Text>
+                    <Text style={{fontSize:24, fontWeight:'bold'}}>Dados Pessoais</Text>
                     </View>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                     onPress={() => setModal(true)}>
                     <Ionicons
                     name='create'
                     size={30}/>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <View style={styles.infos}>
                     
                     <View style={styles.infoController}>
-                        <Text style={styles.title}>Nome completo</Text>
+                        <Text style={styles.title}>Nome</Text>
                         <Text style={styles.desc}>{passageiro.nomePassageiro}</Text>
                     </View>
                     <View style={styles.infoController}>
@@ -109,19 +109,7 @@ export default function Perfil({navigation}) {
                     </View>
                 </View>
             </View>
-            <View style={styles.dashArea}>
-                <View style={styles.dashController}>              
-                    <View style={styles.quadrado}>
-                        <Text style={styles.acao}>Consumos</Text>
-                        <Text style={styles.numero}>{passagens.qtdConsumos}</Text>
-                    </View>
-                    <View style={styles.quadrado}>
-                        <Text style={styles.acao}>Compras</Text>
-                        <Text style={styles.numero}>{compras.qtdCompras}</Text>
-                    </View>
-                </View>
-
-            </View>
+           
 
 
             <Modal

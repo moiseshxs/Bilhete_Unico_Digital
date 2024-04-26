@@ -28,19 +28,25 @@ export default StyleSheet.create({
         fontWeight: 'bold',
     },
     areaPassagens:{
-        flex: 1,
+        flex: 1.7,
         flexDirection: 'row',
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: 'thistle',
+        backgroundColor:'#FF0000', 
+        borderRadius:'15px',
+        marginHorizontal:'22px',
+        marginVertical:'18px',
+        height:'100%'
 
     },
     areaEsq:{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRightWidth: 1,
-        borderColor: 'thistle',
+        borderRightWidth: 3,
+        borderColor: 'white',
+        marginVertical:'10px'
     },
     areaDir:{
         flex: 1,
@@ -49,10 +55,12 @@ export default StyleSheet.create({
     },
     textPassagens:{
         fontSize: 15,
+        color:'white',
+        fontWeight: 'bold'
     },
     numPassagens:{
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 32,
+        color:'white'
     },
 
 
@@ -65,7 +73,7 @@ export default StyleSheet.create({
         backgroundColor: '',
         paddingVertical: 20,
         borderBottomWidth: 1,
-        borderColor: "thistle",
+        borderColor: "#FF0000",
         justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems: 'center',

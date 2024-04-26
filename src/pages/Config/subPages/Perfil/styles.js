@@ -40,65 +40,37 @@ export default StyleSheet.create({
         width:'90%',
         borderColor:'#7b7b7b',
         flexDirection:'row',
-        justifyContent:'space-between',
         alignItems:'center',
-        borderBottomWidth:2,
+        justifyContent:'center'
+    
     },
     infos:{
-        height:'78%',
+        height:'100%',
         width:'95%',
-        borderColor:'#7b7b7b',
-        borderWidth:2,
-        borderRadius:25,
         justifyContent:'center',
         alignItems:'center',
-        gap:5,
-        
     },
     infoController:{
         width:'90%',
         height:'20%',
-        flexDirection:'column',
+        flexDirection:'row',
         justifyContent:'flex-start',
-    },
-    dashArea:{
-        width:'100%',
-        height:'20%',
-        justifyContent:'center',
         alignItems:'center',
+        borderBottomWidth:1,
+        borderColor:'#FF0000',
+        paddingVertical:30,
     },
-    dashController:{
-       width:'80%',
-       flexDirection:'row',
-       height:'100%',
-       justifyContent:'space-around',
-       alignItems:'center',
-    },
+   
     title:{
-        fontSize:16,
-        fontWeight:'500',
+        fontSize:20,
+        fontWeight:'bold',
     },
     desc:{
-        fontSize:14,
-        color:'#7b7b7b'
-    },
-    quadrado:{
-        justifyContent:'center',
-        alignItems:'center',
-        height:'70%',
-        width:'40%',
-        borderWidth:2,
-        borderColor:'#7b7b7b',
-        borderRadius:25,
-        gap:8,
-    },
-    acao:{
-        fontSize:18,
-    },
-    numero:{
         fontSize:16,
-        fontWeight:'700'
+        color:'#7b7b7b',
+        paddingHorizontal:30
     },
+
     modal:{
         margin: 0,
         display: 'flex',
