@@ -51,9 +51,10 @@ export default function Perfil({navigation}) {
         })
         if(!response.canceled) {
             setFile(response.assets[0].uri);
-            console.log(file)
+            console.log(response)
+            console.log(response.assets[0].uri)
             let p = new AuthPassageiro()
-            await p.colocaImagem(file);
+            await p.colocaImagem(response.assets[0].uri);
         }
     }
 

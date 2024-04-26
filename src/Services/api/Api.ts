@@ -4,7 +4,7 @@ import axios from "axios";
 export default class Api{
   //127.0.0.1:9000
   //0.tcp.sa.ngrok.io:
-    baseUrl: string = ' http://127.0.0.1:9000/api/';
+    baseUrl: string = ' http://0.tcp.sa.ngrok.io:12588/api/';
     api;
     config;
     token;
@@ -13,7 +13,8 @@ export default class Api{
         this.api = axios.create({
             baseURL: this.baseUrl,
             headers: { Accept:'application/json',
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+            
             
                }
         });
