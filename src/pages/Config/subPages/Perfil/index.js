@@ -6,12 +6,13 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import MyContext from '../../../../Context/context';
 import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
+import User from '../../../../../assets/img/global/defaultUser.png'
 export default function Perfil({navigation}) {
     
     
     const [file, setFile] = useState();
     const [modal, setModal] =useState(false);
-    const{passageiro, compras, passagens} = useContext(MyContext)
+    const{passageiro, setPassageiro, url} = useContext(MyContext)
     const trocarSenha = () =>{
         setModal(false)
         navigation.navigate('TrocarSenha')
@@ -53,7 +54,8 @@ export default function Perfil({navigation}) {
             setFile(response.assets[0].uri);
             console.log(file)
             let p = new AuthPassageiro()
-            await p.colocaImagem(file);
+           let resp = await p.colocaImagem(response.assets[0].uri);
+           setPassageiro(resp)
         }
     }
 
@@ -65,7 +67,7 @@ export default function Perfil({navigation}) {
             <View style={styles.fotoArea}>
                 <View style={styles.fotoPlace}>
                     <Image
-                    source={file}
+                    source={passageiro.fotoPassageiro != null ? {uri: url + passageiro.fotoPassageiro} : User}
                     style={styles.foto}/>
                     <TouchableOpacity style={styles.icon}
                     onPress={() => pickImage()}>
@@ -107,6 +109,9 @@ export default function Perfil({navigation}) {
                         <Text style={styles.title}>CPF</Text>
                         <Text style={styles.desc}>{passageiro.cpfPassageiro}</Text>
                     </View>
+                   
+                        
+                  
                 </View>
             </View>
            

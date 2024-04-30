@@ -121,7 +121,9 @@ async requireCodEmailRecuperar(forma:string,dado:string)
       const filename = arquivo.substring(arquivo.lastIndexOf('/') + 1, arquivo.length);
       
       const tipoArquivo = filename.split('.')[1];
+      
       let form = new FormData();
+      
       form.append('file', JSON.parse(JSON.stringify({
           name: filename,
           uri: arquivo,
@@ -129,10 +131,12 @@ async requireCodEmailRecuperar(forma:string,dado:string)
       })));
 
       try {
-        const reponse = await this.api.post(`/insertFoto/${1}`, form);
+        const reponse = await this.api.post(`/insertFoto/${1}`, form, {headers: {'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data'}});
         console.log(reponse.data);
+        return reponse.data.passageiro
       } catch(e) {
-        console.error("Erro ao enviar imagem parceiro")
+       return  e.message
       }
       
   }

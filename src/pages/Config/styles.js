@@ -34,7 +34,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: 'thistle',
         backgroundColor:'#FF0000', 
-        borderRadius:'15px',
+        borderRadius:25,
         marginHorizontal:'22px',
         marginVertical:'18px',
         height:'100%'

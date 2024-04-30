@@ -15,6 +15,7 @@ export default function App(){
   const[token, setToken] = useState('')
   const[troca, setTroca] = useState(false)
   const[password, setPassword] = useState('')
+  const[url, setUrl] = useState("http://0.tcp.sa.ngrok.io:19637/storage/")
   return(
     <MyContext.Provider value={
       { 
@@ -31,7 +32,8 @@ export default function App(){
         troca,
         setTroca,
         password,
-        setPassword
+        setPassword,
+        url
       }
       }>
       <Routes />

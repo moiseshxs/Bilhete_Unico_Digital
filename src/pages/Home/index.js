@@ -10,7 +10,7 @@ import { useContext, useEffect, useState } from 'react';
 import styles from './styles';
 import MyContext from '../../Context/context';
 import Passagem from '../../Controllers/Passagem';
-import Passageiro from '../../Services/api/Passageiro';
+import User from '../../../assets/img/global/defaultUser.png'
 import Loading from '../Loading';
 
 
@@ -46,7 +46,7 @@ export default function Home()  {
 
 
 
-  const {passageiro, bilhete, passagens, setPassagens, setCompras, token, troca, setTroca} = useContext(MyContext)
+  const {passageiro, bilhete, passagens, setPassagens, url, token, troca, setTroca} = useContext(MyContext)
   const[DATA, setDATA] = useState('')
   const[integracao, setintegracao] = useState(false)
   const[loading, setLoading] = useState(false)
@@ -237,7 +237,7 @@ export default function Home()  {
           <View style={styles.nav}>
             <View style={styles.perfil}>
             <Image
-              source={require('../../../assets/img/home/homem.jpg')}
+              source={passageiro.fotoPassageiro != null ? {uri: url + passageiro.fotoPassageiro} : User}
               style={styles.fotoPerfil}
             />
               <Text numberOfLines={1} style={styles.nomePerfil}>Bom dia, {passageiro.nomePassageiro}</Text>

@@ -58,7 +58,7 @@ export default StyleSheet.create({
         alignItems:'center',
         borderBottomWidth:1,
         borderColor:'#FF0000',
-        paddingVertical:30,
+        // paddingVertical:30,
     },
    
     title:{

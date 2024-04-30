@@ -1,14 +1,19 @@
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import Une from '../../../../../../assets/img/bilhete/UNElogo.png'
+import MyContext from "../../../../../Context/context";
 import Uee from '../../../../../../assets/img/bilhete/UEElogo.png'
 import Anpg from '../../../../../../assets/img/bilhete/ANPGlogo.png'
 import Ubes from '../../../../../../assets/img/bilhete/UBESlogo.png'
 import Umes from '../../../../../../assets/img/bilhete/UMESlogo.jpg'
-import Cassio from '../../../../../../assets/img/home/homem.jpg'
+import User from '../../../../../../assets/img/global/defaultUser.png'
 import Ano from '../../../../../../assets/img/bilhete/anoBilhete.png'
+import { useContext } from "react";
 
 
 export default function BilheteElement(props) {
+
+    const{url, passageiro} = useContext(MyContext)
+
     let lista = props.lista
     let tipoBilhete = props.tipoBilhete
     let gratuidadeBilhete = props.gratuidadeBilhete
@@ -46,7 +51,7 @@ export default function BilheteElement(props) {
             <View style={styles.fotoInfo}>
                 <View style={styles.fotoArea}>
                     <Image
-                        source={Cassio}
+                        source={ passageiro.fotoPassageiro != null ? {uri: url + passageiro.fotoPassageiro} : User }
                         style={styles.foto} />
                 </View>
                 <View style={styles.infoArea}>

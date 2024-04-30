@@ -6,10 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import MyContext from '../../Context/context';
 import Compra from '../../Controllers/Compra';
+import User from  '../../../assets/img/global/defaultUser.png'
 
 export default function Config() {
     const navigation = useNavigation();
-    const{passageiro, compras, passagens, bilhete, token} = useContext(MyContext);
+    const{passageiro, compras, passagens, bilhete, token, url} = useContext(MyContext);
     const[loading, setLoading] = useState(false)
     const[countCompra,setCountCompra] = useState('')
 
@@ -34,7 +35,7 @@ export default function Config() {
         <SafeAreaView style={styles.container}>
             <View style={styles.areaImagem}>
                 <Image 
-                    source={require('../../../assets/img/home/homem.jpg')} 
+                    source={passageiro.fotoPassageiro != null ? {uri: url + passageiro.fotoPassageiro} : User} 
                     style={styles.imagem}
                 />
                 <Text style={styles.nomeUsuario}>{passageiro.nomePassageiro}</Text>
