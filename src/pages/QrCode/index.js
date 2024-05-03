@@ -49,7 +49,7 @@ export default function QrCode() {
                 
             <Pressable style={styles.areaQrcode} onPress={() => consumir()}>
                 <Image 
-                    source={require('../../../assets/img/qrcode/qrcode.png')} 
+                    source={bilhete.qrCodeBilhete == 'pendente' ? require('../../../assets/img/qrcode/qrcode.png') : {uri: bilhete.qrCodeBilhete}} 
                     style={styles.qrcode}
                 />
             </Pressable>
