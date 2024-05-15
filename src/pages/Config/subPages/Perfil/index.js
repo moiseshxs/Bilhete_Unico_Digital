@@ -11,7 +11,7 @@ export default function Perfil({navigation}) {
     
     
     const [file, setFile] = useState();
-    const [modal, setModal] =useState(false);
+    const [modal, setModal] =useState(true);
     const{passageiro, setPassageiro, url} = useContext(MyContext)
     const trocarSenha = () =>{
         setModal(false)

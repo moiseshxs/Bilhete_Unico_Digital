@@ -8,16 +8,21 @@ import Logo from '../../../assets/img/logo/logovermelha.png'
 import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import MyContext from '../../Context/context';
 import Loading from '../Loading';
+import ModalErro from '../../components/ModalErro';
 
 
 export default function Login({navigation}) {
     
     const authP = new AuthPassageiro()
+
+    
     //Uso do context para ter acesso aos estados globais
     const{setPassageiro, setToken,setPassword} = useContext(MyContext) 
-
+    
     //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
+    const[modalErro, setModalErro] = useState('')
+    console.log(modalErro)
     //estado de loading
     const[loading, setLoading] = useState(false)
     //função para chamar a função de consumo da api para fazer login
@@ -35,7 +40,7 @@ export default function Login({navigation}) {
             
 
             if(!response){
-                setError("Falha ao carregar informações!")
+                setError(404)
                 setLoading(false)
                 return false
             }
@@ -86,8 +91,9 @@ export default function Login({navigation}) {
               
             //resposta false
             }else{
-                setError("Erro ao carregar informações")
-                setLoading(false)
+            
+                <ModalErro error={modalErro} />
+
             }
         }
         }

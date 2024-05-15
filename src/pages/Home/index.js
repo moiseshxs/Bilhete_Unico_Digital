@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, FlatList, ScrollView, SafeAreaView, StatusBar, TouchableOpacity, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {DotIndicator } from 'react-native-indicators'
-
+import ModalErro from '../../components/ModalErro';
 import { useContext, useEffect, useState } from 'react';
 import styles from './styles';
 import MyContext from '../../Context/context';
@@ -274,7 +274,7 @@ export default function Home()  {
           </View>
         </View>
         : loading ? <DotIndicator color='#f00' count={3} size={16} /> :  null}
-
+<ModalErro/>
 
         <View style={[styles.atividades, integracao? styles.atividadesIntegracao : styles.atividadesSemIntegracao]}>
           <Text style={styles.titulo}>Atividades</Text>

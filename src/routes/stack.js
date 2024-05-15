@@ -228,7 +228,7 @@ const navigation = useNavigation();
           title: 'TrocarSenha',
           headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
-          headerShown: false,
+          headerShown: true,
         }}
       /> 
        <Stack.Screen
