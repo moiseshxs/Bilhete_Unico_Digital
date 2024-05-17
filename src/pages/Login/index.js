@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Modal, Dimensions} from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
@@ -14,15 +14,14 @@ import ModalErro from '../../components/ModalErro';
 export default function Login({navigation}) {
     
     const authP = new AuthPassageiro()
-
     
     //Uso do context para ter acesso aos estados globais
     const{setPassageiro, setToken,setPassword} = useContext(MyContext) 
     
     //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
-    const[modalErro, setModalErro] = useState('')
-    console.log(modalErro)
+    const[modalErro, setModalErro] = useState(false)
+    const[codErro, setCodErro] = useState(200)
     //estado de loading
     const[loading, setLoading] = useState(false)
     //função para chamar a função de consumo da api para fazer login
@@ -40,8 +39,9 @@ export default function Login({navigation}) {
             
 
             if(!response){
-                setError(404)
                 setLoading(false)
+                setModalErro(true)
+                setCodErro(500)
                 return false
             }
             if(response.message === undefined){
@@ -92,7 +92,7 @@ export default function Login({navigation}) {
             //resposta false
             }else{
             
-                <ModalErro error={modalErro} />
+                
 
             }
         }
@@ -330,7 +330,7 @@ export default function Login({navigation}) {
 
 
             </Modal>
-            
+            <ModalErro visible={modalErro} error={codErro} />
         </SafeAreaView>
         
     );

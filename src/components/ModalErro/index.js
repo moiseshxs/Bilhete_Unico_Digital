@@ -1,14 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal} from 'react-native';
 import styles from './styles';
 
 import { Ionicons } from '@expo/vector-icons';
 
-export default function ModalErro({error}) {
+export default function ModalErro({visible ,error}) {
 
     
-    const [modal, setModal] =useState(true);
-    const errorMessage = error === 404 ? 'Erro de Conexão' : 'Erro desconhecido';
+    const [modal, setModal] =useState(false);
+    useEffect(() => {
+        console.log(modal, error)
+        setModal(visible);
+      }, [visible]);
+      
+
+    const errorMessage = error ===500? 'Erro Interno de Servidor' : 'Erro desconhecido';
+
     return (
             <Modal
             visible={modal}
