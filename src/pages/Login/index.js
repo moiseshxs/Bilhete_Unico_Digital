@@ -24,6 +24,18 @@ export default function Login({navigation}) {
     const[codErro, setCodErro] = useState(200)
     //estado de loading
     const[loading, setLoading] = useState(false)
+
+const testeConexao = async()=>{
+    const response = await authP.testConnection();
+    !response?setCodErro(200): setCodErro(response)
+    !response?setModalErro(false): setModalErro(true)
+}
+
+useEffect(()=>{
+     testeConexao()
+    
+}, [])
+
     //função para chamar a função de consumo da api para fazer login
     const login = async(cpf, password) =>{
         
@@ -40,8 +52,6 @@ export default function Login({navigation}) {
 
             if(!response){
                 setLoading(false)
-                setModalErro(true)
-                setCodErro(500)
                 return false
             }
             if(response.message === undefined){

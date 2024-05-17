@@ -1,20 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal} from 'react-native';
 import styles from './styles';
-
+import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 export default function ModalErro({visible ,error}) {
 
     
     const [modal, setModal] =useState(false);
+    const [errorMessage, setErrorMessage]= useState('')
+    const [icon, setIcon]= useState('')
     useEffect(() => {
-        console.log(modal, error)
         setModal(visible);
-      }, [visible]);
-      
-
-    const errorMessage = error ===500? 'Erro Interno de Servidor' : 'Erro desconhecido';
+        if(error===500){
+  
+            setErrorMessage('Erro Interno de Servidor');
+              setIcon('error-outline')
+          }if(error ===404){
+            setErrorMessage('Verifique Sua Internet');
+              setIcon('wifi-off')
+  
+        }
+      }, [visible, error]);
+      const recarregar = async()=>{
+        //por enquanto sem nada pois n sei como vou fazer :D
+      }
 
     return (
             <Modal
@@ -36,11 +48,10 @@ export default function ModalErro({visible ,error}) {
                             <View style={styles.textModal}>
                             <Text style={styles.informe}>{errorMessage}</Text>
                             </View>
-                            <Image source={require('../../../assets/img/modalErro/wifi 1.png')} 
-                            style={styles.metodo} />
+                            <MaterialIcons name={icon} size={80} color="red" />
                             <TouchableOpacity
                                style={styles.buttonArea}
-                               onPress={() => trocarSenha()} >
+                               onPress={() => recarregar()} >
                                 <View style={styles.buttonAlterar}>
                                     <Text style={styles.textButton}>Recarregar</Text>
                                 </View>

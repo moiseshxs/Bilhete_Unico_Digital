@@ -15,7 +15,7 @@ containerModal:{
 },
 areaModal:{
     width:'100%',
-    height: '25%',
+    height: '35%',
     backgroundColor: '#fff',
     elevation: 15,
     borderTopStartRadius: 50,

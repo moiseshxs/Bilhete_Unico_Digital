@@ -2,9 +2,9 @@ import axios from "axios";
 
 
 export default class Api{
-  //127.0.0.1:9000
+  //127.0.0.1:9000/api/
   //0.tcp.sa.ngrok.io:
-    baseUrl: string = 'http://0.tcp.sa.ngrok.io/';
+    baseUrl: string = 'http://127.0.0.1:9000/api/';
     api;
     config;
     token;
@@ -54,6 +54,16 @@ export default class Api{
         this.setToken(response.data.token_de_acesso)
         return response.data
       }
+
+      async testConnection(){
+        try{
+          await this.api.get('/testConnection');
+        }catch(error){
+          return 500;
+        }
+
+      }
+
       async getByCpf(cpf:string){
         let form = new FormData();
         form.append("cpfPassageiro",cpf);
