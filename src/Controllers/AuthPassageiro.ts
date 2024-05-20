@@ -86,6 +86,31 @@ async updateSenhaPassageiro(id:number,password:string) {
         return error;
     }
 }
+
+async updateEmailPassageiro(id:number,emailPassageiro:string) {
+
+    let formData = new FormData();
+    formData.append("emailPassageiro", emailPassageiro);
+    try {
+    const response = await this.api.post(`/auth/putEmail/${id}`, formData)
+    return response.data
+    } catch (error) {
+        console.log(error, "erro ao atualizar o email do usuario")
+        return error;
+    }
+}
+async updateTelefonePassageiro(id:number,telefonePassageiro:string) {
+
+    let formData = new FormData();
+    formData.append("numTelPassageiro", telefonePassageiro);
+    try {
+    const response = await this.api.post(`/auth/putTelefone/${id}`, formData)
+    return response.data
+    } catch (error) {
+        console.log(error, "erro ao atualizar o telefone do usuario")
+        return error;
+    }
+}
 async getByCpfRecuperar(cpf:string)
 {
     let form = new FormData();

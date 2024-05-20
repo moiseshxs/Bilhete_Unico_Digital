@@ -1,21 +1,56 @@
-import React, { useContext, useState } from 'react';
-import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking} from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Text, View, SafeAreaView, Image, TouchableOpacity, Modal, Linking, Pressable, Dimensions, TextInput} from 'react-native';
 import styles from './styles';
 import Cassio from '../../../../../assets/img/home/homem.jpg'
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import User from '../../../../../assets/img/global/defaultUser.png'
+import { FloatingLabelInput } from 'react-native-floating-label-input';
 import MyContext from '../../../../Context/context';
 import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
-import User from '../../../../../assets/img/global/defaultUser.png'
+import Passageiro from '../../../../Services/api/Passageiro';
+
+
 export default function Perfil({navigation}) {
     
-    
+    let aP = new AuthPassageiro();
     const [file, setFile] = useState();
-    const [modal, setModal] =useState(true);
+
+    const [modal, setModal] = useState(true);
+
+  
+
     const{passageiro, setPassageiro, url} = useContext(MyContext)
     const trocarSenha = () =>{
         setModal(false)
         navigation.navigate('TrocarSenha')
+    }
+    const [modalEditTelefone, setModalEditTelefone] = useState(false);
+    const [modalEditEmail, setModalEditEmail] = useState(false);
+    const [modalEditEscolha, setModalEditEscolha] = useState(false);
+    const [email, setEmail] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [emailDisplay, setEmailDisplay] = useState('');
+    const [telefoneDisplay, setTelefoneDisplay] = useState('');
+    
+    useEffect(() => {
+        setEmail(passageiro.emailPassageiro);
+        setEmailDisplay(passageiro.emailPassageiro);
+        setTelefone(passageiro.numTelPassageiro);
+        setTelefoneDisplay(passageiro.numTelPassageiro);
+    }, [passageiro]);
+    
+    const updateEmail = async() => {
+        const response = await aP.updateEmailPassageiro(passageiro.id,email);
+        setModalEditEmail(false);
+        setEmailDisplay(email);
+        console.log(response)
+    }
+    const updateTelefone = async() => {
+        const response = await aP.updateTelefonePassageiro(passageiro.id,telefone);
+        setModalEditTelefone(false);
+        setTelefoneDisplay(telefone);
+        console.log(response)
     }
 
     // const handleChoosePhoto = () => {
@@ -58,11 +93,17 @@ export default function Perfil({navigation}) {
            setPassageiro(resp)
         }
     }
-
-
-
+    const modalEscolhaEmail = () => {
+        setModalEditEscolha(false);
+        setModalEditEmail(true);
+    }
+    const modalEscolhaTelefone = () => {
+        setModalEditEscolha(false);
+        setModalEditTelefone(true);
+    }
 
     return (
+        
         <SafeAreaView style={styles.container}>
             <View style={styles.fotoArea}>
                 <View style={styles.fotoPlace}>
@@ -81,9 +122,13 @@ export default function Perfil({navigation}) {
             </View>
             <View style={styles.infosArea}>
                 <View style={styles.alterarArea}>
-                    <View>
-                    <Text style={{fontSize:24, fontWeight:'bold'}}>Dados Pessoais</Text>
+                    <View style={styles.boxInicio}>
+                    <Text style={styles.dadosPessoais}>Dados Pessoais</Text>
+                    <TouchableOpacity style={styles.btnBorda} onPress={()=>setModalEditEscolha(true)}>
+                                <Ionicons name="create-outline"size={30} />
+                            </TouchableOpacity>
                     </View>
+                    
                     {/* <TouchableOpacity
                     onPress={() => setModal(true)}>
                     <Ionicons
@@ -91,6 +136,27 @@ export default function Perfil({navigation}) {
                     size={30}/>
                     </TouchableOpacity> */}
                 </View>
+                <Modal transparent visible={modalEditEscolha}>
+                    <View style={styles.ViewModalEdit}>
+                <View style={styles.modalEdit}>
+                   <View style={styles.containerModalEdit}>  
+                    <View style={styles.boxTitle}>
+                        <Text style={styles.titleModalEscolha}>Escolha o que deseja editar</Text>
+                    </View>
+                    <View style={styles.boxBotoesEscolha}>
+                        <Pressable  style={styles.botoesModal}  onPress={modalEscolhaEmail}>
+                            <Ionicons name="mail-outline"size={50} />
+                            <Text style={styles.titleEscolha}>E-mail</Text>
+                        </Pressable>
+                        <Pressable style={styles.botoesModal} onPress={modalEscolhaTelefone}>
+                            <Ionicons name="call-outline"size={50} />
+                            <Text style={styles.titleEscolha}>Telefone</Text>
+                        </Pressable>
+                    </View>
+                </View>
+                </View>
+                </View>
+            </Modal>   
                 <View style={styles.infos}>
                     
                     <View style={styles.infoController}>
@@ -98,19 +164,141 @@ export default function Perfil({navigation}) {
                         <Text style={styles.desc}>{passageiro.nomePassageiro}</Text>
                     </View>
                     <View style={styles.infoController}>
-                        <Text style={styles.title}>E-mail</Text>
-                        <Text style={styles.desc}>{passageiro.emailPassageiro}</Text>
+                            <Text style={styles.title}>E-mail</Text>
+                            <Text style={styles.desc}>{emailDisplay}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>Celular</Text>
-                        <Text style={styles.desc}>{passageiro.numTelPassageiro}</Text>
+                        <Text style={styles.desc}>{telefoneDisplay}</Text>
                     </View>
                     <View style={styles.infoController}>
                         <Text style={styles.title}>CPF</Text>
                         <Text style={styles.desc}>{passageiro.cpfPassageiro}</Text>
+                       
                     </View>
-                   
-                        
+                    <Modal transparent visible={modalEditEmail}>
+                    <View style={styles.ViewModalEdit}>
+                <View style={styles.modalEdit}>
+                   <View style={styles.containerModalEdit}>  
+                    <View style={styles.boxTitle}>
+                        <Text style={styles.titleModal}>Insira seu E-mail</Text>
+                    </View>
+                    <View style={styles.boxInput}>
+                            <FloatingLabelInput
+                            style={styles.inputModal}
+                            value={email}
+                            editable = {true}
+                            onChangeText={(email) => {setEmail(email)}}
+                            label='Email'
+                            staticLabel
+                            hintTextColor='#aaa'
+                            containerStyles={{
+                                borderWidth: 2,
+                                width: Dimensions.get('screen').width/1.15,
+                                paddingHorizontal: 10,
+                                borderRadius: 40,
+                                height: 55
+                            }}
+                            customLabelStyles={{
+                                colorFocused: '#F00E0E',
+                                fontSizeFocused: 12,
+                                color: '#7B7B7B',
+                                
+                              }}
+                            labelStyles={{
+                                backgroundColor: '#fff',
+                                paddingHorizontal: 8,
+                                lineHeight:15,
+                                fontSize: 16,
+                                fontWeight: '500'
+                              }}
+                            inputStyles={{
+                                color: 'black',
+                                borderColor: 'transparent',
+                                outline: 'none',
+                                paddingHorizontal: 10,
+                                fontSize: 16
+                            }}      
+                            />
+                   </View>
+                    <View style={styles.containerBoxBotoes}>
+                    <View style={styles.boxBotoes}>
+                        <Pressable>
+                            <Text style={styles.botoesModal}  onPress={()=>setModalEditEmail(false)}>Cancelar</Text> 
+                        </Pressable>
+                        <Pressable>
+                            <Text style={styles.botoesModal} onPress={updateEmail}>Enviar</Text>
+                        </Pressable>
+              
+                    </View>
+                    </View>
+                </View>
+                </View>
+                </View>
+               
+                  
+            </Modal>
+            <Modal transparent visible={modalEditTelefone}>
+                    <View style={styles.ViewModalEdit}>
+                <View style={styles.modalEdit}>
+                   <View style={styles.containerModalEdit}>  
+                    <View style={styles.boxTitle}>
+                        <Text style={styles.titleModal}>Insira seu Telefone</Text>
+                    </View>
+                    <View style={styles.boxInput}>
+                         <FloatingLabelInput
+                            value={telefone}
+                            editable = {true}
+                            onChangeText={(telefone) => {setTelefone(telefone)}}
+                            label='Telefone'
+                            staticLabel
+                            hintTextColor='#aaa'
+                            mask='(00) 00000-0000'
+                            keyboardType='numeric'
+                            containerStyles={{
+                                borderWidth: 2,
+                                width: Dimensions.get('screen').width/1.15,
+                                paddingHorizontal: 10,
+                                borderRadius: 40,
+                                height: 55
+                            }}
+                            customLabelStyles={{
+                                colorFocused: '#F00E0E',
+                                fontSizeFocused: 12,
+                                color: '#7B7B7B',
+                                
+                              }}
+                            labelStyles={{
+                                backgroundColor: '#fff',
+                                paddingHorizontal: 8,
+                                lineHeight:15,
+                                fontSize: 16,
+                                fontWeight: '500'
+                              }}
+                            inputStyles={{
+                                color: 'black',
+                                borderColor: 'transparent',
+                                outline: 'none',
+                                paddingHorizontal: 10,
+                                fontSize: 16
+                            }}      
+                            />
+                   </View>
+                    <View style={styles.containerBoxBotoes}>
+                    <View style={styles.boxBotoes}>
+                        <Pressable>
+                            <Text style={styles.botoesModal}  onPress={()=>setModalEditTelefone(false)}>Cancelar</Text> 
+                        </Pressable>
+                        <Pressable>
+                            <Text style={styles.botoesModal} onPress={updateTelefone}>Enviar</Text>
+                        </Pressable>
+              
+                    </View>
+                    </View>
+                </View>
+                </View>
+                </View>
+            </Modal>   
                   
                 </View>
             </View>

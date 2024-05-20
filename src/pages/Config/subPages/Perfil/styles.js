@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 
 export default StyleSheet.create({
     container: {
@@ -51,24 +51,40 @@ export default StyleSheet.create({
         alignItems:'center',
     },
     infoController:{
-        width:'90%',
+        width:'100%',
         height:'20%',
         flexDirection:'row',
         justifyContent:'flex-start',
         alignItems:'center',
         borderBottomWidth:1,
         borderColor:'#FF0000',
+        
+        
         // paddingVertical:30,
     },
-   
+    boxInicio:{
+      width:'100%',
+      flexDirection:'row',
+      justifyContent: 'space-evenly',
+      alignItems:'center',
+    },
+   dadosPessoais:{
+    fontSize:24,
+     fontWeight:'bold',
+   },
     title:{
         fontSize:20,
         fontWeight:'bold',
     },
+    titleEscolha:{
+        fontSize:20,
+        fontWeight:'bold',
+        textAlign:'center'
+    },
     desc:{
         fontSize:16,
         color:'#7b7b7b',
-        paddingHorizontal:30
+        paddingHorizontal:30,
     },
 
     modal:{
@@ -141,5 +157,98 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         
-    }
+    },
+    ViewModalEdit:{
+      flex:1,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalEdit: {
+      flex: 0.22,
+      width:'100%',
+      height:'100%',
+    },
+      containerModalEdit: {
+        flex: 1,
+        width:'100%',
+        height:'100%',
+        backgroundColor: "#fff",
+        padding: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+      },
+      botaoModal:{
+        height: 30,
+        width: 90,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+      },
+      boxBotaoModal:{
+        flex: 1,
+        flexDirection:'row',
+        borderColor: 'black',
+        justifyContent: 'space-evenly',
+        alignItems:'center',
+      },
+      boxTitle:{
+        flex: 0.3,
+        width:'100%',
+
+      },
+      boxInput:{
+        flex: 0.4,
+        width:'100%',
+        height:'100%',
+        alignItems:'center',
+        justifyContent: 'center',
+      },
+      containerBoxBotoes:{
+        flex:0.3,
+        alignSelf:'flex-end',
+        width:'50%',
+      },
+      boxBotoes:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'space-evenly',
+        height:'100%',
+        gap:10,
+      },
+      boxBotoesEscolha:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'space-evenly',
+        height:'100%',
+        gap:5,
+
+      },
+      inputModal:{
+        borderBottomColor:'red',
+        borderBottomWidth:2,
+        width:'80%',
+        padding:10,
+      },
+      botoesModal:{
+        color: 'red',
+        fontSize: 15,
+        fontWeight: 'bold',
+
+      },
+      titleModal:{
+        color:'black',
+        fontSize: 19,
+        fontWeight: '400',
+        padding:10,
+      },
+      titleModalEscolha:{
+        textAlign:'center',
+        color:'black',
+        fontSize: 19,
+        fontWeight: '400',
+        padding:10,
+      }
+
+    
 });
