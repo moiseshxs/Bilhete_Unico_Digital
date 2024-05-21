@@ -215,7 +215,6 @@ export default function Perfil({navigation}) {
                             inputStyles={{
                                 color: 'black',
                                 borderColor: 'transparent',
-                                outline: 'none',
                                 paddingHorizontal: 10,
                                 fontSize: 16
                             }}      
@@ -278,7 +277,6 @@ export default function Perfil({navigation}) {
                             inputStyles={{
                                 color: 'black',
                                 borderColor: 'transparent',
-                                outline: 'none',
                                 paddingHorizontal: 10,
                                 fontSize: 16
                             }}      

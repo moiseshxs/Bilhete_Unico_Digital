@@ -165,7 +165,7 @@ export default StyleSheet.create({
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modalEdit: {
-      flex: 0.22,
+      flex: 0.30,
       width:'100%',
       height:'100%',
     },
@@ -240,7 +240,7 @@ export default StyleSheet.create({
         color:'black',
         fontSize: 19,
         fontWeight: '400',
-        padding:10,
+        marginBottom:20,
       },
       titleModalEscolha:{
         textAlign:'center',

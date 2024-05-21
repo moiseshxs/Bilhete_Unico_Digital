@@ -97,7 +97,6 @@ export default function Cartao({navigation}) {
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -143,7 +142,6 @@ export default function Cartao({navigation}) {
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                         
@@ -186,7 +184,6 @@ export default function Cartao({navigation}) {
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                        
                         
@@ -230,7 +227,6 @@ export default function Cartao({navigation}) {
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -271,7 +267,6 @@ export default function Cartao({navigation}) {
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}

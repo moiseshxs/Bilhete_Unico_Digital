@@ -118,7 +118,6 @@ const qtdOutroValor = parseInt(outroValor)
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}

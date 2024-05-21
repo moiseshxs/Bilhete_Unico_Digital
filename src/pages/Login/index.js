@@ -228,7 +228,6 @@ useEffect(()=>{
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         fontSize: 16
                         
@@ -273,7 +272,6 @@ useEffect(()=>{
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -364,7 +362,6 @@ useEffect(()=>{
                                         inputStyles={{
                                             color: 'black',
                                             borderColor: 'transparent',
-                                            outline: 'none',
                                             paddingHorizontal: 10,
                                             fontSize: 16
                                             

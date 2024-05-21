@@ -18,12 +18,23 @@ import styles from "./styles";
 export default function Ajuda({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const inputRef = useRef(null);
-
+  const[modalErro, setModalErro] = useState(false)
+  const[iconModal, setIconModal] = useState('')
+  const[textModal, setTextModal] = useState('')
   useEffect(() => {
     if (isModalVisible) {
       inputRef.current.focus();
     }
   }, [isModalVisible]);
+
+  const title = "Como comprar com o cartão de crédito?";
+
+  const TextLimitado = ({ texto, limite }) => {
+    if (texto.length > limite) {
+      return <Text style={styles.tituloArtigo}>{texto.substring(0, limite)}...</Text>;
+    }
+    return <Text style={styles.tituloArtigo}>{texto}</Text>;
+  };
 
   const [filtro, setFiltro] = useState("");
   const [result, setResult] = useState([]);
@@ -172,7 +183,7 @@ export default function Ajuda({ navigation }) {
                 desc: 'Acessando a carteira, basta selecionar o método de pagamento, selecionar a quantidade de passagens para comprar, depois é so verificar as informações e efetuar a compra',
               })}
             >
-              <Text style={styles.tituloArtigo}>Como comprar com o cartão de crédito?</Text>
+              <TextLimitado texto={title} limite={20} />
               <View style={styles.respostaDuvida}>
                 <AntDesign name="right" size={20} color="#9b9b9b" />
               </View>

@@ -114,7 +114,6 @@ export default function NovaSenha({navigation, route}){
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -158,7 +157,6 @@ export default function NovaSenha({navigation, route}){
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}

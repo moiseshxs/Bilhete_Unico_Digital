@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import Bilhete from "../../../../Controllers/Bilhete"
 import MyContext from "../../../../Context/context"
 import Loading from "../../../Loading"
+import ModalErro from '../../../../components/ModalErro';
 
 
 export default function ListaBilhetes({navigation}){
@@ -11,8 +12,10 @@ export default function ListaBilhetes({navigation}){
     const{ token, passageiro, setBilhete, setPassagens, setCompras} = useContext(MyContext)
     const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
-    
-    const[error, setError] = useState(false)
+    const [error, setError] = useState(false)
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     let b = new Bilhete()
     const[DATA, setDATA] = useState('')
     
@@ -55,11 +58,10 @@ export default function ListaBilhetes({navigation}){
         setInfos(false)
         const response = await b.getBilhetes(passageiro.id, token)
         if(response.message !== undefined){
-            setError(true)
-            setDATA([{
-                id: '1',
-                error: "Você não possui bilhetes"
-            }])
+            setModalErro(true)
+            setTextModal('Você não possui Bilhetes')
+            setIconModal('error-outline')
+            
             setInfos(true)
             setRefreshing(false)
         }else{
@@ -114,7 +116,7 @@ export default function ListaBilhetes({navigation}){
             
           </View>
           
-          
+          <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </SafeAreaView>
     )
 }

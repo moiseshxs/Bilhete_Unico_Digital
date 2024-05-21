@@ -107,7 +107,6 @@ const {passageiro,password} = useContext(MyContext);
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -150,7 +149,6 @@ const {passageiro,password} = useContext(MyContext);
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}
@@ -194,7 +192,6 @@ const {passageiro,password} = useContext(MyContext);
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         
                     }}

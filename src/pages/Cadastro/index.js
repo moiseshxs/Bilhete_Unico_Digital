@@ -126,7 +126,6 @@ export default function Cadastro({navigation}){
                     inputStyles={{
                         color: 'black',
                         borderColor: 'transparent',
-                        outline: 'none',
                         paddingHorizontal: 10,
                         fontSize: 16
                         
