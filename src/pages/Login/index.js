@@ -21,18 +21,37 @@ export default function Login({navigation}) {
     //estado sera utilizado para mostrar erros ao usuario
     const[error, setError] = useState('')
     const[modalErro, setModalErro] = useState(false)
-    const[codErro, setCodErro] = useState(200)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     //estado de loading
     const[loading, setLoading] = useState(false)
 
-const testeConexao = async()=>{
-    const response = await authP.testConnection();
-    !response?setCodErro(200): setCodErro(response)
-    !response?setModalErro(false): setModalErro(true)
-}
+    const testeConexao = async () => {
+        try {
+            const response = await authP.testConnection();
+    
+            if (response) {
+                setModalErro(true);
+            } 
+    
+            if (response === 500) {
+                setTextModal('Erro Interno de Servidor');
+                setIconModal('error-outline');
+            } else if (response === 404) {
+                setTextModal('Verifique sua conexão com a Internet');
+                setIconModal('wifi-off');
+            }
+        } catch (error) {
+            setModalErro(true);
+            setTextModal('Erro ao tentar conectar. Por favor, tente novamente mais tarde.');
+            setIconModal('error-outline');
+        }
+    };
+    
 
 useEffect(()=>{
-     testeConexao()
+     testeConexao();
+     
     
 }, [])
 
@@ -40,31 +59,42 @@ useEffect(()=>{
     const login = async(cpf, password) =>{
         
         if(cpf  == '' || password == ''){
-            
-            setError('Campos vazios')
+            setModalErro(true)
+            setTextModal('Preencha os Campos')
+            setIconModal('error-outline')
         }
         else if(cpf.length < 14){
-            setError('CPF invalido')
+            setModalErro(true)
+            setTextModal('Cpf Inválido')
+            setIconModal('error-outline')
         }else{
+            
             setLoading(true)
         const response = await authP.login(cpf, password)
             
 
             if(!response){
                 setLoading(false)
-                return false
+                setModalErro(true)
+                setTextModal('Erro Interno de Servidor')
+                setIconModal('error-outline')
+                
             }
             if(response.message === undefined){
                 setPassageiro(response.usuario)
                 setToken(response.token_de_acesso)
                 setPassword(senha)
-                console.log(senha)
+                setModalErro(false)
                 setTimeout(() => setLoading(false), 1000)
                 navigation.navigate('ListaBilhetes')
             }else{
                 setLoading(false)
-                setError("CPF ou senha incorretos!")
+                setModalErro(true)
+                setTextModal('Cpf ou senha Incorreto(s)')
+                setIconModal('error-outline')
+                
             }
+            setModalErro(false)
 
     }
             
@@ -74,10 +104,14 @@ useEffect(()=>{
         const consultar = async(cpf) =>{
             //validação
             if(cpf == ''){
-                setError('Campo vazio')
+                setModalErro(true)
+            setTextModal('Preencha os Campos')
+            setIconModal('error-outline')
             }
             else if(cpf.length < 14){
-                setError('CPF invalido')
+                setModalErro(true)
+            setTextModal('Cpf Inválido')
+            setIconModal('error-outline')
             }
     
             else{
@@ -88,13 +122,15 @@ useEffect(()=>{
             if(response){ 
     
                 if(response.message !== undefined){
-                    setError("CPF não encontrado!")
+                    setModalErro(true)
+                setTextModal('Cpf não Encontrado')
+                setIconModal('error-outline')
                     setLoading(false)
                     return false
                 }
                 setTimeout(() => setLoading(false), 1000)
                 setModal(false)
-                
+                setModalErro(false)
                 navigation.navigate('FormaRecuperarSenha', {
                     dados: response.usuario
                 })
@@ -340,7 +376,7 @@ useEffect(()=>{
 
 
             </Modal>
-            <ModalErro visible={modalErro} error={codErro} />
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </SafeAreaView>
         
     );

@@ -4,18 +4,19 @@ import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { useState } from "react";
 import AuthPassageiro from '../../Controllers/AuthPassageiro';
+import ModalErro from '../../components/ModalErro';
 import Loading from "../Loading";
 
 
 export default function Cadastro({navigation}){
 
     const [cpf, setCpf] = useState('')
-
     const [borderColor, setBorderColor] = useState('#7b7b7b')
-
-    const [error, setError] = useState('')
-    
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     const [loading, setLoading] = useState(false)
+
     //função de trocar a cor do input ao tocar
     const changeColor =(area) =>{
         if(area == 'cpf'){
@@ -30,12 +31,23 @@ export default function Cadastro({navigation}){
 
     //função para chamar a api para consular se o cpf existe no banco
     const consultar = async(cpf) =>{
+
+        await new Promise(resolve => {
+            setModalErro(false);
+            
+            setTimeout(resolve, 0);
+        });
+
         //validação
         if(cpf == ''){
-            setError('Campo vazio')
+            setModalErro(true)
+            setTextModal('Preencha os Campos')
+            setIconModal('error-outline')
         }
         else if(cpf.length < 14){
-            setError('CPF invalido')
+            setModalErro(true)
+            setTextModal('Cpf Inválido')
+            setIconModal('error-outline')
         }
 
         else{
@@ -46,11 +58,14 @@ export default function Cadastro({navigation}){
         if(response){ 
 
             if(response.message !== undefined){
-                setError("CPF não encontrado!")
+                setModalErro(true)
+                setTextModal(response.message)
+                setIconModal('error-outline')
                 setLoading(false)
                 return false
             }
             setTimeout(() => setLoading(false), 1000)
+            setModalErro(false)
             navigation.navigate('ConfirmarCadastro', {
                 dados: response.usuario
             })
@@ -125,10 +140,7 @@ export default function Cadastro({navigation}){
             <View style={styles.descArea}> 
                 <Text style={styles.desc}>Nosso aplicativo funciona em conjunto a SPtrans, seus dados serão resgatados dos registros e serão utilizados no aplicativo. Ainda não possui um cadastro na Sptrans?<Text style={styles.link} onPress={() => Linking.openURL('https://scapub.sbe.sptrans.com.br/sa/acessoPublico/novoUsuario.action')}>Clique aqui</Text></Text>
                 
-            </View>
-            <View>
-            <Text style={styles.error}>{error}</Text>
-            </View>
+            </View> 
             <View style={styles.buttonArea}> 
                 <TouchableOpacity
                 onPress={() => consultar(cpf)}>
@@ -137,6 +149,7 @@ export default function Cadastro({navigation}){
                         </View>
                 </TouchableOpacity>
                 </View>
+                <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </SafeAreaView>
     )
     }else{

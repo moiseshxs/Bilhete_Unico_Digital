@@ -6,27 +6,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 
-export default function ModalErro({visible ,error}) {
+export default function ModalErro({visible ,text, icon}) {
 
     
     const [modal, setModal] =useState(false);
-    const [errorMessage, setErrorMessage]= useState('')
-    const [icon, setIcon]= useState('')
+  
+    
     useEffect(() => {
         setModal(visible);
-        if(error===500){
-  
-            setErrorMessage('Erro Interno de Servidor');
-              setIcon('error-outline')
-          }if(error ===404){
-            setErrorMessage('Verifique Sua Internet');
-              setIcon('wifi-off')
-  
-        }
-      }, [visible, error]);
-      const recarregar = async()=>{
-        //por enquanto sem nada pois n sei como vou fazer :D
-      }
+      }, [visible]);
+    //   const recarregar = async()=>{
+             //por enquanto sem nada pois n sei como vou fazer :D
+    //   }
 
     return (
             <Modal
@@ -46,16 +37,10 @@ export default function ModalErro({visible ,error}) {
                         </View>
                         <View style={styles.contArea}>
                             <View style={styles.textModal}>
-                            <Text style={styles.informe}>{errorMessage}</Text>
+                            <Text style={styles.informe}>{text}</Text>
                             </View>
                             <MaterialIcons name={icon} size={80} color="red" />
-                            <TouchableOpacity
-                               style={styles.buttonArea}
-                               onPress={() => recarregar()} >
-                                <View style={styles.buttonAlterar}>
-                                    <Text style={styles.textButton}>Recarregar</Text>
-                                </View>
-                            </TouchableOpacity>
+                            
                         </View>
                     </View>
                 </SafeAreaView>

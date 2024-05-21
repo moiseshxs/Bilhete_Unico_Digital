@@ -274,7 +274,6 @@ export default function Home()  {
           </View>
         </View>
         : loading ? <DotIndicator color='#f00' count={3} size={16} /> :  null}
-<ModalErro/>
 
         <View style={[styles.atividades, integracao? styles.atividadesIntegracao : styles.atividadesSemIntegracao]}>
           <Text style={styles.titulo}>Atividades</Text>

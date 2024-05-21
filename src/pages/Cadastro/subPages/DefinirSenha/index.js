@@ -4,11 +4,14 @@ import styles from "./styles"
 import { useState } from "react"
 import { FloatingLabelInput } from "react-native-floating-label-input"
 import AuthPassageiro from "../../../../Controllers/AuthPassageiro"
+import ModalErro from '../../../../components/ModalErro';
 import Loading from "../../../Loading"
 
 export default function NovaSenha({navigation, route}){
 
-    const[error, setError] = useState('')
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     const[loading, setLoading] = useState(false)
 
     function changeColor(input){
@@ -23,10 +26,14 @@ export default function NovaSenha({navigation, route}){
     let authP = new AuthPassageiro()
     const register = async(senha, confirmaSenha) => {
         if(senha == '' || confirmSenha == ''){
-            setError('Campos vazios')
+            setModalErro(true)
+            setTextModal('Preencha os Campos')
+            setIconModal('error-outline')
         }
         else if(senha != confirmaSenha){
-            setError('Senhas diferentes')
+            setModalErro(true)
+            setTextModal('As senhas são diferentes')
+            setIconModal('error-outline')
             setLoading(false)
             return false;
         }else{
@@ -47,8 +54,9 @@ export default function NovaSenha({navigation, route}){
             //   ]);
             navigation.navigate('Login') //usar apenas no navegador
         }else{
-            setError('Erro ao cadastrar')
-            setLoading(false)
+            setModalErro(true)
+            setTextModal('Erro ao Cadastrar')
+            setIconModal('error-outline')
             return false
         }
     }
@@ -153,7 +161,7 @@ export default function NovaSenha({navigation, route}){
                     onFocus={() => changeColor('confirma')}
                     isFocused
                     />
-                    <Text style={styles.error}>{error}</Text>
+                
             </View>
             <View style={styles.buttonArea}>
             <TouchableOpacity
@@ -163,6 +171,7 @@ export default function NovaSenha({navigation, route}){
                         </View>
                 </TouchableOpacity>
             </View>
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </SafeAreaView>
     )
 }else{

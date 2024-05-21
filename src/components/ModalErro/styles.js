@@ -6,17 +6,19 @@ export default StyleSheet.create({
 modal:{
     margin: 0,
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
 },
 containerModal:{
     width: '100%',
     height: '100%',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
 },
 areaModal:{
     width:'100%',
-    height: '35%',
+    height: '30%',
     backgroundColor: '#fff',
+    padding: 10,
     elevation: 15,
     borderTopStartRadius: 50,
     borderTopEndRadius: 50,
@@ -34,7 +36,7 @@ contArea:{
     display: 'flex',
     flexDirection:'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     
 },
 textModal:{

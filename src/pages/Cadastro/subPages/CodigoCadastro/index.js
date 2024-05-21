@@ -7,6 +7,7 @@ import styles from './styles'
 import Loading from '../../../Loading';
 import Animated from 'react-native-reanimated';
 import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
+import ModalErro from '../../../../components/ModalErro';
 
 export default function RecuperarSenha({navigation, route}){
     const CELL_COUNT = 4
@@ -16,7 +17,9 @@ export default function RecuperarSenha({navigation, route}){
     setValue,
     })
     const[loading, setLoading] = useState(false)
-    const[error, setError] = useState(false)
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     let authP = new AuthPassageiro()
 
     const verCod = async(codigo) =>
@@ -25,6 +28,7 @@ export default function RecuperarSenha({navigation, route}){
       const response = await authP.verCod(route.params.id,codigo)
       
       if(response == 'autorizado'){
+        setModalErro(false)
         setTimeout(() => setLoading(false), 1000)
         navigation.navigate('DefinirSenha', {
           id: route.params.id 
@@ -32,7 +36,9 @@ export default function RecuperarSenha({navigation, route}){
       }
       else if(response == 'incorreto'){
         setLoading(false)
-        setError('Código Incorreto')
+        setModalErro(true)
+        setTextModal('Código incorreto')
+        setIconModal('error-outline')
       }else{
         setLoading(false)
         Alert.alert('Erro', "Erro inesperado ao verificar código", [
@@ -83,7 +89,7 @@ export default function RecuperarSenha({navigation, route}){
               <Text style={[styles.textCelula, isFocused && styles.focusTextCell]}
                 key={index}
                 onLayout={getCellOnLayoutHandler(index)}>
-                {symbol || (isFocused ? <Cursor/> : null)}
+                {symbol}
               </Text>
               </View>
             )}
@@ -94,8 +100,8 @@ export default function RecuperarSenha({navigation, route}){
               <Text style={styles.reenviar}> Reenviar</Text>
               </Text>
               </TouchableOpacity>
-              <Text style={styles.error}>{error}</Text>
           </View>
+          <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </Animated.View>
     )
   }else{
