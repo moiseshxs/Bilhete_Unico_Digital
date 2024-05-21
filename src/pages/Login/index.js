@@ -57,7 +57,11 @@ useEffect(()=>{
 
     //função para chamar a função de consumo da api para fazer login
     const login = async(cpf, password) =>{
-        
+        await new Promise(resolve => {
+            setModalErro(false);
+            
+            setTimeout(resolve, 0);
+        });
         if(cpf  == '' || password == ''){
             setModalErro(true)
             setTextModal('Preencha os Campos')
@@ -94,7 +98,7 @@ useEffect(()=>{
                 setIconModal('error-outline')
                 
             }
-            setModalErro(false)
+            
 
     }
             
@@ -102,6 +106,12 @@ useEffect(()=>{
             
         }
         const consultar = async(cpf) =>{
+
+            await new Promise(resolve => {
+                setModalErro(false);
+                
+                setTimeout(resolve, 0);
+            });
             //validação
             if(cpf == ''){
                 setModalErro(true)

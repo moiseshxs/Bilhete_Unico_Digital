@@ -25,6 +25,11 @@ export default function NovaSenha({navigation, route}){
     }
     let authP = new AuthPassageiro()
     const register = async(senha, confirmaSenha) => {
+        await new Promise(resolve => {
+            setModalErro(false);
+            
+            setTimeout(resolve, 0);
+        });
         if(senha == '' || confirmSenha == ''){
             setModalErro(true)
             setTextModal('Preencha os Campos')
