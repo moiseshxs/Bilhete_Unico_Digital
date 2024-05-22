@@ -3,6 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 import MyContext from '../../Context/context';
 import Compra from '../../Controllers/Compra';
@@ -99,7 +100,18 @@ export default function Config() {
                     </View>
                 </View>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <View style={styles.areaBotao}>
+                    <View style={styles.esquerda}>
+                    <Ionicons name="log-out" size={30} color="black" />
+                        <Text style={styles.titulo}>Sair</Text>
+                    </View>
 
+                    <View style={styles.direita}>  
+                            <AntDesign name="right" size={20} color="black" />
+                    </View>
+                </View>
+                </TouchableOpacity>
                 <View style={styles.areaUltima}>
                     
                 </View>

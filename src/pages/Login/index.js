@@ -14,7 +14,7 @@ import ModalErro from '../../components/ModalErro';
 export default function Login({navigation}) {
     
     const authP = new AuthPassageiro()
-    
+   
     //Uso do context para ter acesso aos estados globais
     const{setPassageiro, setToken,setPassword} = useContext(MyContext) 
     
@@ -106,7 +106,8 @@ export default function Login({navigation}) {
             
             setLoading(true)
         const response = await authP.login(cpf, password)
-            
+        setSenha('');
+        setCpfForm('');
 
             if(!response){
                 setLoading(false)
