@@ -221,7 +221,7 @@ export default StyleSheet.create({
         width:'100%',
         height:'100%',
         alignItems:'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
       },
       containerBoxBotoes:{
         flex:0.3,

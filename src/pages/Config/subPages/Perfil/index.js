@@ -17,8 +17,8 @@ export default function Perfil({navigation}) {
     const [file, setFile] = useState();
 
     const [modal, setModal] = useState(true);
-
-  
+    const [contador,setContador] = useState(30);
+    
 
     const{passageiro, setPassageiro, url} = useContext(MyContext)
     const trocarSenha = () =>{
@@ -111,6 +111,13 @@ export default function Perfil({navigation}) {
         setMessage('');
         setModalEditTelefone(true);
     }
+
+    const conta = ()=>{
+         return 30 - email.length
+    }
+    useEffect(() => {
+       conta();
+    }, [email.length]);
 
     return (
         
@@ -235,6 +242,7 @@ export default function Perfil({navigation}) {
                                 fontSize: 16
                             }}      
                             />
+                            <Text>{conta()}</Text>
                    </View>
                     <View style={styles.containerBoxBotoes}>
                     <View style={styles.boxBotoes}>
