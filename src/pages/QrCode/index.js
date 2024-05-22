@@ -4,34 +4,34 @@ import styles from './styles';
 import MyContext from '../../Context/context';
 import Passageiro from '../../Services/api/Passageiro';
 import Loading from '../Loading';
-
+import ModalErro from '../../components/ModalErro';
 export default function QrCode() {
 
 
     const[loading, setLoading] = useState(false)
     const{passageiro,bilhete, token} = useContext(MyContext)
-
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
     const consumir = async () =>{
         setLoading(true)
         let p = new Passageiro()
-        const response = await p.storeConsumo(passageiro.id, token, bilhete.id)
-        setLoading(false)
-        if(response.message !== undefined){
-
-        Alert.alert('Consumo', response.message, [
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ]);
-        }else{
-            Alert.alert('Erro', 'Estamos com problemas para efetuar essa transação, tente novamente mais tarde', [
-                
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-              ]);
+        try {
+            const response = await p.storeConsumo(passageiro.id, token, bilhete.id);
+            if (response.message !== undefined) {
+                Alert.alert('Consumo', response.message, [
+                    {
+                        text: 'OK',
+                        onPress: () => console.log('OK Pressed'),
+                    }
+                ]);
+            }
+        } catch (error) {
+            setModalErro(true);
+            setIconModal('error-outline');
+            setTextModal('Falha no servidor. Por favor, tente novamente mais tarde.');
         }
+        setLoading(false);
     }
     if(!loading){
     return (
@@ -62,6 +62,7 @@ export default function QrCode() {
             <View style={styles.alal}>
                 
             </View>
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
         </SafeAreaView>
     );
     }else{

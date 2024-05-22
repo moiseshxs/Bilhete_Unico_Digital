@@ -20,6 +20,7 @@ export default function RecuperarSenha({navigation, route}){
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
     const[textModal, setTextModal] = useState('')
+    const[closeButton, setCloseButton] = useState(false)
     let authP = new AuthPassageiro()
 
     const verCod = async(codigo) =>
@@ -39,17 +40,13 @@ export default function RecuperarSenha({navigation, route}){
         setModalErro(true)
         setTextModal('Código incorreto')
         setIconModal('error-outline')
+        setCloseButton(true)
       }else{
         setLoading(false)
-        Alert.alert('Erro', "Erro inesperado ao verificar código", [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'OK'
-          },
-        ]);
+        setModalErro(true)
+        setTextModal('Erro ao verificar o código. Por favor, tente novamente mais tarde.')
+        setIconModal('error-outline')
+        setCloseButton(true)
         
       }
     }
@@ -101,7 +98,7 @@ export default function RecuperarSenha({navigation, route}){
               </Text>
               </TouchableOpacity>
           </View>
-          <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
+          <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </Animated.View>
     )
   }else{

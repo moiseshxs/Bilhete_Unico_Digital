@@ -12,6 +12,7 @@ export default function NovaSenha({navigation, route}){
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
     const[textModal, setTextModal] = useState('')
+    const[closeButton, setCloseButton] = useState(false)
     const[loading, setLoading] = useState(false)
 
     function changeColor(input){
@@ -34,11 +35,13 @@ export default function NovaSenha({navigation, route}){
             setModalErro(true)
             setTextModal('Preencha os Campos')
             setIconModal('error-outline')
+            setCloseButton(true)
         }
         else if(senha != confirmaSenha){
             setModalErro(true)
             setTextModal('As senhas são diferentes')
             setIconModal('error-outline')
+            setCloseButton(true)
             setLoading(false)
             return false;
         }else{
@@ -62,6 +65,7 @@ export default function NovaSenha({navigation, route}){
             setModalErro(true)
             setTextModal('Erro ao Cadastrar')
             setIconModal('error-outline')
+            setCloseButton(false)
             return false
         }
     }

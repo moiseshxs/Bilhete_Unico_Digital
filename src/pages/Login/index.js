@@ -23,13 +23,14 @@ export default function Login({navigation}) {
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
     const[textModal, setTextModal] = useState('')
+    const[closeButton, setCloseButton] = useState(false)
     //estado de loading
     const[loading, setLoading] = useState(false)
 
     const testeConexao = async () => {
         try {
             const response = await authP.testConnection();
-    
+            
             if (response) {
                 setModalErro(true);
             } 
@@ -37,23 +38,51 @@ export default function Login({navigation}) {
             if (response === 500) {
                 setTextModal('Erro Interno de Servidor');
                 setIconModal('error-outline');
+                setCloseButton(false)
             } else if (response === 404) {
                 setTextModal('Verifique sua conexão com a Internet');
                 setIconModal('wifi-off');
+                setCloseButton(false)
             }
+            return response
         } catch (error) {
             setModalErro(true);
             setTextModal('Erro ao tentar conectar. Por favor, tente novamente mais tarde.');
             setIconModal('error-outline');
+            setCloseButton(false)
         }
+
     };
     
-
-useEffect(()=>{
-     testeConexao();
-     
+    useEffect(() => {
+        const checkConnection = async () => {
+            let isConnected = false;
+            
     
-}, [])
+            while (!isConnected) {
+                try {
+                    const response = await testeConexao();
+                    if (!response) {                  
+                        isConnected = true;
+                    }
+                } catch (error) {
+                    setModalErro(true);
+                    setTextModal('Erro inesperado ao verificar conexão');
+                    setIconModal('error-outline');
+                    setCloseButton(false)
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+            }
+    
+            // Se houve erro de conexão, fecha o modal apenas se não houver mais erros
+            if ( isConnected && !modalErro) {
+                setModalErro(false);
+            }
+        };
+    
+        checkConnection();
+    }, [modalErro]);
 
     //função para chamar a função de consumo da api para fazer login
     const login = async(cpf, password) =>{
@@ -66,11 +95,13 @@ useEffect(()=>{
             setModalErro(true)
             setTextModal('Preencha os Campos')
             setIconModal('error-outline')
+            setCloseButton(true)
         }
         else if(cpf.length < 14){
             setModalErro(true)
             setTextModal('Cpf Inválido')
             setIconModal('error-outline')
+            setCloseButton(true)
         }else{
             
             setLoading(true)
@@ -82,6 +113,7 @@ useEffect(()=>{
                 setModalErro(true)
                 setTextModal('Erro Interno de Servidor')
                 setIconModal('error-outline')
+                setCloseButton(false)
                 
             }
             if(response.message === undefined){
@@ -90,12 +122,19 @@ useEffect(()=>{
                 setPassword(senha)
                 setModalErro(false)
                 setTimeout(() => setLoading(false), 1000)
-                navigation.navigate('ListaBilhetes')
+                response.usuario?
+                navigation.navigate('ListaBilhetes'):
+                setModalErro(true)
+                setTextModal('Erro Interno de Servidor')
+                setIconModal('error-outline')
+                setCloseButton(false)
+
             }else{
                 setLoading(false)
                 setModalErro(true)
                 setTextModal('Cpf ou senha Incorreto(s)')
                 setIconModal('error-outline')
+                setCloseButton(true)
                 
             }
             
@@ -117,11 +156,13 @@ useEffect(()=>{
                 setModalErro(true)
             setTextModal('Preencha os Campos')
             setIconModal('error-outline')
+            setCloseButton(true)
             }
             else if(cpf.length < 14){
                 setModalErro(true)
             setTextModal('Cpf Inválido')
             setIconModal('error-outline')
+            setCloseButton(true)
             }
     
             else{
@@ -135,6 +176,7 @@ useEffect(()=>{
                     setModalErro(true)
                 setTextModal('Cpf não Encontrado')
                 setIconModal('error-outline')
+                setCloseButton(true)
                     setLoading(false)
                     return false
                 }
@@ -383,7 +425,7 @@ useEffect(()=>{
 
 
             </Modal>
-            <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </SafeAreaView>
         
     );

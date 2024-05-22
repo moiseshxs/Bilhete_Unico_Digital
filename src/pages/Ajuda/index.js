@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import MyContext from "../../Context/context";
 import search from "../../Controllers/Ajuda";
+import ModalErro from '../../components/ModalErro';
 
 import styles from "./styles";
 
@@ -41,17 +42,31 @@ export default function Ajuda({ navigation }) {
   const { token } = useContext(MyContext);
   const searchAjuda = async () => {
     let ajuda = new search();
-
-    const response = await ajuda.search(token, filtro.trim() || "");
-    setResult(response);
+    try {
+      const response = await ajuda.search(token, filtro.trim() || "");
+      setResult(response);
+    } catch (error) {
+      setModalErro(true);
+      setIconModal('error-outline');
+      setTextModal('Falha no servidor. Por favor, tente novamente mais tarde.');
+    }
   };
-  const resultSearchData = result.map((item) => ({
-    id: item.id,
-    tituloAjuda: item.tituloAjuda,
-    caminhoAjuda: item.caminhoAjuda,
-    descAjuda: item.descAjuda,
-  }));
-  console.log(resultSearchData);
+  const resultSearchData = Array.isArray(result)
+  ? result.map((item) => ({
+      id: item.id,
+      tituloAjuda: item.tituloAjuda,
+      caminhoAjuda: item.caminhoAjuda,
+      descAjuda: item.descAjuda,
+    }))
+  : [];
+
+useEffect(() => {
+  if (!Array.isArray(result)) {
+    setModalErro(true);
+    setIconModal('error-outline');
+    setTextModal('Falha no servidor Por favor, tente novamente mais tarde.');
+  }
+}, [result]);
   useEffect(() => {
     searchAjuda();
     if (filtro != "") {
@@ -234,6 +249,7 @@ export default function Ajuda({ navigation }) {
       </View>
 
       <View style={styles.areaNada}></View>
+      <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
     </SafeAreaView>
   );
 }

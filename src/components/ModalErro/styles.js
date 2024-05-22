@@ -18,7 +18,7 @@ areaModal:{
     width:'100%',
     height: '30%',
     backgroundColor: '#fff',
-    padding: 10,
+    padding: 20,
     elevation: 15,
     borderTopStartRadius: 50,
     borderTopEndRadius: 50,

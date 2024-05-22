@@ -61,12 +61,11 @@ export default function ListaBilhetes({navigation}){
             setModalErro(true)
             setTextModal('Você não possui Bilhetes')
             setIconModal('error-outline')
-            
             setInfos(true)
             setRefreshing(false)
         }else{
         setDATA(response)
-        setError(false)
+        setModalErro(false)
         setRefreshing(false)
         setInfos(true)
     }

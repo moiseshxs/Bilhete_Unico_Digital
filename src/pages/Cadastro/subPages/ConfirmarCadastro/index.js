@@ -4,6 +4,7 @@ import styles from './styles'
 import { useEffect, useState } from 'react';
 import AuthPassageiro from '../../../../Controllers/AuthPassageiro';
 import Loading from '../../../Loading';
+import ModalErro from '../../../../components/ModalErro';
 
 export default function ConfirmarCadastro({navigation, route}){
     
@@ -12,7 +13,10 @@ export default function ConfirmarCadastro({navigation, route}){
     const[numTel, setNumTel] = useState('');
     const[dados, setDados] = useState('')
     const[loading, setLoading] = useState(false)
-    
+    const[modalErro, setModalErro] = useState(false)
+    const[iconModal, setIconModal] = useState('')
+    const[textModal, setTextModal] = useState('')
+    const[closeButton, setCloseButton] = useState(false)
 
     if(route.params !== undefined){
         let emailPassageiro = route.params.dados.emailPassageiro
@@ -37,14 +41,10 @@ export default function ConfirmarCadastro({navigation, route}){
                 })
             }else{
                 setLoading(false)
-                Alert.alert('Erro', "Erro inesperado ao carregar informações", [
-                    {
-                      text: 'Cancel',
-                      onPress: () => navigation.navigate("Login"),
-                      style: 'cancel',
-                    },
-                    {text: 'OK', onPress: () =>  navigation.navigate("Login")},
-                  ]);
+                setModalErro(true)
+                setTextModal('Erro ao carregar informações. Por favor, tente novamente mais tarde.')
+                setIconModal('error-outline')
+                setCloseButton(false)
                 //navigation.navigate("Login")  
             }
         }
@@ -95,7 +95,7 @@ export default function ConfirmarCadastro({navigation, route}){
 
 
           </View>
-          
+          <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </SafeAreaView>
     )
 }else{

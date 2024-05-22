@@ -15,6 +15,7 @@ export default function Cadastro({navigation}){
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
     const[textModal, setTextModal] = useState('')
+    const[closeButton, setCloseButton] = useState(false)
     const [loading, setLoading] = useState(false)
 
     //função de trocar a cor do input ao tocar
@@ -43,11 +44,13 @@ export default function Cadastro({navigation}){
             setModalErro(true)
             setTextModal('Preencha os Campos')
             setIconModal('error-outline')
+            setCloseButton(true)
         }
         else if(cpf.length < 14){
             setModalErro(true)
             setTextModal('Cpf Inválido')
             setIconModal('error-outline')
+            setCloseButton(true)
         }
 
         else{
@@ -61,6 +64,7 @@ export default function Cadastro({navigation}){
                 setModalErro(true)
                 setTextModal(response.message)
                 setIconModal('error-outline')
+                setCloseButton(true)
                 setLoading(false)
                 return false
             }
@@ -71,7 +75,10 @@ export default function Cadastro({navigation}){
             })
         //resposta false
         }else{
-            setError("Erro ao carregar informações")
+            setModalErro(true)
+                setTextModal('Erro ao carregar informações. Por favor, Tente novamente mais tarde')
+                setIconModal('error-outline')
+                setCloseButton(false)
             setLoading(false)
         }
     }
@@ -148,7 +155,7 @@ export default function Cadastro({navigation}){
                         </View>
                 </TouchableOpacity>
                 </View>
-                <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
+                <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </SafeAreaView>
     )
     }else{
