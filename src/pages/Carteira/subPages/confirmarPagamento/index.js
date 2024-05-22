@@ -15,7 +15,7 @@ import Passagem from "../../../../Controllers/Passagem";
 import Loading from "../../../Loading";
 import Preco from "../../../../Controllers/Preco";
 import MyContext from "../../../../Context/context";
-
+import ModalErro from '../../../../components/ModalErro';
 const metodos = [
   {
     id: "2",
@@ -37,6 +37,10 @@ const metodos = [
 export default function ConfirmarPagamento({ navigation, route }) {
   const [modalEdit, setModalEdit] = useState(false);
   const [idEdit, setIdEdit] = useState("");
+  const[modalErro, setModalErro] = useState(false)
+  const[iconModal, setIconModal] = useState('')
+  const[textModal, setTextModal] = useState('')
+  const[closeButton, setCloseButton] = useState(false)
   const formasPagamento = {
     1: "Cartão",
     2: "Pix",
@@ -140,32 +144,55 @@ export default function ConfirmarPagamento({ navigation, route }) {
       token,
       route.params.quantidade,
       route.params.quantidade * preco,
-      idEdit != "" ? idEdit : route.params.formaPagamento,
+      idEdit !== "" ? idEdit : route.params.formaPagamento,
       "Compra",
       bilhete.id
     );
     if (!response) {
+      setLoading(false);
+      setModalErro(true);
+      setTextModal('Erro Interno de Servidor. Por favor, tente novamente mais tarde.');
+      setIconModal('error-outline');
+      setCloseButton(false);
       return false;
     }
+  
     const compras = await compra.getComprasByBilhete(
       passageiro.id,
       bilhete.id,
       token
     );
     if (!compras) {
+      setLoading(false);
+      setModalErro(true);
+      setTextModal('Erro Interno de Servidor. Por favor, tente novamente mais tarde.');
+      setIconModal('error-outline');
+      setCloseButton(false);
       return false;
     }
+  
     const passagens = await passagem.getPassagens(bilhete.id, token);
     if (!passagens) {
+      setLoading(false);
+      setModalErro(true);
+      setTextModal('Erro Interno de Servidor. Por favor, tente novamente mais tarde.');
+      setIconModal('error-outline');
+      setCloseButton(false);
       return false;
     }
+  
     setTimeout(() => {
       setLoading(false);
       setPassagens(passagens);
     }, 300);
-
+  
     setCompras(compras);
-    navigation.navigate("Comprovante", { dados: response.message });
+    if (response) {
+      setLoading(false);
+      navigation.navigate("Comprovante", { dados: response.message });
+    }
+  
+    console.log(response);
   };
 
   const arrayEdit = (editar) => {
@@ -264,6 +291,7 @@ export default function ConfirmarPagamento({ navigation, route }) {
             </View>
           </View>
         </Modal>
+        <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
       </SafeAreaView>
     );
   } else {

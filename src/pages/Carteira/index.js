@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 import MyContext from '../../Context/context';
 import Compra from '../../Controllers/Compra';
 import Loading from '../Loading';
+import ModalErro from '../../components/ModalErro';
 
 const metodos = [
   {
@@ -67,18 +68,47 @@ export default function Carteira() {
     1 : 'Cartão',
     2: 'Pix',
     3:'Boleto'
-} 
-
+  } 
+  
   const{compras, setCompras , passagens, passageiro, bilhete, token} = useContext(MyContext)
   const[historico, setHistorico] = useState('')
   const[infos, setInfos] = useState(false)
+  const[modalErro, setModalErro] = useState(false)
+  const[iconModal, setIconModal] = useState('')
+  const[textModal, setTextModal] = useState('')
+  const[closeButton, setCloseButton] = useState(false)
+  let c = new Compra()
   
+  const testeConexao = async () => {
+    try {
+        const response = await c.testConnection();
+        
+        if (response) {
+            setModalErro(true);
+        } 
 
+        if (response === 500) {
+            setTextModal('Erro Interno de Servidor. Por favor, tente novamente mais tarde.');
+            setIconModal('error-outline');
+            setCloseButton(false)
+        } else if (response === 404) {
+            setTextModal('Verifique sua conexão com a Internet');
+            setIconModal('wifi-off');
+            setCloseButton(false)
+        }
+        return response
+    } catch (error) {
+        setModalErro(true);
+        setTextModal('Erro ao tentar conectar. Por favor, tente novamente mais tarde.');
+        setIconModal('error-outline');
+        setCloseButton(false)
+    }
+
+};
 
 
   const getComprasByBilhete = async() =>{
     
-    let c = new Compra()
     const response = await c.getComprasByBilhete(passageiro.id, bilhete.id, token)
     console.log(response)
     if(!response){
@@ -122,7 +152,12 @@ export default function Carteira() {
   const Metodos = ({tipoRecarga,image, id}) => ( 
     <View style={styles.fundometodos}>            
       <View style={styles.circleMetodo}>
-        <TouchableOpacity onPress={() => navigation.navigate('QtdPassagens', {fpId: id})}>
+      <TouchableOpacity onPress={async () => {
+        const conexaoFuncionando = await testeConexao();
+        if (!conexaoFuncionando) {
+          navigation.navigate('QtdPassagens', { fpId: id });
+        }
+      }}>
           <Image
             source={image}
             style={styles.metodo}
@@ -202,6 +237,7 @@ export default function Carteira() {
         </View>
 
       </View>
+      <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
     </SafeAreaView>
   );
 }else{
