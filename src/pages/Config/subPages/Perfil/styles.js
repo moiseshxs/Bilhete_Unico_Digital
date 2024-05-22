@@ -235,6 +235,10 @@ export default StyleSheet.create({
         height:'100%',
         gap:10,
       },
+      erroTelefone:{
+        color:'red',
+        textAlign:'center'
+      },
       boxBotoesEscolha:{
         flexDirection: 'row',
         alignItems: 'center',

@@ -32,6 +32,7 @@ export default function Perfil({navigation}) {
     const [telefone, setTelefone] = useState('');
     const [emailDisplay, setEmailDisplay] = useState('');
     const [telefoneDisplay, setTelefoneDisplay] = useState('');
+    const [message,setMessage] = useState('')
     
     useEffect(() => {
         setEmail(passageiro.emailPassageiro);
@@ -47,10 +48,18 @@ export default function Perfil({navigation}) {
         console.log(response)
     }
     const updateTelefone = async() => {
-        const response = await aP.updateTelefonePassageiro(passageiro.id,telefone);
-        setModalEditTelefone(false);
-        setTelefoneDisplay(telefone);
-        console.log(response)
+        if (telefone.length === 15) {
+            setMessage('');
+            const response = await aP.updateTelefonePassageiro(passageiro.id,telefone);
+            setModalEditTelefone(false);
+            setTelefoneDisplay(telefone);
+            console.log(response)
+          } 
+          if(telefone.length !== 15) {
+            setMessage('Número inválido');
+        }
+
+         
     }
 
     // const handleChoosePhoto = () => {
@@ -99,6 +108,7 @@ export default function Perfil({navigation}) {
     }
     const modalEscolhaTelefone = () => {
         setModalEditEscolha(false);
+        setMessage('');
         setModalEditTelefone(true);
     }
 
@@ -140,6 +150,11 @@ export default function Perfil({navigation}) {
                     <View style={styles.ViewModalEdit}>
                 <View style={styles.modalEditEscolha}>
                    <View style={styles.containerModalEditEscolha}>  
+                   <View style={styles.closeArea}>
+                            <Ionicons
+                            name='close' size={30} color={'black'} style={styles.icon}
+                            onPress={() => setModalEditEscolha(false)}/>
+                        </View>
                     <View style={styles.boxTitleEscolha}>
                         <Text style={styles.titleModalEscolha}>Escolha o que deseja editar</Text>
                     </View>
@@ -244,6 +259,7 @@ export default function Perfil({navigation}) {
                    <View style={styles.containerModalEdit}>  
                     <View style={styles.boxTitle}>
                         <Text style={styles.titleModal}>Insira seu Telefone</Text>
+                        <Text style={styles.erroTelefone}>{message}</Text>
                     </View>
                     <View style={styles.boxInput}>
                          <FloatingLabelInput
