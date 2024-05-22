@@ -169,14 +169,27 @@ export default StyleSheet.create({
       width:'100%',
       height:'100%',
     },
+    modalEditEscolha: {
+      flex: 0.30,
+      width:'100%',
+      height:'100%',
+    },
       containerModalEdit: {
         flex: 1,
-        width:'100%',
-        height:'100%',
         backgroundColor: "#fff",
         padding: 10,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
+
+      },
+      containerModalEditEscolha: {
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 10,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        justifyContent:'center',
+
       },
       botaoModal:{
         height: 30,
@@ -197,6 +210,12 @@ export default StyleSheet.create({
         width:'100%',
 
       },
+      boxTitleEscolha:{
+        width:'100%',
+        height:'40%',
+        alignItems:'center',
+        justifyContent: 'center',
+      },
       boxInput:{
         flex: 0.4,
         width:'100%',
@@ -216,13 +235,16 @@ export default StyleSheet.create({
         height:'100%',
         gap:10,
       },
+      erroTelefone:{
+        color:'red',
+        textAlign:'center'
+      },
       boxBotoesEscolha:{
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'space-evenly',
-        height:'100%',
+        height:'60%',
         gap:5,
-
       },
       inputModal:{
         borderBottomColor:'red',
@@ -234,7 +256,10 @@ export default StyleSheet.create({
         color: 'red',
         fontSize: 15,
         fontWeight: 'bold',
-
+      },
+      botoesModalEscolha:{
+        justifyContent:'center',
+        alignItems:'center'
       },
       titleModal:{
         color:'black',
@@ -244,10 +269,8 @@ export default StyleSheet.create({
       },
       titleModalEscolha:{
         textAlign:'center',
-        color:'black',
-        fontSize: 19,
-        fontWeight: '400',
-        padding:10,
+        fontSize: 24,
+        fontWeight:'bold',
       }
 
     

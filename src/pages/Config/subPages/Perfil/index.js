@@ -32,6 +32,7 @@ export default function Perfil({navigation}) {
     const [telefone, setTelefone] = useState('');
     const [emailDisplay, setEmailDisplay] = useState('');
     const [telefoneDisplay, setTelefoneDisplay] = useState('');
+    const [message,setMessage] = useState('')
     
     useEffect(() => {
         setEmail(passageiro.emailPassageiro);
@@ -47,10 +48,18 @@ export default function Perfil({navigation}) {
         console.log(response)
     }
     const updateTelefone = async() => {
-        const response = await aP.updateTelefonePassageiro(passageiro.id,telefone);
-        setModalEditTelefone(false);
-        setTelefoneDisplay(telefone);
-        console.log(response)
+        if (telefone.length === 15) {
+            setMessage('');
+            const response = await aP.updateTelefonePassageiro(passageiro.id,telefone);
+            setModalEditTelefone(false);
+            setTelefoneDisplay(telefone);
+            console.log(response)
+          } 
+          if(telefone.length !== 15) {
+            setMessage('Número inválido');
+        }
+
+         
     }
 
     // const handleChoosePhoto = () => {
@@ -99,6 +108,7 @@ export default function Perfil({navigation}) {
     }
     const modalEscolhaTelefone = () => {
         setModalEditEscolha(false);
+        setMessage('');
         setModalEditTelefone(true);
     }
 
@@ -138,17 +148,22 @@ export default function Perfil({navigation}) {
                 </View>
                 <Modal transparent visible={modalEditEscolha}>
                     <View style={styles.ViewModalEdit}>
-                <View style={styles.modalEdit}>
-                   <View style={styles.containerModalEdit}>  
-                    <View style={styles.boxTitle}>
+                <View style={styles.modalEditEscolha}>
+                   <View style={styles.containerModalEditEscolha}>  
+                   <View style={styles.closeArea}>
+                            <Ionicons
+                            name='close' size={30} color={'black'} style={styles.icon}
+                            onPress={() => setModalEditEscolha(false)}/>
+                        </View>
+                    <View style={styles.boxTitleEscolha}>
                         <Text style={styles.titleModalEscolha}>Escolha o que deseja editar</Text>
                     </View>
                     <View style={styles.boxBotoesEscolha}>
-                        <Pressable  style={styles.botoesModal}  onPress={modalEscolhaEmail}>
+                        <Pressable  style={styles.botoesModalEscolha}  onPress={modalEscolhaEmail}>
                             <Ionicons name="mail-outline"size={50} />
                             <Text style={styles.titleEscolha}>E-mail</Text>
                         </Pressable>
-                        <Pressable style={styles.botoesModal} onPress={modalEscolhaTelefone}>
+                        <Pressable style={styles.botoesModalEscolha} onPress={modalEscolhaTelefone}>
                             <Ionicons name="call-outline"size={50} />
                             <Text style={styles.titleEscolha}>Telefone</Text>
                         </Pressable>
@@ -186,6 +201,7 @@ export default function Perfil({navigation}) {
                     <View style={styles.boxInput}>
                             <FloatingLabelInput
                             style={styles.inputModal}
+                            maxLength={30}
                             value={email}
                             editable = {true}
                             onChangeText={(email) => {setEmail(email)}}
@@ -243,6 +259,7 @@ export default function Perfil({navigation}) {
                    <View style={styles.containerModalEdit}>  
                     <View style={styles.boxTitle}>
                         <Text style={styles.titleModal}>Insira seu Telefone</Text>
+                        <Text style={styles.erroTelefone}>{message}</Text>
                     </View>
                     <View style={styles.boxInput}>
                          <FloatingLabelInput
