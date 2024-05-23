@@ -17,7 +17,6 @@ export default function Perfil({navigation}) {
     const [file, setFile] = useState();
 
     const [modal, setModal] = useState(true);
-    const [contador,setContador] = useState(30);
     
 
     const{passageiro, setPassageiro, url} = useContext(MyContext)
@@ -158,9 +157,11 @@ export default function Perfil({navigation}) {
                 <View style={styles.modalEditEscolha}>
                    <View style={styles.containerModalEditEscolha}>  
                    <View style={styles.closeArea}>
+                         <Pressable  style={styles.botoesModalEscolha} onPress={() => setModalEditEscolha(false)}>
                             <Ionicons
                             name='close' size={30} color={'black'} style={styles.icon}
-                            onPress={() => setModalEditEscolha(false)}/>
+                            />
+                             </Pressable>
                         </View>
                     <View style={styles.boxTitleEscolha}>
                         <Text style={styles.titleModalEscolha}>Escolha o que deseja editar</Text>

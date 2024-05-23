@@ -8,6 +8,7 @@ import styles from './styles';
 import MyContext from '../../Context/context';
 import Compra from '../../Controllers/Compra';
 import User from  '../../../assets/img/global/defaultUser.png'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Config() {
     const navigation = useNavigation();
@@ -30,7 +31,10 @@ export default function Config() {
             countCompras()
         }
     })
-
+    const logoff = () => {
+        AsyncStorage.clear();
+        navigation.navigate('Login')
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -100,7 +104,7 @@ export default function Config() {
                     </View>
                 </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity onPress={logoff}>
                 <View style={styles.areaBotao}>
                     <View style={styles.esquerda}>
                     <Ionicons name="log-out" size={30} color="black" />

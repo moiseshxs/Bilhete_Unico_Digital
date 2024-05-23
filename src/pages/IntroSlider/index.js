@@ -9,7 +9,10 @@ import doneButton from './partials/doneButton'
 import renderSlides from "./partials/renderSlides";
 import skipButton from './partials/skipButton'
 import Api from "../../Services/api/Api";
-
+import {getCpfStorage,getPasswordStorage,getIdStorage} from './axios';
+import AuthPassageiro from '../../Controllers/AuthPassageiro';
+import MyContext from '../../Context/context';
+import { useContext } from "react";
 
 
 const slides = [
@@ -41,9 +44,30 @@ const slides = [
 
     }
 ]
-   
 
 export default function IntroSlider({navigation}){
+    const authP = new AuthPassageiro()
+    const{setPassageiro, setToken} = useContext(MyContext) 
+    const verificaoLogin = async() =>{
+    
+        const cpf = await getCpfStorage();
+        const password = await getPasswordStorage();
+        const id = await getIdStorage();
+        if (cpf && password != null) {
+            const response = await authP.login(cpf, password);
+            console.log(response)
+            if(response.message === undefined){
+                setPassageiro(response.usuario)
+                setToken(response.token_de_acesso)
+                setTimeout(() => setLoading(false), 1000)
+                navigation.navigate('ListaBilhetes')
+            }
+            
+        } else {
+            navigation.navigate('Login');
+        }
+    
+    }
     
     
     return(
@@ -69,8 +93,8 @@ export default function IntroSlider({navigation}){
             bottomButton={true}
             renderNextButton={button}
             renderDoneButton={doneButton}
-            onDone={() => navigation.navigate('Login')}
-            onSkip={() => navigation.navigate('Login')}
+            onDone={verificaoLogin}
+            onSkip={verificaoLogin}
             />
             
     );

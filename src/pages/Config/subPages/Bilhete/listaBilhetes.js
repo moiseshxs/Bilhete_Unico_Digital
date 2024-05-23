@@ -5,19 +5,33 @@ import Bilhete from "../../../../Controllers/Bilhete"
 import MyContext from "../../../../Context/context"
 import Loading from "../../../Loading"
 import ModalErro from '../../../../components/ModalErro';
-
+import { setIdStorage,getIdStorage,getTokenStorage} from './axios';
 
 export default function ListaBilhetes({navigation}){
     
-    const{ token, passageiro, setBilhete, setPassagens, setCompras} = useContext(MyContext)
+    const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras} = useContext(MyContext)
     const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
     const [error, setError] = useState(false)
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
     const[textModal, setTextModal] = useState('')
+    const[idPassageiro,setIdPassageiro] = useState('')
     let b = new Bilhete()
     const[DATA, setDATA] = useState('')
+    
+    useEffect(()=>{
+        const initializePassageiro = async () => {
+        setIdPassageiro(await getIdStorage());
+        setToken(await getTokenStorage());
+       console.log(token+'token')
+        if(idPassageiro == undefined){
+            setIdStorage(passageiro.id);
+        }
+    }
+    initializePassageiro();
+    })
+    
     
     // let DATA = [ 
     //     // {
@@ -56,7 +70,7 @@ export default function ListaBilhetes({navigation}){
     }
     const getBilhetes = async() => {
         setInfos(false)
-        const response = await b.getBilhetes(passageiro.id, token)
+        const response = await b.getBilhetes(idPassageiro, token)
         if(response.message !== undefined){
             setModalErro(true)
             setTextModal('Você não possui Bilhetes')

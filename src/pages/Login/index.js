@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Modal, Dimensions} from 'react-native';
-import { useState, useEffect} from 'react';
+import { useState, useEffect,useContext} from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
@@ -9,9 +8,11 @@ import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import MyContext from '../../Context/context';
 import Loading from '../Loading';
 import ModalErro from '../../components/ModalErro';
+import { setCpfStorage,setPasswordStorage,setTokenStorage} from './axios';
 
 
 export default function Login({navigation}) {
+    
     
     const authP = new AuthPassageiro()
    
@@ -105,7 +106,10 @@ export default function Login({navigation}) {
         }else{
             
             setLoading(true)
-        const response = await authP.login(cpf, password)
+            setCpfStorage(cpf);
+            setPasswordStorage(password);
+            
+        const response = await authP.login(cpf, password);
         setSenha('');
         setCpfForm('');
 
@@ -120,6 +124,7 @@ export default function Login({navigation}) {
             if(response.message === undefined){
                 setPassageiro(response.usuario)
                 setToken(response.token_de_acesso)
+                setTokenStorage(response.token_de_acesso)
                 setPassword(senha)
                 setModalErro(false)
                 setTimeout(() => setLoading(false), 1000)

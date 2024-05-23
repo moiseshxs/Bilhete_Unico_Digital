@@ -58,6 +58,7 @@ export default StyleSheet.create({
         alignItems:'center',
         borderBottomWidth:1,
         borderColor:'#FF0000',
+       
         
         
         // paddingVertical:30,
@@ -212,7 +213,7 @@ export default StyleSheet.create({
       },
       boxTitleEscolha:{
         width:'100%',
-        height:'40%',
+        height:'20%',
         alignItems:'center',
         justifyContent: 'center',
       },
@@ -243,7 +244,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent:'space-evenly',
-        height:'60%',
+        height:'80%',
         gap:5,
       },
       inputModal:{
@@ -259,7 +260,7 @@ export default StyleSheet.create({
       },
       botoesModalEscolha:{
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
       },
       titleModal:{
         color:'black',
