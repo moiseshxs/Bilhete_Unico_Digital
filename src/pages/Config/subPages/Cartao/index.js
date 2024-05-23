@@ -8,7 +8,7 @@ import styles from './styles';
 import CartaoPassageiro from '../../../../Controllers/CartaoPassageiro';
 import MyContext from '../../../../Context/context';
 import { Ionicons } from '@expo/vector-icons';
-
+import ModalErro from '../../../../components/ModalErro';
 
 const DATA = [
     {
@@ -29,12 +29,17 @@ export default function Cartao({ navigation, route }) {
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
     const [modalEdit, setModalEdit] = useState(false);
+    const [modalErro, setModalErro] = useState(false)
+    const [iconModal, setIconModal] = useState('')
+    const [textModal, setTextModal] = useState('')
+    const [closeButton, setCloseButton] = useState(false)
     let cP = new CartaoPassageiro();
 
     useEffect(() => {
         const getCartoesPassageiro = async () => {
             const response = await cP.getCartaoPassageiro(passageiro.id, token)
             setCartao(response)
+
         }
 
         getCartoesPassageiro();
@@ -44,11 +49,23 @@ export default function Cartao({ navigation, route }) {
 
     const destroyCartao = async (id) => {
         try {
-            await cP.destroyCartaoPassageiro(id, token);
-            const updatedCartao = cartao.filter(item => item.id !== id);
-            setCartao(updatedCartao);
+            const response = await cP.destroyCartaoPassageiro(id, token);
+            console.log(response, "PPPPP")
+            if (response === true) {
+                const updatedCartao = cartao.filter(item => item.id !== id);
+                setCartao(updatedCartao);
+            }else{
+                setModalErro(true);
+                setTextModal('Erro ao excluir Cartão. Por favor, tente novamente mais tarde.');
+                setIconModal('error-outline');
+                setCloseButton(false);
+            }
         } catch (error) {
-            console.error('Erro ao excluir o cartão:', error);
+            console.error('Erro ao excluir cartão:', error);
+            setModalErro(true);
+            setTextModal('Erro ao excluir Cartão. Por favor, tente novamente mais tarde.');
+            setIconModal('error-outline');
+            setCloseButton(false);
         }
     };
     const modalId = (id) => {
@@ -120,6 +137,7 @@ export default function Cartao({ navigation, route }) {
                     </TouchableOpacity>
                 </View>
             </View>
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </SafeAreaView>
     );
 }

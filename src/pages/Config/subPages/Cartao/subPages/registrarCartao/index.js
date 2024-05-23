@@ -5,12 +5,17 @@ import { FloatingLabelInput } from 'react-native-floating-label-input';
 import styles from './styles';
 import CartaoPassageiro from '../../../../../../Controllers/CartaoPassageiro'
 import MyContext from '../../../../../../Context/context';
+import ModalErro from '../../../../../../components/ModalErro';
 export default function Cartao({navigation}) {
 
 
     const {passageiro, token} = useContext(MyContext);
     const [borderColor, setBorderColor] = useState('#7b7b7b')
     const [borderColor2, setBorderColor2] = useState('#7b7b7b')
+    const [modalErro, setModalErro] = useState(false)
+    const [iconModal, setIconModal] = useState('')
+    const [textModal, setTextModal] = useState('')
+    const [closeButton, setCloseButton] = useState(false)
     let cartaoPassageiro = new CartaoPassageiro()
 
     function changeColor(input){
@@ -39,15 +44,46 @@ export default function Cartao({navigation}) {
 
 
     const storeCartao = async () => {
-        try {
-            await cartaoPassageiro.storeCartaoPassageiro(passageiro.id, token, nome, cpf, numCartao, "visa", "c6 bank", cvv, "088988", "8999", validade);
-            return navigation.navigate("Cartao", { novoCartaoAdicionado: true });
-        } catch (error) {
-            console.error("Erro ao inserir cartão:", error);
-            return error; 
+        await new Promise(resolve => {
+            setModalErro(false);
+            
+            setTimeout(resolve, 0);
+        });
+        if(cpf  == '' || nome == '' ||numCartao =='' ||cvv==''||validade == ''){
+            setModalErro(true)
+            setTextModal('Preencha os Campos')
+            setIconModal('error-outline')
+            setCloseButton(true)
+        }else if(cpf.length!==14 || numCartao.length!==19 ||cvv.length!==3|| validade.length !==5){
+            setModalErro(true)
+            setTextModal('Dados inválidos. Por favor, preencha novamente.')
+            setIconModal('error-outline')
+            setCloseButton(true)
+        }else{
+
+            
+            const response = await cartaoPassageiro.storeCartaoPassageiro(passageiro.id, token, nome, cpf, numCartao, "visa", "c6 bank", cvv, "088988", "8999", validade);
+            if(response){
+                return navigation.navigate("Cartao", { novoCartaoAdicionado: true });
+            }else{
+                setModalErro(true);
+                setTextModal('Erro ao excluir Cartão. Por favor, tente novamente mais tarde.');
+                setIconModal('error-outline');
+                setCloseButton(false);
+            }
         }
+        
+        
+        
+        
     }
     
+    const onChangeTextNome = (value) => {
+        // Verifica se o valor contém algum número
+        if (!/\d/.test(value)) {
+            setNome(value); // Atualiza o estado apenas se não houver números
+        }
+    }
 
     const [numCartao, setNumCartao] = useState('')
     const [validade, setValidade] = useState('')
@@ -230,7 +266,7 @@ export default function Cartao({navigation}) {
                         paddingHorizontal: 10,
                         
                     }}
-                    onChangeText={value => {setNome(value)}}
+                    onChangeText={value => {onChangeTextNome(value)}}
                     onFocus={() => changeColor('nome')}
                     />
                     <FloatingLabelInput
@@ -285,6 +321,8 @@ export default function Cartao({navigation}) {
                     </TouchableOpacity>
                 </View>
             </View>
+
+            <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
         </SafeAreaView>
     );
 }

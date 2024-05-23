@@ -25,7 +25,7 @@ async storeCartaoPassageiro(id:number,token:string,nomeTitularCartao:string,cpfT
     return response.data
     } catch (error) {
         console.log(error, "ERRO AO INSERIR CARTAO")
-        return error;
+        return false;
     }
 }
 
@@ -42,7 +42,7 @@ async getCartaoPassageiro(id:number,token:string){
 async destroyCartaoPassageiro(id:number, token:string){
     try{
         const response = await this.api.delete(`/destroyCartao/${id}`, {headers: {'Authorization': `Bearer ${token}`}}) 
-        return false
+        return true
     } catch (error) {
         return error;
     }
