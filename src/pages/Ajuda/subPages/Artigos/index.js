@@ -1,17 +1,25 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-
-
-
+import VotoAjuda from '../../../../Controllers/VotoAjuda';
+import MyContext from '../../../../Context/context';
 export default function ArtigosBilhete({navigation,route}) {
-
+    const {token} = useContext(MyContext);
+    let voto = new VotoAjuda()
     
+    const [id] = useState(route.params?.id);
     const [titulo] = useState(route.params?.titulo);
     const [caminho] = useState(route.params?.caminho);
     const [descricao] = useState(route.params?.desc)
-    console.log(route.paramns, "PORRA")
+    const votoAjuda =async (util)=>{
+        const response = await voto.storeVoto(token, util, id);
+    } 
+
+    const StoreVotoAjuda = async(util)=>{
+        votoAjuda(util)
+    }
+  
     return (
         <SafeAreaView style={styles.container}>
             
@@ -34,14 +42,14 @@ export default function ArtigosBilhete({navigation,route}) {
                 <View style={styles.linha} />
                 <View style={styles.center}>
                     <TouchableOpacity style={styles.buttonAjuda}
-                    //onPress={}
+                    onPress={(()=>{StoreVotoAjuda(1)})}
                     >
                         <Text>
                             Sim
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonAjuda}
-                    //onPress={}
+                    onPress={(()=>{StoreVotoAjuda(0)})}
                     >
                         <Text>
                             Não
