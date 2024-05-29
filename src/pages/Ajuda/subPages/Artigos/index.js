@@ -5,15 +5,15 @@ import { useNavigation } from '@react-navigation/native';
 import VotoAjuda from '../../../../Controllers/VotoAjuda';
 import MyContext from '../../../../Context/context';
 export default function ArtigosBilhete({navigation,route}) {
-    const {token} = useContext(MyContext);
+    const {token, passageiro} = useContext(MyContext);
     let voto = new VotoAjuda()
     
-    const [id] = useState(route.params?.id);
+    const [idAjuda] = useState(route.params?.id);
     const [titulo] = useState(route.params?.titulo);
     const [caminho] = useState(route.params?.caminho);
     const [descricao] = useState(route.params?.desc)
     const votoAjuda =async (util)=>{
-        const response = await voto.storeVoto(token, util, id);
+        const response = await voto.storeVoto(token, util, idAjuda, passageiro.id);
     } 
 
     const StoreVotoAjuda = async(util)=>{
