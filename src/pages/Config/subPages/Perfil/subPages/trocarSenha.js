@@ -46,7 +46,7 @@ const {passageiro,password} = useContext(MyContext);
             const response = await aP.updateSenhaPassageiro(passageiro.id,newPassword)
             console.log(response)
             setTexto("É sua senha atual")
-            navigation.navigate('Home');
+            navigation.navigate('Inicio');
            }
            if(password==newPassword){
             setTexto("É sua senha atual")

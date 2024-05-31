@@ -49,7 +49,7 @@ const navigation = useNavigation();
       
 
       <Stack.Screen 
-        name='Home'
+        name='Inicio'
         component={Tabs}
         options={{
           title: 'Inicio',

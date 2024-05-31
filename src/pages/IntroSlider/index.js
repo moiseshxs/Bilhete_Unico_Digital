@@ -9,12 +9,12 @@ import doneButton from './partials/doneButton'
 import renderSlides from "./partials/renderSlides";
 import skipButton from './partials/skipButton'
 import Api from "../../Services/api/Api";
-import {getCpfStorage,getPasswordStorage,getIdStorage} from './axios';
+import {getCpfStorage,getPasswordStorage} from './axios';
 import AuthPassageiro from '../../Controllers/AuthPassageiro';
 import MyContext from '../../Context/context';
-import { useContext } from "react";
-
-
+import { useContext,useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loading from '../Loading';
 const slides = [
     {
         key: '1',
@@ -45,30 +45,52 @@ const slides = [
     }
 ]
 
-export default function IntroSlider({navigation}){
-    const authP = new AuthPassageiro()
-    const{setPassageiro, setToken} = useContext(MyContext) 
-    const verificaoLogin = async() =>{
-    
-        const cpf = await getCpfStorage();
-        const password = await getPasswordStorage();
-        const id = await getIdStorage();
-        if (cpf && password != null) {
-            const response = await authP.login(cpf, password);
-            console.log(response)
-            if(response.message === undefined){
-                setPassageiro(response.usuario)
-                setToken(response.token_de_acesso)
-                setTimeout(() => setLoading(false), 1000)
-                navigation.navigate('ListaBilhetes')
-            }
-            
-        } else {
-            navigation.navigate('Login');
-        }
-    
+
+const limparAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      // console.log('AsyncStorage limpo com sucesso.');
+    } catch (error) {
+      console.error('Erro ao limpar o AsyncStorage:', error);
     }
-    
+  };
+  
+  export default function IntroSlider({ navigation }) {
+    const authP = new AuthPassageiro();
+    const { setPassageiro, setToken } = useContext(MyContext);
+    const[loading, setLoading] = useState(false)
+    const verificaoLogin = async () => {
+      const cpf = await getCpfStorage();
+      const password = await getPasswordStorage();
+  
+      if (cpf && password != null) {
+        try {
+          const response = await authP.login(cpf, password);
+          
+          
+          if(response.message){
+            
+                // Chama a função para limpar o AsyncStorage em caso de erro
+                await limparAsyncStorage();
+                navigation.navigate('Login');
+              
+          }
+          if (response.message === undefined) {
+            setPassageiro(response.usuario);
+            setToken(response.token_de_acesso);
+            setTimeout(() => setLoading(false), 1000);
+            navigation.navigate('ListaBilhetes');
+          }
+        } catch (error) {
+          
+          console.error('Erro ao fazer login:', error);
+          await limparAsyncStorage();
+          navigation.navigate('Login');
+        }
+      } else {
+        navigation.navigate('Login');
+      }
+    };
     
     return(
         

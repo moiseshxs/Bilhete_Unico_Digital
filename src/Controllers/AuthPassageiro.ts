@@ -68,7 +68,7 @@ async login(cpf:string, password:string)
         const response = await this.api.post('/auth/login', form)
         return response.data
         }catch(e){
-            return false
+            return e
         }
        
 

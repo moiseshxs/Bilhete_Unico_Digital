@@ -20,17 +20,15 @@ export default function ListaBilhetes({navigation}){
     let b = new Bilhete()
     const[DATA, setDATA] = useState('')
     
-    useEffect(()=>{
+ useEffect(() => {
         const initializePassageiro = async () => {
-        setIdPassageiro(await getIdStorage());
-        setToken(await getTokenStorage());
-       console.log(token+'token')
-        if(idPassageiro == undefined){
-            setIdStorage(passageiro.id);
-        }
-    }
-    initializePassageiro();
-    })
+            const id = await getIdStorage();
+            const storedToken = await getTokenStorage();
+            setIdPassageiro(id);
+            setToken(storedToken);    
+        };
+        initializePassageiro();
+    }, []);
     
     
     // let DATA = [ 
@@ -70,7 +68,7 @@ export default function ListaBilhetes({navigation}){
     }
     const getBilhetes = async() => {
         setInfos(false)
-        const response = await b.getBilhetes(idPassageiro, token)
+        const response = await b.getBilhetes(!idPassageiro?passageiro.id:idPassageiro, token)
         if(response.message !== undefined){
             setModalErro(true)
             setTextModal('Você não possui Bilhetes')
@@ -95,7 +93,7 @@ export default function ListaBilhetes({navigation}){
     const onRefresh = () => {
         setRefreshing(true)
         getBilhetes()
-        console.log('vai')
+        // console.log('vai')
     }
     
     return(

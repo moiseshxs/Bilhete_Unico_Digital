@@ -20,7 +20,7 @@ export default function Bilhete({navigation, route}) {
     const[textModal, setTextModal] = useState('')
     const navHome = (bilhete) => {
         setTroca(true)
-        navigation.navigate('Home')
+        navigation.navigate('Inicio')
     }
 
     const getPassagens = async() =>{
