@@ -64,6 +64,14 @@ export default StyleSheet.create({
         alignItems: 'center',
 
     },
+
+    jaVotou:{
+        backgroundColor: 'red',
+    },
+
+    txtJaVotou:{
+        color: 'white'
+    },
     linha: {
         borderBottomWidth: 1,
         borderColor: '#000',

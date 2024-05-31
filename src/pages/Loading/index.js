@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export default function Loading(props){
     const[observacoes, setObservacoes] = useState('')
-    console.log(props.obs)
+    // console.log(props.obs)
     if(props.obs !==undefined && observacoes ==''){
 
         setObservacoes(props.obs)

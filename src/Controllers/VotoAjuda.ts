@@ -16,6 +16,17 @@ class VotoAjuda extends Api{
             return error;
         }
     }
+
+    async getVoto(token:string,id:number, idAjuda:number)
+{
+        try{
+            const response = await this.api.get(`/voto/${id}/${idAjuda}` ,{ headers: {'Authorization': `Bearer ${token}`}})
+            return response.data
+        }catch(error){
+            return error
+        } 
+        
+}
     
 
 }
