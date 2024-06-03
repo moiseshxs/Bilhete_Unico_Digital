@@ -1,119 +1,82 @@
-import { StyleSheet, Dimensions } from 'react-native';
-const Width = Dimensions.get('screen').width;
-const Height = Dimensions.get('screen').height;
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
         backgroundColor: '#fff',
-        alignItems: 'center',
-        padding: 20,
-        gap : Height/20,
-        
     },
-    containerR: {  
-        alignItems: 'center',
-        padding: 20,
-        flexDirection: 'row',
-        
+    areaChat: {
+        flex: 7,
     },
-    circuloBorda:{
-        width:  40,
-        height: 40,
-        
-        borderRadius: 50,
-        borderWidth: 1,
-        borderColor: 'black',
-        display: 'flex',
-        justifyContent:'center',
-        alignItems: 'center'
-    },
-    circuloBordaChat:{
-        width:  40,
-        height: 40,
-        backgroundColor:'red',
-        borderRadius: 50,
-        borderWidth: 1,
-        borderColor: 'white',
-        display: 'flex',
-        justifyContent:'center',
-        alignItems: 'center'
-    },
-    row:{
-        flex: 0.11,
-        display: 'flex',
-        flexDirection:'row',
-        alignItems: 'center',
-        gap:10,
-        borderBottomWidth: 1,
-        borderColor: '#000', 
-        
-    },
-    center:{
-        display: 'flex',
-        justifyContent:'center',
-        alignItems: 'center'
-    },
-    titulo:{
-        fontWeight:'bold',
-        fontSize: Width/18
-    },
-    boxInput:{
-        flex:0,
-        height: Height/12,
-        alignItems: 'center',
-        flexDirection: 'row',
-    },
-    input: { 
-        borderWidth: 1,
-        borderRadius: 20,
-        marginHorizontal: 10,
-        backgroundColor: 'white',
-        height: Height/16,
-        width: Width/1.2,
-        padding: Width/40,
-        
-    },
-    viewCompleta:{
+    areaChatRobo: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        padding: Height/40
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        gap: 7,
+        padding: 20, 
     },
-    boxChat:{
-        height: Height/1.55, 
-        justifyContent: 'flex-end',
-        alignItems:'center',
+    areaFinalizarChat:{
+        flex: 1,
+      
     },
-    questionario:{
-        justifyContent: 'center',
-        alignItems:'center',
-        gap: 10
-    },  
-    titleQuest:{
-        fontWeight: 'bold',
-        fontSize: 14,
+    mensagemRobo: {
+        height: 100,
+        width: '90%',
+        backgroundColor: '#d3d3d3',
+        padding: 15,
+        borderRadius: 15,
     },
-    buttonAjuda:{
-        
-        height: Height/20,
-        width: Width/4,
+    mensagemFinalizar: {
+        height: 50,
+        width: '120%',
+        backgroundColor: '#000',
+        padding: 15,
         borderRadius: 50,
-        borderWidth: 1.5,
-        borderColor: '#000',
-        backgroundColor: '#fff',
-        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    textBold: {
+        fontWeight: 'bold',
+    },
+    areaOpcoes: {
+        width: '90%',
+        gap: 7,
+    },
+    opcoes: {
+        backgroundColor: 'red',
+        height: 50,
+        width: '100%',
+        borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
-    buttonArea:{
-        justifyContent:'flex-end',
-        flexDirection: 'row',
-        alignItems:'center',
-        gap: 10,
-    },    
-    
-    
+    textOpcoes: {
+        fontWeight: 'bold',
+        color: '#FFF',
+    },
+
+    areaTeclado: {
+        flex: 10,
+        borderTopWidth: 1,
+        borderColor: '#d3d3d3',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    input: {
+        height: '70%',
+        width: '90%',
+        borderRadius: 50,
+        backgroundColor: '#d3d3d3',
+        paddingHorizontal: 20,
+    },
+    icone: {
+        position: 'absolute',
+        right: 35,
+        height: 50,
+        width: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+  
 });

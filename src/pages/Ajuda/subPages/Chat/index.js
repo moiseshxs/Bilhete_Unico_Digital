@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity, TextInput,KeyboardAvoidingView} from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity, TextInput, KeyboardAvoidingView, Pressable, ScrollView } from 'react-native';
 import styles from './styles';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,36 +14,54 @@ export default function Chat() {
 
     return (
         <SafeAreaView style={styles.container}>
-        <View style={styles.boxChat}>
-            <View style={styles.questionario}>
-                <Text style={styles.titleQuest}>Conseguiu resolver o seu problema?</Text>
-                <View style={styles.buttonArea}>
-                    <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('Ajuda')}>
-                        <Text>Sim</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonAjuda} onPress={() => navigation.navigate('FaleComFuncionario')}>
-                        <Text>Não</Text>
-                    </TouchableOpacity>
+            <ScrollView>
+            <View style={styles.areaChat}>
+
+                <View style={styles.areaChatRobo}>
+                    <View style={styles.mensagemRobo}>
+                        <Text style={styles.textBold}>Atendimento automatico</Text>
+                        <Text>Olá, Hugo Botinha. Esse é o atendimento automatico.</Text>
+                    </View>
+                    <View style={styles.mensagemRobo}>
+                        <Text>Escolha uma das opções a seguir ou clique em outros e escreva em poucas palavras qual é a sua dúvida.</Text>
+                    </View>
+                    <View style={styles.areaOpcoes}>
+                        <Pressable style={styles.opcoes}>
+                            <Text style={styles.textOpcoes}>Como trocar de bilhete</Text>
+                        </Pressable>
+                        <Pressable style={styles.opcoes}>
+                            <Text style={styles.textOpcoes}>Como solicitar bilhete</Text>
+                        </Pressable>
+                        <Pressable style={styles.opcoes}>
+                            <Text style={styles.textOpcoes}>Como pagar via PIX</Text>
+                        </Pressable>
+                        <Pressable style={styles.opcoes}>
+                            <Text style={styles.textOpcoes}>Como alterar email</Text>
+                        </Pressable>
+                    </View> 
+
+                <View style={styles.areaFinalizarChat}>
+                    <View style={styles.mensagemFinalizar}>
+                        <Pressable style={styles.areaOpcoes}>
+                            <Text style={styles.textOpcoes}> Finalizar Chat. </Text>
+                        </Pressable>
+                    </View>
+
                 </View>
+                </View>
+
+
             </View>
-        </View>
-
-        <KeyboardAvoidingView
-            style={styles.containerR}
-
-        >
-            <TextInput
-                style={styles.input}
-                placeholder="Digite algo"
-            />
-            <View style={styles.circuloBordaChat}>
-                <TouchableOpacity>
-                    <Ionicons name="paper-plane" size={25} color={'white'} />
-                </TouchableOpacity>
+            </ScrollView>
+            <View style={styles.areaTeclado}>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Digite sua mensagem...'
+                />
+                <Pressable style={styles.icone}>
+                    <FontAwesome name="send" size={24} color="red" />
+                </Pressable>
             </View>
-        </KeyboardAvoidingView>
-
-
-    </SafeAreaView>
+        </SafeAreaView>
     );
 }
