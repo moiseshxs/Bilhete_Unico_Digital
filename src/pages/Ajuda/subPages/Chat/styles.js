@@ -15,10 +15,7 @@ export default StyleSheet.create({
         gap: 7,
         padding: 20, 
     },
-    areaFinalizarChat:{
-        flex: 1,
-      
-    },
+
     mensagemRobo: {
         height: 100,
         width: '90%',
@@ -26,15 +23,7 @@ export default StyleSheet.create({
         padding: 15,
         borderRadius: 15,
     },
-    mensagemFinalizar: {
-        height: 50,
-        width: '120%',
-        backgroundColor: '#000',
-        padding: 15,
-        borderRadius: 50,
-        justifyContent:'center',
-        alignItems:'center',
-    },
+
     textBold: {
         fontWeight: 'bold',
     },
@@ -44,7 +33,7 @@ export default StyleSheet.create({
     },
     opcoes: {
         backgroundColor: 'red',
-        height: 50,
+        height: 40,
         width: '100%',
         borderRadius: 50,
         justifyContent: 'center',
@@ -56,7 +45,7 @@ export default StyleSheet.create({
     },
 
     areaTeclado: {
-        flex: 10,
+        flex: 1,
         borderTopWidth: 1,
         borderColor: '#d3d3d3',
         justifyContent: 'center',

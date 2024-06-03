@@ -14,16 +14,14 @@ export default function Chat() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView>
             <View style={styles.areaChat}>
-
                 <View style={styles.areaChatRobo}>
                     <View style={styles.mensagemRobo}>
                         <Text style={styles.textBold}>Atendimento automatico</Text>
                         <Text>Olá, Hugo Botinha. Esse é o atendimento automatico.</Text>
                     </View>
                     <View style={styles.mensagemRobo}>
-                        <Text>Escolha uma das opções a seguir ou clique em outros e escreva em poucas palavras qual é a sua dúvida.</Text>
+                        <Text>Escolha uma das opções a seguir ou clique em outros e escreva em poucas palavras chaves qual é a sua dúvida.</Text>
                     </View>
                     <View style={styles.areaOpcoes}>
                         <Pressable style={styles.opcoes}>
@@ -38,21 +36,10 @@ export default function Chat() {
                         <Pressable style={styles.opcoes}>
                             <Text style={styles.textOpcoes}>Como alterar email</Text>
                         </Pressable>
-                    </View> 
-
-                <View style={styles.areaFinalizarChat}>
-                    <View style={styles.mensagemFinalizar}>
-                        <Pressable style={styles.areaOpcoes}>
-                            <Text style={styles.textOpcoes}> Finalizar Chat. </Text>
-                        </Pressable>
                     </View>
-
                 </View>
-                </View>
-
-
             </View>
-            </ScrollView>
+
             <View style={styles.areaTeclado}>
                 <TextInput
                     style={styles.input}
