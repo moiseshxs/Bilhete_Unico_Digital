@@ -147,6 +147,7 @@ useEffect(() => {
                 <View style={styles.areaModalCorpo}>
                   <FlatList
                     data={resultSearchData}
+                    style={styles.resultado}
                     renderItem={({ item }) => (
                       <ResultSearch
                         id={item.id}

@@ -65,7 +65,7 @@ export default StyleSheet.create({
   boxTituloAjuda: {
     justifyContent: 'flex-end',
     flexDirection: 'column',
-    padding: Width / 38,
+    paddingVertical: 15,
     borderBottomWidth: 1,
     borderColor: '#d3d3d3',
   },
@@ -196,6 +196,7 @@ export default StyleSheet.create({
 
   areaModalCorpo: {
     flex: 9,
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
 });

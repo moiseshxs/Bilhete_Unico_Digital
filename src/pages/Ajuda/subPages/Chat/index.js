@@ -45,7 +45,7 @@ export default function Chat() {
                     style={styles.input}
                     placeholder='Digite sua mensagem...'
                 />
-                <Pressable style={styles.icone}>
+                <Pressable style={styles.icone} onPress={() => navigation.navigate("FaleComFuncionario")}>
                     <FontAwesome name="send" size={24} color="red" />
                 </Pressable>
             </View>

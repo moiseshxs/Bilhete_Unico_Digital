@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity, Dimensions, ScrollView, TextInput, Pressable } from 'react-native';
 import styles from './styles';
 import { FloatingLabelInput } from "react-native-floating-label-input";
 import { Ionicons } from '@expo/vector-icons';
@@ -14,8 +14,49 @@ export default function FaleComFuncionario() {
     const navigation = useNavigation();
     const [assunto, setAssunto] = useState()
     return (
-        <SafeAreaView>
-            <ScrollView>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.areaHeader}>
+                <Text style={styles.textHeader}>Para dúvidas, sugestões ou reclamações, preencha o formulário abaixo.</Text>
+            </View>
+            <View style={styles.areaForm}>
+                <View>
+                    <Text >Todos os campos são obrigatórios.*</Text>
+                </View>
+                <View>
+                    <Text style={styles.textInput}>NOME*</Text>
+                    <TextInput
+                        style={styles.input}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.textInput}>E-MAIL*</Text>
+                    <TextInput
+                        style={styles.input}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.textInput}>TIPO DE SUPORTE*</Text>
+                    <TextInput
+                        style={styles.input}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.textInput}>MENSAGEM*</Text>
+                    <TextInput
+                        style={styles.inputMsg}
+                    />
+                </View>
+            </View>
+            <View style={styles.areaBtn}>
+                <Pressable style={styles.btnEnviar}>
+                    <Text style={styles.textBtn}>Enviar</Text>
+                </Pressable>
+            </View>
+        </SafeAreaView>
+    );
+}
+
+{/* <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.section}>
                         <View style={styles.boxAssunto}>
@@ -78,7 +119,4 @@ export default function FaleComFuncionario() {
                         </View>
                     </View>
                 </View>
-            </ScrollView>
-        </SafeAreaView>
-    );
-}
+            </ScrollView> */}
