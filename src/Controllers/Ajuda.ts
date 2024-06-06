@@ -16,6 +16,16 @@ class Ajuda extends Api{
         }
 
     }
+    async getAjuda(token:string,id:number)
+    {
+            try{
+                const response = await this.api.get(`/getAjuda/${id}` ,{ headers: {'Authorization': `Bearer ${token}`}})
+                return response.data
+            }catch(error){
+                return error
+            } 
+            
+    }
 
 }
 

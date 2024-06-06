@@ -4,14 +4,26 @@ import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import VotoAjuda from '../../../../Controllers/VotoAjuda';
 import MyContext from '../../../../Context/context';
+import Ajuda from '../../../../Controllers/Ajuda';
 export default function ArtigosBilhete({navigation,route}) {
     const {token, passageiro} = useContext(MyContext);
     let voto = new VotoAjuda()
-    
+    let ajuda = new Ajuda()
+    const getAjuda = async() =>{
+        const response = await ajuda.getAjuda(token,route.params?.id);
+        console.log(response);
+        setTitulo(response.map(item=>item.tituloAjuda));
+        setCaminho(response.map(item=>item.caminhoAjuda));
+        setDescricao(response.map(item=>item.descAjuda));
+
+    }
+    useEffect(()=>{
+        getAjuda();
+    },[])
     const [idAjuda] = useState(route.params?.id);
-    const [titulo] = useState(route.params?.titulo);
-    const [caminho] = useState(route.params?.caminho);
-    const [descricao] = useState(route.params?.desc)
+    const [titulo, setTitulo] = useState('');
+    const [caminho,setCaminho] = useState('');
+    const [descricao,setDescricao] = useState('')
     const [votou, setVotou] = useState(0)
     const votoAjuda =async (util)=>{
         const response = await voto.storeVoto(token, util, idAjuda, passageiro.id);

@@ -27,6 +27,16 @@ class VotoAjuda extends Api{
         } 
         
 }
+    async getAjudaMaiores(token:string)
+{
+        try{
+            const response = await this.api.get(`/votoPorcentagem` ,{ headers: {'Authorization': `Bearer ${token}`}})
+            return response.data
+        }catch(error){
+            return error
+        } 
+        
+}
     
 
 }
