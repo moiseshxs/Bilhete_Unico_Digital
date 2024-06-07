@@ -13,6 +13,7 @@ import ModalErro from '../../../../components/ModalErro';
 export default function Cartao({ navigation, route }) {
 
     const [cartao, setCartao] = useState();
+    const [nomeCartao, setNomeCartao] = useState();
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
     const [modalEdit, setModalEdit] = useState(false);
@@ -26,6 +27,8 @@ export default function Cartao({ navigation, route }) {
         const getCartoesPassageiro = async () => {
             const response = await cP.getCartaoPassageiro(passageiro.id, token)
             setCartao(response)
+            setNomeCartao(response.map(item=>item.apelidoCartao));
+            console.log(nomeCartao)
 
         }
 
@@ -63,19 +66,34 @@ export default function Cartao({ navigation, route }) {
         destroyCartao(idCartao)
         setModalEdit(false)
     }
+    function formataçãoNumero(n) {
+     
+      
+     
+        const primeiros4 = n.slice(0, 4);
+      
+      
+        const ultimos4 = n.slice(-4);
+      
+      
+        return `${primeiros4} **** **** ${ultimos4}`;
+      }
+      
+
+      
 
     const Item = ({ id, numero, bandeira }) => (
         <View>
             <View style={styles.cartao}>
                 <View style={styles.areaCimaCartao}>
-                    <Text style={styles.textCartao}>{numero}</Text>
+                    <Text style={styles.textCartao}>{formataçãoNumero(numero)}</Text>
 
                     <Pressable onPress={() => modalId(id)}>
                         <Ionicons name="trash-outline" size={30} color="white"/>
                     </Pressable>
                 </View>
                 <View style={styles.areaBaixoCartao}>
-                    <Text style={styles.textNomeCartao}>NUBANK</Text>
+                    <Text style={styles.textNomeCartao}>{nomeCartao}</Text>
                     <FontAwesome name="cc-visa" size={30} color="white" />
                 </View>
             </View>

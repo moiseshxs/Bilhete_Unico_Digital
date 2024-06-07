@@ -5,14 +5,21 @@ import MyContext from '../../Context/context';
 import Passageiro from '../../Services/api/Passageiro';
 import Loading from '../Loading';
 import ModalErro from '../../components/ModalErro';
+
 export default function QrCode() {
 
 
-    const[loading, setLoading] = useState(false)
-    const{passageiro,bilhete, token} = useContext(MyContext)
-    const[modalErro, setModalErro] = useState(false)
-    const[iconModal, setIconModal] = useState('')
-    const[textModal, setTextModal] = useState('')
+    const[loading, setLoading] = useState(false);
+    const{passageiro,bilhete, token} = useContext(MyContext);
+    const[modalErro, setModalErro] = useState(false);
+    const[iconModal, setIconModal] = useState('');
+    const[textModal, setTextModal] = useState('');
+    const[nomePassageiro] = useState(passageiro.nomePassageiro);
+    const[dataPassageiro] = useState(passageiro.dataNascPassageiro);
+    const[cpfPassageiro] = useState(passageiro.cpfPassageiro);
+    const[tipoBilhete] = useState(bilhete.tipoBilhete);
+    const[codigoBilhete] = useState(bilhete.numBilhete);
+    console.log(nomePassageiro,dataPassageiro,cpfPassageiro,tipoBilhete,codigoBilhete);
     const consumir = async () =>{
         setLoading(true)
         let p = new Passageiro()

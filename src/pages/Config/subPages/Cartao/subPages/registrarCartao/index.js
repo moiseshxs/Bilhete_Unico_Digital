@@ -62,7 +62,7 @@ export default function Cartao({navigation}) {
         }else{
 
             
-            const response = await cartaoPassageiro.storeCartaoPassageiro(passageiro.id, token, nome, cpf, numCartao, "visa", "c6 bank", cvv, "088988", "8999", validade);
+            const response = await cartaoPassageiro.storeCartaoPassageiro(passageiro.id, token, nome, cpf, numCartao, "visa", "c6 bank", cvv, "088988", "8999", validade,nomeCartao);
             if(response){
                 return navigation.navigate("Cartao", { novoCartaoAdicionado: true });
             }else{
@@ -89,6 +89,7 @@ export default function Cartao({navigation}) {
     const [validade, setValidade] = useState('')
     const [cvv, setCvv] = useState('')
     const [nome, setNome] = useState('')
+    const [nomeCartao, setNomeCartao] = useState('')
     const [cpf, setCpf] = useState('')
 
     return (
@@ -268,6 +269,46 @@ export default function Cartao({navigation}) {
                     }}
                     onChangeText={value => {onChangeTextNome(value)}}
                     onFocus={() => changeColor('nome')}
+                    />
+                    <FloatingLabelInput
+                    label='Nome Cartao'
+                    staticLabel
+                    hintTextColor='#aaa'
+                    
+                    
+                    value={nomeCartao}
+                    containerStyles={{
+                        borderWidth: 2,
+                      
+                        paddingHorizontal: 10,
+                        borderColor: borderColor2,
+                        borderRadius: 40,
+                        height: 55,
+                        
+                    }}
+                    customLabelStyles={{
+                        colorFocused: '#F00E0E',
+                        fontSizeFocused: 12,
+                        color: '#7B7B7B',
+                        
+                        
+                      }}
+                    labelStyles={{
+                        backgroundColor: '#fff',
+                        paddingHorizontal: 8,
+                        lineHeight:15,
+                        fontSize: 16,
+                        fontWeight: '500'
+                        
+                      }}
+                    inputStyles={{
+                        color: 'black',
+                        borderColor: 'transparent',
+                        paddingHorizontal: 10,
+                        
+                    }}
+                    onChangeText={value => {setNomeCartao(value)}}
+                    onFocus={() => changeColor('nomeCartao')}
                     />
                     <FloatingLabelInput
                     label='CPF titular'

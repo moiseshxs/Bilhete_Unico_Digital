@@ -4,7 +4,7 @@ import Api from "../Services/api/Api";
 
 class CartaoPassageiro extends Api{
 
-async storeCartaoPassageiro(id:number,token:string,nomeTitularCartao:string,cpfTitularCartao:string, numeroCartao:string, bandeiraCartao: string,bancoCartao: string, cvcCartao: string, contaCartao: string, agenciaCartao: string, validadeCartao:string) {
+async storeCartaoPassageiro(id:number,token:string,nomeTitularCartao:string,cpfTitularCartao:string, numeroCartao:string, bandeiraCartao: string,bancoCartao: string, cvcCartao: string, contaCartao: string, agenciaCartao: string, validadeCartao:string,apelidoCartao:string) {
     try {
         let form = new FormData();
     
@@ -17,6 +17,7 @@ async storeCartaoPassageiro(id:number,token:string,nomeTitularCartao:string,cpfT
     form.append("contaCartao", contaCartao);
     form.append("agenciaCartao", agenciaCartao);
     form.append("validadeCartao", validadeCartao);
+    form.append("apelidoCartao", apelidoCartao);
 
    
 
