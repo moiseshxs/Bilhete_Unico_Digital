@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, Image, FlatList, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { Text, View, SafeAreaView, Image, FlatList, Pressable, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import visa from '../../../../../assets/img/cartao/visa.png';
@@ -7,21 +7,8 @@ import mastercard from '../../../../../assets/img/cartao/mastercard.png';
 import styles from './styles';
 import CartaoPassageiro from '../../../../Controllers/CartaoPassageiro';
 import MyContext from '../../../../Context/context';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import ModalErro from '../../../../components/ModalErro';
-
-const DATA = [
-    {
-        id: '1',
-        numero: '**** 2546',
-        bandeira: visa,
-    },
-    {
-        id: '2',
-        numero: '**** 4278',
-        bandeira: mastercard,
-    },
-];
 
 export default function Cartao({ navigation, route }) {
 
@@ -54,7 +41,7 @@ export default function Cartao({ navigation, route }) {
             if (response === true) {
                 const updatedCartao = cartao.filter(item => item.id !== id);
                 setCartao(updatedCartao);
-            }else{
+            } else {
                 setModalErro(true);
                 setTextModal('Erro ao excluir Cartão. Por favor, tente novamente mais tarde.');
                 setIconModal('error-outline');
@@ -80,14 +67,17 @@ export default function Cartao({ navigation, route }) {
     const Item = ({ id, numero, bandeira }) => (
         <View>
             <View style={styles.cartao}>
-                <Text style={styles.textCartao}>{numero}</Text>
-                <Image
-                    source={bandeira}
-                    style={styles.bandeira}
-                />
-                <TouchableOpacity onPress={() => modalId(id)}>
-                    <Ionicons name="trash-outline" size={30} />
-                </TouchableOpacity>
+                <View style={styles.areaCimaCartao}>
+                    <Text style={styles.textCartao}>{numero}</Text>
+
+                    <Pressable onPress={() => modalId(id)}>
+                        <Ionicons name="trash-outline" size={30} color="white"/>
+                    </Pressable>
+                </View>
+                <View style={styles.areaBaixoCartao}>
+                    <Text style={styles.textNomeCartao}>NUBANK</Text>
+                    <FontAwesome name="cc-visa" size={30} color="white" />
+                </View>
             </View>
         </View>
     );
@@ -132,9 +122,9 @@ export default function Cartao({ navigation, route }) {
             </Modal>
             <View style={styles.areaBotao}>
                 <View style={styles.botao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('RegistrarCartao')}>
+                    <Pressable onPress={() => navigation.navigate('RegistrarCartao')}>
                         <Text style={styles.textBotao}>Adicionar cartão</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
             </View>
             <ModalErro visible={modalErro} icon={iconModal} text={textModal} closeButton={closeButton} />
