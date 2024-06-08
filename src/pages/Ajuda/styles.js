@@ -59,20 +59,24 @@ export default StyleSheet.create({
 
   tituloArtigo: {
     color: '#9b9b9b',
-    textAlign: 'center',
   },
 
   boxTituloAjuda: {
     justifyContent: 'flex-end',
     flexDirection: 'column',
-    paddingVertical: 15,
+    paddingVertical: 5,
     borderBottomWidth: 1,
     borderColor: '#d3d3d3',
   },
   respostaDuvida: {
-    width: Width / 4,
+    width:'10%',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+  },
+  respostaTitulo: {
+    width:'90%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   boxAjuda: {

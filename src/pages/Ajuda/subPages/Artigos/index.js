@@ -1,49 +1,51 @@
 import React,{useState, useContext, useEffect} from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
 import VotoAjuda from '../../../../Controllers/VotoAjuda';
 import MyContext from '../../../../Context/context';
 import Ajuda from '../../../../Controllers/Ajuda';
+import Loading from '../../../Loading';
 export default function ArtigosBilhete({navigation,route}) {
     const {token, passageiro} = useContext(MyContext);
     let voto = new VotoAjuda()
     let ajuda = new Ajuda()
-    const getAjuda = async() =>{
-        const response = await ajuda.getAjuda(token,route.params?.id);
-        console.log(response);
-        setTitulo(response.map(item=>item.tituloAjuda));
-        setCaminho(response.map(item=>item.caminhoAjuda));
-        setDescricao(response.map(item=>item.descAjuda));
-
-    }
-    useEffect(()=>{
-        getAjuda();
-    },[])
     const [idAjuda] = useState(route.params?.id);
     const [titulo, setTitulo] = useState('');
     const [caminho,setCaminho] = useState('');
     const [descricao,setDescricao] = useState('')
+    const[loading, setLoading] = useState(false);
     const [votou, setVotou] = useState(0)
+    const getAjuda = async() =>{
+        const response = await ajuda.getAjuda(token,route.params?.id);
+        setTitulo(response.map(item=>item.tituloAjuda));
+        setCaminho(response.map(item=>item.caminhoAjuda));
+        setDescricao(response.map(item=>item.descAjuda));
+    }
     const votoAjuda =async (util)=>{
         const response = await voto.storeVoto(token, util, idAjuda, passageiro.id);
-    } 
-
-    const StoreVotoAjuda = async(util)=>{
-        votoAjuda(util)
-        setVotou(util)
-    }
-useEffect(()=>{
-
-    const getVotoAjuda = async()=>{
-        const response = await voto.getVoto(token, passageiro.id, idAjuda)
-        setVotou(response)
-    }
-
-    getVotoAjuda();
-},[])
-    return (
-        <SafeAreaView style={styles.container}>
+        } 
+        
+        const StoreVotoAjuda = async(util)=>{
+            votoAjuda(util)
+            setVotou(util)
+            }
+            useEffect(()=>{
+                getAjuda();
+                
+                const getVotoAjuda = async()=>{
+                    setLoading(true)
+                    const response = await voto.getVoto(token, passageiro.id, idAjuda)
+                    setVotou(response)
+                    if(response)
+                        {
+                            setLoading(false);
+                            }
+                            }
+                getVotoAjuda();
+                            },[])
+                    if(!loading){
+                        return (
+                            <SafeAreaView style={styles.container}>
             
 
             <View style={styles.boxTitulo}>
@@ -83,4 +85,8 @@ useEffect(()=>{
 
         </SafeAreaView>
         );
-}
+}else{
+    return(
+        <Loading/>
+    )
+}}

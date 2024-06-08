@@ -5,7 +5,6 @@ import MyContext from '../../Context/context';
 import Passageiro from '../../Services/api/Passageiro';
 import Loading from '../Loading';
 import ModalErro from '../../components/ModalErro';
-
 export default function QrCode() {
 
 

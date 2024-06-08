@@ -14,6 +14,7 @@ import MyContext from "../../Context/context";
 import search from "../../Controllers/Ajuda";
 import ModalErro from '../../components/ModalErro';
 import VotoAjuda from '../../Controllers/VotoAjuda';
+import Loading from '../Loading';
 import styles from "./styles";
 
 export default function Ajuda({ navigation }) {
@@ -23,17 +24,15 @@ export default function Ajuda({ navigation }) {
   const[iconModal, setIconModal] = useState('')
   const[textModal, setTextModal] = useState('')
   const[responseGlobal, setResponseGlobal] = useState([])
+  const[loading, setLoading] = useState(false);
+  const[controle, setControle] = useState(false);
   
   let voto = new VotoAjuda()
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await voto.getAjudaMaiores(token);
-      setResponseGlobal(response);
-      
-      };
-      fetchData();
-      }, []);
-    console.log("AAAAA", responseGlobal.map(item => item.id)); // Aqui response será o valor atualizado
+  const fetchData = async () => {
+    const response = await voto.getAjudaMaiores(token);
+    setResponseGlobal(response);
+    setControle(true);
+  }
   useEffect(() => {
     if (isModalVisible) {
       inputRef.current.focus();
@@ -73,13 +72,11 @@ export default function Ajuda({ navigation }) {
                   : [];
                   
                   useEffect(() => {
-                    if (!Array.isArray(result)) {
-                      setModalErro(true);
-                      setIconModal('error-outline');
-                      setTextModal('Falha no servidor Por favor, tente novamente mais tarde.');
-                      }
-                      }, [result]);
-                      useEffect(() => {
+                        if (!Array.isArray(result)) {
+                          setModalErro(true);
+                          setIconModal('error-outline');
+                          setTextModal('Falha no servidor Por favor, tente novamente mais tarde.');
+                          }
                         searchAjuda();
                         if (filtro != "") {
                           result.filter((item) => {
@@ -88,7 +85,9 @@ export default function Ajuda({ navigation }) {
                             : false;
                             });
                             }
-                            }, [filtro]);
+                          
+                            }, [filtro,result]);
+
                             
                             const ResultSearch = ({ id, tituloAjuda, caminhoAjuda, descAjuda }) => (
                               <TouchableOpacity
@@ -99,7 +98,9 @@ export default function Ajuda({ navigation }) {
           caminho: caminhoAjuda,
           desc: descAjuda,
         }, setIsModalVisible(false))
+
       }
+      
     >
       <View style={styles.boxAjuda}>
         <View style={styles.boxTituloAjuda}>
@@ -108,7 +109,15 @@ export default function Ajuda({ navigation }) {
       </View>
     </TouchableOpacity>
   );
-
+  useEffect(()=>{
+    setLoading(true);
+    fetchData();                          
+    if(controle){
+      setLoading(false);
+    }
+  });
+  
+ if(!loading){ 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.areaTitulo}>
@@ -195,10 +204,14 @@ export default function Ajuda({ navigation }) {
         id: item.id,
       })}
     >
-      <Text style={styles.tituloArtigo}>{item.titulo}</Text>
+
+      <View  style={styles.respostaTitulo}>
+        <Text style={styles.tituloArtigo}>{item.titulo}</Text>
+      </View>
       <View style={styles.respostaDuvida}>
         <AntDesign name="right" size={20} color="#9b9b9b" />
       </View>
+
       <View style={styles.linha} />
     </TouchableOpacity>
   ))}
@@ -232,4 +245,8 @@ export default function Ajuda({ navigation }) {
       <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
     </SafeAreaView>
   );
-}
+}else{
+  return(
+      <Loading/>
+  )
+}}
