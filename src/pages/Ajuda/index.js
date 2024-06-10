@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef, useCallback } from "react";
 import {
   Text,
   View,
@@ -29,11 +29,18 @@ export default function Ajuda({ navigation }) {
   
   let voto = new VotoAjuda()
   const fetchData = async () => {
+    console.log('estou aqui')
+
     const response = await voto.getAjudaMaiores(token);
     setResponseGlobal(response);
     setControle(true);
+
   }
   useEffect(() => {
+    setLoading(true);
+    fetchData();                          
+    setLoading(false);
+    
     if (isModalVisible) {
       inputRef.current.focus();
       }
@@ -51,44 +58,7 @@ export default function Ajuda({ navigation }) {
           const [filtro, setFiltro] = useState("");
           const [result, setResult] = useState([]);
           const { token } = useContext(MyContext);
-          const searchAjuda = async () => {
-            let ajuda = new search();
-            try {
-              const response = await ajuda.search(token, filtro.trim() || "");
-              setResult(response);
-              } catch (error) {
-                setModalErro(true);
-                setIconModal('error-outline');
-                setTextModal('Falha no servidor. Por favor, tente novamente mais tarde.');
-                }
-                };
-                const resultSearchData = Array.isArray(result)
-                ? result.map((item) => ({
-                  id: item.id,
-                  tituloAjuda: item.tituloAjuda,
-                  caminhoAjuda: item.caminhoAjuda,
-                  descAjuda: item.descAjuda,
-                  }))
-                  : [];
-                  
-                  useEffect(() => {
-                        if (!Array.isArray(result)) {
-                          setModalErro(true);
-                          setIconModal('error-outline');
-                          setTextModal('Falha no servidor Por favor, tente novamente mais tarde.');
-                          }
-                        searchAjuda();
-                        if (filtro != "") {
-                          result.filter((item) => {
-                            return item.tituloAjuda
-                            ? item.tituloAjuda.toLowerCase().includes(filtro.toLowerCase())
-                            : false;
-                            });
-                            }
-                          
-                            }, [filtro,result]);
 
-                            
                             const ResultSearch = ({ id, tituloAjuda, caminhoAjuda, descAjuda }) => (
                               <TouchableOpacity
       onPress={() =>
@@ -101,7 +71,11 @@ export default function Ajuda({ navigation }) {
 
       }
       
+
+      
     >
+
+      
       <View style={styles.boxAjuda}>
         <View style={styles.boxTituloAjuda}>
           <Text style={styles.tituloArtigoP}>{tituloAjuda}</Text>
@@ -109,13 +83,7 @@ export default function Ajuda({ navigation }) {
       </View>
     </TouchableOpacity>
   );
-  useEffect(()=>{
-    setLoading(true);
-    fetchData();                          
-    if(controle){
-      setLoading(false);
-    }
-  });
+ 
   
  if(!loading){ 
   return (
@@ -166,23 +134,7 @@ export default function Ajuda({ navigation }) {
             style={styles.input}
           ></TextInput>} */}
                 <View style={styles.areaModalCorpo}>
-                  <FlatList
-                    data={resultSearchData}
-                    style={styles.resultado}
-                    renderItem={({ item }) => (
-                      <ResultSearch
-                        id={item.id}
-                        tituloAjuda={item.tituloAjuda}
-                        caminhoAjuda={item.caminhoAjuda}
-                        descAjuda={item.descAjuda}
-                      />
-                    )}
-                    keyExtractor={(item) => item.id}
-                    showsVerticalScrollIndicator={false}
-                    horizontal={false}
-                    showsHorizontalScrollIndicator={false}
-                    scrollEnabled={false}
-                  />
+        
                 </View>
               </View>
             </Modal>

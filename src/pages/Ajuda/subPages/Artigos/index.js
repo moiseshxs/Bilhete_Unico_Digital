@@ -26,10 +26,12 @@ export default function ArtigosBilhete({navigation,route}) {
         } 
         
         const StoreVotoAjuda = async(util)=>{
+            console.log('estou no storeAjuda')
             votoAjuda(util)
             setVotou(util)
             }
             useEffect(()=>{
+                console.log('estou no useEffec get')
                 getAjuda();
                 
                 const getVotoAjuda = async()=>{
