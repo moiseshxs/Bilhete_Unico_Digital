@@ -21,6 +21,7 @@ export default function ListaBilhetes({navigation}){
     const[DATA, setDATA] = useState('')
     
  useEffect(() => {
+    
         const initializePassageiro = async () => {
             const id = await getIdStorage();
             const storedToken = await getTokenStorage();

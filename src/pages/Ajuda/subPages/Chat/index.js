@@ -1,15 +1,16 @@
-import React from 'react';
+import React,{useContext,useState} from 'react';
 import { Text, View, SafeAreaView, TouchableOpacity, TextInput, KeyboardAvoidingView, Pressable, ScrollView } from 'react-native';
 import styles from './styles';
 import { FontAwesome } from '@expo/vector-icons';
-
+import MyContext from '../../../../Context/context';
 import { useNavigation } from '@react-navigation/native';
 
 
 
 
 export default function Chat() {
-
+    const {passageiro} = useContext(MyContext);
+    const[nomePassageiro] = useState(passageiro.nomePassageiro);
     const navigation = useNavigation();
 
     return (
@@ -18,7 +19,7 @@ export default function Chat() {
                 <View style={styles.areaChatRobo}>
                     <View style={styles.mensagemRobo}>
                         <Text style={styles.textBold}>Atendimento automatico</Text>
-                        <Text>Olá, Hugo Botinha. Esse é o atendimento automatico.</Text>
+                        <Text>Olá, {nomePassageiro}. Esse é o atendimento automatico.</Text>
                     </View>
                     <View style={styles.mensagemRobo}>
                         <Text>Escolha uma das opções a seguir ou clique em outros e escreva em poucas palavras chaves qual é a sua dúvida.</Text>

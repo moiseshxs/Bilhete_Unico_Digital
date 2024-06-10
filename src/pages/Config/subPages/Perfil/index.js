@@ -111,12 +111,12 @@ export default function Perfil({navigation}) {
         setModalEditTelefone(true);
     }
 
-    const conta = ()=>{
-         return 30 - email.length
-    }
-    useEffect(() => {
-       conta();
-    }, [email.length]);
+    // const conta = ()=>{
+    //      return 30 - email.length
+    // }
+    // useEffect(() => {
+    //    conta();
+    // }, [email.length]);
 
     return (
         
@@ -243,7 +243,7 @@ export default function Perfil({navigation}) {
                                 fontSize: 16
                             }}      
                             />
-                            <Text>{conta()}</Text>
+                            {/* <Text>{conta()}</Text> */}
                    </View>
                     <View style={styles.containerBoxBotoes}>
                     <View style={styles.boxBotoes}>
