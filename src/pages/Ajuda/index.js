@@ -26,8 +26,16 @@ export default function Ajuda({ navigation }) {
   const[responseGlobal, setResponseGlobal] = useState([])
   const[loading, setLoading] = useState(false);
   const[controle, setControle] = useState(false);
-  
+  const [filtro, setFiltro] = useState("");
+  const [result, setResult] = useState([]);
+  const { token } = useContext(MyContext);
   let voto = new VotoAjuda()
+  const searchAjuda = async () => {
+    let ajuda = new search();
+
+    const response = await ajuda.search(token, filtro.trim() || "");
+    setResult(response);
+  };
   const fetchData = async () => {
     console.log('estou aqui')
 
@@ -48,6 +56,7 @@ export default function Ajuda({ navigation }) {
       
       const title = "Como comprar com o cartão de crédito?";
       
+      
       const TextLimitado = ({ texto, limite }) => {
         if (texto.length > limite) {
           return <Text style={styles.tituloArtigo}>{texto.substring(0, limite)}...</Text>;
@@ -55,9 +64,24 @@ export default function Ajuda({ navigation }) {
           return <Text style={styles.tituloArtigo}>{texto}</Text>;
           };
           
-          const [filtro, setFiltro] = useState("");
-          const [result, setResult] = useState([]);
-          const { token } = useContext(MyContext);
+          
+          const resultSearchData = result.map((item) => ({
+            id: item.id,
+            tituloAjuda: item.tituloAjuda,
+            caminhoAjuda: item.caminhoAjuda,
+            descAjuda: item.descAjuda,
+          }));
+          console.log(resultSearchData);
+          useEffect(() => {
+            searchAjuda();
+            if (filtro != "") {
+              result.filter((item) => {
+                return item.tituloAjuda
+                  ? item.tituloAjuda.toLowerCase().includes(filtro.toLowerCase())
+                  : false;
+              });
+            }
+          }, [filtro]);
 
                             const ResultSearch = ({ id, tituloAjuda, caminhoAjuda, descAjuda }) => (
                               <TouchableOpacity
@@ -134,7 +158,22 @@ export default function Ajuda({ navigation }) {
             style={styles.input}
           ></TextInput>} */}
                 <View style={styles.areaModalCorpo}>
-        
+                <FlatList
+                    data={resultSearchData}
+                    renderItem={({ item }) => (
+                      <ResultSearch
+                        id={item.id}
+                        tituloAjuda={item.tituloAjuda}
+                        caminhoAjuda={item.caminhoAjuda}
+                        descAjuda={item.descAjuda}
+                      />
+                    )}
+                    keyExtractor={(item) => item.id}
+                    showsVerticalScrollIndicator={false}
+                    horizontal={false}
+                    showsHorizontalScrollIndicator={false}
+                    scrollEnabled={false}
+                  />
                 </View>
               </View>
             </Modal>
