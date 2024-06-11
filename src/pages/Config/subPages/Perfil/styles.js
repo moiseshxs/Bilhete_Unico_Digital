@@ -96,15 +96,16 @@ export default StyleSheet.create({
     containerModal:{
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     areaModal:{
         width:'100%',
-        height: '45%',
+        height: 280,
         backgroundColor: '#fff',
         elevation: 20,
-        borderTopStartRadius: 50,
-        borderTopEndRadius: 50,
+        borderTopStartRadius: 25,
+        borderTopEndRadius: 25,
 
     },
     closeArea:{

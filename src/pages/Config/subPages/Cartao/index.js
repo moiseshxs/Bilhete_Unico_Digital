@@ -13,7 +13,6 @@ import ModalErro from '../../../../components/ModalErro';
 export default function Cartao({ navigation, route }) {
 
     const [cartao, setCartao] = useState();
-    const [nomeCartao, setNomeCartao] = useState();
     const [idCartao, setIdCartao] = useState();
     const { passageiro, token } = useContext(MyContext);
     const [modalEdit, setModalEdit] = useState(false);
@@ -27,9 +26,6 @@ export default function Cartao({ navigation, route }) {
         const getCartoesPassageiro = async () => {
             const response = await cP.getCartaoPassageiro(passageiro.id, token)
             setCartao(response)
-            setNomeCartao(response.map(item=>item.apelidoCartao));
-            console.log(nomeCartao)
-
         }
 
         getCartoesPassageiro();
@@ -82,7 +78,7 @@ export default function Cartao({ navigation, route }) {
 
       
 
-    const Item = ({ id, numero, bandeira }) => (
+    const Item = ({ id, numero, bandeira, apelidoCartao }) => (
         <View>
             <View style={styles.cartao}>
                 <View style={styles.areaCimaCartao}>
@@ -93,7 +89,7 @@ export default function Cartao({ navigation, route }) {
                     </Pressable>
                 </View>
                 <View style={styles.areaBaixoCartao}>
-                    <Text style={styles.textNomeCartao}>{nomeCartao}</Text>
+                    <Text style={styles.textNomeCartao}>{apelidoCartao}</Text>
                     <FontAwesome name="cc-visa" size={30} color="white" />
                 </View>
             </View>
@@ -114,6 +110,7 @@ export default function Cartao({ navigation, route }) {
                             id={item.id}
                             numero={item.numeroCartao}
                             bandeira={item.bandeira}
+                            apelidoCartao={item.apelidoCartao}
                         />
                     )}
                     keyExtractor={item => item.id.toString()}
