@@ -69,7 +69,6 @@ const limparAsyncStorage = async () => {
           
           
           if(response.message){
-            
                 // Chama a função para limpar o AsyncStorage em caso de erro
                 await limparAsyncStorage();
                 navigation.navigate('Login');
