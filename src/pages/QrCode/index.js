@@ -54,7 +54,10 @@ export default function QrCode() {
             <View style={styles.areaInfo1}>
                 <View style={styles.areaFoto}>
                     <View style={styles.foto}>
-
+                        <Image
+                            source={require('../../../assets/img/global/defaultUser.png')}
+                            style={styles.imagem}
+                        />
                     </View>
                 </View>
                 <View style={styles.areaQrCode}>
@@ -92,13 +95,13 @@ export default function QrCode() {
             >
                 <View style={styles.modalContainer}>
 
-                        <Pressable style={styles.modalContent} onPress={() => setShowFullScreenModal(false)}>
-                            <Image
-                                source={bilhete.qrCodeBilhete == 'pendente' ? require('../../../assets/img/qrcode/qrcode.png') : { uri: bilhete.qrCodeBilhete }}
-                                style={styles.qrcode}
-                            />
-                        </Pressable>
-    
+                    <Pressable style={styles.modalContent} onPress={() => setShowFullScreenModal(false)}>
+                        <Image
+                            source={bilhete.qrCodeBilhete == 'pendente' ? require('../../../assets/img/qrcode/qrcode.png') : { uri: bilhete.qrCodeBilhete }}
+                            style={styles.qrcode}
+                        />
+                    </Pressable>
+
                 </View>
             </Modal>
 

@@ -35,7 +35,7 @@ export default StyleSheet.create({
         borderColor: 'thistle',
         backgroundColor:'#FF0000', 
         borderRadius:25,
-        marginHorizontal:'22px',
+        marginHorizontal: 20,
         marginVertical:'18px',
         height:'100%'
 

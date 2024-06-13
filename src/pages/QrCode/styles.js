@@ -51,6 +51,11 @@ export default StyleSheet.create({
         paddingHorizontal: 5,
         paddingVertical: 15,
     },
+    imagem: {
+        height: '100%',
+        width: '100%',
+        objectFit: 'contain',
+    },
     areaQrCode: {
         flex: 1,
         justifyContent: 'center',
