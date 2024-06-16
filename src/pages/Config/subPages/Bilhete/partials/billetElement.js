@@ -24,13 +24,14 @@ export default function BilheteElement(props) {
     if (backgroundColor == undefined) {
         backgroundColor = '#438E28'
     }
+    let escolha = props.escolha
    
 
     return (
         <TouchableOpacity
         style={[lista==false ?{width:'100%', height:'100%', justifyContent:'center', alignItems:'center'} : null]}
         onPress={props.press}>
-        <View  style={[styles.bilhete, lista == true ? styles.bilheteLista : styles.bilheteUnique, backgroundColor != undefined ? { backgroundColor: backgroundColor }: null]}>
+        <View  style={[styles.bilhete, lista == true ? styles.bilheteLista : escolha ==true  ? styles.bilheteSelect : styles.bilheteUnique, backgroundColor != undefined ? { backgroundColor: backgroundColor }: null]}>
             <View style={styles.header}>
                 <Image
                     source={Une}
@@ -56,7 +57,7 @@ export default function BilheteElement(props) {
                 </View>
                 <View style={styles.infoArea}>
                     <View style={styles.info}>
-                        <Text><Text style={{ fontWeight: '500' }}>Tipo Bilhete:</Text> {tipoBilhete} </Text>
+                        <Text numberOfLines={1} style={{width:180}}><Text style={{ fontWeight: '500', overflow:'hidden', width: 10 }} >Tipo Bilhete:</Text> {tipoBilhete} </Text>
                         <Text><Text style={{ fontWeight: '500' }}>Status:</Text> {statusBilhete}</Text>
                         <Text><Text style={{ fontWeight: '500' }}>Meia Passagem:</Text> {meiaPassagemBilhete}</Text>
                         <Text><Text style={{ fontWeight: '500' }}>Gratuidade:</Text> {gratuidadeBilhete}</Text>
@@ -144,6 +145,11 @@ const styles = StyleSheet.create({
     bilheteLista: {
         height: 250,
         width: Dimensions.get('screen').width/1.09,
+        marginVertical: 8,
+    },
+    bilheteSelect: {
+        height: 220,
+        width: Dimensions.get('screen').width/1.18,
         marginVertical: 8,
     },
     header: {

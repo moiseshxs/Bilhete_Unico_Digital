@@ -9,15 +9,14 @@ import { setIdStorage,getIdStorage,getTokenStorage} from './axios';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import noBilhete from '../../../../../assets/img/bilhete/noBilhete.png';
-export default function ListaBilhetes({navigation}){
+export default function PedidosBilhetes({navigation}){
     
     const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras} = useContext(MyContext)
-    const[infos, setInfos] = useState(false)
+    const[infos, setInfos] = useState(true)
     const[refreshing, setRefreshing] = useState(false)
     const [error, setError] = useState(false)
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
-    const [pedidos, setPedidos] = useState(0)
     const[textModal, setTextModal] = useState('')
     const[idPassageiro,setIdPassageiro] = useState('')
     let b = new Bilhete()
@@ -25,14 +24,8 @@ export default function ListaBilhetes({navigation}){
     
  useEffect(() => {
     
-        const initializePassageiro = async () => {
-            const id = await getIdStorage();
-            const storedToken = await getTokenStorage();
-            setIdPassageiro(id);
-            setToken(storedToken);    
-        };
-        initializePassageiro();
-    }, []);
+        
+    });
     
     
     // let DATA = [ 
@@ -66,9 +59,7 @@ export default function ListaBilhetes({navigation}){
     // ]
     const getPedidoBilhete = async() => {
         const response = await b.getPedidoBilhete(passageiro.id,token)
-        if(response.length > 0){
-            setPedidos(response)
-        }
+        console.log(response)
     }
     
     const choseBilhete = (item) => {
@@ -85,12 +76,7 @@ export default function ListaBilhetes({navigation}){
     }
     useEffect(() => {
 
-        if(DATA == ''){
-        getPedidoBilhete()
-        getBilhetes()
-        setPassagens('')
-        setCompras('')
-        }
+        
     })
     const onRefresh = () => {
         setRefreshing(true)
@@ -103,7 +89,7 @@ export default function ListaBilhetes({navigation}){
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
-                <Text style={styles.title}>Seus Bilhetes</Text>
+                <Text style={styles.title}>Pedidos de Bilhetes</Text>
             </View>
             
             <View style={styles.lista}>
@@ -136,24 +122,11 @@ export default function ListaBilhetes({navigation}){
                     
                     :
                     <Loading/>}
-                    <View style={styles.boxButtonCircular}>
-                    <Pressable 
-                    onPress={() => navigation.navigate("PedidosBilhetes", {
-                        pedidos: pedidos
-                    })}>
-                        <View style={styles.buttonCircular}>
-                            <FontAwesome name="list" size={30} color="white" />
-                        </View>
-                    </Pressable>
-                    </View>
+                    
                      
           </View>
           <View style={styles.boxButton}>
-                <Pressable onPress={EscolhaBilhete}>
-                        <View style={styles.button}>
-                            <Text style={styles.textButton}>Solicitar Bilhete</Text>
-                        </View>
-                </Pressable>
+               
           </View>
          
         </SafeAreaView>

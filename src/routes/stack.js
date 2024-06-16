@@ -28,6 +28,7 @@ import FaleComFuncionario from '../pages/Ajuda/subPages/FaleComFuncionario';
 import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
 import EscolhaBilhete from '../pages/Config/subPages/Bilhete/escolhaBilhete';
 import { useNavigation } from '@react-navigation/native';
+import PedidosBilhetes from '../pages/Config/subPages/Bilhete/pedidosBilhete';
 
 const Stack = createNativeStackNavigator();
 export default function StackRoutes() {
@@ -251,6 +252,17 @@ const navigation = useNavigation();
           headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: false,
+        }}
+      />
+
+        <Stack.Screen
+        name='PedidosBilhetes' 
+        component={PedidosBilhetes}
+        options={{
+          title: '',
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
+          headerTintColor:'black',
+          headerShown: true,
         }}
       />
       <Stack.Screen
