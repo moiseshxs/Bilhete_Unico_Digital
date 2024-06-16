@@ -1,4 +1,4 @@
-import { SafeAreaView, View, Text, StyleSheet, FlatList,  RefreshControl } from "react-native"
+import { SafeAreaView, View, Text, StyleSheet, FlatList,  RefreshControl,Image, Pressable,Dimensions } from "react-native"
 import BilletElement from './partials/billetElement'
 import { useContext, useEffect, useState } from "react"
 import Bilhete from "../../../../Controllers/Bilhete"
@@ -6,7 +6,9 @@ import MyContext from "../../../../Context/context"
 import Loading from "../../../Loading"
 import ModalErro from '../../../../components/ModalErro';
 import { setIdStorage,getIdStorage,getTokenStorage} from './axios';
-
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import noBilhete from '../../../../../assets/img/bilhete/noBilhete.png';
 export default function ListaBilhetes({navigation}){
     
     const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras} = useContext(MyContext)
@@ -61,7 +63,10 @@ export default function ListaBilhetes({navigation}){
     //     //     backgroundColor:'#728'
     //     // }
     // ]
-    
+    const getPedidoBilhete = async() => {
+        const response = await b.getPedidoBilhete(passageiro.id,token)
+        console.log(response)
+    }
     
     const choseBilhete = (item) => {
         setBilhete(item)
@@ -70,22 +75,15 @@ export default function ListaBilhetes({navigation}){
     const getBilhetes = async() => {
         setInfos(false)
         const response = await b.getBilhetes(!idPassageiro?passageiro.id:idPassageiro, token)
-        if(response.message !== undefined){
-            setModalErro(true)
-            setTextModal('Você não possui Bilhetes')
-            setIconModal('error-outline')
-            setInfos(true)
-            setRefreshing(false)
-        }else{
         setDATA(response)
-        setModalErro(false)
         setRefreshing(false)
         setInfos(true)
-    }
-    
+
     }
     useEffect(() => {
+
         if(DATA == ''){
+        getPedidoBilhete()
         getBilhetes()
         setPassagens('')
         setCompras('')
@@ -96,39 +94,60 @@ export default function ListaBilhetes({navigation}){
         getBilhetes()
         // console.log('vai')
     }
-    
+    const EscolhaBilhete = () =>{
+        navigation.navigate('EscolhaBilhete')
+    }
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
-            <Text style={styles.title}>Seus Bilhetes</Text>
+                <Text style={styles.title}>Seus Bilhetes</Text>
             </View>
             
             <View style={styles.lista}>
-                { infos ?
-            <FlatList
-            data={DATA}
-            refreshControl={<RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}/>}
-            renderItem={({item}) => !error ? <BilletElement lista={true}
-                tipoBilhete={item.tipoBilhete}
-                statusBilhete={item.statusBilhete}
-                gratuidadeBilhete={item.gratuidadeBilhete?'Sim' : 'Não'}
-                meiaPassagemBilhete={item.meiaPassagensBilhete? 'Sim' : 'Não'}
-                numBilhete={item.numBilhete} 
-                backgroundColor={item.backgroundColor}
-                press={() => choseBilhete(item)}   /> :
-            <Text>{item.error}</Text>}
-            keyExtractor={item => item.id}
-            showsVerticalScrollIndicator={false}
-            
-          />
-            :
-            <Loading/>}
-            
+                
+            {infos ? 
+                    DATA.length > 0 ? (
+                        <FlatList
+                            data={DATA}
+                            refreshControl={<RefreshControl
+                                refreshing={refreshing}
+                                onRefresh={onRefresh} />}
+                            renderItem={({ item }) => !error ? <BilletElement lista={true}
+                                tipoBilhete={item.tipoBilhete}
+                                statusBilhete={item.statusBilhete}
+                                gratuidadeBilhete={item.gratuidadeBilhete ? 'Sim' : 'Não'}
+                                meiaPassagemBilhete={item.meiaPassagensBilhete ? 'Sim' : 'Não'}
+                                numBilhete={item.numBilhete}
+                                backgroundColor={item.backgroundColor}
+                                press={() => choseBilhete(item)} /> :
+                                <Text>{item.error}</Text>}
+                            keyExtractor={item => item.id}
+                            showsVerticalScrollIndicator={false}
+                        />
+                      
+                    ) : 
+                    <View style={styles.lista}>
+                            <Image source={noBilhete} style={styles.noDataImage} />
+                            <Text style={styles.textBilhete}>Você não possui bilhetes</Text>
+                    </View>
+                    
+                    :
+                    <Loading/>}
+                    <View style={styles.boxButtonCircular}>
+                        <View style={styles.buttonCircular}>
+                            <FontAwesome name="list" size={30} color="white" />
+                        </View>
+                    </View>
+                     
           </View>
-          
-          <ModalErro visible={modalErro} icon={iconModal} text={textModal} />
+          <View style={styles.boxButton}>
+                <Pressable onPress={EscolhaBilhete}>
+                        <View style={styles.button}>
+                            <Text style={styles.textButton}>Solicitar Bilhete</Text>
+                        </View>
+                </Pressable>
+          </View>
+         
         </SafeAreaView>
     )
 }
@@ -142,14 +161,12 @@ export default function ListaBilhetes({navigation}){
         },
         lista:{
             width:'100%',
-            flex:6,
+            flex:0.75,
             justifyContent:'center',
             alignItems:'center'
-            
-            
         },
         titleArea:{
-            flex:1,
+            flex:0.1,
             justifyContent:'center',
             alignItems:'flex-start',
             width:'85%'
@@ -157,5 +174,52 @@ export default function ListaBilhetes({navigation}){
         title:{
             fontSize:30,
             fontWeight:'500'
-        }
+        },
+        noDataImage:{
+            width:220,
+            height:200
+        },
+        boxButton:{
+            flex:0.15,
+            justifyContent:'center',
+            alignItems:'center',
+            width:'100%',
+        },
+        button:{
+            backgroundColor: '#f00',
+            height: 40,
+            width: 250,
+            borderRadius: 50,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        textButton:{
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: '500',
+        },
+        textBilhete:{
+            marginTop:10,
+            color:'gray',
+            fontSize:24,
+            fontWeight:'500'
+        },
+        boxButtonCircular:{
+            width:'100%',
+            justifyContent:'flex-end',
+            alignItems:'flex-end',
+            paddingHorizontal:30
+        },
+        buttonCircular:{
+            borderRadius:1000,
+            width:60,
+            height:60,
+            backgroundColor:'red',
+            borderWidth:2,
+            borderColor:'red',
+            justifyContent:'center',
+            alignItems:'center'
+        },
+
     })

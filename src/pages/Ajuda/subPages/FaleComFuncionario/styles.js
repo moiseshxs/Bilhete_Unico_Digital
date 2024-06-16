@@ -38,6 +38,9 @@ export default StyleSheet.create({
         borderWidth: 2,
         marginTop: 6,
         borderRadius: 20,
+        borderBottomColor:'red',
+        borderBottomWidth:2,
+        padding:10,
     },
 
     areaBtn: {
@@ -59,4 +62,10 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
     },
+    inputModal:{
+        borderBottomColor:'red',
+        borderBottomWidth:2,
+        width:'80%',
+        padding:10,
+      },
 });

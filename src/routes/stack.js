@@ -26,6 +26,7 @@ import Ajuda from '../pages/Ajuda';
 import Chat from '../pages/Ajuda/subPages/Chat';
 import FaleComFuncionario from '../pages/Ajuda/subPages/FaleComFuncionario';
 import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
+import EscolhaBilhete from '../pages/Config/subPages/Bilhete/escolhaBilhete';
 import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
@@ -311,6 +312,16 @@ const navigation = useNavigation();
         component={FaleComFuncionario}
         options={{
           title: 'Fale Conosco',
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
+          headerTintColor:'black',
+          headerShown: true,
+        }}
+      /> 
+      <Stack.Screen
+        name='EscolhaBilhete'
+        component={EscolhaBilhete}
+        options={{
+          title: 'Escolha de Bilhete',
           headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
           headerTintColor:'black',
           headerShown: true,

@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         bottom: Dimensions.get('screen').height/1.15
-        
     },
     text:{
         fontSize: 20,
