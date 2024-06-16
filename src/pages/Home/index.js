@@ -12,12 +12,13 @@ import Passagem from '../../Controllers/Passagem';
 import User from '../../../assets/img/global/defaultUser.png'
 import Loading from '../Loading';
 import ModalErro from '../../components/ModalErro';
+import Acao from '../../Controllers/Acao';
 
 
 
 
 let passagem = new Passagem()
-
+let acao = new Acao
 
 
 
@@ -58,6 +59,13 @@ export default function Home() {
   const [iconModal, setIconModal] = useState('')
   const [textModal, setTextModal] = useState('')
 
+  const getAcao = async() =>{
+    const response = await acao.getAcao(passageiro.id,token);
+    console.log(response);
+  }
+  useEffect(()=>{
+    getAcao();
+  })
   const contador = () => {
 
     if (segundos == 0) {
@@ -118,12 +126,13 @@ export default function Home() {
     setInfos(false)
     setLoading(true)
     const response = await passagem.getPassagens(bilhete.id, token);
+    console.log(response)
     if (!response) {
       return false
     }
     setPassagens(response);
     setDATA(response.consumos);
-
+    
 
 
     await verificaIntegracao()
