@@ -9,7 +9,8 @@ import { setIdStorage,getIdStorage,getTokenStorage} from './axios';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import noBilhete from '../../../../../assets/img/bilhete/noBilhete.png';
-export default function PedidosBilhetes({navigation}){
+import PedidoElement from "./partials/pedidoElement"
+export default function PedidosBilhetes({route, navigation}){
     
     const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras} = useContext(MyContext)
     const[infos, setInfos] = useState(true)
@@ -23,8 +24,8 @@ export default function PedidosBilhetes({navigation}){
     const[DATA, setDATA] = useState('')
     
  useEffect(() => {
-    
-        
+        console.log(route.params.pedidos)
+        setDATA(route.params.pedidos)
     });
     
     
@@ -61,6 +62,8 @@ export default function PedidosBilhetes({navigation}){
         const response = await b.getPedidoBilhete(passageiro.id,token)
         console.log(response)
     }
+
+    
     
     const choseBilhete = (item) => {
         setBilhete(item)
@@ -101,14 +104,14 @@ export default function PedidosBilhetes({navigation}){
                             refreshControl={<RefreshControl
                                 refreshing={refreshing}
                                 onRefresh={onRefresh} />}
-                            renderItem={({ item }) => !error ? <BilletElement lista={true}
-                                tipoBilhete={item.tipoBilhete}
-                                statusBilhete={item.statusBilhete}
-                                gratuidadeBilhete={item.gratuidadeBilhete ? 'Sim' : 'Não'}
-                                meiaPassagemBilhete={item.meiaPassagensBilhete ? 'Sim' : 'Não'}
-                                numBilhete={item.numBilhete}
-                                backgroundColor={item.backgroundColor}
-                                press={() => choseBilhete(item)} /> :
+                            renderItem={({ item }) => !error ?
+                            <PedidoElement
+                            tipo={item.tipo}
+                            data={item.data}
+                            id={item.id}
+                            status={item.status}
+                            
+                            /> :
                                 <Text>{item.error}</Text>}
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
@@ -125,9 +128,7 @@ export default function PedidosBilhetes({navigation}){
                     
                      
           </View>
-          <View style={styles.boxButton}>
-               
-          </View>
+         
          
         </SafeAreaView>
     )
@@ -139,8 +140,7 @@ export default function PedidosBilhetes({navigation}){
             justifyContent:'center',
             alignItems:'center',
             width:'100%',
-            borderWidth:1,
-            borderColor: 'blue'
+            backgroundColor: 'white'
         },
         lista:{
             width:'100%',

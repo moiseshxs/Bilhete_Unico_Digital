@@ -35,6 +35,15 @@ async getPedidoBilhete(id:number, token:string)
         } 
         
 }
+async payStoreBihete(id:number, token:string)
+{
+    try{
+        const response = await this.api.post(`/pedidoBilhete/payTaxaStoreBilhete/${id}`,{ headers: {'Authorization': `Bearer ${token}`}})
+        return response
+    }catch(e){
+        return e
+    }
+}
 }
 
 

@@ -29,6 +29,7 @@ import TrocarSenha from '../pages/Config/subPages/Perfil/subPages/trocarSenha';
 import EscolhaBilhete from '../pages/Config/subPages/Bilhete/escolhaBilhete';
 import { useNavigation } from '@react-navigation/native';
 import PedidosBilhetes from '../pages/Config/subPages/Bilhete/pedidosBilhete';
+import ConfirmarPagamentoBilhete from '../pages/Config/subPages/Bilhete/partials/confirmarPagamento';
 
 const Stack = createNativeStackNavigator();
 export default function StackRoutes() {
@@ -48,7 +49,17 @@ const navigation = useNavigation();
         }}
       />
 
-      
+<Stack.Screen 
+        name='ConfirmarPagamentoBilhete'
+        component={ConfirmarPagamentoBilhete}
+        options={{
+          title: 'Login',
+          headerStyle: { backgroundColor: 'white', borderBottomWidth: 0 },
+          headerTintColor: 'white',
+          headerShown: false,
+          
+        }}
+      />
 
       <Stack.Screen 
         name='Inicio'

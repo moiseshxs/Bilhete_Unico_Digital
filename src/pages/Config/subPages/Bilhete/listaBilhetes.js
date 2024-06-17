@@ -33,6 +33,13 @@ export default function ListaBilhetes({navigation}){
         };
         initializePassageiro();
     }, []);
+
+    const visualizarPedidos = () =>{
+        navigation.navigate("PedidosBilhetes", {
+            pedidos: pedidos
+        })
+        setDATA('')
+    }
     
     
     // let DATA = [ 
@@ -138,9 +145,7 @@ export default function ListaBilhetes({navigation}){
                     <Loading/>}
                     <View style={styles.boxButtonCircular}>
                     <Pressable 
-                    onPress={() => navigation.navigate("PedidosBilhetes", {
-                        pedidos: pedidos
-                    })}>
+                    onPress={() => visualizarPedidos()}>
                         <View style={styles.buttonCircular}>
                             <FontAwesome name="list" size={30} color="white" />
                         </View>
@@ -166,8 +171,7 @@ export default function ListaBilhetes({navigation}){
             justifyContent:'center',
             alignItems:'center',
             width:'100%',
-            borderWidth:1,
-            borderColor: 'blue'
+            
         },
         lista:{
             width:'100%',
