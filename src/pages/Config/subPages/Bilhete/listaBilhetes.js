@@ -20,6 +20,7 @@ export default function ListaBilhetes({navigation}){
     const [pedidos, setPedidos] = useState(0)
     const[textModal, setTextModal] = useState('')
     const[idPassageiro,setIdPassageiro] = useState('')
+    const[pedidoBilheteCount,SetPedidoBilheteCount] = useState('')
     let b = new Bilhete()
     const[DATA, setDATA] = useState('')
     
@@ -73,6 +74,8 @@ export default function ListaBilhetes({navigation}){
     // ]
     const getPedidoBilhete = async() => {
         const response = await b.getPedidoBilhete(passageiro.id,token)
+        SetPedidoBilheteCount(response.length)
+        console.log(response)
         if(response.length > 0){
             setPedidos(response)
         }
