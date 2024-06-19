@@ -97,7 +97,7 @@ export default function Perfil({navigation}) {
             setFile(response.assets[0].uri);
             console.log(file)
             let p = new AuthPassageiro()
-           let resp = await p.colocaImagem(response.assets[0].uri);
+           let resp = await p.colocaImagem(response.assets[0].uri, passageiro.id);
            setPassageiro(resp)
         }
     }

@@ -4,11 +4,12 @@ import styles from './styles';
 import MyContext from '../../Context/context';
 import Passageiro from '../../Services/api/Passageiro';
 import Loading from '../Loading';
+import User from '../../../assets/img/global/defaultUser.png'
 import ModalErro from '../../components/ModalErro';
 
 export default function QrCode() {
     const [loading, setLoading] = useState(false);
-    const { passageiro, bilhete, token } = useContext(MyContext);
+    const { passageiro, bilhete, token, url } = useContext(MyContext);
     const [modalErro, setModalErro] = useState(false);
     const [iconModal, setIconModal] = useState('');
     const [textModal, setTextModal] = useState('');
@@ -39,6 +40,7 @@ export default function QrCode() {
         }
         setLoading(false);
     }
+    
 
     return (
         <SafeAreaView style={styles.container}>
@@ -55,7 +57,7 @@ export default function QrCode() {
                 <View style={styles.areaFoto}>
                     <View style={styles.foto}>
                         <Image
-                            source={require('../../../assets/img/global/defaultUser.png')}
+                            source={passageiro.fotoPassageiro != null ? {uri: url + passageiro.fotoPassageiro} : User}
                             style={styles.imagem}
                         />
                     </View>

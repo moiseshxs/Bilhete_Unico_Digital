@@ -140,7 +140,7 @@ async requireCodEmailRecuperar(forma:string,dado:string)
       }
   }
 
-  async colocaImagem(arquivo:string)
+  async colocaImagem(arquivo:string, id:number)
   {
     console.log(arquivo);
       const filename = arquivo.substring(arquivo.lastIndexOf('/') + 1, arquivo.length);
@@ -156,12 +156,14 @@ async requireCodEmailRecuperar(forma:string,dado:string)
       })));
 
       try {
-        const reponse = await this.api.post(`/insertFoto/${1}`, form, {headers: {'Accept': 'application/json',
+        const reponse = await this.api.post(`/insertFoto/${id}`, form, {headers: {'Accept': 'application/json',
         'Content-Type': 'multipart/form-data'}});
         console.log(reponse.data);
         return reponse.data.passageiro
       } catch(e) {
-       return  e.message
+        console.log(e.response)
+       return  e.response.data.message
+       
       }
       
   }
