@@ -34,7 +34,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function Comprovante({route}) {
     const resolveValor = (qtd) => {
-        let valor = `R$ ${(parseInt(qtd)).toFixed(2)}`
+        let valor = `R$ ${(parseFloat(qtd)).toFixed(2)}`
 
             return valor.replaceAll ('.', ',')
     }
