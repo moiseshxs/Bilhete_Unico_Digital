@@ -45,9 +45,9 @@ export default function Ajuda({ navigation }) {
 
   }
   useEffect(() => {
-    setLoading(true);
+    
     fetchData();                          
-    setLoading(false);
+    
     
     if (isModalVisible) {
       inputRef.current.focus();

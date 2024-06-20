@@ -38,10 +38,8 @@ export default function ArtigosBilhete({navigation,route}) {
                     setLoading(true)
                     const response = await voto.getVoto(token, passageiro.id, idAjuda)
                     setVotou(response)
-                    if(response)
-                        {
                             setLoading(false);
-                            }
+                            
                             }
                 getVotoAjuda();
                             },[])
