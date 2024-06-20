@@ -21,7 +21,7 @@ export default function QrCode() {
     const [showFullScreenModal, setShowFullScreenModal] = useState(false);
 
     const consumir = async () => {
-        setLoading(true)
+        
         let p = new Passageiro()
         try {
             const response = await p.storeConsumo(passageiro.id, token, bilhete.id);
@@ -34,11 +34,11 @@ export default function QrCode() {
                 ]);
             }
         } catch (error) {
-            setModalErro(true);
-            setIconModal('error-outline');
-            setTextModal('Falha no servidor. Por favor, tente novamente mais tarde.');
+            // setModalErro(true);
+            // setIconModal('error-outline');
+            // setTextModal('Falha no servidor. Por favor, tente novamente mais tarde.');
         }
-        setLoading(false);
+        
     }
     
 
@@ -72,18 +72,22 @@ export default function QrCode() {
                 </View>
             </View>
             <View style={styles.areaInfo2}>
-                <View style={styles.areaDados}>
-                    <View>
-                        <Text style={styles.textNome}>{nomePassageiro}</Text>
-                    </View>
+                <Pressable
+                style={{ width:'100%', height:'100%' }}
+                onPress={() => consumir()}>
+                    <View style={styles.areaDados}>
+                        <View>
+                            <Text style={styles.textNome}>{nomePassageiro}</Text>
+                        </View>
 
-                    <View>
-                        <Text style={styles.textDados}>Cod. Bilhete: {codigoBilhete}</Text>
-                        <Text style={styles.textDados}>Tipo bilhete: {tipoBilhete}</Text>
-                        <Text style={styles.textDados}>CPF: {cpfPassageiro}</Text>
-                        <Text style={styles.textDados}>Data Nasc: {dataPassageiro}</Text>
+                        <View>
+                            <Text style={styles.textDados}>Cod. Bilhete: {codigoBilhete}</Text>
+                            <Text style={styles.textDados}>Tipo bilhete: {tipoBilhete}</Text>
+                            <Text style={styles.textDados}>CPF: {cpfPassageiro}</Text>
+                            <Text style={styles.textDados}>Data Nasc: {dataPassageiro}</Text>
+                        </View>
                     </View>
-                </View>
+                </Pressable>
             </View>
             <View style={styles.areaNada}>
 

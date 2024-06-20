@@ -7,7 +7,7 @@ class Preco extends Api{
             const response = await this.api.get('/preco', { headers: {'Authorization': `Bearer ${token}`}})
             return response.data
         }catch(e){
-            return false
+            return e.response.data.message
         }
       }
 }

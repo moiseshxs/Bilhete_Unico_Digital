@@ -11,13 +11,13 @@ import { AntDesign } from '@expo/vector-icons';
 import noBilhete from '../../../../../assets/img/bilhete/noBilhete.png';
 export default function ListaBilhetes({navigation}){
     
-    const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras} = useContext(MyContext)
+    const{ token, passageiro, setToken,setBilhete, setPassagens, setCompras, pedidos, setPedidos, taxa} = useContext(MyContext)
     const[infos, setInfos] = useState(false)
     const[refreshing, setRefreshing] = useState(false)
     const [error, setError] = useState(false)
     const[modalErro, setModalErro] = useState(false)
     const[iconModal, setIconModal] = useState('')
-    const [pedidos, setPedidos] = useState(0)
+    // const [pedidos, setPedidos] = useState(0)
     const[textModal, setTextModal] = useState('')
     const[idPassageiro,setIdPassageiro] = useState('')
     const[pedidoBilheteCount,SetPedidoBilheteCount] = useState('')
@@ -33,13 +33,23 @@ export default function ListaBilhetes({navigation}){
             setToken(storedToken);    
         };
         initializePassageiro();
-    }, []);
+
+        
+            getPedidoBilhete()
+            getBilhetes()
+            setPassagens('')
+            setCompras('')
+            
+            console.log("entrou")
+    }, [taxa]);
 
     const visualizarPedidos = () =>{
         navigation.navigate("PedidosBilhetes", {
             pedidos: pedidos
         })
-        setDATA('')
+        if(DATA.message !== undefined){
+            setDATA('')
+        }
     }
     
     
@@ -88,19 +98,15 @@ export default function ListaBilhetes({navigation}){
     const getBilhetes = async() => {
         setInfos(false)
         const response = await b.getBilhetes(!idPassageiro?passageiro.id:idPassageiro, token)
+        console.log(response)
         setDATA(response)
         setRefreshing(false)
         setInfos(true)
 
     }
     useEffect(() => {
-
-        if(DATA == ''){
-        getPedidoBilhete()
-        getBilhetes()
-        setPassagens('')
-        setCompras('')
-        }
+        
+        
     })
     const onRefresh = () => {
         setRefreshing(true)

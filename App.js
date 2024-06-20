@@ -10,12 +10,15 @@ export default function App(){
  
   const[bilhete, setBilhete] = useState('')
   const[passageiro, setPassageiro] = useState('')
+  const[pedidos, setPedidos] = useState('')
   const[passagens, setPassagens] = useState('')
   const[compras, setCompras] = useState('') 
+  const[taxa, setTaxa] = useState(0)
   const[token, setToken] = useState('')
   const[troca, setTroca] = useState(false)
   const[password, setPassword] = useState('')
-  const[url, setUrl] = useState("http://0.tcp.sa.ngrok.io:11324/storage/")
+  // 0.tcp.sa.ngrok.io
+  const[url, setUrl] = useState("http://localhost:9000/storage/")
   return(
     <MyContext.Provider value={
       { 
@@ -33,7 +36,11 @@ export default function App(){
         setTroca,
         password,
         setPassword,
-        url
+        url,
+        pedidos,
+        setPedidos,
+        taxa,
+        setTaxa
       }
       }>
       <Routes />

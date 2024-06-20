@@ -89,6 +89,7 @@ export default StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'space-evenly',
         paddingHorizontal: 10,
+        // borderWidth:1
 
     },
     textNome: {

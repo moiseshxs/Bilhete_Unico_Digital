@@ -13,8 +13,8 @@ export default class Api{
         this.api = axios.create({
             baseURL: this.baseUrl,
             headers: { Accept:'application/json',
-            'Content-Type': 'multipart/form-data',
-             "ngrok-skip-browser-warning": "11"
+            'Content-Type': 'multipart/form-data'
+             
                },
                
         });

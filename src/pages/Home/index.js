@@ -59,13 +59,11 @@ export default function Home() {
   const [iconModal, setIconModal] = useState('')
   const [textModal, setTextModal] = useState('')
 
-  const getAcao = async() =>{
-    const response = await acao.getAcao(passageiro.id,token);
-    console.log(response);
-  }
-  useEffect(()=>{
-    getAcao();
-  })
+  // const getAcao = async() =>{
+  //   const response = await acao.getAcao(passageiro.id,token);
+  //   console.log(response);
+  // }
+ 
   const contador = () => {
 
     if (segundos == 0) {
@@ -205,6 +203,7 @@ export default function Home() {
     if (troca) {
       setInfos(false)
       setDATA(passagens.consumos)
+      // getAcao();
       setInfos(true)
     }
 
@@ -212,7 +211,8 @@ export default function Home() {
       verificaIntegracao()
       setInfos(true)
     }
-  })
+    
+  },[])
 
   // useEffect(() => {
   //   if(troca == true){
@@ -229,20 +229,20 @@ export default function Home() {
   const navCarteira = async () => {
     let isConnected = false;
 
-    while (!isConnected) {
+    // while (!isConnected) {
 
-      const response = await getPassagens()
+      // const response = await getPassagens()
 
-      if (response) {
-        isConnected = true
+      // if (response) {
+      //   isConnected = true
         navigation.navigate('Carteira')
         setModalErro(false);
-      } else {
-        setModalErro(true);
-        setTextModal('Erro inesperado ao carregar a carteira');
-        setIconModal('error-outline');
-      }
-    }
+    //   } else {
+    //     setModalErro(true);
+    //     setTextModal('Erro inesperado ao carregar a carteira');
+    //     setIconModal('error-outline');
+    //   }
+    // }
   }
 
   const navigation = useNavigation();

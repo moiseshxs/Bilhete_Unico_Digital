@@ -48,7 +48,7 @@ export default function ConfirmarPagamento({ navigation, route }) {
     3: "Boleto",
   };
 
-  const { passageiro, token, bilhete, setPassagens, setCompras } =
+  const { passageiro, token, bilhete, setPassagens, setCompras, setTaxa, taxa } =
     useContext(MyContext);
   let pr = new Preco();
   let id = route.params.id
@@ -62,7 +62,7 @@ export default function ConfirmarPagamento({ navigation, route }) {
     const response = await b.payStoreBihete(id, token)
     console.log(response)
     setLoading(false)
-    
+    setTaxa(taxa +1)
     navigation.navigate("ListaBilhetes")
     
   }

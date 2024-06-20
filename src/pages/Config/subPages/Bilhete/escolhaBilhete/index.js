@@ -5,6 +5,7 @@ import MyContext from '../../../../../Context/context';
 import { Ionicons } from '@expo/vector-icons';
 import ModalErro from '../../../../../components/ModalErro';
 import Bilhete from '../../../../../Controllers/Bilhete';
+import Loading from '../../../../Loading';
 
 
 export default function EscolhaBilhete({navigation}) {
@@ -19,7 +20,11 @@ export default function EscolhaBilhete({navigation}) {
 
     let b = new Bilhete
     const storeBilhete = async() =>{
+        setLoading(true)
         const response = await b.storeEscolhaBilhete(passageiro.id,token,tipoBilhetes[indice].tipo)
+        const pedidos =  await b.getPedidoBilhete(passageiro.id,token)
+        setPedidos(pedidos)
+        setLoading(false)
         setModal(true)
         // navigation.navigate('ListaBilhetes')
     }
@@ -33,6 +38,7 @@ export default function EscolhaBilhete({navigation}) {
     }
     const [indice, setIndice] = useState(0)
     const [modal, setModal] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     let tipoBilhetes = [
         {
@@ -80,7 +86,8 @@ export default function EscolhaBilhete({navigation}) {
         
     ]
     
-    const{passageiro, bilhete, setTroca, setPassagens, token} = useContext(MyContext)
+    const{passageiro,setPedidos, bilhete, setTroca, setPassagens, token} = useContext(MyContext)
+    if(!loading){
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titleArea}>
@@ -136,6 +143,12 @@ export default function EscolhaBilhete({navigation}) {
                  <ModalErro visible={modal} icon={'check-circle-outline'} text={'Sucesso ao fazer pedido de bilhete, acompanhe o status de seu pedido em sua lista de pedidos'} closeButton={true} />
         </SafeAreaView>  
     );
+}else{
+
+    return(
+        <Loading/>
+    )
+}
 
     
     

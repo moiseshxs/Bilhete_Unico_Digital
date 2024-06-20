@@ -92,6 +92,7 @@ export default function Login({navigation}) {
             
             setTimeout(resolve, 0);
         });
+        
         if(cpf  == '' || password == ''){
             setModalErro(true)
             setTextModal('Preencha os Campos')
@@ -110,6 +111,7 @@ export default function Login({navigation}) {
             setPasswordStorage(password);
             
         const response = await authP.login(cpf, password);
+        console.log(response)
         setSenha('');
         setCpfForm('');
 
